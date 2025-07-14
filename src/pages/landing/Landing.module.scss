@@ -63,6 +63,12 @@
     }
   }
 
+  @media (aspect-ratio > 175/100) {
+    .treeContainer {
+      top: -5svw;
+    }
+  }
+
   .logoContainer {
     position: absolute;
     left: 3svw;
