@@ -1,0 +1,128 @@
+@use "../../assets/global.scss" as *;
+
+.landing {
+  height: 100svh;
+  background: linear-gradient(#ff6084 0%, #ff9c7b 100%);
+  .cloudContainer {
+    position: absolute;
+    left: 0;
+    bottom: 22svw;
+    will-change: auto; /* Optimize for static elements */
+
+    .cloud {
+      width: 40svw;
+    }
+  }
+  .sunContainer {
+    position: absolute;
+    right: 28svw;
+    bottom: 25svw;
+    will-change: auto;
+
+    .sun {
+      width: 21svw;
+    }
+  }
+  .smallMountainsContainer {
+    position: absolute;
+    left: 0;
+    bottom: -10svw;
+    width: 100%;
+    will-change: auto;
+
+    .smallMountains {
+      width: 100%;
+    }
+  }
+  .bigMountainContainer {
+    position: absolute;
+    left: 0;
+    bottom: 18svw;
+    width: 100%;
+    will-change: auto;
+
+    .bigMountain {
+      width: 100%;
+    }
+  }
+  .treeContainer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 90%;
+    will-change: auto;
+
+    .tree {
+      width: 100%;
+    }
+  }
+
+  @media (aspect-ratio < 18/10) {
+    .treeContainer {
+      width: 100%;
+    }
+  }
+
+  .logoContainer {
+    position: absolute;
+    left: 3svw;
+    bottom: 8svw;
+    width: 25svw;
+    will-change: auto;
+
+    .logo {
+      width: 100%;
+    }
+  }
+
+  .dateCountdown {
+    position: absolute;
+    left: 3svw;
+    bottom: 2.5svw;
+    width: 15svw;
+    display: flex;
+    align-items: center;
+    gap: 0.5svw;
+    will-change: auto;
+    font-family: $primaryFont;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    .timeLeft {
+      font-size: 1.5rem;
+      .days,
+      .hours,
+      .minutes,
+      .seconds {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .registerBtnContainer {
+    position: absolute;
+    right: 3svw;
+    bottom: 2.5svw;
+    width: 22svw;
+    will-change: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-items: center;
+    .registerBtn {
+      grid-row: 1/2;
+      grid-column: 1/2;
+      width: 100%;
+    }
+    .registerBtnText {
+      font-family: $primaryFont;
+      font-size: 2rem;
+      color: white;
+      text-align: center;
+      grid-row: 1/2;
+      grid-column: 1/2;
+    }
+  }
+}

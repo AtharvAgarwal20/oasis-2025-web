@@ -1,0 +1,37 @@
+@use "../../../assets/global.scss" as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  height: fit-content;
+  display: flex;
+  align-items: center;
+
+  padding-left: 30px;
+  padding-top: 45px;
+  z-index: 1000;
+
+  ul {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2vw;
+
+    li {
+      font-family: $primaryFont;
+      font-size: 1.25rem;
+      color: white;
+      cursor: pointer;
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+}

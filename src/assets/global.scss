@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Japan Ramen";
+  src: url("/fonts/japanRamen.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$primaryFont: "Japan Ramen", sans-serif;
+
+$gradient: linear-gradient(#ff6084 0%, #ff9c7b 100%);
