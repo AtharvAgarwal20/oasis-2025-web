@@ -1,4 +1,9 @@
+import { useEffect, useState } from "react";
+
 import styles from "./Landing.module.scss";
+
+import Navbar from "../components/navbar/Navbar";
+
 import smallMountains from "/images/landing/smallMountains.png";
 import bigMountain from "/images/landing/bigMountain.png";
 import tree from "/images/landing/tree.png";
@@ -6,10 +11,27 @@ import cloud from "/images/landing/cloud.png";
 import sun from "/images/landing/sun.png";
 import registerBtn from "/svgs/landing/registerBtn.svg";
 import logo from "/svgs/logo.svg";
-import { useEffect, useState } from "react";
-import Navbar from "../components/navbar/Navbar";
+import insta from "/svgs/landing/insta.svg";
+import twitter from "/svgs/landing/twitter.svg";
+import linkedin from "/svgs/landing/linkden.svg";
+import socialLinksBg from "/svgs/landing/socialLink.svg";
 
 const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
+
+const socialLinks = [
+  {
+    icon: twitter,
+    url: "https://x.com/bitsoasis",
+  },
+  {
+    icon: linkedin,
+    url: "https://www.linkedin.com/company/oasis24-bits-pilani/",
+  },
+  {
+    icon: insta,
+    url: "https://www.instagram.com/bitsoasis/",
+  },
+];
 
 export default function Landing() {
   const [timeLeft, setTimeLeft] = useState({
@@ -48,6 +70,7 @@ export default function Landing() {
   return (
     <div className={styles.landing}>
       <Navbar />
+
       <div className={styles.cloudContainer}>
         <img src={cloud} className={styles.cloud} alt="" />
       </div>
@@ -85,6 +108,24 @@ export default function Landing() {
         <div className={`${styles.secondsLeft} ${styles.timeLeft}`}>
           <div className={styles.seconds}>{timeLeft.seconds}</div>
           SECONDS
+        </div>
+      </div>
+      <div className={styles.socialLinksContainer}>
+        <div className={styles.linkBackground}>
+          <img src={socialLinksBg} alt="" />
+        </div>
+        <div className={styles.socialLinks}>
+          {socialLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialLink}
+            >
+              <img src={link.icon} alt="" />
+            </a>
+          ))}
         </div>
       </div>
       <div className={styles.registerBtnContainer}>
