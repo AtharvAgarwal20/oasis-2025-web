@@ -14,7 +14,7 @@ import logo from "/svgs/logo.svg";
 import insta from "/svgs/landing/insta.svg";
 import twitter from "/svgs/landing/twitter.svg";
 import linkedin from "/svgs/landing/linkden.svg";
-import socialLinksBg from "/svgs/landing/socialLink.svg";
+import socialLinksBg from "/svgs/landing/socialLinkBg.svg";
 
 const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
 
