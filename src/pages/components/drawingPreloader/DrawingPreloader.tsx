@@ -40,6 +40,8 @@ export default function DrawingPreloader({
       });
     };
 
+    // Stagger loading each image with 1 sec delay
+
     Promise.all(imagesToPreload.map(preloadImage))
       .then(() => {
         setLoading(false);
@@ -52,21 +54,56 @@ export default function DrawingPreloader({
   }, []);
 
   const svgEl = useRef<SVGSVGElement>(null);
+  const pathsRef = useRef<SVGPathElement[]>([]);
+
   useGSAP(() => {
     if (svgEl.current) {
       const paths = document.querySelectorAll(".drawingPaths");
-      paths.forEach((path, i) => {
-        const length = (path as SVGPathElement).getTotalLength();
-        (path as SVGPathElement).style.strokeDasharray = `${length}`;
-        (path as SVGPathElement).style.strokeDashoffset = `${length}`;
-        gsap.to(path, {
-          strokeDashoffset: 0,
-          duration: 5,
-          delay: i * 1 + 0.3,
-        });
+      pathsRef.current = Array.from(paths) as SVGPathElement[];
+
+      // Setup initial state for all paths
+      pathsRef.current.forEach((path) => {
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = `${length}`;
+        path.style.strokeDashoffset = `${length}`;
       });
     }
   }, []);
+
+  useGSAP(() => {
+    if (pathsRef.current.length > 0) {
+      const progressNormalized = progress / 100;
+      const totalPaths = pathsRef.current.length;
+
+      pathsRef.current.forEach((path, index) => {
+        const pathStartProgress = index / totalPaths;
+        const pathEndProgress = (index + 1) / totalPaths;
+
+        if (progressNormalized >= pathEndProgress) {
+          // Path should be completely drawn
+          gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 5,
+            ease: "power2.out",
+          });
+        } else if (progressNormalized > pathStartProgress) {
+          // Path is partially being drawn
+          const pathProgress =
+            (progressNormalized - pathStartProgress) /
+            (pathEndProgress - pathStartProgress);
+          const length = path.getTotalLength();
+          const offset = length * (1 - pathProgress);
+
+          gsap.to(path, {
+            strokeDashoffset: offset,
+            duration: 3,
+            ease: "power2.out",
+          });
+        }
+        // If progressNormalized <= pathStartProgress, the path remains hidden (initial state)
+      });
+    }
+  }, [progress]);
 
   return (
     <>
