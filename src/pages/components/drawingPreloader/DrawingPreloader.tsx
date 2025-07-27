@@ -21,8 +21,8 @@ export default function DrawingPreloader({
   className?: string;
   onEnter?: () => void;
 }) {
-  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
     let loadedImages = 0;
@@ -40,15 +40,17 @@ export default function DrawingPreloader({
       });
     };
 
-    // Stagger loading each image with 1 sec delay
-
-    Promise.all(imagesToPreload.map(preloadImage))
-      .then(() => {
-        setLoading(false);
-      })
+    Promise.all(
+      imagesToPreload.map((src, i) =>
+        preloadImage(src).then(async (img) => {
+          await new Promise((resolve) => setTimeout(resolve, 1000 * i));
+          return img;
+        })
+      )
+    )
+      .then(() => {})
       .catch((err) => {
         console.error("Error preloading images:", err);
-        setLoading(false);
       });
     console.log("Preloading images completed");
   }, []);
@@ -61,7 +63,6 @@ export default function DrawingPreloader({
       const paths = document.querySelectorAll(".drawingPaths");
       pathsRef.current = Array.from(paths) as SVGPathElement[];
 
-      // Setup initial state for all paths
       pathsRef.current.forEach((path) => {
         const length = path.getTotalLength();
         path.style.strokeDasharray = `${length}`;
@@ -80,14 +81,17 @@ export default function DrawingPreloader({
         const pathEndProgress = (index + 1) / totalPaths;
 
         if (progressNormalized >= pathEndProgress) {
-          // Path should be completely drawn
           gsap.to(path, {
             strokeDashoffset: 0,
             duration: 5,
             ease: "power2.out",
+            onComplete: () => {
+              if (index === totalPaths - 1) {
+                setIsAnimating(false);
+              }
+            },
           });
         } else if (progressNormalized > pathStartProgress) {
-          // Path is partially being drawn
           const pathProgress =
             (progressNormalized - pathStartProgress) /
             (pathEndProgress - pathStartProgress);
@@ -100,7 +104,6 @@ export default function DrawingPreloader({
             ease: "power2.out",
           });
         }
-        // If progressNormalized <= pathStartProgress, the path remains hidden (initial state)
       });
     }
   }, [progress]);
@@ -224,10 +227,23 @@ export default function DrawingPreloader({
           d="M292.5 571c.3.5.8 1 1.1 1 .2 0 .4-.5.4-1 0-.6-.5-1-1.1-1-.5 0-.7.4-.4 1zM139.7 571.7c-2.7.7-1 2.3 2.5 2.3 2.6 0 2.9-.2 1.8-1.5-.7-.8-1.5-1.4-1.9-1.4-.3.1-1.4.3-2.4.6zM62.4 573.1c-.3.5 1.1.9 3.1.9s3.4-.4 3.1-.9c-.3-.5-1.7-.9-3.1-.9-1.4 0-2.8.4-3.1.9zM712.9 573.3c.5.5 2.4.7 4.2.5 3.3-.3 3.3-.4-.8-.8-2.3-.3-3.9-.2-3.4.3zM146.8 573.7c.7.3 1.6.2 1.9-.1.4-.3-.2-.6-1.3-.5-1.1 0-1.4.3-.6.6z"
         />
       </svg>
-      {!loading && (
-        <button className={styles.enterButton} onClick={onEnter}>
-          Enter
-        </button>
+      {isAnimating ? (
+        <div className={styles.loadingContainer}>
+          <div className={styles.loader}></div>
+          <div className={styles.progressBar}>
+            <div
+              className={styles.progressFill}
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+          <div className={styles.percentage}>{Math.round(progress)}%</div>
+        </div>
+      ) : (
+        <>
+          <button className={styles.enterButton} onClick={onEnter}>
+            Enter
+          </button>
+        </>
       )}
     </>
   );
