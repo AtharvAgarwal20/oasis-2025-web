@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 import Landing from "./pages/landing/Landing";
-import Preloader from './pages/components/preloader/Preloader'; 
+import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
+import styles from "./App.module.scss";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,9 +11,9 @@ export default function App() {
     // add music later
   };
 
-  return isLoading ? (
-    <Preloader onEnter={handleEnter} />
-  ) : (
-    <Landing />
+  return (
+    <div className={styles.root}>
+      {isLoading ? <DrawingPreloader onEnter={handleEnter} /> : <Landing />}
+    </div>
   );
 }

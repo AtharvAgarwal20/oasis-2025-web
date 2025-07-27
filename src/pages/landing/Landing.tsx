@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import styles from "./Landing.module.scss";
 
 import Navbar from "../components/navbar/Navbar";
+// import Drawing from "../components/Background/Drawing";
 
-import smallMountains from "/images/landing/smallMountains.png";
-import bigMountain from "/images/landing/bigMountain.png";
+// import smallMountains from "/images/landing/smallMountains.png";
+// import bigMountain from "/images/landing/bigMountain.png";
+// import cloud from "/images/landing/cloud.png";
+// import sun from "/images/landing/sun.png";
 import tree from "/images/landing/tree.png";
-import cloud from "/images/landing/cloud.png";
-import sun from "/images/landing/sun.png";
 import registerBtn from "/svgs/landing/registerBtn.svg";
 import logo from "/svgs/logo.svg";
 import insta from "/svgs/landing/insta.svg";
@@ -71,7 +72,7 @@ export default function Landing() {
     <div className={styles.landing}>
       <Navbar />
 
-      <div className={styles.cloudContainer}>
+      {/* <div className={styles.cloudContainer}>
         <img src={cloud} className={styles.cloud} alt="" />
       </div>
       <div className={styles.sunContainer}>
@@ -82,7 +83,11 @@ export default function Landing() {
       </div>
       <div className={styles.smallMountainsContainer}>
         <img src={smallMountains} className={styles.smallMountains} alt="" />
-      </div>
+      </div> */}
+
+      {/* <div className={styles.background}>
+        <Drawing className={styles.backgroundSvg} />
+      </div> */}
       <div className={styles.treeContainer}>
         <img src={tree} className={styles.tree} alt="" />
       </div>
