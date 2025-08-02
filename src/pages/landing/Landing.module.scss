@@ -6,18 +6,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; // Initially high
-  background-image: url("/svgs/landing/sketchBackground.svg");
-  background-size: cover;
-  background-position: center;
+  z-index: 2000;
   pointer-events: none;
-  transition: opacity 0.3s ease
+  mask-image: url("/videos/ink-spread-3.gif");
+  mask-size: cover;
+  mask-position: center;
 
-}
-
-.sketchOverlay.hidden {
-  opacity: 0; // Hide the overlay
-  z-index: -2; // Move it behind other elements
+  .sketchImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 .landing {
@@ -31,14 +31,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
     background-image: url("/images/landing/v.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    mask-image: url("/videos/ink-spread-2.gif");
-    mask-size: cover;
-    mask-position: center;
   }
   
   .cloudContainer,

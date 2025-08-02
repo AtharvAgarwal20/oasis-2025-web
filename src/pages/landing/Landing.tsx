@@ -71,7 +71,13 @@ export default function Landing() {
   return (
 
     <>
-    <div className={styles.sketchOverlay}></div>
+    <div className={styles.sketchOverlay}>
+      <img 
+          src="/svgs/landing/sketchBackground.svg" 
+          alt="Sketch background"
+          className={styles.sketchImage}
+        />
+    </div>
     <div className={styles.landing}>
       <Navbar />
 
