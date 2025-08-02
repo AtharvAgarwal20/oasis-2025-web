@@ -69,6 +69,9 @@ export default function Landing() {
   }, []);
 
   return (
+
+    <>
+    <div className={styles.sketchOverlay}></div>
     <div className={styles.landing}>
       <Navbar />
 
@@ -138,5 +141,6 @@ export default function Landing() {
         <div className={styles.registerBtnText}>Register</div>
       </div>
     </div>
+   </>
   );
 }

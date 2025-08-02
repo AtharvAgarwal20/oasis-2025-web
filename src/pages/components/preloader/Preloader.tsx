@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import styles from './Preloader.module.scss';
 
 const imagesToPreload = [
-  '/images/landing/smallMountains.png',
-  '/images/landing/bigMountain.png',
-  '/images/landing/tree.png',
-  '/images/landing/cloud.png',
-  '/images/landing/sun.png',
-  '/svgs/landing/registerBtn.svg',
-  '/svgs/logo.svg'
+  "/images/landing/smallMountains.png",
+  "/images/landing/bigMountain.png",
+  "/images/landing/tree.png",
+  "/images/landing/cloud.png",
+  "/images/landing/sun.png",
+  "/svgs/landing/registerBtn.svg",
+  "/svgs/logo.svg",
+  "/svgs/landing/sketchBackground.svg",
+  "/images/landing/v.png",
+  "/videos/ink-spread-2.gif",
 ];
 
 interface PreloaderProps {
