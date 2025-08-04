@@ -13,7 +13,7 @@ const imagesToPreload = [
   "/svgs/logo.svg",
   "/svgs/landing/sketchBackground.svg",
   "/images/landing/v.png",
-  "/videos/ink-spread-2.gif",
+  "/videos/ink-spread-3.gif",
 ];
 
 export default function DrawingPreloader({
