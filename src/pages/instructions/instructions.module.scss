@@ -1,0 +1,81 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Share+Tech&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&display=swap');
+
+.dm-serif-text-regular {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.birds
+{
+  display: flex;
+  position: absolute;
+  top:40px;
+  width: 40vw;
+  height: 10vh;
+  background: url("/svgs/registration/birds.svg");
+  background-size:contain;
+  background-repeat: no-repeat;
+    background-blend-mode: overlay;
+}
+.instr
+{
+  height: auto;
+  overflow-y: hidden;
+  width: 46.10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+font-family: DM Serif Text;
+font-weight: 400;
+font-style: "Regular";
+font-size: 30px;
+leading-trim: CAP_HEIGHT;
+line-height: 30.6px;
+letter-spacing: 6%;
+text-align: center;
+overflow-x: hidden;
+
+p{
+  color: #540000;
+  text-align: left;
+  padding-top: 0.3vh;
+  padding-bottom: 0.3vh;
+
+font-size: 25px;
+}
+}
+
+.instrback {
+  background: 
+    linear-gradient(180.39deg, #FF88A3 0%, #FFAE93 52.75%), 
+    url("/svgs/registration/silhouttes.svg");
+    background-blend-mode: overlay;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.heading{
+  height: auto;
+  color:#000000F0;
+  padding-bottom: 2.5vh;
+  display: flex;
+  justify-content: center;
+  font-family: "Ibarra Real Nova";
+font-weight: 400;
+font-style: "Regular";
+font-size: 50px;
+
+line-height: 28.8px;
+letter-spacing: 4%;
+text-align: center;
+
+}
