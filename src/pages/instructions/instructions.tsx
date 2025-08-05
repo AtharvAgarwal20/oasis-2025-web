@@ -1,28 +1,32 @@
-import React from "react";
 import styles from "./instructions.module.scss";
-
 
 const instructions = () => {
   return (
     <div className={styles.instrback}>
-      <div className={styles.birds}></div>
+      <div className={styles.birds}>
+        <h1 className={styles.header}>REGISTRATION</h1>
+      </div>
       <h1 className={styles.heading}>INSTRUCTIONS</h1>
-      <div className={styles.instr}>
-      <p>✦ Complete the registration form with all required details. 
-    You'll be able to login through your registered email id 
-    when required.</p>
-    <p>✦ All team members are required to register separately.</p>
-    <p>✦ A College Representative (CR) will be appointed for each 
-    college who'll be responsible for allotting heads for all 
-    the societies the college will be participating for.</p>
-    <p>✦ All prof shows are free. </p>
-    <p>✦ For further details contact, Parimal: 8638304074, 
-     Ishita: 7804051996</p>
-     <p>✦ For detailed instructions click here </p>
+      <ul className={styles.instr}>
+        <li>
+          Complete the registration form with all required details. You'll be
+          able to login through your registered email id when required.
+        </li>
+        <li>All team members are required to register separately.</li>
+        <li>
+          A College Representative (CR) will be appointed for each college
+          who'll be responsible for allotting heads for all the societies the
+          college will be participating for.
+        </li>
+        <li>All prof shows are free. </li>
+        <li>
+          For further details contact, Parimal: 8638304074, Ishita: 7804051996
+        </li>
+        <li>For detailed instructions click here </li>
+      </ul>
+      <button className={styles.googleButton}>SIGN IN WITH GOOGLE</button>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default instructions
-
+export default instructions;

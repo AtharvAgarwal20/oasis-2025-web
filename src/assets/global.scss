@@ -4,6 +4,14 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "Ibarra Real Nova SemiBold";
+  src: url("/public/fonts/IbarraRealNova-SemiBold.ttf");
+}
+@font-face {
+  font-family: "DM Serif Text";
+  src: url("/public/fonts/DMSerifText-Regular.ttf");
+}
 
 $primaryFont: "Japan Ramen", sans-serif;
 
