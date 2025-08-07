@@ -15,7 +15,7 @@ import logo from "/svgs/logo.svg";
 import insta from "/svgs/landing/insta.svg";
 import twitter from "/svgs/landing/twitter.svg";
 import linkedin from "/svgs/landing/linkden.svg";
-import socialLinksBg from "/svgs/landing/socialLinkBg.svg";
+import socialLinksBg from "/svgs/landing/socialLinkBg1.svg";
 
 const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
 
@@ -69,19 +69,18 @@ export default function Landing() {
   }, []);
 
   return (
-
     <>
-    <div className={styles.sketchOverlay}>
-      <img 
-          src="/svgs/landing/sketchBackground.svg" 
+      <div className={styles.sketchOverlay}>
+        <img
+          src="/svgs/landing/sketchBackground.svg"
           alt="Sketch background"
           className={styles.sketchImage}
         />
-    </div>
-    <div className={styles.landing}>
-      <Navbar />
+      </div>
+      <div className={styles.landing}>
+        <Navbar />
 
-      {/* <div className={styles.cloudContainer}>
+        {/* <div className={styles.cloudContainer}>
         <img src={cloud} className={styles.cloud} alt="" />
       </div>
       <div className={styles.sunContainer}>
@@ -94,59 +93,63 @@ export default function Landing() {
         <img src={smallMountains} className={styles.smallMountains} alt="" />
       </div> */}
 
-      {/* <div className={styles.background}>
+        {/* <div className={styles.background}>
         <Drawing className={styles.backgroundSvg} />
       </div> */}
-      <div className={styles.treeContainer}>
-        <img src={tree} className={styles.tree} alt="" />
+        <div className={styles.treeContainer}>
+          <img src={tree} className={styles.tree} alt="" />
+        </div>
+        <div className={styles.logoContainer}>
+          <img src={logo} className={styles.logo} alt="Logo" />
+        </div>
+        <div className={styles.dateCountdown}>
+          <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
+            <div className={styles.days}>{timeLeft.days}</div>
+            DAYS
+          </div>
+          :
+          <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
+            <div className={styles.hours}>{timeLeft.hours}</div>
+            HOURS
+          </div>
+          :
+          <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
+            <div className={styles.minutes}>{timeLeft.minutes}</div>
+            MINUTES
+          </div>
+          :
+          <div className={`${styles.secondsLeft} ${styles.timeLeft}`}>
+            <div className={styles.seconds}>{timeLeft.seconds}</div>
+            SECONDS
+          </div>
+        </div>
+        <div className={styles.socialLinksContainer}>
+          <div className={styles.linkBackground}>
+            <img src={socialLinksBg} alt="" />
+          </div>
+          <div className={styles.socialLinks}>
+            {socialLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.socialLink}
+              >
+                <img src={link.icon} alt="" />
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className={styles.registerBtnContainer}>
+          <img
+            src={registerBtn}
+            className={styles.registerBtn}
+            alt="Register"
+          />
+          <div className={styles.registerBtnText}>Register</div>
+        </div>
       </div>
-      <div className={styles.logoContainer}>
-        <img src={logo} className={styles.logo} alt="Logo" />
-      </div>
-      <div className={styles.dateCountdown}>
-        <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
-          <div className={styles.days}>{timeLeft.days}</div>
-          DAYS
-        </div>
-        :
-        <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
-          <div className={styles.hours}>{timeLeft.hours}</div>
-          HOURS
-        </div>
-        :
-        <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
-          <div className={styles.minutes}>{timeLeft.minutes}</div>
-          MINUTES
-        </div>
-        :
-        <div className={`${styles.secondsLeft} ${styles.timeLeft}`}>
-          <div className={styles.seconds}>{timeLeft.seconds}</div>
-          SECONDS
-        </div>
-      </div>
-      <div className={styles.socialLinksContainer}>
-        <div className={styles.linkBackground}>
-          <img src={socialLinksBg} alt="" />
-        </div>
-        <div className={styles.socialLinks}>
-          {socialLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-            >
-              <img src={link.icon} alt="" />
-            </a>
-          ))}
-        </div>
-      </div>
-      <div className={styles.registerBtnContainer}>
-        <img src={registerBtn} className={styles.registerBtn} alt="Register" />
-        <div className={styles.registerBtnText}>Register</div>
-      </div>
-    </div>
-   </>
+    </>
   );
 }
