@@ -11,9 +11,8 @@ const imagesToPreload = [
   "/images/landing/sun.png",
   "/svgs/landing/registerBtn.svg",
   "/svgs/logo.svg",
-  "/svgs/landing/sketchBackground.svg",
   "/images/landing/v.png",
-  "/videos/ink-spread-2.gif",
+  "/videos/ink-spread-3.gif",
 ];
 
 export default function DrawingPreloader({
@@ -37,6 +36,7 @@ export default function DrawingPreloader({
           loadedImages++;
           setProgress((loadedImages / imagesToPreload.length) * 100);
           resolve(img);
+          console.log(`Image preloaded: ${src}, Progress: ${loadedImages}/${imagesToPreload.length}`);
         };
         img.onerror = reject;
       });
