@@ -12,6 +12,7 @@ import Navbar from "../components/navbar/Navbar";
 // import cloud from "/images/landing/cloud.png";
 // import sun from "/images/landing/sun.png";
 import tree from "/images/landing/tree.png";
+import landingImage from "/images/landing/v.png"; 
 import registerBtn from "/svgs/landing/registerBtn.svg";
 import logo from "/svgs/logo.svg";
 import insta from "/svgs/landing/insta.svg";
@@ -41,38 +42,57 @@ const socialLinks = [
 export default function Landing() {
   const treeRef = useRef<HTMLDivElement>(null);
   const treeImageRef = useRef<HTMLImageElement>(null);
+  const landingRef = useRef<HTMLImageElement>(null);
 
    useEffect(() => {
     if (treeRef.current && treeImageRef.current) {
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: treeRef.current,
-          start: "top bottom", 
-          end: "bottom top",   
-          scrub: 1,          
-          markers: false,     
+
+      let zoomPhase = true;
+      let scrollPosition = 0;
+      // @ts-ignore
+    
+      const handleScroll = (e) => {
+        if (zoomPhase) {
+          e.preventDefault();
+          scrollPosition += e.deltaY * 0.5;
+
+          const maxZoom = 500;
+          const minZoom = 0;
+
+          if (scrollPosition < minZoom) scrollPosition = minZoom;
+          if (scrollPosition > maxZoom) {
+            scrollPosition = maxZoom;
+            zoomPhase = false;
+            document.body.style.overflow = "auto"; 
+          }
+
+          const treeZoom = 1 + (scrollPosition / maxZoom) * 1.2; 
+          const bgZoom = 1 + (scrollPosition / maxZoom) * 0.3; 
+          
+          gsap.set(treeImageRef.current, {
+            scale: treeZoom,
+            transformOrigin: "center center"
+          });
+          
+          gsap.set(landingRef.current, {
+            scale: bgZoom,
+            transformOrigin: "center center"
+          });
+
+          if (scrollPosition <= minZoom && !zoomPhase) {
+            zoomPhase = true;
+            document.body.style.overflow = "hidden";
+          }
         }
-      });
+      }
+      
+      document.body.style.overflow = "hidden";
 
-      tl.to(treeRef.current, {
-        y: -400,
-        ease: "none",
-      });
-
-      tl.to(treeImageRef.current, {
-        scale: 1.3,
-        rotation: 2,
-        ease: "none",
-      }, 0); 
-       
-      tl.to(".landing", {
-      backgroundPositionY: "50px", 
-      ease: "none",
-      }, 0);
+      window.addEventListener('wheel', handleScroll, { passive: false });
 
       return () => {
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        window.removeEventListener('wheel', handleScroll);
+        document.body.style.overflow = "auto";
       };
     }
    }, []);
@@ -240,6 +260,7 @@ export default function Landing() {
       </svg>
     </div>
     <div className={styles.landing}>
+      <img src={landingImage} className={styles.landingImage} ref={landingRef} />
       <Navbar />
 
       {/* <div className={styles.cloudContainer}>
