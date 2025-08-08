@@ -40,98 +40,42 @@ const socialLinks = [
 ];
 
 export default function Landing() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
-  const isZoomingRef = useRef(true);
-  const scrollProgressRef = useRef(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current || !treeImageRef.current || !landingRef.current) return;
+    ScrollTrigger.create({
+      trigger: wrapperRef.current,
+      start: "top top",
+      end: "+=100vh", 
+      scrub: 4,
+      onUpdate: (self) => {
+        const progress = self.progress; 
 
-    document.body.style.overflow = 'hidden';
-    
-    gsap.set(treeImageRef.current, {
-      scale: 1,
-      transformOrigin: "center center"
+        const treeScale = 1 + progress * 1.2;
+
+        const landingScale = 1 + progress * 0.3;
+
+       
+        gsap.set(treeImageRef.current, {
+          scale: treeScale,
+          transformOrigin: "center center",
+          ease: "none",
+        });
+
+        gsap.set(landingRef.current, {
+          scale: landingScale,
+          transformOrigin: "center center",
+          ease: "none",
+        });
+      },
     });
-    
-    gsap.set(landingRef.current, {
-      scale: 1,
-      transformOrigin: "center center"
-    });
 
-    const handleWheel = (e: WheelEvent) => {
-      if (!isZoomingRef.current) return;
-
-      e.preventDefault();
-      
-      // Smooth scroll progress calculation
-      const delta = e.deltaY * 0.002; // Reduced sensitivity for smoothness
-      scrollProgressRef.current = Math.max(0, Math.min(1, scrollProgressRef.current + delta));
-      
-      // Smooth easing function
-      const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
-      const progress = easeOutQuart(scrollProgressRef.current);
-      
-      // Calculate scales with different rates
-      const treeScale = 1 + progress * 1.5; // Tree scales from 1 to 2.5
-      const bgScale = 1 + progress * 0.3;   // Background scales from 1 to 1.3
-      
-      // Apply transforms smoothly
-      gsap.to(treeImageRef.current, {
-        scale: treeScale,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-
-      gsap.to(landingRef.current, {
-        scale: bgScale,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-      
-      // Exit zoom phase when fully zoomed
-      if (scrollProgressRef.current >= 1) {
-        isZoomingRef.current = false;
-        document.body.style.overflow = 'auto';
-        
-        // Add smooth transition to normal content
-        setTimeout(() => {
-          window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-        }, 300);
-      }
-    };
-
-    const handleScroll = () => {
-      if (isZoomingRef.current) return;
-      
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      
-      // Re-enter zoom mode when scrolling back to top
-      if (scrollTop <= 50) {
-        isZoomingRef.current = true;
-        document.body.style.overflow = 'hidden';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Reset to zoomed state
-        scrollProgressRef.current = 1;
-        gsap.set(treeImageRef.current, { scale: 2.5 });
-        gsap.set(landingRef.current, { scale: 1.3 });
-      }
-    };
-
-     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Cleanup
     return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('scroll', handleScroll);
-      document.body.style.overflow = 'auto';
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-
-  }, [])
+  }, []);
 
   const [showDelayedOverlay, setShowDelayedOverlay] = useState(false);
 
@@ -297,15 +241,17 @@ export default function Landing() {
           />
         </svg>
       </div>
-      <div className={styles.landing}>
-        <img
-          src={landingImage}
-          className={styles.landingImage}
-          ref={landingRef}
-        />
-        <Navbar />
 
-        {/* <div className={styles.cloudContainer}>
+      <div className={styles.wrapper} ref={wrapperRef}>
+        <div className={styles.landing}>
+          <img
+            src={landingImage}
+            className={styles.landingImage}
+            ref={landingRef}
+          />
+          <Navbar />
+
+          {/* <div className={styles.cloudContainer}>
         <img src={cloud} className={styles.cloud} alt="" />
       </div>
       <div className={styles.sunContainer}>
@@ -318,63 +264,64 @@ export default function Landing() {
         <img src={smallMountains} className={styles.smallMountains} alt="" />
       </div> */}
 
-        {/* <div className={styles.background}>
+          {/* <div className={styles.background}>
         <Drawing className={styles.backgroundSvg} />
       </div> */}
-        <div className={styles.treeContainer}>
-          <img src={tree} className={styles.tree} alt="" ref={treeImageRef} />
-        </div>
-        <div className={styles.logoContainer}>
-          <img src={logo} className={styles.logo} alt="Logo" />
-        </div>
-        <div className={styles.dateCountdown}>
-          <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
-            <div className={styles.days}>{timeLeft.days}</div>
-            DAYS
+          <div className={styles.treeContainer}>
+            <img src={tree} className={styles.tree} alt="" ref={treeImageRef} />
           </div>
-          :
-          <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
-            <div className={styles.hours}>{timeLeft.hours}</div>
-            HOURS
+          <div className={styles.logoContainer}>
+            <img src={logo} className={styles.logo} alt="Logo" />
           </div>
-          :
-          <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
-            <div className={styles.minutes}>{timeLeft.minutes}</div>
-            MINUTES
+          <div className={styles.dateCountdown}>
+            <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
+              <div className={styles.days}>{timeLeft.days}</div>
+              DAYS
+            </div>
+            :
+            <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
+              <div className={styles.hours}>{timeLeft.hours}</div>
+              HOURS
+            </div>
+            :
+            <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
+              <div className={styles.minutes}>{timeLeft.minutes}</div>
+              MINUTES
+            </div>
+            :
+            <div className={`${styles.secondsLeft} ${styles.timeLeft}`}>
+              <div className={styles.seconds}>{timeLeft.seconds}</div>
+              SECONDS
+            </div>
           </div>
-          :
-          <div className={`${styles.secondsLeft} ${styles.timeLeft}`}>
-            <div className={styles.seconds}>{timeLeft.seconds}</div>
-            SECONDS
+          <div className={styles.socialLinksContainer}>
+            <div className={styles.linkBackground}>
+              <img src={socialLinksBg} alt="" />
+            </div>
+            <div className={styles.socialLinks}>
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  <img src={link.icon} alt="" />
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className={styles.socialLinksContainer}>
-          <div className={styles.linkBackground}>
-            <img src={socialLinksBg} alt="" />
+          <div className={styles.registerBtnContainer}>
+            <img
+              src={registerBtn}
+              className={styles.registerBtn}
+              alt="Register"
+            />
+            <div className={styles.registerBtnText}>Register</div>
           </div>
-          <div className={styles.socialLinks}>
-            {socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-              >
-                <img src={link.icon} alt="" />
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className={styles.registerBtnContainer}>
-          <img
-            src={registerBtn}
-            className={styles.registerBtn}
-            alt="Register"
-          />
-          <div className={styles.registerBtnText}>Register</div>
         </div>
       </div>
     </>
   );
-}
+} 

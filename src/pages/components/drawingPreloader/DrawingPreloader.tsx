@@ -241,11 +241,11 @@ export default function DrawingPreloader({
           <div className={styles.percentage}>{Math.round(progress)}%</div>
         </div>
       ) : (
-        <>
+        <div className={styles.btnContainer}>
           <button className={styles.enterButton} onClick={onEnter}>
             Enter
           </button>
-        </>
+        </div>
       )}
     </>
   );
