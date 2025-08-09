@@ -1,6 +1,7 @@
 @use "../../../assets/global.scss" as *;
 
-.drawingPreloader {
+.drawingPreloader {position: fixed;
+  height: 100svh;
 }
 
 .btnContainer {
