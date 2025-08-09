@@ -2,8 +2,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
 import Landing from "./pages/landing/Landing";
 import { useState } from "react";
-import Registration from "./pages/registration/Registration";
-import Instructions from "./pages/instructions/instructions";
+import Registration from "./pages/Registration/Registration";
+import Instructions from "./pages/Instructions/Instructions";
+import Events from "./pages/Events/events";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,8 @@ export default function App() {
         }
       />
       <Route path="/register" element={<Registration />} />
-      <Route path="/instructions" element ={<Instructions/>}></Route>
+      <Route path="/instructions" element={<Instructions />} />
+      <Route path="/events" element={<Events />} />
     </Routes>
   );
 }
