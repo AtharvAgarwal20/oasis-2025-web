@@ -128,9 +128,13 @@ body{
 
       .tree {
         width: 100%;
-        height: auto;
-        max-width: 100%;
-        transform: translateY(0) scale(1) rotate(0deg);
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        transition: transform 0.1s ease-out;
       }
     }
 
@@ -254,4 +258,5 @@ body{
       }
     }
   }
+  
 }

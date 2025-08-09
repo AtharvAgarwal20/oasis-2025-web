@@ -48,26 +48,21 @@ export default function Landing() {
     ScrollTrigger.create({
       trigger: wrapperRef.current,
       start: "top top",
-      end: "+=100vh", 
-      scrub: 4,
+      end: "+=10vh",
+      scrub: 0.8,
       onUpdate: (self) => {
-        const progress = self.progress; 
+        const progress = self.progress;
 
-        const treeScale = 1 + progress * 1.2;
+        const treeScale = 1 + progress * 0.6;
 
-        const landingScale = 1 + progress * 0.3;
+        const landingScale = 1 + progress * 0.2;
 
-       
-        gsap.set(treeImageRef.current, {
+        gsap.to(treeImageRef.current, {
           scale: treeScale,
-          transformOrigin: "center center",
-          ease: "none",
         });
 
-        gsap.set(landingRef.current, {
+        gsap.to(landingRef.current, {
           scale: landingScale,
-          transformOrigin: "center center",
-          ease: "none",
         });
       },
     });
@@ -324,4 +319,4 @@ export default function Landing() {
       </div>
     </>
   );
-} 
+}
