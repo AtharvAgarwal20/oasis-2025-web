@@ -1,6 +1,6 @@
-import styles from "./instructions.module.scss";
+import styles from "./Instructions.module.scss";
 
-const instructions = () => {
+const Instructions = () => {
   return (
     <div className={styles.instrback}>
       <div className={styles.birds}>
@@ -22,11 +22,11 @@ const instructions = () => {
         <li>
           For further details contact, Parimal: 8638304074, Ishita: 7804051996
         </li>
-        <li>For detailed instructions click here </li>
+        <li>For detailed Instructions click here </li>
       </ul>
       <button className={styles.googleButton}>SIGN IN WITH GOOGLE</button>
     </div>
   );
 };
 
-export default instructions;
+export default Instructions;
