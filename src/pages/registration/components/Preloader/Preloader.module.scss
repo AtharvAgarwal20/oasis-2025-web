@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: $gradient;
+  background: linear-gradient(to bottom, #000 0%, #666666 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,12 +18,9 @@
     align-items: center;
 
     .loader {
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 1s ease-in-out infinite;
+      width: 100px;
+      height: 100px;
+      animation: spin 1s linear infinite;
       margin-bottom: 20px;
     }
 
@@ -54,22 +51,4 @@
       font-size: 1.5rem;
     }
   }
-
-  .enterButton {
-    font-family: $primaryFont;
-    font-size: 2rem;
-    color: white;
-    background: none;
-    border: 2px solid white;
-    padding: 15px 40px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: scale(1.05);
-    }
-  }
 }
-

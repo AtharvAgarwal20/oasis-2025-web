@@ -27,15 +27,15 @@ const Registration = () => {
       });
       switch (currentPage) {
         case 1:
-          gsap.set(bgRef.current, { x: "-45%" });
+          gsap.set(bgRef.current, { x: "-42.5%" });
           gsap.set(elemRef1.current, { display: "flex", opacity: 1 });
           break;
         case 2:
-          gsap.set(bgRef.current, { x: "-22%" });
+          gsap.set(bgRef.current, { x: "-17%" });
           gsap.set(elemRef2.current, { display: "block", opacity: 1 });
           break;
         case 3:
-          gsap.set(bgRef.current, { x: "0%" });
+          gsap.set(bgRef.current, { x: "-1%" });
           gsap.set(elemRef3.current, { display: "block", opacity: 1 });
           break;
       }
@@ -50,7 +50,7 @@ const Registration = () => {
   const toFirstPage = () => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
-        x: "-45%",
+        x: "-42.5%",
         duration: 1.5,
         // ease: "power1.out",
       });
@@ -81,7 +81,7 @@ const Registration = () => {
   const toRegPage = (back: boolean) => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
-        x: "-22%",
+        x: "-17%",
         duration: 1.5,
         // ease: "power1.out",
       });
@@ -112,7 +112,7 @@ const Registration = () => {
   const toEventPage = () => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
-        x: "0%",
+        x: "-1%",
         duration: 1.5,
         // ease: "power1.out",
       });

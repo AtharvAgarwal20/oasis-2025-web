@@ -8,15 +8,15 @@
   align-items: center;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 
   .backgroundImage {
     position: absolute;
-    bottom: 0;
+    bottom: -0.5vw;
     left: 0;
-    height: 75svh;
-    // width: 100vw;
-    transform: translateX(-45%);
+    // height: 84svh;
+    width: 175vw;
+    transform: translateX(-42.5%);
     pointer-events: none;
     object-fit: contain;
   }
