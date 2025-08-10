@@ -1,33 +1,14 @@
 @use "/src/assets/global.scss" as *;
 
-.instrback {
-  background: linear-gradient(180.39deg, #ff88a3 0%, #ffae93 52.75%),
-    center / contain no-repeat url("/svgs/registration/silhouttes.svg");
-  background-blend-mode: overlay;
-  background-position: bottom;
-  height: 100svh;
-  width: 100vw;
+.content {
   display: flex;
   align-items: center;
   flex-direction: column;
 
-  .birds {
-    margin-top: 2vw;
-    width: 45vw;
-    height: 4vw;
-    background: center / contain no-repeat url("/svgs/registration/birds.svg");
-    background-blend-mode: overlay;
-
-    .header {
-      margin-top: 1vw;
-      text-align: center;
-      font-size: 4vw;
-    }
-  }
-
   .heading {
-    margin: 3vw 0 1vw 0;
+    margin: 5vw 0 2vw 0;
     font: 400 2.6vw "Ibarra Real Nova SemiBold";
+    color: #ffffff;
   }
 
   .instr {
@@ -35,14 +16,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1vw;
+    gap: 1.3vw;
     list-style: none;
-    
+
     li {
       position: relative;
-      color: #540000;
+      color: #ffffff;
       text-align: left;
-      font: 400 1.6vw "DM Serif Text";
+      font: 400 1.3vw "DM Serif Text";
       line-height: 1.1;
       letter-spacing: 0.7px;
 
@@ -59,7 +40,7 @@
     }
   }
 
-  .googleButton{
+  .googleButton {
     width: 20vw;
     height: 4vw;
     font: 400 1.6vw "DM Serif Text";

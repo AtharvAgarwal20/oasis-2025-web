@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import styles from "./Events.module.scss";
 
 const eventList = [
@@ -7,7 +7,11 @@ const eventList = [
   { id: 3, name: "Event 3" },
 ];
 
-const Events = () => {
+type PropsType = {
+  onClickNext: () => void;
+};
+
+const Events = forwardRef<HTMLDivElement, PropsType>(({ onClickNext }, ref) => {
   const [selectedEvents, setSelectedEvents] = useState<
     { id: number; name: string }[]
   >(JSON.parse(sessionStorage.getItem("selectedEvents") || "[]"));
@@ -27,7 +31,7 @@ const Events = () => {
     setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
   };
   return (
-    <div className={styles.eventsContainer}>
+    <div className={styles.eventsContainer} ref={ref}>
       <h1 className={styles.heading}>Events</h1>
       <ul className={styles.eventsList}>
         {eventList.map((event) => (
@@ -68,6 +72,7 @@ const Events = () => {
         <button
           onClick={() => {
             console.log("Confirmed Events:", selectedEvents);
+            onClickNext();
           }}
           disabled={selectedEvents.length === 0}
         >
@@ -78,6 +83,6 @@ const Events = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Events;
