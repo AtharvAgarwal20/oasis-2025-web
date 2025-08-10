@@ -1,4 +1,5 @@
 $inputwidth:30vw;
+@use "../../assets/global.scss" as *;
 
 .reg {
   position: relative;
@@ -62,6 +63,7 @@ background: linear-gradient(180deg, rgba(0, 0, 0, 0.79) 0%, rgba(102, 102, 102, 
       flex: 1;
       display: flex;
       flex-direction: column;
+      line-height: 5vh;
 
       label {
         margin-top: 1rem;
@@ -163,7 +165,7 @@ border: 1px solid #EDEDED;
 }
 
 .sameline label {
-  font-size: 14px;
+  font-size: 0.8rem;
   /* padding-bottom removed */
   text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
 }
@@ -256,16 +258,16 @@ border: 1px solid #EDEDED;
   }
 
   img:first-of-type {
-    left: -2vw;
+    left: 0;
   }
 
   img:last-of-type {
-    right: -2vw;
+    right: 0;
   }
 }
 .sameline 
 {img{
-  width:10vw;
+  width:7vw;
   margin: 0;
 }}
 
@@ -336,4 +338,11 @@ border: 1px solid #EDEDED;
   position: relative;
 
  
+}
+input::placeholder{
+  color:  #CFCFCF;
+font-family: $regFont;
+}
+label{
+  padding-bottom: 0.7rem;
 }

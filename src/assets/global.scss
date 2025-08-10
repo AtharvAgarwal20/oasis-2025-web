@@ -12,7 +12,12 @@
   font-family: "DM Serif Text";
   src: url("/public/fonts/DMSerifText-Regular.ttf");
 }
+@font-face {
+  font-family: "Abhaya Libre Extrabold";
+  src: url("/public/fonts/AbhayaLibre-ExtraBold.ttf");
+}
 
 $primaryFont: "Japan Ramen", sans-serif;
 
 $gradient: linear-gradient(#ff6084 0%, #ff9c7b 100%);
+$regFont:"Abhaya Libre Extrabold", sans-serif;
