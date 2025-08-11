@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Select, { type StylesConfig } from "react-select";
 
 import styles from "./Register.module.scss";
 
@@ -24,6 +25,7 @@ type FormData = {
   year: string;
   state: string;
   city: string;
+  interests: string[];
 };
 
 interface StateItem {
@@ -32,6 +34,10 @@ interface StateItem {
 }
 
 const typedStatesData: StateItem[] = statesData;
+const stateOptions = typedStatesData.map((item) => ({
+  value: item.state,
+  label: item.state,
+}));
 
 const registrationSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -46,6 +52,11 @@ const registrationSchema = yup.object({
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
+   interests: yup
+    .array()
+    .of(yup.string())
+    .min(1, "Select at least one college")
+    .required("College is required"),
 });
 
 type PropsType = {
@@ -100,13 +111,111 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
       setAvailableCities(getAvailableCities(selectedState));
     }, [selectedState]);
 
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm<FormData>({
-      resolver: yupResolver(registrationSchema),
-    });
+  const [interests, setInterests] = useState<string[]>([]);
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
+  resolver: yupResolver(registrationSchema),
+});
+const [inputValue, setInputValue] = useState("");
+  const InterestSelectOptions = interestOptions.map(c => ({
+    value: c.id.toString(),
+    label: c.name,
+  }));
+const getFilteredOptions = (input: string) => {
+  if (!input) return stateOptions;
+
+  const inputLower = input.toLowerCase();
+ const startsWith = stateOptions.filter(opt =>
+    opt.label.toLowerCase().startsWith(inputLower)
+  );
+const contains = stateOptions.filter(opt =>
+    !opt.label.toLowerCase().startsWith(inputLower) &&
+    opt.label.toLowerCase().includes(inputLower)
+  );
+
+  return [...startsWith, ...contains];
+};
+
+const customStyles = {
+  
+  noOptionsMessage: (provided: any) => ({
+    ...provided,
+    color: "white",
+    backgroundColor: "#00000061", 
+    padding: "10px",
+    textAlign: "center",
+  }),
+  control: (provided: any, state: any) => ({
+    ...provided,
+    textAlign: "center",
+    paddingLeft:"5vw",
+    
+    paddingRight:"5vw",
+    width: "30vw",
+    height: "2.1rem",
+    background: "#00000061",
+    border: "1px solid #ededed",
+    color: "white",
+    boxShadow: "0px 0px 10.2px 0px #e5c3845e",
+  }),
+  menuList: (provided: any) => ({
+  ...provided,
+  padding: 0,
+  margin: 0,
+  backgroundColor: "#2e0505",
+  color: "white",
+  borderRadius: "10px",
+  scrollbarWidth: "thin",
+}),
+  singleValue: (provided: any) => ({
+    ...provided,
+    color: "white",
+    textAlign: "center",
+    
+    paddingLeft:"5vw",
+    
+  }),
+  input: (provided: any) => ({
+    ...provided,
+    color: "white",
+    textAlign: "center",
+    padding:"0",
+  }),
+  menu: (provided: any) => ({
+    ...provided,
+    marginTop: 0,
+    width: "30vw",
+    borderRadius: "10px",
+    overflow: "hidden",
+    zIndex: 10,
+  }),
+  option: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "rgba(0,20,80,0.8)" : "#2e0505",
+    color: "white",
+    cursor: "pointer",
+  }),
+  valueContainer: (provided: any) => ({
+    ...provided,
+    width: "100%",
+    
+    height: "100%",
+    padding: "0",
+    background:"transparent",
+    color: "white",
+    display: "flex", flexDirection:"column",
+    justifyContent: "center",
+  }),
+  dropdownIndicator: (provided: any) => ({
+    ...provided,
+    color: "white",
+    display:"none",
+    cursor: "pointer",
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+};
+
 
     const onSubmit = (data: FormData) => {
       console.log(data);
@@ -179,21 +288,26 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
                   </div>
                   <p>{errors.dob?.message}</p>
                 </div> */}
+                <div className="int">
                 <div className={styles.clouds}>
                   <img src={CloudLeft} alt="" />
-                  <select {...register("college_id")}>
-                    <option value="">-- Select --</option>
-                    {(Array.isArray(interestOptions)
-                      ? interestOptions
-                      : []
-                    ).map((college, index) => (
-                      <option key={index} value={college.name}>
-                        {college.name}
-                      </option>
-                    ))}
-                  </select>
+                 <Select
+          isMulti
+          options={InterestSelectOptions}
+         value={InterestSelectOptions.filter(opt => interests.includes(opt.value))}
+
+          onChange={(selected) => {
+            const vals = selected ? selected.map(opt => opt.value) : [];
+            setInterests(vals);
+            setValue("interests", vals, { shouldValidate: true });
+          }}
+          placeholder="Select interest(s)"
+          classNamePrefix="react-select"
+          styles={customStyles}
+        />
                   <img src={CloudRight} alt="" />
                 </div>
+              </div>
               </div>
             </div>
             <div className={styles.mobile} style={{ marginLeft: "3.5vw" }}>
@@ -265,27 +379,36 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
             </div>
 
             <p>{errors.year?.message}</p>
-            <div className={styles.state} style={{ marginLeft: "3vw" }}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>STATE OF RESIDENCE</label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-
-                <select {...register("state")} onChange={handleStateChange}>
-                  <option value="">-- Select --</option>
-                  {typedStatesData.map((stateItem, index) => (
-                    <option key={index} value={stateItem.state}>
-                      {stateItem.state}
-                    </option>
-                  ))}
-                </select>
-                <img src={CloudRight} alt="" />
-              </div>
-              <p>{errors.state?.message}</p>
+            <div className={styles.sameline}>
+              <img src={Left} alt="" />
+              <label>STATE</label>
+              <img src={Right} alt="" />
             </div>
+            <div className={styles.clouds}>
+              <img src={CloudLeft} alt="" />
+            <Select
+            
+            menuPortalTarget={null}
+menuPosition="absolute"
+
+    options={getFilteredOptions(inputValue)}
+  styles={customStyles}
+  
+  onInputChange={(value) => setInputValue(value)}
+  filterOption={() => true} 
+  value={stateOptions.find(option => option.value === selectedState) || null}
+  onChange={(option) => {
+    const val = option ? option.value : "";
+    setSelectedState(val);
+     setValue("state", val, { shouldValidate: true });
+  }}
+  placeholder="Select state"
+  classNamePrefix="react-select"
+/>
+
+              <img src={CloudRight} alt="" />
+            </div>
+
             <div className={styles.sameline}>
               <img src={Left} alt="" />
               <label>CITY </label>

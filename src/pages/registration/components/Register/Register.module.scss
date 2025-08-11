@@ -2,9 +2,15 @@ $inputwidth: 30vw;
 @use "/src/assets/global.scss" as *;
 
 .registrationForm {
+  
+.react-select__input-container{
+  input{
+  box-shadow: none!important;
+  }
+}
   display: none;
   opacity: 0;
-  position: relative;
+  position: absolute;
   color: white;
   padding: 2rem;
   width: 100%;
@@ -38,7 +44,7 @@ $inputwidth: 30vw;
     }
 
     input,
-    select {
+    select,Select {
       text-align: center;
       width: 30vw;
       height: 2.1rem;
@@ -46,8 +52,7 @@ $inputwidth: 30vw;
       border: 1px solid #ededed;
       color: white;
       padding: 0.5rem;
-      box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-    }
+         }
 
     p {
       font-size: 0.75rem;
@@ -185,9 +190,10 @@ select {
   height: 3vh;
 }
 .clouds {
+   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+
   position: relative;
   width: 30vw;
-  height: 2.1rem;
   overflow: visible;
   align-items: center;
   padding: 0;
@@ -202,7 +208,6 @@ select {
     border: 1px solid #ededed;
     color: white;
     padding: 0.5rem;
-    box-shadow: 0px 0px 10.2px 0px #e5c3845e;
     font-size: 1rem;
     z-index: 1;
     box-sizing: border-box;
@@ -302,4 +307,57 @@ input::placeholder {
 }
 label {
   padding-bottom: 0.7rem;
+}
+.react-select__control {
+   box-sizing: border-box;
+  text-align: center;
+  width: 30vw;
+  height: 2.1rem;
+  background: #00000061;
+  border: 1px solid #ededed;
+  color: white;
+  padding: 0.5rem;
+  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+  cursor: pointer;
+  
+  width: 30vw;
+}
+
+.react-select__single-value {
+  color: white;
+  
+  width: 30vw;
+  text-align: center;
+}
+
+.react-select__input {
+  color: white;
+  text-align: center;
+}
+.react-select__control--is-focused {
+  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+  
+  width: 30vw;
+  border-color: #ededed;
+}
+.react-select__menu {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #e5c3845e;
+  margin-top: 0;
+  width: 30vw;
+  overflow: hidden;
+  z-index: 10;
+}
+.react-select__value-container{
+ box-sizing: border-box;
+  text-align: center;
+  
+  width: 3vw;
+  height: 2.1rem;
+  background: #00000061;
+  border: 1px solid #ededed;
+  color: white;
+  padding: 0;
+  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+  cursor: pointer;
 }
