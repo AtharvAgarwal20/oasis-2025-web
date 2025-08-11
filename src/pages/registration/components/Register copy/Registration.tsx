@@ -8,10 +8,7 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 import CloudLeft from "/svgs/registration/left.svg";
 import CloudRight from "/svgs/registration/right.svg";
-
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import single from "/svgs/registration/single.svg";
-import gsap from "gsap/all";
+const ref = useRef<HTMLFormElement>(null);
 type FormData = {
   name: string;
   email: string;
@@ -116,11 +113,11 @@ useEffect(() => {
   const onSubmit = (data: FormData) => {
     console.log(data);
   };
-  const singleRef = useRef<HTMLImageElement>(null);
   return (
     <div className={styles.reg}>
       <form
         onSubmit={handleSubmit(onSubmit)}
+        ref={ref}
         className={styles.registrationForm}
       >
         <h2 className={styles.title}>Registration</h2>

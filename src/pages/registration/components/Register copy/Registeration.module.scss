@@ -6,7 +6,9 @@ $inputwidth: 30vw;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-
+input::placeholder,select::placeholder{
+text-align: center;
+}
   &::before {
     content: "";
     position: absolute;

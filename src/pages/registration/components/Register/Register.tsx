@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Select, { type StylesConfig } from "react-select";
+import Select from "react-select";
 
 import styles from "./Register.module.scss";
 
@@ -14,6 +14,7 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 import CloudLeft from "/svgs/registration/left.svg";
 import CloudRight from "/svgs/registration/right.svg";
+import { Placeholder } from "react-select/animated";
 
 type FormData = {
   name: string;
@@ -25,7 +26,8 @@ type FormData = {
   year: string;
   state: string;
   city: string;
-  interests: string[];
+ // interests: string[];
+  referral?: string;
 };
 
 interface StateItem {
@@ -52,11 +54,12 @@ const registrationSchema = yup.object({
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
-   interests: yup
+   /*interests: yup
     .array()
     .of(yup.string())
     .min(1, "Select at least one college")
-    .required("College is required"),
+    .required("College is required"),*/
+    referral: yup.string().notRequired(), 
 });
 
 type PropsType = {
@@ -69,14 +72,14 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
   ({ onClickNext, userEmail, setUserData }, ref) => {
     const [selectedState, setSelectedState] = useState("");
     const [availableCities, setAvailableCities] = useState<string[]>([]);
-    const [interestOptions, setInterestOptions] = useState<
+    /*const [interestOptions, setInterestOptions] = useState<
       { id: number; name: string }[]
-    >([]);
+    >([]);*/
     const [collegeOptions, setCollegeOptions] = useState<
       { id: number; name: string }[]
     >([]);
 
-    useEffect(() => {
+   /* useEffect(() => {
       axios
         .get(
           "https://merge.bits-apogee.org/2025/main/registrations/categories/"
@@ -85,7 +88,7 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
           setInterestOptions(response.data.data);
         })
         .catch((error) => console.error("Error fetching events:", error));
-    }, []);
+    }, []);*/
 
     useEffect(() => {
       axios
@@ -111,15 +114,15 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
       setAvailableCities(getAvailableCities(selectedState));
     }, [selectedState]);
 
-  const [interests, setInterests] = useState<string[]>([]);
+ // const [interests, setInterests] = useState<string[]>([]);
     const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
   resolver: yupResolver(registrationSchema),
 });
 const [inputValue, setInputValue] = useState("");
-  const InterestSelectOptions = interestOptions.map(c => ({
+ /* const InterestSelectOptions = interestOptions.map(c => ({
     value: c.id.toString(),
     label: c.name,
-  }));
+  }));*/
 const getFilteredOptions = (input: string) => {
   if (!input) return stateOptions;
 
@@ -144,18 +147,16 @@ const customStyles = {
     padding: "10px",
     textAlign: "center",
   }),
-  control: (provided: any, state: any) => ({
+  control: (provided: any) => ({
     ...provided,
     textAlign: "center",
     paddingLeft:"5vw",
-    
+    border:"none",
     paddingRight:"5vw",
     width: "30vw",
-    height: "2.1rem",
-    background: "#00000061",
-    border: "1px solid #ededed",
+    maxHeight:"2rem",
+    background: "transparent",
     color: "white",
-    boxShadow: "0px 0px 10.2px 0px #e5c3845e",
   }),
   menuList: (provided: any) => ({
   ...provided,
@@ -171,6 +172,7 @@ const customStyles = {
     color: "white",
     textAlign: "center",
     
+    height: "5vh",
     paddingLeft:"5vw",
     
   }),
@@ -178,7 +180,12 @@ const customStyles = {
     ...provided,
     color: "white",
     textAlign: "center",
-    padding:"0",
+    
+    height: "5vh",
+  }),
+  Placeholder:(provided:any)=>({
+    ...provided, 
+    textAlign:"center",
   }),
   menu: (provided: any) => ({
     ...provided,
@@ -198,7 +205,7 @@ const customStyles = {
     ...provided,
     width: "100%",
     
-    height: "100%",
+    height: "4vh",
     padding: "0",
     background:"transparent",
     color: "white",
@@ -231,6 +238,7 @@ const customStyles = {
       >
         <div className={styles.formColumns}>
           <div className={styles.left}>
+            <div className={styles.name}>
             <div className={styles.sameline}>
               <img src={Left} alt="" />
               <label>NAME</label>
@@ -238,11 +246,12 @@ const customStyles = {
             </div>
             <div className={styles.clouds}>
               <img src={CloudLeft} alt="" />
-              <input {...register("name")} />
+              <input {...register("name")} placeholder="Name" />
               <img src={CloudRight} alt="" />
             </div>
             <p>{errors.name?.message}</p>
-            <div className={styles.email} style={{ marginLeft: "-1.5vw" }}>
+            </div>
+            <div className={styles.email}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
                 <label>EMAIL </label>
@@ -259,16 +268,19 @@ const customStyles = {
                 <img src={CloudRight} alt="" />
               </div>
               <p>{errors.email_id?.message}</p>
+              
             </div>
             <div className={styles.together}>
               <div className={styles.fields}>
                 <div className={styles.field1}>
-                  <label className={styles.gendob}>GENDER</label>
-
+                   <img src={Left} alt=""style={{display:"none"}} />
+   <label className={styles.sameline}>GENDER</label>
+ 
+    <img src={Right} alt="" style={{display:"none"}}/>
                   <div className={styles.clouds}>
                     <img src={CloudLeft} alt="" />
-                    <select {...register("gender")}>
-                      <option value="">-- Select --</option>
+                    <select {...register("gender")} style={{paddingLeft:"30%"}}>
+                      <option value="">Male</option>
                       <option value="M">Male</option>
                       <option value="F">Female</option>
                       <option value="O">Other</option>
@@ -288,29 +300,23 @@ const customStyles = {
                   </div>
                   <p>{errors.dob?.message}</p>
                 </div> */}
-                <div className="int">
-                <div className={styles.clouds}>
-                  <img src={CloudLeft} alt="" />
-                 <Select
-          isMulti
-          options={InterestSelectOptions}
-         value={InterestSelectOptions.filter(opt => interests.includes(opt.value))}
+                
+                <div className={styles.referral} style={{}}>
+  <div className={styles.sameline}style={{width:"18vw"}}>
 
-          onChange={(selected) => {
-            const vals = selected ? selected.map(opt => opt.value) : [];
-            setInterests(vals);
-            setValue("interests", vals, { shouldValidate: true });
-          }}
-          placeholder="Select interest(s)"
-          classNamePrefix="react-select"
-          styles={customStyles}
-        />
-                  <img src={CloudRight} alt="" />
-                </div>
-              </div>
+    <label className="styles.gendob" >REFERRAL CODE </label>
+  </div>
+  <div className={styles.clouds} style={{width:"18vw"}}>
+    <img src={CloudLeft} alt="" />
+    <input {...register("referral")} placeholder="Referral Code"style={{width:"18vw"}} />
+    <img src={CloudRight} alt="" />
+  </div>
+</div>
+
+              
               </div>
             </div>
-            <div className={styles.mobile} style={{ marginLeft: "3.5vw" }}>
+            <div className={styles.mobile} style={{ marginLeft: "3vw" }}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
                 <label>MOBILE NUMBER </label>
@@ -318,7 +324,7 @@ const customStyles = {
               </div>
               <div className={styles.clouds}>
                 <img src={CloudLeft} alt="" />
-                <input {...register("phone")} />
+                <input {...register("phone")} placeholder="+919876543210"/>
                 <img src={CloudRight} alt="" />
               </div>
               <p>{errors.phone?.message}</p>
@@ -326,7 +332,7 @@ const customStyles = {
           </div>
 
           <div className={styles.right}>
-            <div className={styles.college} style={{ marginLeft: "2.5vw" }}>
+            <div className={styles.college} style={{ marginLeft: "0.5vw" }}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
                 <label>COLLEGE NAME </label>
@@ -355,13 +361,14 @@ const customStyles = {
                 <label>YEAR OF STUDY </label>
                 <img src={Right} alt="" />
               </div>
-              <div className={styles.clouds}>
+              <div className={styles.clouds}
+                  >
                 <img src={CloudLeft} alt="" />
                 <fieldset
                   className={styles.radioGroup}
                   aria-label="Year of Study"
                 >
-                  {["1", "2", "3", "4", "5"].map((year) => (
+                  {["1", "2", "3", "4"].map((year) => (
                     <label key={year} className={styles.radioLabel}>
                       <input
                         type="radio"
@@ -374,11 +381,12 @@ const customStyles = {
                   ))}
                 </fieldset>
                 <img src={CloudRight} alt="" />
+                <p className={styles.error}>{errors.year?.message}</p>
+           
               </div>
-              <p className={styles.error}>{errors.year?.message}</p>
-            </div>
+               </div>
 
-            <p>{errors.year?.message}</p>
+            <div className={styles.states} style={{marginLeft:"4.5vw"}}>
             <div className={styles.sameline}>
               <img src={Left} alt="" />
               <label>STATE</label>
@@ -407,8 +415,8 @@ menuPosition="absolute"
 />
 
               <img src={CloudRight} alt="" />
-            </div>
-
+            </div></div>
+<div className={styles.city} style={{marginLeft:"0.5vw"}}>
             <div className={styles.sameline}>
               <img src={Left} alt="" />
               <label>CITY </label>
@@ -429,7 +437,7 @@ menuPosition="absolute"
               <img src={CloudRight} alt="" />
             </div>
             <p>{errors.city?.message}</p>
-          </div>
+          </div></div>
         </div>
 
         <button className={styles.submitBtn} type="submit">
