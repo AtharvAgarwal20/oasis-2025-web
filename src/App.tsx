@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
-import Preloader from "./pages/Registration/components/Preloader/Preloader";
+import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Landing from "./pages/landing/Landing";
 import { useState } from "react";
-import Registration from "./pages/Registration/Registration";
+import Registration from "./pages/registration/Registration";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
