@@ -4,11 +4,6 @@ import { useGSAP } from "@gsap/react";
 import styles from "./DrawingPreloader.module.scss";
 
 const imagesToPreload = [
-  "/images/landing/smallMountains.png",
-  "/images/landing/bigMountain.png",
-  "/images/landing/tree.png",
-  "/images/landing/cloud.png",
-  "/images/landing/sun.png",
   "/svgs/landing/registerBtn.svg",
   "/svgs/logo.svg",
   "/images/landing/v.png",
