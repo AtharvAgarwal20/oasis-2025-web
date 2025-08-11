@@ -5,6 +5,7 @@ import styles from "./Register.module.scss";
 
 import { useEffect, useState, forwardRef } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 import statesData from "./cities.json";
 
@@ -15,11 +16,11 @@ import CloudRight from "/svgs/registration/right.svg";
 
 type FormData = {
   name: string;
-  email: string;
-  dob: string;
+  email_id: string;
+  // dob: string;
   gender: string;
-  mobile: string;
-  college: string;
+  phone: string;
+  college_id: string;
   year: string;
   state: string;
   city: string;
@@ -32,29 +33,16 @@ interface StateItem {
 
 const typedStatesData: StateItem[] = statesData;
 
-const colleges = [
-  "University of Tokyo",
-  "University of Cape Town",
-  "Pontifical Catholic University of Chile",
-  "Trinity College Dublin",
-  "University of British Columbia",
-  "BITS Pilani",
-  "University of Melbourne",
-  "Korea Advanced Institute of Science & Technology (KAIST)",
-  "Sciences Po",
-  "University of São Paulo",
-];
-
 const registrationSchema = yup.object({
   name: yup.string().required("Name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  dob: yup.string().required("Date of birth is required"),
+  email_id: yup.string().email("Invalid email").required("Email is required"),
+  // dob: yup.string().required("Date of birth is required"),
   gender: yup.string().required("Gender is required"),
-  mobile: yup
+  phone: yup
     .string()
     .matches(/^\+?\d{10,15}$/, "Invalid mobile number")
     .required("Mobile number is required"),
-  college: yup.string().required("College is required"),
+  college_id: yup.string().required("College is required"),
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
@@ -62,12 +50,42 @@ const registrationSchema = yup.object({
 
 type PropsType = {
   onClickNext: () => void;
+  userEmail: string;
+  setUserData: React.Dispatch<React.SetStateAction<any>>;
 };
 
 const Register = forwardRef<HTMLFormElement, PropsType>(
-  ({ onClickNext }, ref) => {
+  ({ onClickNext, userEmail, setUserData }, ref) => {
     const [selectedState, setSelectedState] = useState("");
     const [availableCities, setAvailableCities] = useState<string[]>([]);
+    const [interestOptions, setInterestOptions] = useState<
+      { id: number; name: string }[]
+    >([]);
+    const [collegeOptions, setCollegeOptions] = useState<
+      { id: number; name: string }[]
+    >([]);
+
+    useEffect(() => {
+      axios
+        .get(
+          "https://merge.bits-apogee.org/2025/main/registrations/categories/"
+        )
+        .then((response) => {
+          setInterestOptions(response.data.data);
+        })
+        .catch((error) => console.error("Error fetching events:", error));
+    }, []);
+
+    useEffect(() => {
+      axios
+        .get(
+          "https://merge.bits-apogee.org/2025/main/registrations/get_college/"
+        )
+        .then((response) => {
+          setCollegeOptions(response.data.data);
+        })
+        .catch((error) => console.error("Error fetching events:", error));
+    }, []);
 
     const getAvailableCities = (stateName: string): string[] =>
       typedStatesData.find((item) => item.state === stateName)?.cities ?? [];
@@ -92,6 +110,8 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
 
     const onSubmit = (data: FormData) => {
       console.log(data);
+      setUserData(data);
+      onClickNext();
     };
 
     return (
@@ -109,7 +129,7 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
             </div>
             <div className={styles.clouds}>
               <img src={CloudLeft} alt="" />
-              <input {...register("name")} placeholder="RAIYYAN NSA" />
+              <input {...register("name")} />
               <img src={CloudRight} alt="" />
             </div>
             <p>{errors.name?.message}</p>
@@ -121,10 +141,15 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
               </div>
               <div className={styles.clouds}>
                 <img src={CloudLeft} alt="" />
-                <input {...register("email")} />
+                <input
+                  {...register("email_id")}
+                  value={userEmail}
+                  disabled
+                  placeholder={userEmail}
+                />
                 <img src={CloudRight} alt="" />
               </div>
-              <p>{errors.email?.message}</p>
+              <p>{errors.email_id?.message}</p>
             </div>
             <div className={styles.together}>
               <div className={styles.fields}>
@@ -135,24 +160,39 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
                     <img src={CloudLeft} alt="" />
                     <select {...register("gender")}>
                       <option value="">-- Select --</option>
-                      <option value="MALE">Male</option>
-                      <option value="FEMALE">Female</option>
-                      <option value="OTHER">Other</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                      <option value="O">Other</option>
                     </select>
                   </div>
 
                   <p>{errors.gender?.message}</p>
                 </div>
-                <div className={styles.field2}>
+                {/* <div className={styles.field2}>
                   <label className={styles.gendob}>DATE OF BIRTH</label>
 
                   <div className={styles.clouds}>
-                    {/* <img src="" alt="" /> */}
+                    <img src="" alt="" />
                     <input type="date" {...register("dob")} />
 
                     <img src={CloudRight} alt="" />
                   </div>
                   <p>{errors.dob?.message}</p>
+                </div> */}
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+                  <select {...register("college_id")}>
+                    <option value="">-- Select --</option>
+                    {(Array.isArray(interestOptions)
+                      ? interestOptions
+                      : []
+                    ).map((college, index) => (
+                      <option key={index} value={college.name}>
+                        {college.name}
+                      </option>
+                    ))}
+                  </select>
+                  <img src={CloudRight} alt="" />
                 </div>
               </div>
             </div>
@@ -164,10 +204,10 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
               </div>
               <div className={styles.clouds}>
                 <img src={CloudLeft} alt="" />
-                <input {...register("mobile")} />
+                <input {...register("phone")} />
                 <img src={CloudRight} alt="" />
               </div>
-              <p>{errors.mobile?.message}</p>
+              <p>{errors.phone?.message}</p>
             </div>
           </div>
 
@@ -180,18 +220,20 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
               </div>
               <div className={styles.clouds}>
                 <img src={CloudLeft} alt="" />
-                <select {...register("college")}>
+                <select {...register("college_id")}>
                   <option value="">-- Select --</option>
-                  {colleges.map((college, index) => (
-                    <option key={index} value={college}>
-                      {college}
-                    </option>
-                  ))}
+                  {(Array.isArray(collegeOptions) ? collegeOptions : []).map(
+                    (college, index) => (
+                      <option key={index} value={college.id}>
+                        {college.name}
+                      </option>
+                    )
+                  )}
                 </select>
                 <img src={CloudRight} alt="" />
               </div>
 
-              <p>{errors.college?.message}</p>
+              <p>{errors.college_id?.message}</p>
             </div>
             <div className={styles.year} style={{ marginLeft: "4.5vw" }}>
               <div className={styles.sameline}>
@@ -205,7 +247,7 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
                   className={styles.radioGroup}
                   aria-label="Year of Study"
                 >
-                  {["1", "2", "3", "4"].map((year) => (
+                  {["1", "2", "3", "4", "5"].map((year) => (
                     <label key={year} className={styles.radioLabel}>
                       <input
                         type="radio"
@@ -267,7 +309,7 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
           </div>
         </div>
 
-        <button className={styles.submitBtn} onClick={onClickNext}>
+        <button className={styles.submitBtn} type="submit">
           NEXT
         </button>
         {/* <button type="submit" className={styles.submitBtn}>

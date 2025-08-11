@@ -1,6 +1,7 @@
 @use "/src/assets/global.scss" as *;
 
 .content {
+  z-index: 1;
   display: flex;
   align-items: center;
   flex-direction: column;

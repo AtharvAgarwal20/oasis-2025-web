@@ -10,37 +10,21 @@ import bgExtend from "../../../public/svgs/registration/bg-extended.svg";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
+import { useCookies } from "react-cookie";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 const Registration = () => {
   const { contextSafe } = useGSAP();
-  const [currentPage, setCurrentPage] = useState(
-    sessionStorage.getItem("currentPage")
-      ? parseInt(sessionStorage.getItem("currentPage")!)
-      : 1
-  );
-
-  useEffect(() => {
-    contextSafe(() => {
-      gsap.set([elemRef1.current, elemRef2.current, elemRef3.current], {
-        display: "none",
-        opacity: 0,
-      });
-      switch (currentPage) {
-        case 1:
-          gsap.set(bgRef.current, { x: "-42.5%" });
-          gsap.set(elemRef1.current, { display: "flex", opacity: 1 });
-          break;
-        case 2:
-          gsap.set(bgRef.current, { x: "-17%" });
-          gsap.set(elemRef2.current, { display: "block", opacity: 1 });
-          break;
-        case 3:
-          gsap.set(bgRef.current, { x: "-1%" });
-          gsap.set(elemRef3.current, { display: "block", opacity: 1 });
-          break;
-      }
-    })();
-  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [userEmail, setUserEmail] = useState("ghk@example.com");
+  const [userState, setUserState] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
+  const [_cookies, setCookies] = useCookies([
+    "Authorization",
+    "user-auth",
+    "Access_token",
+  ]);
 
   const bgRef = useRef<HTMLImageElement>(null);
   const elemRef1 = useRef<HTMLDivElement>(null);
@@ -72,9 +56,7 @@ const Registration = () => {
           opacity: 1,
           duration: 1,
           ease: "power1.out",
-          onComplete: () => {
-            setCurrentPage(1), sessionStorage.setItem("currentPage", "1");
-          },
+          onComplete: () => setCurrentPage(1),
         });
     })();
   };
@@ -103,12 +85,16 @@ const Registration = () => {
           opacity: 1,
           duration: 1,
           ease: "power1.out",
-          onComplete: () => {
-            setCurrentPage(2), sessionStorage.setItem("currentPage", "2");
-          },
+          onComplete: () => setCurrentPage(2),
         });
     })();
   };
+  useEffect(() => {
+    toRegPage(false);
+    setTimeout(() => {
+      toEventPage();
+    }, 2500);
+  }, []);
   const toEventPage = () => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
@@ -127,38 +113,17 @@ const Registration = () => {
           ease: "power1.out",
         })
         .set(elemRef3.current, {
-          display: "block",
+          display: "flex",
           ease: "power1.out",
         })
         .to(elemRef3.current, {
           opacity: 1,
           duration: 1,
           ease: "power1.out",
-          onComplete: () => {
-            setCurrentPage(3), sessionStorage.setItem("currentPage", "3");
-          },
+          onComplete: () => setCurrentPage(3),
         });
     })();
   };
-  const onClickEvents = () => {
-    contextSafe(() => {
-      gsap.to(bgRef.current, {
-        x: "0%",
-        duration: 1.5,
-        // ease: "power1.out",
-      });
-      const tl = gsap.timeline();
-      tl.to(elemRef3.current, {
-        opacity: 0,
-        duration: 1,
-        ease: "power1.out",
-      }).set(elemRef3.current, {
-        display: "none",
-        ease: "power1.out",
-      });
-    })();
-  };
-
   const backButtonHandler = () => {
     switch (currentPage) {
       case 1:
@@ -171,6 +136,40 @@ const Registration = () => {
         break;
     }
   };
+  const onGoogleSignIn = useGoogleLogin({
+    onSuccess: (response) => {
+      axios
+        .post(
+          "https://merge.bits-apogee.org/2025/main/registrations/google-reg/",
+          {
+            access_token: response.access_token,
+          }
+        )
+        .then((res) => {
+          setCookies("Access_token", response.access_token);
+          if (res.data.exists) {
+            setCookies("user-auth", res.data);
+            setCookies("Authorization", res.data.tokens.access);
+            window.location.href = `https://merge.bits-apogee.org/2025/main/registrations?token=${res.data.tokens.access}`;
+            setUserEmail(res.data.email);
+          } else {
+            setCookies("user-auth", res.data);
+            setUserState({
+              ...res.data,
+              access_token: response.access_token,
+            });
+            setUserEmail(res.data.email);
+          }
+          if (userEmail && userState) toRegPage(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    // onFailure: () => {
+    //   console.error("Login failed");
+    // },
+  });
 
   return (
     <div className={styles.instrback}>
@@ -186,12 +185,18 @@ const Registration = () => {
       <button
         onClick={backButtonHandler}
         className={currentPage === 1 ? styles.inActive : ""}
+        style={{ zIndex: 3, position: "absolute", top: "2vw", left: "2vw" }}
       >
         Back Button
       </button>
-      <Instructions onGoogleSignIn={() => toRegPage(false)} ref={elemRef1} />
-      <Register ref={elemRef2} onClickNext={toEventPage} />
-      <Events ref={elemRef3} onClickNext={onClickEvents} />
+      <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />
+      <Register
+        ref={elemRef2}
+        onClickNext={toEventPage}
+        userEmail={userEmail}
+        setUserData={setUserData}
+      />
+      <Events ref={elemRef3} userData={userData} setUserData={setUserData} />
     </div>
   );
 };
