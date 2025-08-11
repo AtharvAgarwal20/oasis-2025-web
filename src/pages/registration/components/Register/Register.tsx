@@ -5,7 +5,7 @@ import Select from "react-select";
 import styles from "./Register.module.scss";
 
 import { useEffect, useState, forwardRef } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import axios from "axios";
 
 import statesData from "./cities.json";
@@ -68,8 +68,8 @@ type PropsType = {
   setUserData: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const Register = forwardRef<HTMLFormElement, PropsType>(
-  ({ onClickNext, userEmail, setUserData }, ref) => {
+const Register = forwardRef<HTMLFormElement, PropsType>(function RegisterComponent(props, ref) {
+  const { onClickNext, userEmail, setUserData } = props;
     const [selectedState, setSelectedState] = useState("");
     const [availableCities, setAvailableCities] = useState<string[]>([]);
     /*const [interestOptions, setInterestOptions] = useState<
@@ -206,11 +206,13 @@ const customStyles = {
     width: "100%",
     
     height: "4vh",
-    padding: "0",
+    paddingLeft:"30%",
     background:"transparent",
     color: "white",
     display: "flex", flexDirection:"column",
     justifyContent: "center",
+    alignItems:"center",
+    
   }),
   dropdownIndicator: (provided: any) => ({
     ...provided,
@@ -224,11 +226,12 @@ const customStyles = {
 };
 
 
-    const onSubmit = (data: FormData) => {
-      console.log(data);
-      setUserData(data);
-      onClickNext();
-    };
+const onSubmit: SubmitHandler<FormData> = (data) => {
+  console.log(data);
+  setUserData(data);
+  onClickNext();
+};
+
 
     return (
       <form
@@ -280,7 +283,7 @@ const customStyles = {
                   <div className={styles.clouds}>
                     <img src={CloudLeft} alt="" />
                     <select {...register("gender")} style={{paddingLeft:"30%"}}>
-                      <option value="">Male</option>
+                      <option value="">Gender</option>
                       <option value="M">Male</option>
                       <option value="F">Female</option>
                       <option value="O">Other</option>
