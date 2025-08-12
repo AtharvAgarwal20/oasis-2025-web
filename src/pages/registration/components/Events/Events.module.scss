@@ -81,14 +81,34 @@
         );
       }
     }
-    .confirm {
+    .confirmButton {
+      outline: none;
+      border: none;
+      cursor: pointer;
       margin-top: 2vw;
+      background: center / cover no-repeat
+        url("/public/images/registration/button-banner.png");
+      padding: 1vw;
+      color: #fff;
+      font: 100 1.5vw "Abhaya Libre Extrabold";
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 32vw;
+
+      .confirmIcon {
+        width: 7vw;
+        height: 0.5vw;
+        &:last-child{
+          rotate: 180deg;
+        }
+      }
     }
   }
 
   .scrollBarContainer {
     height: 55svh;
-    width: 10%;
+    width: 10vw;
     margin: 3.5svh 0;
     display: flex;
     justify-content: center;

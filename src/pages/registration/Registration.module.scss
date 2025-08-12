@@ -8,7 +8,7 @@
   align-items: center;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 
   .backgroundImage {
     position: absolute;
@@ -19,7 +19,7 @@
     pointer-events: none;
     object-fit: cover;
   }
-  
+
   .birds {
     z-index: 1;
     margin-top: 1.5vw;
@@ -35,7 +35,19 @@
       object-fit: contain;
     }
   }
-  .inActive{
+  .backBtn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    position: absolute;
+    top: 2vw;
+    left: 2vw;
+    background: transparent;
+    color: #fff;
+    font: 100 1.5vw "Abhaya Libre Extrabold";
+  }
+  .inActive {
     display: none;
   }
 }

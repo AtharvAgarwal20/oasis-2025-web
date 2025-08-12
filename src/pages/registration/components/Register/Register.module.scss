@@ -2,22 +2,21 @@ $inputwidth: 30vw;
 @use "/src/assets/global.scss" as *;
 
 .registrationForm {
-  .name{
+  .name {
     margin-left: 3vw;
   }
-  .email{
-    
+  .email {
     margin-left: 1vw;
   }
-  .together{
+  .together {
     margin-left: 1vw;
   }
-  
-.react-select__input-container{
-  input{
-  box-shadow: none!important;
+
+  .react-select__input-container {
+    input {
+      box-shadow: none !important;
+    }
   }
-}
   display: none;
   opacity: 0;
   position: absolute;
@@ -47,31 +46,36 @@ $inputwidth: 30vw;
     display: flex;
     flex-direction: column;
     gap: 5vh;
- .radioInput {
-  appearance: none;
-  width: 18px !important;
-  height: 18px !important;
-  border: 2px solid white;
-  border-radius: 50%;
-  position: relative;
-  outline: none;
-  cursor: pointer;
-  background-color: transparent;
-  transition: border-color 0.3s ease;
-  &:checked::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 8px;
-    
-    height: 8px;
-background: linear-gradient(0deg, #F57572 0%, #F8A26C 42.84%, #FCDF81 102.69%);
+    .radioInput {
+      appearance: none;
+      width: 18px !important;
+      height: 18px !important;
+      border: 2px solid white;
+      border-radius: 50%;
+      position: relative;
+      outline: none;
+      cursor: pointer;
+      background-color: transparent;
+      transition: border-color 0.3s ease;
+      &:checked::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 8px;
 
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
+        height: 8px;
+        background: linear-gradient(
+          0deg,
+          #f57572 0%,
+          #f8a26c 42.84%,
+          #fcdf81 102.69%
+        );
+
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
     label {
       margin-top: 1rem;
       letter-spacing: 1px;
@@ -81,12 +85,12 @@ background: linear-gradient(0deg, #F57572 0%, #F8A26C 42.84%, #FCDF81 102.69%);
     select {
       text-align: center;
       width: 30vw;
-      
-    height: 100%;
+
+      height: 100%;
       background: transparent;
       border: 0;
       color: white;
-         }
+    }
 
     p {
       font-size: 0.75rem;
@@ -95,18 +99,28 @@ background: linear-gradient(0deg, #F57572 0%, #F8A26C 42.84%, #FCDF81 102.69%);
     }
   }
 
-  .submitBtn {
-    margin-top: 2rem;
-    padding: 0.75rem 2rem;
-    background: crimson;
+  .confirmButton {
+    outline: none;
     border: none;
-    color: white;
-    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2vw auto 0 auto;
+    background: center / cover no-repeat
+      url("/public/images/registration/button-banner.png");
+    padding: 1vw;
+    color: #fff;
+    font: 100 1.5vw "Abhaya Libre Extrabold";
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 22vw;
+
+    .confirmIcon {
+      width: 7vw;
+      height: 0.5vw;
+      &:last-child {
+        rotate: 180deg;
+      }
+    }
   }
 }
 
@@ -222,10 +236,10 @@ select {
   height: 3vh;
 }
 .clouds {
-   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-border: 1px solid rgba(255, 255, 255,0.6);
+  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 
-      height: 2.3rem;
+  height: 2.3rem;
   position: relative;
   width: 30vw;
   overflow: visible;
@@ -285,10 +299,7 @@ border: 1px solid rgba(255, 255, 255,0.6);
   font-size: 1.2rem;
   color: white;
   cursor: pointer;
-  
 }
-
-
 
 .radioGroup {
   width: 100%;
@@ -315,7 +326,7 @@ label {
   padding-bottom: 0.7rem;
 }
 .react-select__control {
-   box-sizing: border-box;
+  box-sizing: border-box;
   text-align: center;
   width: 30vw;
   height: 2.1rem;
@@ -325,13 +336,13 @@ label {
   padding: 0.5rem;
   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
   cursor: pointer;
-  
+
   width: 30vw;
 }
 
 .react-select__single-value {
   color: white;
-  
+
   width: 30vw;
   text-align: center;
 }
@@ -342,7 +353,7 @@ label {
 }
 .react-select__control--is-focused {
   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-  
+
   width: 30vw;
   border-color: #ededed;
 }
@@ -354,10 +365,10 @@ label {
   overflow: hidden;
   z-index: 10;
 }
-.react-select__value-container{
- box-sizing: border-box;
+.react-select__value-container {
+  box-sizing: border-box;
   text-align: center;
-  
+
   width: 3vw;
   height: 2.1rem;
   background: #00000061;

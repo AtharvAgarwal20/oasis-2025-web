@@ -184,10 +184,11 @@ const Registration = () => {
       </div>
       <button
         onClick={backButtonHandler}
-        className={currentPage === 1 ? styles.inActive : ""}
-        style={{ zIndex: 3, position: "absolute", top: "2vw", left: "2vw" }}
+        className={
+          styles.backBtn + " " + (currentPage === 1 ? styles.inActive : "")
+        }
       >
-        Back Button
+        Back -&gt;
       </button>
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />
       <Register

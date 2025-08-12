@@ -38,6 +38,23 @@ const Events = forwardRef<
       .catch((error) => console.error("Error fetching events:", error));
   }, []);
 
+  const handleEvent = (event: { id: number; name: string }) => {
+    if (selectedEvents.some((e) => e.id === event.id)) {
+      sessionStorage.setItem(
+        "selectedEvents",
+        JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
+      );
+      setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
+    } else {
+      console.log("Event already selected:", event);
+      sessionStorage.setItem(
+        "selectedEvents",
+        JSON.stringify([...selectedEvents, event])
+      );
+      setSelectedEvents((prev) => [...prev, event]);
+    }
+  };
+
   function handleScroll() {
     if (!mainContainerRef.current || !thumbRef.current) return;
     const maxScrollTopValue =
@@ -58,23 +75,6 @@ const Events = forwardRef<
       document.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const handleEvent = (event: { id: number; name: string }) => {
-    if (selectedEvents.some((e) => e.id === event.id)) {
-      sessionStorage.setItem(
-        "selectedEvents",
-        JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
-      );
-      setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
-    } else {
-      console.log("Event already selected:", event);
-      sessionStorage.setItem(
-        "selectedEvents",
-        JSON.stringify([...selectedEvents, event])
-      );
-      setSelectedEvents((prev) => [...prev, event]);
-    }
-  };
 
   const handlewheelMouseDown = (
     e: React.MouseEvent<HTMLImageElement> | React.TouchEvent<HTMLImageElement>
@@ -133,8 +133,12 @@ const Events = forwardRef<
   const handleSubmit = () => {
     setUserData((prevData: any) => ({
       ...prevData,
-      selectedEvents,
+      events: selectedEvents.map((event) => event.id),
     }));
+    console.log(
+      "Selected Events:",
+      selectedEvents.map((event) => event.id)
+    );
     setConfirmModal(true);
   };
 
@@ -160,16 +164,40 @@ const Events = forwardRef<
               </li>
             ))}
           </ul>
-          <div className={styles.confirm}>
-            <button
-              onClick={handleSubmit}
-              disabled={selectedEvents.length === 0}
+          <button
+            className={styles.confirmButton}
+            onClick={handleSubmit}
+            disabled={selectedEvents.length === 0}
+          >
+            <svg
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={styles.confirmIcon}
             >
-              {selectedEvents.length > 0
-                ? `Confirm Selection`
-                : "No Events Selected"}
-            </button>
-          </div>
+              <path
+                d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+                fill="white"
+                stroke="white"
+                strokeWidth="0.16"
+              />
+            </svg>
+
+            {selectedEvents.length > 0
+              ? `CONFIRM SELECTION`
+              : "NO EVENTS SELECTED"}
+            <svg
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={styles.confirmIcon}
+            >
+              <path
+                d="M0 3.80298C2.50922 3.80298 66.6863 5.62965 83.2277 6.54299L87.8205 3.80298L83.2277 0.925964L0 3.80298Z"
+                fill="white"
+                stroke="white"
+                strokeWidth="0.16"
+              />
+            </svg>
+          </button>
         </div>
         <div
           className={styles.scrollBarContainer}

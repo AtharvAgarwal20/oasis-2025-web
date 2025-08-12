@@ -34,6 +34,7 @@ const Confirmation = (props: PropsType) => {
       ...userData,
       access_token: cookies["Access_token"],
     };
+    console.log("Submitting Data:", reqData);
     axios
       .post(
         "https://merge.bits-apogee.org/2025/main/registrations/register/",
