@@ -1,8 +1,8 @@
 import styles from "./Registration.module.scss";
 
-import Instructions from "./components/Instructions/Instructions";
-import Register from "./components/Register/Register";
-import Events from "./components/Events/Events";
+import Instructions from "../../pages/registration/components/Instructions/Instructions";
+import Register from "../../pages/registration/components/Register/Register";
+import Events from "../../pages/registration/components/Events/Events"
 
 import banner from "../../../public/images/registration/reg-banner.png";
 import bgExtend from "../../../public/svgs/registration/bg-extended.svg";
