@@ -29,7 +29,7 @@ export default function DrawingPreloader({
     let loadedImages = 0;
 
     const preloadImage = (src: string) => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const img = new Image();
         img.src = src;
         img.onload = () => {
