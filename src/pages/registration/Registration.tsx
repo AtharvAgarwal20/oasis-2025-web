@@ -89,12 +89,12 @@ const Registration = () => {
         });
     })();
   };
-  useEffect(() => {
-    toRegPage(false);
-    setTimeout(() => {
-      toEventPage();
-    }, 2500);
-  }, []);
+  // useEffect(() => {
+  //   toRegPage(false);
+  //   setTimeout(() => {
+  //     toEventPage();
+  //   }, 2500);
+  // }, []);
   const toEventPage = () => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
