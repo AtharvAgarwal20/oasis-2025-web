@@ -8,6 +8,11 @@ const imagesToPreload = [
   "/svgs/logo.svg",
   "/images/landing/v.png",
   "/videos/ink-spread-3.gif",
+  "/images/landing/tree.png",
+  "/svgs/landing/insta.svg",
+  "/svgs/landing/twitter.svg",
+  "/svgs/landing/linkden.svg",
+  "/svgs/landing/socialLinkBg.svg",
 ];
 
 export default function DrawingPreloader({
@@ -30,10 +35,28 @@ export default function DrawingPreloader({
         img.onload = () => {
           loadedImages++;
           setProgress((loadedImages / imagesToPreload.length) * 100);
+          const canvas = document.createElement("canvas");
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext("2d");
+          if (ctx) {
+            ctx.drawImage(img, 0, 0);
+          }
           resolve(img);
-          console.log(`Image preloaded: ${src}, Progress: ${loadedImages}/${imagesToPreload.length}`);
         };
-        img.onerror = reject;
+        img.onerror = (err) => {
+          console.error("Image failed to load", err);
+          resolve(img); // Optionally resolve to continue progress even if an image fails
+        };
+        // img.onload = () => {
+        //   loadedImages++;
+        //   setProgress((loadedImages / imagesToPreload.length) * 100);
+        //   resolve(img);
+        //   console.log(
+        //     `Image preloaded: ${src}, Progress: ${loadedImages}/${imagesToPreload.length}`
+        //   );
+        // };
+        // img.onerror = reject;
       });
     };
 

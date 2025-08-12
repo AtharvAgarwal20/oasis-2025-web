@@ -5,12 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./Landing.module.scss";
 
 import Navbar from "../components/navbar/Navbar";
-// import Drawing from "../components/Background/Drawing";
-
-// import smallMountains from "/images/landing/smallMountains.png";
-// import bigMountain from "/images/landing/bigMountain.png";
-// import cloud from "/images/landing/cloud.png";
-// import sun from "/images/landing/sun.png";
 import tree from "/images/landing/tree.png";
 import landingImage from "/images/landing/v.png";
 import registerBtn from "/svgs/landing/registerBtn.svg";
@@ -19,6 +13,7 @@ import insta from "/svgs/landing/insta.svg";
 import twitter from "/svgs/landing/twitter.svg";
 import linkedin from "/svgs/landing/linkden.svg";
 import socialLinksBg from "/svgs/landing/socialLinkBg.svg";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,36 +39,57 @@ export default function Landing() {
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    ScrollTrigger.create({
-      trigger: wrapperRef.current,
-      start: "top top",
-      end: "+=0.5vh",
-      scrub: 0,
+  // useEffect(() => {
+  //   ScrollTrigger.create({
+  //     trigger: wrapperRef.current,
+  //     start: "top top",
+  //     end: "+=10vh",
+  //     scrub: 0,
 
-      onUpdate: (self) => {
-        const progress = self.progress;
+  //     onUpdate: (self) => {
+  //       const progress = self.progress;
 
-        const treeScale = 1 + progress * 0.1;
+  //       const treeScale = 1 + progress * 0.1;
 
-        const landingScale = 1 + progress * 0.04;
+  //       const landingScale = 1 + progress * 0.04;
 
-        gsap.to(treeImageRef.current, {
-          scale: treeScale,
-          transformOrigin: "center right",
-        });
+  //       gsap.to(treeImageRef.current, {
+  //         scale: treeScale,
+  //       });
 
-        gsap.to(landingRef.current, {
-          scale: landingScale,
-        });
+  //       gsap.to(landingRef.current, {
+  //         scale: landingScale,
+  //       });
+  //     },
+  //   });
+
+  //   return () => {
+  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  //   };
+  // }, []);
+
+  useGSAP(() => {
+    gsap.to(treeImageRef.current, {
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: "top top",
+        end: "+=400vh",
+        scrub: true,
+        markers: true,
+        pin: `.${styles.treeContainer}`,
       },
-
-
+      scale: 1.2,
     });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+    gsap.to(landingRef.current, {
+      scrollTrigger: {
+        trigger: wrapperRef.current,
+        start: "top top",
+        end: "+=400vh",
+        scrub: true,
+        markers: true,
+      },
+      scale: 1.1,
+    });
   }, []);
 
   const [showDelayedOverlay, setShowDelayedOverlay] = useState(false);
@@ -250,24 +266,16 @@ export default function Landing() {
           />
           <Navbar />
 
-          {/* <div className={styles.cloudContainer}>
-        <img src={cloud} className={styles.cloud} alt="" />
-      </div>
-      <div className={styles.sunContainer}>
-        <img src={sun} className={styles.sun} alt="" />
-      </div>
-      <div className={styles.bigMountainContainer}>
-        <img src={bigMountain} className={styles.bigMountain} alt="" />
-      </div>
-      <div className={styles.smallMountainsContainer}>
-        <img src={smallMountains} className={styles.smallMountains} alt="" />
-      </div> */}
-
-          {/* <div className={styles.background}>
-        <Drawing className={styles.backgroundSvg} />
-      </div> */}
           <div className={styles.treeContainer}>
-            <img src={tree} className={styles.tree} alt="" ref={treeImageRef} />
+            <img
+              src={tree}
+              className={styles.tree}
+              alt=""
+              ref={treeImageRef}
+              loading="eager"
+              fetchPriority="high"
+              style={{ contain: "none" }}
+            />
           </div>
           <div className={styles.logoContainer}>
             <img src={logo} className={styles.logo} alt="Logo" />
