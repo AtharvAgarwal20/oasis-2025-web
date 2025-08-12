@@ -35,6 +35,25 @@
       object-fit: contain;
     }
   }
+  
+@media (max-aspect-ratio:1.45) {
+  
+  .birds {
+    z-index: 1;
+    margin-top: 1.5vw;
+    width: 70vw;
+    background: center / contain no-repeat url("/svgs/registration/birds.svg");
+    background-blend-mode: overlay;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .bannerImage {
+      width: 70%;
+      object-fit: contain;
+    }
+  }
+}
   .backBtn {
     outline: none;
     border: none;
