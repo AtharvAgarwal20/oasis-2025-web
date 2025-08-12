@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 import styles from "./Landing.module.scss";
 
@@ -307,14 +308,14 @@ export default function Landing() {
               ))}
             </div>
           </div>
-          <div className={styles.registerBtnContainer}>
+          <Link to="/register" className={styles.registerBtnContainer}>
             <img
               src={registerBtn}
               className={styles.registerBtn}
               alt="Register"
             />
             <div className={styles.registerBtnText}>Register</div>
-          </div>
+          </Link>
         </div>
       </div>
     </>

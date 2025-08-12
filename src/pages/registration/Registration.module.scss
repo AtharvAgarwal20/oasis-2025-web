@@ -1,0 +1,53 @@
+@use "/src/assets/global.scss" as *;
+
+.instrback {
+  background: linear-gradient(to bottom, #000 0%, #666666 100%);
+  height: 100svh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  .backgroundImage {
+    position: absolute;
+    bottom: -0.5vw;
+    left: 0;
+    width: 175vw;
+    transform: translateX(-42.5%);
+    pointer-events: none;
+    object-fit: cover;
+  }
+
+  .birds {
+    z-index: 1;
+    margin-top: 1.5vw;
+    width: 45vw;
+    background: center / contain no-repeat url("/svgs/registration/birds.svg");
+    background-blend-mode: overlay;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .bannerImage {
+      width: 70%;
+      object-fit: contain;
+    }
+  }
+  .backBtn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    position: absolute;
+    top: 2vw;
+    left: 2vw;
+    background: transparent;
+    color: #fff;
+    font: 100 1.5vw "Abhaya Libre Extrabold";
+  }
+  .inActive {
+    display: none;
+  }
+}

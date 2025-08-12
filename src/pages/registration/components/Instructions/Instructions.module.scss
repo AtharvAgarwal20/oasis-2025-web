@@ -1,0 +1,52 @@
+@use "/src/assets/global.scss" as *;
+
+.content {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: -2vh;
+
+  .heading {
+    margin: 5vw 0 2vw 0;
+    font: 400 2.6vw "Ibarra Real Nova SemiBold";
+    color: #ffffff;
+  }
+
+  .instr {
+    width: 43vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.3vw;
+    list-style: none;
+
+    li {
+      position: relative;
+      color: #ffffff;
+      text-align: left;
+      font: 400 1.3vw "DM Serif Text";
+      line-height: 1.1;
+      letter-spacing: 0.7px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 6%;
+        left: -2.5vw;
+        width: 1.5vw;
+        height: 1.45vw;
+        background: center / contain no-repeat
+          url("/public/svgs/registration/list-tag.svg");
+      }
+    }
+  }
+
+  .googleButton {
+    width: 20vw;
+    height: 4vw;
+    font: 400 1.6vw "DM Serif Text";
+    margin-top: 2vw;
+    cursor: pointer;
+  }
+}
