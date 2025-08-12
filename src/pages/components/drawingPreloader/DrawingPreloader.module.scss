@@ -2,6 +2,7 @@
 
 .drawingPreloader {position: fixed;
   height: 100svh;
+  background-image: url(/images/paper-texture.svg);
 }
 
 .btnContainer {
@@ -24,11 +25,12 @@
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: white;
+  background-image: url(/images/paper-texture.svg);
+  background-position: center;
   transform: translate(-12%, 0);
 
   &:hover {
-    background: rgb(233, 233, 233);
+    opacity: 0.8;
     scale: 1.05;
   }
 }

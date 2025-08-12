@@ -74,7 +74,7 @@ export default function Landing() {
       scrollTrigger: {
         trigger: wrapperRef.current,
         start: "top top",
-        end: "+=400vh",
+        end: "+=250vh",
         scrub: true,
         markers: true,
         pin: `.${styles.treeContainer}`,
@@ -85,7 +85,7 @@ export default function Landing() {
       scrollTrigger: {
         trigger: wrapperRef.current,
         start: "top top",
-        end: "+=400vh",
+        end: "+=200vh",
         scrub: true,
         markers: true,
       },
@@ -152,7 +152,6 @@ export default function Landing() {
           height="100%"
           className={styles.sketchImage}
         >
-          <rect width="100%" height="100%" fill="white" />
           <path
             stroke="black"
             fill="none"

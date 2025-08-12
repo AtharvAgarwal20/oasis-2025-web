@@ -30,6 +30,7 @@ body {
     object-fit: cover;
     object-position: center;
     transform: translateZ(0);
+    background-image: url("/images/paper-texture.svg");
   }
 }
 
@@ -140,7 +141,6 @@ body {
         transition: transform 0.1s ease-out;
         transform-origin: "center right";
         will-change: transform;
-        transform-origin: center center;
       }
     }
 
