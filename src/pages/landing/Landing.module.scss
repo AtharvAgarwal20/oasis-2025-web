@@ -137,8 +137,7 @@ body{
         object-position: center;
         will-change: transform;
         backface-visibility: hidden;
-        transform: translateZ(0);
-        transition: transform 0.1s ease-out;
+        transform-origin: center center;
       }
     }
 

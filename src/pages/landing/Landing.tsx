@@ -50,25 +50,21 @@ export default function Landing() {
       start: "top top",
       end: "+=0.5vh",
       scrub: 0,
-
       onUpdate: (self) => {
         const progress = self.progress;
 
-        const treeScale = 1 + progress * 0.1;
+        const treeScale = 1 + progress * 0.15;
 
-        const landingScale = 1 + progress * 0.04;
+        const landingScale = 1 + progress * 0.05;
 
         gsap.to(treeImageRef.current, {
           scale: treeScale,
-          transformOrigin: "center right",
         });
 
         gsap.to(landingRef.current, {
           scale: landingScale,
         });
       },
-
-
     });
 
     return () => {
