@@ -9,7 +9,7 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <CookiesProvider>
-      <GoogleOAuthProvider clientId="650062736141-pb64o0ubh8ejek13gogejjb9t5r6sdf0.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="358805339383-nq4m5rprt3grgbeisj64m598rsbi7b24.apps.googleusercontent.com">
         <BrowserRouter>
           <App />
         </BrowserRouter>

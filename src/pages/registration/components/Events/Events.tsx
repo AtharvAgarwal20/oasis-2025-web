@@ -46,7 +46,6 @@ const Events = forwardRef<
       );
       setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
     } else {
-      console.log("Event already selected:", event);
       sessionStorage.setItem(
         "selectedEvents",
         JSON.stringify([...selectedEvents, event])
@@ -135,10 +134,6 @@ const Events = forwardRef<
       ...prevData,
       events: selectedEvents.map((event) => event.id),
     }));
-    console.log(
-      "Selected Events:",
-      selectedEvents.map((event) => event.id)
-    );
     setConfirmModal(true);
   };
 
@@ -148,9 +143,9 @@ const Events = forwardRef<
         <div className={styles.eventsSubContainer}>
           <h1 className={styles.heading}>CHOOSE EVENTS</h1>
           <ul className={styles.eventsList} ref={mainContainerRef}>
-            {eventsOptions.map((event) => (
+            {eventsOptions.map((event, index) => (
               <li
-                key={event.id}
+                key={index}
                 onClick={() => handleEvent(event)}
                 className={`${styles.eventItem} ${
                   selectedEvents.some((e) => e.id === event.id)

@@ -4,8 +4,10 @@ import Select from "react-select";
 
 import styles from "./Register.module.scss";
 
+import type { SingleValue } from "react-select";
+
 import { useEffect, useState, forwardRef } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import statesData from "./cities.json";
@@ -14,21 +16,6 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 import CloudLeft from "/svgs/registration/left.svg";
 import CloudRight from "/svgs/registration/right.svg";
-// import { Placeholder } from "react-select/animated";
-
-type FormData = {
-  name: string;
-  email_id: string;
-  // dob: string;
-  gender: string;
-  phone: string;
-  college_id: string;
-  year: string;
-  state: string;
-  city: string;
-  // interests: string[];
-  referral?: string;
-};
 
 interface StateItem {
   state: string;
@@ -40,11 +27,9 @@ const stateOptions = typedStatesData.map((item) => ({
   value: item.state,
   label: item.state,
 }));
-
 const registrationSchema = yup.object({
   name: yup.string().required("Name is required"),
-  email_id: yup.string().required("Email is required").email("Invalid email"),
-  // dob: yup.string().required("Date of birth is required"),
+  email_id: yup.string().email("Invalid email"),
   gender: yup.string().required("Gender is required"),
   phone: yup
     .string()
@@ -54,13 +39,10 @@ const registrationSchema = yup.object({
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
-  /*interests: yup
-    .array()
-    .of(yup.string())
-    .min(1, "Select at least one college")
-    .required("College is required"),*/
-  referral: yup.string().optional(),
+  referral: yup.string().nullable().optional(),
 });
+
+type FormData = yup.InferType<typeof registrationSchema>;
 
 type PropsType = {
   onClickNext: () => void;
@@ -68,7 +50,7 @@ type PropsType = {
   setUserData: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const Register = forwardRef<HTMLFormElement, PropsType>(
+const Register = forwardRef<HTMLDivElement, PropsType>(
   function RegisterComponent(props, ref) {
     const { onClickNext, userEmail, setUserData } = props;
     const [selectedState, setSelectedState] = useState("");
@@ -105,26 +87,42 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
     const getAvailableCities = (stateName: string): string[] =>
       typedStatesData.find((item) => item.state === stateName)?.cities ?? [];
 
-    // const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //   const state = e.target.value;
-    //   setSelectedState(state);
-    //   setAvailableCities([]);
-    // };
+    interface OptionType {
+      value: string;
+      label: string;
+    }
+    const handleStateChange = (option: SingleValue<OptionType>) => {
+      const val = option?.value || "";
+      setSelectedState(val);
+      setValue("state", val, { shouldValidate: true });
+      setValue("city", "", { shouldValidate: true }); // clear city on state change
+    };
 
     useEffect(() => {
       setAvailableCities(getAvailableCities(selectedState));
     }, [selectedState]);
 
     // const [interests, setInterests] = useState<string[]>([]);
-    type FormValues = yup.InferType<typeof registrationSchema>;
     const {
       register,
       handleSubmit,
       formState: { errors },
       setValue,
-    } = useForm<FormValues>({
-      resolver: yupResolver(registrationSchema),
+    } = useForm<FormData>({
+      resolver: yupResolver(registrationSchema as any),
+      defaultValues: {
+        name: "",
+        email_id: userEmail,
+        gender: "",
+        phone: "",
+        college_id: "",
+        year: "",
+        state: "",
+        city: "",
+        referral: null,
+      },
     });
+
     const [inputValue, setInputValue] = useState("");
     /* const InterestSelectOptions = interestOptions.map(c => ({
     value: c.id.toString(),
@@ -178,7 +176,6 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
         ...provided,
         color: "white",
         textAlign: "center",
-
         height: "5vh",
         paddingLeft: "5vw",
       }),
@@ -186,12 +183,13 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
         ...provided,
         color: "white",
         textAlign: "center",
-
+        marginLeft: "-80%",
         height: "5vh",
       }),
-      Placeholder: (provided: any) => ({
+      placeholder: (provided: any) => ({
         ...provided,
         textAlign: "center",
+        marginLeft: "20%",
       }),
       menu: (provided: any) => ({
         ...provided,
@@ -210,9 +208,8 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
       valueContainer: (provided: any) => ({
         ...provided,
         width: "100%",
-
+        padding: "0",
         height: "4vh",
-        paddingLeft: "30%",
         background: "transparent",
         color: "white",
         display: "flex",
@@ -231,73 +228,76 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
       }),
     };
 
-    const onSubmit: SubmitHandler<FormData> = (data) => {
-      setUserData(data);
+    const onSubmit = (data: any) => {
+      setUserData({
+        ...data,
+        email_id: userEmail,
+      });
       onClickNext();
     };
 
     return (
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={styles.registrationForm}
-        ref={ref}
-      >
-        <div className={styles.formColumns}>
-          <div className={styles.left}>
-            <div className={styles.name}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>NAME</label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-                <input {...register("name")} placeholder="Name" />
-                <img src={CloudRight} alt="" />
-              </div>
-              <p>{errors.name?.message}</p>
-            </div>
-            <div className={styles.email}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>EMAIL </label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-                <input
-                  {...register("email_id")}
-                  value={userEmail}
-                  disabled
-                  placeholder={userEmail}
-                />
-                <img src={CloudRight} alt="" />
-              </div>
-              <p>{errors.email_id?.message}</p>
-            </div>
-            <div className={styles.together}>
-              <div className={styles.fields}>
-                <div className={styles.field1}>
-                  <img src={Left} alt="" style={{ display: "none" }} />
-                  <label className={styles.sameline}>GENDER</label>
-
-                  <img src={Right} alt="" style={{ display: "none" }} />
-                  <div className={styles.clouds}>
-                    <img src={CloudLeft} alt="" />
-                    <select
-                      {...register("gender")}
-                      style={{ paddingLeft: "30%" }}
-                    >
-                      <option value="">Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  <p>{errors.gender?.message}</p>
+      <div className={styles.registerContainer} ref={ref}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={styles.registrationForm}
+        >
+          <div className={styles.formColumns}>
+            <div className={styles.left}>
+              <div className={styles.name}>
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>NAME</label>
+                  <img src={Right} alt="" />
                 </div>
-                {/* <div className={styles.field2}>
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+                  <input {...register("name")} />
+                  <img src={CloudRight} alt="" />
+                </div>
+                <p>{errors.name?.message}</p>
+              </div>
+              <div className={styles.email}>
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>EMAIL </label>
+                  <img src={Right} alt="" />
+                </div>
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+                  <input
+                    {...register("email_id")}
+                    value={userEmail}
+                    disabled
+                    placeholder={userEmail}
+                  />
+                  <img src={CloudRight} alt="" />
+                </div>
+                <p>{errors.email_id?.message}</p>
+              </div>
+              <div className={styles.together}>
+                <div className={styles.fields}>
+                  <div className={styles.field1}>
+                    <img src={Left} alt="" style={{ display: "none" }} />
+                    <label className={styles.sameline}>GENDER</label>
+
+                    <img src={Right} alt="" style={{ display: "none" }} />
+                    <div className={styles.clouds}>
+                      <img src={CloudLeft} alt="" />
+                      <select
+                        {...register("gender")}
+                        style={{ paddingLeft: "30%" }}
+                      >
+                        <option value="">--Select--</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    <p>{errors.gender?.message}</p>
+                  </div>
+                  {/* <div className={styles.field2}>
                   <label className={styles.gendob}>DATE OF BIRTH</label>
 
                   <div className={styles.clouds}>
@@ -309,148 +309,156 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
                   <p>{errors.dob?.message}</p>
                 </div> */}
 
-                <div className={styles.referral} style={{}}>
-                  <div className={styles.sameline} style={{ width: "18vw" }}>
-                    <label className="styles.gendob">REFERRAL CODE </label>
-                  </div>
-                  <div className={styles.clouds} style={{ width: "18vw" }}>
-                    <img src={CloudLeft} alt="" />
-                    <input
-                      {...register("referral")}
-                      placeholder="Referral Code"
-                      style={{ width: "18vw" }}
-                    />
-                    <img src={CloudRight} alt="" />
+                  <div className={styles.referral} >
+                    <div className={styles.sameline} style={{ width: "18vw" }}>
+                      <label className="styles.gendob">REFERRAL CODE </label>
+                    </div>
+                    <div className={styles.clouds} style={{ width: "18vw" }}>
+                      <img src={CloudLeft} alt="" />
+                      <input
+                        {...register("referral")}
+                        style={{ width: "18vw" }}
+                      />
+                      <img src={CloudRight} alt="" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.mobile} style={{ marginLeft: "3vw" }}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>MOBILE NUMBER </label>
-                <img src={Right} alt="" />
+              <div className={styles.mobile}>
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>MOBILE NUMBER </label>
+                  <img src={Right} alt="" />
+                </div>
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+                  <input {...register("phone")} />
+                  <img src={CloudRight} alt="" />
+                </div>
+                <p>{errors.phone?.message}</p>
               </div>
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-                <input {...register("phone")} placeholder="+919876543210" />
-                <img src={CloudRight} alt="" />
-              </div>
-              <p>{errors.phone?.message}</p>
             </div>
-          </div>
 
-          <div className={styles.right}>
-            <div className={styles.college} style={{ marginLeft: "0.5vw" }}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>COLLEGE NAME </label>
-                <img src={Right} alt="" />
+            <div className={styles.right}>
+              <div className={styles.college} >
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>COLLEGE NAME </label>
+                  <img src={Right} alt="" />
+                </div>
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+                  <select {...register("college_id")}>
+                    <option value="">--Select--</option>
+                    {(Array.isArray(collegeOptions) ? collegeOptions : []).map(
+                      (college, index) => (
+                        <option key={index} value={college.id}>
+                          {college.name}
+                        </option>
+                      )
+                    )}
+                  </select>
+                  <img src={CloudRight} alt="" />
+                </div>
+
+                <p>{errors.college_id?.message}</p>
               </div>
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-                <select {...register("college_id")}>
-                  <option value="">-- Select --</option>
-                  {(Array.isArray(collegeOptions) ? collegeOptions : []).map(
-                    (college, index) => (
-                      <option key={index} value={college.id}>
-                        {college.name}
+              <div className={styles.year}>
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>YEAR OF STUDY </label>
+                  <img src={Right} alt="" />
+                </div>
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+                  <fieldset
+                    className={styles.radioGroup}
+                    aria-label="Year of Study"
+                  >
+                    {["1", "2", "3", "4"].map((year) => (
+                      <label key={year} className={styles.radioLabel}>
+                        <input
+                          type="radio"
+                          value={year}
+                          {...register("year")}
+                          className={styles.radioInput}
+                        />
+                        <span className={styles.yearNumber}>{year}</span>
+                      </label>
+                    ))}
+                  </fieldset>
+                  <img src={CloudRight} alt="" />
+                  <p className={styles.error}>{errors.year?.message}</p>
+                </div>
+              </div>
+
+              <div className={styles.states} >
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>STATE</label>
+                  <img src={Right} alt="" />
+                </div>
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+                  <Select
+                    menuPortalTarget={null}
+                    menuPosition="absolute"
+                    options={getFilteredOptions(inputValue)}
+                    styles={customStyles}
+                    onInputChange={(value) => setInputValue(value)}
+                    filterOption={() => true}
+                    value={
+                      stateOptions.find(
+                        (option) => option.value === selectedState
+                      ) || null
+                    }
+                    onChange={handleStateChange}
+                    placeholder="Enter State"
+                    classNamePrefix="react-select"
+                  />
+
+                  <img src={CloudRight} alt="" />
+                </div>
+              </div>
+              <div className={styles.city} >
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>CITY </label>
+                  <img src={Right} alt="" />
+                </div>
+
+                <div className={styles.clouds}>
+                  <img src={CloudLeft} alt="" />
+
+                  <select
+                    {...register("city")}
+                    disabled={!selectedState}
+                    onChange={(e) =>
+                      setValue("city", e.target.value, { shouldValidate: true })
+                    }
+                  >
+                    <option value="">-- Select --</option>
+                    {availableCities.map((city, index) => (
+                      <option key={index} value={city}>
+                        {city}
                       </option>
-                    )
-                  )}
-                </select>
-                <img src={CloudRight} alt="" />
+                    ))}
+                  </select>
+                  <img src={CloudRight} alt="" />
+                </div>
+                <p>{errors.city?.message}</p>
               </div>
-
-              <p>{errors.college_id?.message}</p>
-            </div>
-            <div className={styles.year} style={{ marginLeft: "4.5vw" }}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>YEAR OF STUDY </label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-                <fieldset
-                  className={styles.radioGroup}
-                  aria-label="Year of Study"
-                >
-                  {["1", "2", "3", "4"].map((year) => (
-                    <label key={year} className={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        value={year}
-                        {...register("year")}
-                        className={styles.radioInput}
-                      />
-                      <span className={styles.yearNumber}>{year}</span>
-                    </label>
-                  ))}
-                </fieldset>
-                <img src={CloudRight} alt="" />
-                <p className={styles.error}>{errors.year?.message}</p>
-              </div>
-            </div>
-
-            <div className={styles.states} style={{ marginLeft: "4.5vw" }}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>STATE</label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-                <Select
-                  menuPortalTarget={null}
-                  menuPosition="absolute"
-                  options={getFilteredOptions(inputValue)}
-                  styles={customStyles}
-                  onInputChange={(value) => setInputValue(value)}
-                  filterOption={() => true}
-                  value={
-                    stateOptions.find(
-                      (option) => option.value === selectedState
-                    ) || null
-                  }
-                  onChange={(option) => {
-                    const val = option ? option.value : "";
-                    setSelectedState(val);
-                    setValue("state", val, { shouldValidate: true });
-                  }}
-                  placeholder="Select state"
-                  classNamePrefix="react-select"
-                />
-
-                <img src={CloudRight} alt="" />
-              </div>
-            </div>
-            <div className={styles.city} style={{ marginLeft: "0.5vw" }}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>CITY </label>
-                <img src={Right} alt="" />
-              </div>
-
-              <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
-
-                <select {...register("city")} disabled={!selectedState}>
-                  <option value="">-- Select --</option>
-                  {availableCities.map((city, index) => (
-                    <option key={index} value={city}>
-                      {city}
-                    </option>
-                  ))}
-                </select>
-                <img src={CloudRight} alt="" />
-              </div>
-              <p>{errors.city?.message}</p>
             </div>
           </div>
-        </div>
-
-        <button className={styles.confirmButton} type="submit">
+          {/* <button type="submit" className={styles.submitBtn}>
+          NEXT
+        </button> */}
+        </form>
+        <button
+          className={styles.confirmButton}
+          type="submit"
+          onClick={handleSubmit(onSubmit)}
+        >
           <svg
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -477,10 +485,7 @@ const Register = forwardRef<HTMLFormElement, PropsType>(
             />
           </svg>
         </button>
-        {/* <button type="submit" className={styles.submitBtn}>
-          NEXT
-        </button> */}
-      </form>
+      </div>
     );
   }
 );
