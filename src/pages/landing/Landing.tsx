@@ -89,6 +89,7 @@ export default function Landing() {
         scrub: true,
         markers: true,
       },
+      y: "-50%",
       scale: 1.1,
     });
   }, []);
