@@ -309,7 +309,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <p>{errors.dob?.message}</p>
                 </div> */}
 
-                  <div className={styles.referral} style={{}}>
+                  <div className={styles.referral} >
                     <div className={styles.sameline} style={{ width: "18vw" }}>
                       <label className="styles.gendob">REFERRAL CODE </label>
                     </div>
@@ -324,7 +324,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   </div>
                 </div>
               </div>
-              <div className={styles.mobile} style={{ marginLeft: "4.5vw" }}>
+              <div className={styles.mobile}>
                 <div className={styles.sameline}>
                   <img src={Left} alt="" />
                   <label>MOBILE NUMBER </label>
@@ -340,7 +340,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             </div>
 
             <div className={styles.right}>
-              <div className={styles.college} style={{ marginLeft: "0.5vw" }}>
+              <div className={styles.college} >
                 <div className={styles.sameline}>
                   <img src={Left} alt="" />
                   <label>COLLEGE NAME </label>
@@ -363,7 +363,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
                 <p>{errors.college_id?.message}</p>
               </div>
-              <div className={styles.year} style={{ marginLeft: "4.5vw" }}>
+              <div className={styles.year}>
                 <div className={styles.sameline}>
                   <img src={Left} alt="" />
                   <label>YEAR OF STUDY </label>
@@ -392,7 +392,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                 </div>
               </div>
 
-              <div className={styles.states} style={{ marginLeft: "4.5vw" }}>
+              <div className={styles.states} >
                 <div className={styles.sameline}>
                   <img src={Left} alt="" />
                   <label>STATE</label>
@@ -420,7 +420,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <img src={CloudRight} alt="" />
                 </div>
               </div>
-              <div className={styles.city} style={{ marginLeft: "0.5vw" }}>
+              <div className={styles.city} >
                 <div className={styles.sameline}>
                   <img src={Left} alt="" />
                   <label>CITY </label>
