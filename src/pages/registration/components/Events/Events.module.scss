@@ -6,6 +6,7 @@
   display: none;
   align-items: flex-start;
   width: 100%;
+  height: 43vw;
 
   .eventsSubContainer {
     display: flex;
@@ -89,7 +90,7 @@
       cursor: pointer;
       margin-top: 2vw;
       background: center / cover no-repeat
-        url("/public/images/registration/button-banner.png");
+        url("/images/registration/button-banner.png");
       padding: 1vw;
       color: #fff;
       font: 100 1.5vw "Abhaya Libre Extrabold";
@@ -102,7 +103,7 @@
       .confirmIcon {
         width: 7vw;
         height: 0.5vw;
-        &:last-child{
+        &:last-child {
           rotate: 180deg;
         }
       }
