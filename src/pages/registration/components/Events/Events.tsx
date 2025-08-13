@@ -30,7 +30,7 @@ const Events = forwardRef<
   useEffect(() => {
     axios
       .get(
-        "https://merge.bits-apogee.org/2025/main/registrations/events_details/"
+        "https://merge.bits-oasis.org/2025/main/registrations/events_details/"
       )
       .then((response) => {
         setEventsOptions(response.data);

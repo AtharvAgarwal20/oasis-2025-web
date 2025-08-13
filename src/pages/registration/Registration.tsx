@@ -169,7 +169,7 @@ const Registration = () => {
     onSuccess: (response) => {
       axios
         .post(
-          "https://merge.bits-apogee.org/2025/main/registrations/google-reg/",
+          "https://merge.bits-oasis.org/2025/main/registrations/google-reg/",
           {
             access_token: response.access_token,
           }
@@ -179,7 +179,7 @@ const Registration = () => {
           if (res.data.exists) {
             setCookies("user-auth", res.data);
             setCookies("Authorization", res.data.tokens.access);
-            window.location.href = `https://merge.bits-apogee.org/2025/main/registrations?token=${res.data.tokens.access}`;
+            window.location.href = `https://merge.bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
             setUserEmail(res.data.email);
           } else {
             setCookies("user-auth", res.data);

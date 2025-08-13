@@ -65,7 +65,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
     /* useEffect(() => {
       axios
         .get(
-          "https://merge.bits-apogee.org/2025/main/registrations/categories/"
+          "https://merge.bits-oasis.org/2025/main/registrations/categories/"
         )
         .then((response) => {
           setInterestOptions(response.data.data);
@@ -76,7 +76,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
     useEffect(() => {
       axios
         .get(
-          "https://merge.bits-apogee.org/2025/main/registrations/get_college/"
+          "https://merge.bits-oasis.org/2025/main/registrations/get_college/"
         )
         .then((response) => {
           setCollegeOptions(response.data.data);
