@@ -1,4 +1,5 @@
 $inputwidth: 30vw;
+$inputheight:10vh;
 @use "/src/assets/global.scss" as *;
 
 .confirmButton {
@@ -55,16 +56,6 @@ $inputwidth: 30vw;
   align-items: center;
   // justify-content: center;
 
-  .name {
-    margin-left: 3vw;
-  }
-  .email {
-    margin-left: 1vw;
-  }
-  .together {
-    margin-left: 1vw;
-  }
-
   .react-select__input-container {
     input {
       box-shadow: none !important;
@@ -83,13 +74,72 @@ $inputwidth: 30vw;
     flex-wrap: wrap;
     gap: 21vw;
   }
-
+.left{
+  
+.together {
+  display: flex;
+  flex-direction: row;
+  width: 31vw;
+  gap: 10px;
+  
+.fields {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+}
+.field1,
+.field2 {
+  display: flex;
+  flex-direction: column;
+}
+  .field1 {
+    input,
+    select {
+      width: 10vw !important;
+    }
+    .sameline {
+      width: 10vw !important;
+    }
+     .clouds {
+    width: 10vw !important;
+  }
+  }
+  .field2 {
+    input,
+    select {
+      width: 20vw !important;
+    }
+    .sameline {
+      width: 20vw !important;
+    }
+      .clouds {
+    width: 20vw !important;
+  }
+  }
+}
+}
   .left,
   .right {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 2vw;
+    
+  .name {
+    margin-left: 3vw;
+  }
+  .email,.together {
+    margin-left: 1vw;
+  }
+  .mobile,.name{
+    margin-left: 4.5vw ;
+  }
+  .college,.city{
+    margin-left: 0.5vw;
+  }
+  .year,.states{
+margin-left: 4.5vw;
+  }
     .radioInput {
       appearance: none;
       width: 18px !important;
@@ -129,7 +179,7 @@ $inputwidth: 30vw;
       text-align: center;
       width: 30vw;
       font-size: 0.8rem;
-      height: 100%;
+      height: 2.1rem;
       background: transparent;
       border: 0;
       color: white;
@@ -150,9 +200,18 @@ select {
   option {
     background-color: #2e0505;
     color: white;
+    width: 30vw;
+    font-size: 1rem;
+    text-align: center;
   }
 }
-
+.field1{
+  option{
+width: 1vw;
+font-size: 1rem;
+text-align: left;
+  }
+}
 .birds2 {
   margin-top: 2vw;
   width: 45vw;
@@ -167,32 +226,6 @@ select {
   }
 }
 
-.arrowleft,
-.arrowright {
-  position: relative;
-  width: 103.2px;
-  height: 23px;
-  background: #ffffff;
-  clip-path: polygon(6.7% 50%, 86.5% 66%, 93.5% 50%, 86.5% 34%, 6.7% 50%);
-  z-index: 3;
-  isolation: isolate;
-}
-
-.arrowleft::before,
-.arrowright::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(229, 195, 132, 1);
-  clip-path: inherit;
-  // z-index: -1;
-  filter: blur(12px);
-  opacity: 0.4;
-}
-
-.arrowright {
-  transform: scaleX(-1);
-}
 
 .sameline {
   font-size: 0.8rem;
@@ -200,59 +233,14 @@ select {
   align-items: center;
   justify-content: center;
   margin-bottom: 4px;
-  width: $inputwidth; /* your input width variable */
-  /* No box-shadow here */
-}
-
-.sameline label {
+  width: $inputwidth; 
+  
+ label {
   font-size: 0.8rem;
-  /* padding-bottom removed */
   text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
 }
-.together {
-  display: flex;
-  flex-direction: row;
-  width: 31vw;
-  gap: 10px;
-  .field1 {
-    input,
-    select {
-      width: 10vw !important;
-    }
-    .sameline {
-      width: 10vw !important;
-    }
-  }
-  .field2 {
-    input,
-    select {
-      width: 20vw !important;
-    }
-    .sameline {
-      width: 20vw !important;
-    }
-  }
 }
-.fields {
-  display: flex;
-  flex-direction: row;
-  gap: 2vw;
-}
-.field1,
-.field2 {
-  display: flex;
-  flex-direction: column;
-}
-.field1 {
-  .clouds {
-    width: 10vw !important;
-  }
-}
-.field2 {
-  .clouds {
-    width: 20vw !important;
-  }
-}
+
 .gendob {
   height: 1vw;
 }
@@ -305,21 +293,6 @@ select {
   }
 }
 
-.radioLabel {
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 1rem;
-  color: #333;
-}
-
-.radioLabel {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 1.2rem;
-  color: white;
-  cursor: pointer;
-}
 
 .radioGroup {
   padding-left: 3.1rem;
@@ -338,6 +311,18 @@ select {
   gap: 0.5vw;
   padding: 0.5rem 1rem;
   position: relative;
+  
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.2rem;
+  color: white;
+  
+  cursor: pointer;
+  font-weight: 500;
+}
+
 }
 input::placeholder {
   color: #cfcfcf;
