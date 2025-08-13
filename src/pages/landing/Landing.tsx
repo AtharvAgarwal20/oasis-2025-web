@@ -69,29 +69,108 @@ export default function Landing() {
   //   };
   // }, []);
 
+  // useGSAP(() => {
+  //   gsap.to(treeImageRef.current, {
+  //     scrollTrigger: {
+  //       trigger: wrapperRef.current,
+  //       start: "top top",
+  //       end: "+=250vh",
+  //       scrub: 0.8,
+  //       markers: true,
+  //       pin: `.${styles.treeContainer}`,
+  //     },
+  //     scale: 1.2,
+  //   });
+
+  //   gsap.to(treeImageRef, {
+  //     scrollTrigger: {
+  //       trigger: wrapperRef.current,
+  //       start: "250vh",
+  //       end: "+=500vh",
+  //       scrub: 1,
+  //       markers: true,
+  //     },
+  //     y: "-30%",
+  //     ease: "power2.in",
+  //   });
+
+  //   gsap.to(landingRef.current, {
+  //     scrollTrigger: {
+  //       trigger: wrapperRef.current,
+  //       start: "top top",
+  //       end: "+=300vh",
+  //       scrub: 0.5,
+  //       markers: true,
+  //     },
+  //     scale: 1.12,
+  //   });
+  //   gsap.to(landingRef.current, {
+  //     scrollTrigger: {
+  //       trigger: wrapperRef.current,
+  //       start: "+=200vh",
+  //       end: "+=800vh",
+  //       scrub: 0.5,
+  //       markers: true,
+  //     },
+  //     y: "-40%",
+  //     ease: "sine.in",
+  //   });
+  // }, []);
+
   useGSAP(() => {
-    gsap.to(treeImageRef.current, {
+
+    const masterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperRef.current,
         start: "top top",
-        end: "+=250vh",
-        scrub: true,
-        markers: true,
+        end: "+=800vh", 
+        scrub: 1.2,
         pin: `.${styles.treeContainer}`,
-      },
-      scale: 1.2,
-    });
-    gsap.to(landingRef.current, {
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "top top",
-        end: "+=200vh",
-        scrub: true,
         markers: true,
       },
-      y: "-50%",
-      scale: 1.1,
     });
+
+    masterTimeline
+      .to(
+        treeImageRef.current,
+        {
+          scale: 1.2,
+          duration: 4, 
+          ease: "power2.out",
+        },
+        0
+      )
+      .to(
+        landingRef.current,
+        {
+          scale: 1.12,
+          duration: 4, 
+          ease: "power2.out",
+        },
+        0
+      )
+
+      .to(
+        treeImageRef.current,
+        {
+          y: "-50%",
+          scale: 1.4, 
+          duration: 10,
+          ease: "sine.in",
+        },
+        3
+      ) 
+
+      .to(
+        landingRef.current,
+        {
+          y: "-40%",
+          scale: 1.15, 
+          duration: 7,
+          ease: "sine.in",
+        },
+        3.2
+      ); 
   }, []);
 
   const [showDelayedOverlay, setShowDelayedOverlay] = useState(false);
