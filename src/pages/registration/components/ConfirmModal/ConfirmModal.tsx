@@ -36,7 +36,7 @@ const Confirmation = (props: PropsType) => {
     };
     axios
       .post(
-        "https://merge.bits-apogee.org/2025/main/registrations/register/",
+        "https://bits-oasis.org/2025/main/registrations/register/",
         reqData
       )
       .then((response) => {
@@ -105,7 +105,7 @@ const Confirmation = (props: PropsType) => {
                 if (notification.isError) {
                   onCancel();
                 } else {
-                  window.location.href = `https://merge.bits-apogee.org/2025/main/registrations?token=${access_token}`;
+                  window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${access_token}`;
                 }
               }}
             >
