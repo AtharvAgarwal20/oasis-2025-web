@@ -4,6 +4,7 @@ import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Landing from "./pages/landing/Landing";
 import { useState } from "react";
 import Registration from "./pages/registration/Registration";
+//import InTransition from "./pages/components/page-transition/InTransition";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,6 +16,7 @@ export default function App() {
   };
 
   return (
+
     <Routes>
       <Route
         path="/"
@@ -28,7 +30,7 @@ export default function App() {
           isLoading2 ? (
             <Preloader onEnter={() => setIsLoading2(false)} />
           ) : (
-            <Registration />
+            <Registration/>
           )
         }
       />
