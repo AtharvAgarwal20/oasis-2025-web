@@ -10,10 +10,11 @@ import sun from "/svgs/registration/sun.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import Back from "/svgs/registration/back.svg"
 
 const Registration = () => {
   const { contextSafe } = useGSAP();
@@ -109,12 +110,12 @@ const Registration = () => {
         });
     })();
   };
-  //  useEffect(() => {
-  //    toRegPage(false);
-  //    setTimeout(() => {
-  //      toEventPage();
-  //    }, 2500);
-  //  }, []);
+   useEffect(() => {
+     toRegPage(false);
+     setTimeout(() => {
+       toEventPage();
+     }, 2500);
+    }, []);
   const toEventPage = () => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
@@ -219,7 +220,7 @@ const Registration = () => {
           styles.backBtn + " " + (currentPage === 1 ? styles.inActive : "")
         }
       >
-        Back -&gt;
+        <img src={Back} alt="" style={{ width:"4vw" ,height:"auto"}}/>
       </button>
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />
       <Register
