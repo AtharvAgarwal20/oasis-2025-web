@@ -17,7 +17,6 @@ const imagesToPreload = [
 
 export default function DrawingPreloader({
   className,
-  onEnter,
 }: {
   className?: string;
   onEnter?: () => void;

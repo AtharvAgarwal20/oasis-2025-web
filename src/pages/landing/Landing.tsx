@@ -172,16 +172,6 @@ export default function Landing() {
       );
   }, []);
 
-  const [showDelayedOverlay, setShowDelayedOverlay] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowDelayedOverlay(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
