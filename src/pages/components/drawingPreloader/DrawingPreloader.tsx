@@ -24,7 +24,7 @@ export default function DrawingPreloader({
 }) {
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
-
+  const [showOverlay, setShowOverlay] = useState(false);
   useEffect(() => {
     let loadedImages = 0;
 
@@ -128,8 +128,18 @@ export default function DrawingPreloader({
     }
   }, [progress]);
 
+  // const [showDelayedOverlay, setShowDelayedOverlay] = useState(false);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowDelayedOverlay(true);
+  //   }, 1000);
+
+  //   return () => clearTimeout(timer);
+  // }, []);
+
   return (
-    <>
+    <div className={showOverlay ? styles.sketchOverlay : styles.overlay}>
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +150,7 @@ export default function DrawingPreloader({
         ref={svgEl}
         className={
           className
-            ? `${styles.drawingPreloader} ${className}`
+            ? `${styles.drawingPreloader} ${className} ${styles.sketchImage}`
             : styles.drawingPreloader
         }
       >
@@ -260,11 +270,16 @@ export default function DrawingPreloader({
         </div>
       ) : (
         <div className={styles.btnContainer}>
-          <button className={styles.enterButton} onClick={onEnter}>
+          <button
+            className={styles.enterButton}
+            onClick={() => {
+              setShowOverlay(true);
+            }}
+          >
             Enter
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }

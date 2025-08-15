@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
 import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Landing from "./pages/landing/Landing";
+import Homepage from "./Homepage";
 import { useState } from "react";
 import Registration from "./pages/registration/Registration";
 
@@ -16,12 +17,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          isLoading ? <DrawingPreloader onEnter={handleEnter} /> : <Landing />
-        }
-      />
+      <Route path="/" element={<Homepage />} />
       <Route
         path="/register"
         element={
