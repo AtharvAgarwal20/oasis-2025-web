@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import styles from "./Landing.module.scss";
 
 import Navbar from "../components/navbar/Navbar";
-import tree from "/images/landing/tree.png";
+import tree from "/images/landing/tree2.png";
 import landingImage from "/images/landing/v.png";
 import registerBtn from "/svgs/landing/registerBtn.svg";
 import logo from "/svgs/logo.svg";
@@ -118,12 +118,11 @@ export default function Landing() {
   // }, []);
 
   useGSAP(() => {
-
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperRef.current,
         start: "top top",
-        end: "+=800vh", 
+        end: "+=800vh",
         scrub: 1.2,
         pin: `.${styles.treeContainer}`,
         markers: true,
@@ -135,7 +134,7 @@ export default function Landing() {
         treeImageRef.current,
         {
           scale: 1.2,
-          duration: 4, 
+          duration: 4,
           ease: "power2.out",
         },
         0
@@ -144,7 +143,7 @@ export default function Landing() {
         landingRef.current,
         {
           scale: 1.12,
-          duration: 4, 
+          duration: 4,
           ease: "power2.out",
         },
         0
@@ -154,33 +153,23 @@ export default function Landing() {
         treeImageRef.current,
         {
           y: "-50%",
-          scale: 1.4, 
+          scale: 1.4,
           duration: 10,
           ease: "sine.in",
         },
         3
-      ) 
+      )
 
       .to(
         landingRef.current,
         {
           y: "-40%",
-          scale: 1.15, 
+          scale: 1.15,
           duration: 7,
           ease: "sine.in",
         },
         3.2
-      ); 
-  }, []);
-
-  const [showDelayedOverlay, setShowDelayedOverlay] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowDelayedOverlay(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+      );
   }, []);
 
   const [timeLeft, setTimeLeft] = useState({
@@ -218,7 +207,7 @@ export default function Landing() {
 
   return (
     <>
-      <div
+      {/* <div
         className={`${styles.sketchOverlay} ${
           showDelayedOverlay ? styles.delayed : ""
         }`}
@@ -335,7 +324,7 @@ export default function Landing() {
             d="M292.5 571c.3.5.8 1 1.1 1 .2 0 .4-.5.4-1 0-.6-.5-1-1.1-1-.5 0-.7.4-.4 1zM139.7 571.7c-2.7.7-1 2.3 2.5 2.3 2.6 0 2.9-.2 1.8-1.5-.7-.8-1.5-1.4-1.9-1.4-.3.1-1.4.3-2.4.6zM62.4 573.1c-.3.5 1.1.9 3.1.9s3.4-.4 3.1-.9c-.3-.5-1.7-.9-3.1-.9-1.4 0-2.8.4-3.1.9zM712.9 573.3c.5.5 2.4.7 4.2.5 3.3-.3 3.3-.4-.8-.8-2.3-.3-3.9-.2-3.4.3zM146.8 573.7c.7.3 1.6.2 1.9-.1.4-.3-.2-.6-1.3-.5-1.1 0-1.4.3-.6.6z"
           />
         </svg>
-      </div>
+      </div> */}
 
       <div className={styles.wrapper} ref={wrapperRef}>
         <div className={styles.landing}>
@@ -362,23 +351,36 @@ export default function Landing() {
           </div>
           <div className={styles.dateCountdown}>
             <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
-              <div className={styles.days}>{timeLeft.days}</div>
+              <div className={styles.days}>
+                {timeLeft.days > 10 ? (
+                  <span>{timeLeft.days}</span>
+                ) : (
+                  <span>0{timeLeft.days}</span>
+                )}
+              </div>
               DAYS
             </div>
             :
             <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
-              <div className={styles.hours}>{timeLeft.hours}</div>
+              <div className={styles.hours}>
+                {timeLeft.hours > 10 ? (
+                  <span>{timeLeft.hours}</span>
+                ) : (
+                  <span>0{timeLeft.hours}</span>
+                )}
+              </div>
               HOURS
             </div>
             :
             <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
-              <div className={styles.minutes}>{timeLeft.minutes}</div>
+              <div className={styles.minutes}>
+                {timeLeft.minutes > 10 ? (
+                  <span>{timeLeft.minutes}</span>
+                ) : (
+                  <span>0{timeLeft.minutes}</span>
+                )}
+              </div>
               MINUTES
-            </div>
-            :
-            <div className={`${styles.secondsLeft} ${styles.timeLeft}`}>
-              <div className={styles.seconds}>{timeLeft.seconds}</div>
-              SECONDS
             </div>
           </div>
           <div className={styles.socialLinksContainer}>
