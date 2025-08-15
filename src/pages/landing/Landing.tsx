@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./Landing.module.scss";
 
@@ -34,8 +34,11 @@ const socialLinks = [
     url: "https://www.instagram.com/bitsoasis/",
   },
 ];
+interface LandingProps {
+  goToRegister: () => void;
+}
 
-export default function Landing() {
+export default function Landing({ goToRegister }: LandingProps) {
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -401,14 +404,11 @@ export default function Landing() {
               ))}
             </div>
           </div>
-          <Link to="/register" className={styles.registerBtnContainer}>
-            <img
-              src={registerBtn}
-              className={styles.registerBtn}
-              alt="Register"
-            />
-            <div className={styles.registerBtnText}>Register</div>
-          </Link>
+        <div className={styles.registerBtnContainer} onClick={goToRegister}>
+  <img src={registerBtn} className={styles.registerBtn} alt="Register" />
+  <div className={styles.registerBtnText}>Register</div>
+</div>
+
         </div>
       </div>
     </>
