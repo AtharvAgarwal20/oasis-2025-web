@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import styles from "./style.module.scss";
 import Door1Image from "/images/doors/Door1.png";

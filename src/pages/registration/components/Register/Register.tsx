@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
-import type { SingleValue } from "react-select";
+//import type { SingleValue } from "react-select";
 
 import styles from "./Register.module.scss";
 

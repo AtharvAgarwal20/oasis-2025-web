@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./Landing.module.scss";
 

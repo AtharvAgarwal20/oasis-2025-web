@@ -10,7 +10,7 @@ import sun from "/svgs/registration/sun.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
@@ -201,7 +201,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
             //   access_token: response.access_token,
             // });
             setUserEmail(res.data.email);
-            if (res.data.email && startAnimation) toRegPage(false); // start animation only after doors
+            if (res.data.email && startAnimation) toRegPage(false); 
           }
         })
         .catch((err) => {
