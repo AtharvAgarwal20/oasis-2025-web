@@ -1,0 +1,53 @@
+
+.cont {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  z-index: 9999;
+  pointer-events: none; 
+  background: transparent;
+}
+
+.door {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  transform: translateX(calc(var(--base, 0%) + var(--dx, 0%)));
+}
+
+.door1 {
+  --base: -150%;    
+  right: 50vw;      
+  min-width: 20vw;
+  object-position: 100% 0;
+  z-index: 30;
+}
+
+.door2 {
+  --base: 0%;   
+  right: 50vw;    
+  min-width: 30vw;
+  object-position: 100% 0;
+  z-index: 20;
+}
+
+.door3 {
+  --base: 0%;      
+  left: 50vw;       
+  min-width: 30vw;
+  object-position: 0 0;
+  z-index: 20;
+}
+
+.door4 {
+  --base: 150%;      
+  left: 50vw;        
+  min-width: 20vw;
+  object-position: 0 0;
+  z-index: 30;
+}

@@ -317,7 +317,6 @@ const customStylesGender = {
               <p>{errors.name?.message}</p>
             </div>
 
-            {/* Email */}
             <div className={styles.email}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
@@ -332,7 +331,6 @@ const customStylesGender = {
               <p>{errors.email_id?.message}</p>
             </div>
 
-            {/* Gender */}
             <div className={styles.together}>
               <div className={styles.fields}>
                 <div className={styles.field1}>
@@ -369,7 +367,6 @@ const customStylesGender = {
                   <p>{errors.gender?.message}</p>
                 </div>
 
-                {/* Referral */}
                 <div className={styles.referral}>
                   <div className={styles.sameline} style={{ width: "18vw" }}>
                     <label>REFERRAL CODE </label>
@@ -383,7 +380,6 @@ const customStylesGender = {
               </div>
             </div>
 
-            {/* Mobile */}
             <div className={styles.mobile}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
@@ -399,9 +395,7 @@ const customStylesGender = {
             </div>
           </div>
 
-          {/* Right Column */}
           <div className={styles.right}>
-            {/* College */}
             <div className={styles.college}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
@@ -435,7 +429,6 @@ const customStylesGender = {
               <p>{errors.college_id?.message}</p>
             </div>
 
-            {/* Year */}
             <div className={styles.year}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
@@ -462,7 +455,6 @@ const customStylesGender = {
               </div>
             </div>
 
-            {/* State */}
             <div className={styles.states}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />
@@ -503,7 +495,6 @@ const customStylesGender = {
               </div>
             </div>
 
-            {/* City */}
             <div className={styles.city}>
               <div className={styles.sameline}>
                 <img src={Left} alt="" />

@@ -16,11 +16,15 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Back from "/svgs/registration/back.svg"
 
-const Registration = () => {
+interface RegistrationProps {
+  startAnimation: boolean; // only start animation after door opens
+}
+
+const Registration = ({ startAnimation }: RegistrationProps) => {
   const { contextSafe } = useGSAP();
   const [currentPage, setCurrentPage] = useState(1);
   const [userEmail, setUserEmail] = useState("");
-  const [isAnim, setisAnim] = useState(false);
+  const [isAnim, setIsAnim] = useState(false);
   const [userData, setUserData] = useState<any>(null);
   const [_cookies, setCookies] = useCookies([
     "Authorization",
@@ -40,8 +44,8 @@ const Registration = () => {
         x: "-42.5%",
         duration: 1.5,
         // ease: "power1.out",
-        onStart: () => setisAnim(true),
-        onComplete: () => setisAnim(false),
+        onStart: () => setIsAnim(true),
+        onComplete: () => setIsAnim(false),
       });
       gsap.to(sunRef.current, {
         left: "-5%",
@@ -72,14 +76,15 @@ const Registration = () => {
         });
     })();
   };
+
   const toRegPage = (back: boolean) => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
         x: "-16.5%",
         duration: 1.5,
         // ease: "power1.out",
-        onStart: () => setisAnim(true),
-        onComplete: () => setisAnim(false),
+        onStart: () => setIsAnim(true),
+        onComplete: () => setIsAnim(false),
       });
       gsap.to(sunRef.current, {
         left: "50%",
@@ -110,20 +115,25 @@ const Registration = () => {
         });
     })();
   };
-   useEffect(() => {
-     toRegPage(false);
-     setTimeout(() => {
-       toEventPage();
-     }, 2500);
-    }, []);
+
+  // useEffect triggered only if startAnimation = true
+ /* useEffect(() => {
+    if (startAnimation) {
+      toRegPage(false);
+      setTimeout(() => {
+        toEventPage();
+      }, 2500);
+    }
+  }, [startAnimation]);*/
+
   const toEventPage = () => {
     contextSafe(() => {
       gsap.to(bgRef.current, {
         x: "-1%",
         duration: 1.5,
         // ease: "power1.out",
-        onStart: () => setisAnim(true),
-        onComplete: () => setisAnim(false),
+        onStart: () => setIsAnim(true),
+        onComplete: () => setIsAnim(false),
       });
       gsap.to(sunRef.current, {
         left: "67%",
@@ -154,6 +164,7 @@ const Registration = () => {
         });
     })();
   };
+
   const backButtonHandler = () => {
     switch (currentPage) {
       case 1:
@@ -166,6 +177,7 @@ const Registration = () => {
         break;
     }
   };
+
   const onGoogleSignIn = useGoogleLogin({
     onSuccess: (response) => {
       axios
@@ -189,7 +201,7 @@ const Registration = () => {
             //   access_token: response.access_token,
             // });
             setUserEmail(res.data.email);
-            if (res.data.email) toRegPage(false);
+            if (res.data.email && startAnimation) toRegPage(false); // start animation only after doors
           }
         })
         .catch((err) => {
@@ -222,6 +234,7 @@ const Registration = () => {
       >
         <img src={Back} alt="" style={{ width:"4vw" ,height:"auto"}}/>
       </button>
+
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />
       <Register
         ref={elemRef2}
