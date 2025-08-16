@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -17,7 +17,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
+// const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
 
 const socialLinks = [
   {
