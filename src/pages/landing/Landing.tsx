@@ -155,7 +155,7 @@ export default function Landing() {
         {
           y: "-50%",
           scale: 1.4, 
-          duration: 10,
+          duration: 7,
           ease: "sine.in",
         },
         3
