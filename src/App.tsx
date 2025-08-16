@@ -1,37 +1,83 @@
-import { Routes, Route } from "react-router-dom";
-import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { useState, useRef } from "react";
 import Preloader from "./pages/registration/components/Preloader/Preloader";
-import Landing from "./pages/landing/Landing";
-import { useState } from "react";
+import Homepage from "./Homepage";
 import Registration from "./pages/registration/Registration";
+import DoorTransition from "./pages/components/page-transition/DoorTransition";
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoading2, setIsLoading2] = useState(true);
-  // const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleEnter = () => {
-    setIsLoading(false);
+  interface LocationState {
+    startAnimation?: boolean;
+  }
+
+  const [currentPage, setCurrentPage] = useState<"home" | "register">(
+    location.pathname === "/register" ? "register" : "home"
+  );
+
+  const [doorPhase, setDoorPhase] = useState<
+    "idle" | "closing" | "waiting" | "opening"
+  >("idle");
+
+  const [isPreloading, setIsPreloading] = useState(
+    location.pathname === "/register"
+  );
+
+  const navigatedFromHome = useRef(false);
+
+  const handleDoorsClosed = () => {
+    setDoorPhase("waiting");
+
+    if (navigatedFromHome.current) {
+      setCurrentPage("register");
+    }
+
+    setTimeout(() => {
+      setDoorPhase("opening");
+      if (navigatedFromHome.current) {
+        navigate("/register", { state: { startAnimation: true } });
+      }
+    }, 500);
+  };
+
+  const handleDoorsOpened = () => {
+    setDoorPhase("idle");
+    navigatedFromHome.current = false;
+  };
+
+  const goToRegister = () => {
+    navigatedFromHome.current = true;
+    setDoorPhase("closing");
+  };
+
+  const handlePreloaderEnter = () => {
+    setIsPreloading(false);
   };
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          isLoading ? <DrawingPreloader onEnter={handleEnter} /> : <Landing />
-        }
+    <>
+      <DoorTransition
+        phase={doorPhase}
+        onClosed={handleDoorsClosed}
+        onOpened={handleDoorsOpened}
       />
-      <Route
-        path="/register"
-        element={
-          isLoading2 ? (
-            <Preloader onEnter={() => setIsLoading2(false)} />
-          ) : (
-            <Registration />
-          )
-        }
-      />
-    </Routes>
+
+      {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
+
+      {!isPreloading && currentPage === "home" && (
+        <Homepage goToRegister={goToRegister} />
+      )}
+      {!isPreloading && currentPage === "register" && (
+        <Registration
+          startAnimation={(location.state as LocationState)?.startAnimation || false}
+        />
+      )}
+      <Routes>
+        <Route path="/" element={null} />
+        <Route path="/register" element={null} />
+      </Routes>
+    </>
   );
 }
