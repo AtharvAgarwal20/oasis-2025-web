@@ -7,7 +7,7 @@ const imagesToPreload = [
   "/svgs/landing/registerBtn.svg",
   "/svgs/logo.svg",
   "/images/landing/v.png",
-  "/videos/ink-spread-3.gif",
+  "/videos/ink-spread-4.gif",
   "/images/landing/tree.png",
   "/svgs/landing/insta.svg",
   "/svgs/landing/twitter.svg",

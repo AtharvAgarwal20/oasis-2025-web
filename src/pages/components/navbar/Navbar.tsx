@@ -1,12 +1,12 @@
 import styles from "./Navbar.module.scss";
-import moon from "/svgs/landing/moon.svg";
+import moon from "/svgs/landing/moon1.svg";
 import moonHam from "/svgs/landing/moonHam.svg";
-import cloud1 from "/svgs/landing/hamClouds/cloud1.svg";
-import cloud2 from "/svgs/landing/hamClouds/cloud2.svg";
-import cloud3 from "/svgs/landing/hamClouds/cloud3.svg";
-import cloud4 from "/svgs/landing/hamClouds/cloud4.svg";
-import cloud5 from "/svgs/landing/hamClouds/cloud5.svg";
-import cloud6 from "/svgs/landing/hamClouds/cloud6.svg";
+import cloud1 from "/svgs/landing/hamClouds/cloud1.min.svg";
+import cloud2 from "/svgs/landing/hamClouds/cloud2.min.svg";
+import cloud3 from "/svgs/landing/hamClouds/cloud3.min.svg";
+import cloud4 from "/svgs/landing/hamClouds/cloud4.min.svg";
+import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
+import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
 
 const navItems = [
   { label: "Home", katakana: "ホーム", href: "/" },
