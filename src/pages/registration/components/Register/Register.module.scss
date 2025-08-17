@@ -81,7 +81,7 @@ $inputheight:10vh;
     gap: 21vw;
   }
 .left{
-  
+
 .together {
   display: flex;
   flex-direction: row;
@@ -104,7 +104,7 @@ $inputheight:10vh;
     input,
     select,
     .selection {
-      width: 10vw !important;
+      width: 10vw ;
     }
 
     .selection {
@@ -128,11 +128,11 @@ $inputheight:10vh;
     }
 
     .sameline {
-      width: 10vw !important;
+      width:10vw;
     }
 
     .clouds {
-      width: 10vw !important;
+      width: 10vw;
     }
   }
 
@@ -204,6 +204,17 @@ $inputheight:10vh;
   }
   .year,.states{
 margin-left: 4.5vw;
+  }
+  .referral{
+    .sameline{
+      width: 18vw;
+    }
+    .clouds{
+      width:18vw;
+      input{
+        width: 18vw;
+      }
+    }
   }
     .radioInput {
       appearance: none;
@@ -571,4 +582,89 @@ input::placeholder {
       );
     }
    }
-}*/
+}
+*/
+@media (max-width:720px)
+{.registerContainer{
+  height:80vh;
+  .registrationForm{
+    width: 100vw;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    top:7rem;
+  .formColumns{
+    margin: 0;
+    padding: 0;
+    
+  margin-top: 10vw;
+    flex-direction: column;
+    gap:0;
+
+    justify-content: center;
+    align-items: center;
+    .left,.right{
+      margin: 0;
+      
+    }
+    .left{
+      .name,.mobile,.referral,.gender,.email,.together{
+        margin: 0;
+        padding: 0;
+      }
+        .mobile{
+          .clouds{
+input{
+  
+    width:50vw;
+}
+          }
+  }
+    }
+    .right{
+      .year,.college,.states,.city{
+        margin: 0;
+        padding: 0;
+      }
+    }
+   .left,.right{
+    .sameline{
+      width: 50vw;
+    }
+    .clouds,.together,.fields{
+      width: 50vw;
+    }
+    .fields{
+      flex-direction: column;
+    }
+   
+    .field1{
+      width: 50vw;
+      .sameline{
+        width: 50vw;
+      }
+      .clouds{
+        width: 50vw;
+      
+    }
+    }
+    .referral{
+      width: 50vw;
+    .sameline{
+      width: 50vw;
+    }
+    .clouds{
+      width:50vw;
+      input{
+        width: 50vw;
+      }
+    }
+  }
+   }
+    }
+  }
+}
+  }

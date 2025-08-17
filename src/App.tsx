@@ -1,5 +1,5 @@
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Homepage from "./Homepage";
 import Registration from "./pages/registration/Registration";
@@ -13,7 +13,7 @@ export default function App() {
     startAnimation?: boolean;
   }
 
-  const [currentPage, setCurrentPage] = useState<"home" | "register">(
+  const [currentPage, setCurrentPage] = useState<"home" | "register" | "events" | "aboutus">(
     location.pathname === "/register" ? "register" : "home"
   );
 
@@ -26,6 +26,24 @@ export default function App() {
   );
 
   const navigatedFromHome = useRef(false);
+useEffect(() => {
+  const path = location.pathname;
+
+  if (path === "/") {
+    setCurrentPage("home");
+  } else if (path === "/register") {
+    setCurrentPage("register");
+    setIsPreloading(true);
+  }
+  else if (path === "/events") {
+    setCurrentPage("events");
+    setIsPreloading(true);
+  }
+  else if (path === "/aboutus") {
+    setCurrentPage("aboutus");
+    setIsPreloading(true);
+  }
+}, [location.pathname]);
 
   const handleDoorsClosed = () => {
     setDoorPhase("waiting");
@@ -62,9 +80,11 @@ export default function App() {
         phase={doorPhase}
         onClosed={handleDoorsClosed}
         onOpened={handleDoorsOpened}
+        page={location.pathname}
       />
 
       {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
+      
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToRegister={goToRegister} />
