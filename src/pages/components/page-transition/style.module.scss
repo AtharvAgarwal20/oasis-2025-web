@@ -17,6 +17,7 @@
   min-height: 100%;
   object-fit: cover;
   will-change: transform;
+  z-index: 1000000;
   transform: translateX(calc(var(--base, 0%) + var(--dx, 0%)));
 }
 
@@ -25,7 +26,6 @@
   right: 50vw;      
   min-width: 20vw;
   object-position: 100% 0;
-  z-index: 30;
 }
 
 .door2 {
@@ -33,7 +33,6 @@
   right: 50vw;    
   min-width: 30vw;
   object-position: 100% 0;
-  z-index: 20;
 }
 
 .door3 {
@@ -41,7 +40,6 @@
   left: 50vw;       
   min-width: 30vw;
   object-position: 0 0;
-  z-index: 20;
 }
 
 .door4 {
@@ -49,5 +47,4 @@
   left: 50vw;        
   min-width: 20vw;
   object-position: 0 0;
-  z-index: 30;
 }

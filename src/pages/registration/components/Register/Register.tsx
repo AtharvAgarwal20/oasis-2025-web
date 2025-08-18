@@ -111,7 +111,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(function RegisterComponen
     );
     return [...startsWith, ...contains];
   };
-
+const isMobile = window.innerWidth < 720;
 const customStyles = {
   noOptionsMessage: (provided: any) => ({
     ...provided,
@@ -170,7 +170,7 @@ const customStyles = {
   menu: (provided: any) => ({
     ...provided,
     marginTop: 0,
-    width: "30vw",
+    width: isMobile ? "50vw" : "30vw",
     borderRadius: "10px",
     overflow: "hidden",
     zIndex: 10,
@@ -252,7 +252,7 @@ const customStylesGender = {
   menu: (provided: any) => ({
     ...provided,
     marginTop: 0,
-    width: "10vw",
+    width: isMobile ? "50vw" : "10vw",
     borderRadius: "10px",
     overflow: "hidden",
     zIndex: 10,
@@ -356,7 +356,7 @@ const customStylesGender = {
           ? { value: field.value, label: field.value }
           : null
       }
-      className={`${styles.selection} ${styles.genderSelect}`} // extra class
+      className={`${styles.selection} ${styles.genderSelect}`} 
       classNamePrefix="Select"
     />
   )}
@@ -368,12 +368,12 @@ const customStylesGender = {
                 </div>
 
                 <div className={styles.referral}>
-                  <div className={styles.sameline} style={{ width: "18vw" }}>
+                  <div className={styles.sameline}>
                     <label>REFERRAL CODE </label>
                   </div>
-                  <div className={styles.clouds} style={{ width: "18vw" }}>
+                  <div className={styles.clouds} >
                     <img src={CloudLeft} alt="" />
-                    <input {...register("referral")} style={{ width: "18vw" }} />
+                    <input {...register("referral")} />
                     <img src={CloudRight} alt="" />
                   </div>
                 </div>

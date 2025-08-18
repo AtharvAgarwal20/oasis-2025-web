@@ -92,10 +92,10 @@ export default function Landing({ goToRegister }: LandingProps) {
         {
           y: "-40%",
           scale: 1.15,
-          duration: 7,
+          duration: 10,
           ease: "sine.in",
         },
-        3.2
+        3.5
       );
   }, []);
 
