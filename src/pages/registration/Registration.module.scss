@@ -48,25 +48,6 @@
       object-fit: contain;
     }
   }
-  
-@media (max-aspect-ratio:1.45) {
-  
-  .birds {
-    z-index: 1;
-    margin-top: 1.5vw;
-    width: 70vw;
-    background: center / contain no-repeat url("/svgs/registration/birds.svg");
-    background-blend-mode: overlay;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .bannerImage {
-      width: 70%;
-      object-fit: contain;
-    }
-  }
-}
   .backBtn {
     outline: none;
     border: none;
@@ -81,5 +62,39 @@
   }
   .inActive {
     display: none;
+  }
+}
+
+@media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
+  .instrback {
+    .backgroundImage {
+      left: 50%;
+      width: 700vw;
+      transform: translateX(-45%);
+    }
+    .sun {
+      position: absolute;
+      bottom: 85vw;
+      left: 50%;
+      transform: translateX(-50%);
+      // transform: translateY(-25%);
+      height: 47vw;
+      z-index: 0;
+    }
+    .birds {
+      z-index: 1;
+      margin-top: 1.5vw;
+      width: 70vw;
+      background: center / contain no-repeat url("/svgs/registration/birds.svg");
+      background-blend-mode: overlay;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .bannerImage {
+        width: 70%;
+        object-fit: contain;
+      }
+    }
   }
 }

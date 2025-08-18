@@ -33,7 +33,6 @@ const Events = forwardRef<
         "https://bits-oasis.org/2025/main/registrations/events_details/"
       )
       .then((response) => {
-        console.log("Events fetched successfully:", response.data);
         setEventsOptions(response.data);
       })
       .catch((error) => console.error("Error fetching events:", error));

@@ -10,11 +10,11 @@ import sun from "/svgs/registration/sun.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import {  useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import Back from "/svgs/registration/back.svg"
+import Back from "/svgs/registration/back.svg";
 
 interface RegistrationProps {
   startAnimation: boolean; // only start animation after door opens
@@ -39,130 +39,165 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   const sunRef = useRef<HTMLImageElement>(null);
 
   const toFirstPage = () => {
-    contextSafe(() => {
-      gsap.to(bgRef.current, {
-        x: "-42.5%",
-        duration: 1.5,
-        // ease: "power1.out",
-        onStart: () => setIsAnim(true),
-        onComplete: () => setIsAnim(false),
-      });
-      gsap.to(sunRef.current, {
-        left: "-5%",
-        bottom: "17vw",
-        x: "0%",
-        duration: 1.5,
-        // ease: "power1.out",
-      });
-      const tl = gsap.timeline();
-      tl.to(elemRef2.current, {
-        opacity: 0,
-        duration: 1,
-        ease: "power1.out",
-      })
-        .set(elemRef2.current, {
-          display: "none",
-          ease: "power1.out",
-        })
-        .set(elemRef1.current, {
-          display: "flex",
-          ease: "power1.out",
-        })
-        .to(elemRef1.current, {
-          opacity: 1,
+    const mm = gsap.matchMedia();
+    mm.add(
+      "(min-width: 1200px) or (aspect-ratio > 1.45)",
+      contextSafe(() => {
+        gsap.to(bgRef.current, {
+          x: "-42.5%",
+          duration: 1.5,
+          // ease: "power1.out",
+          onStart: () => setIsAnim(true),
+          onComplete: () => setIsAnim(false),
+        });
+        gsap.to(sunRef.current, {
+          left: "-5%",
+          bottom: "17vw",
+          x: "0%",
+          duration: 1.5,
+          // ease: "power1.out",
+        });
+        const tl = gsap.timeline();
+        tl.to(elemRef2.current, {
+          opacity: 0,
           duration: 1,
           ease: "power1.out",
-          onComplete: () => setCurrentPage(1),
-        });
-    })();
+        })
+          .set(elemRef2.current, {
+            display: "none",
+            ease: "power1.out",
+          })
+          .set(elemRef1.current, {
+            display: "flex",
+            ease: "power1.out",
+          })
+          .to(elemRef1.current, {
+            opacity: 1,
+            duration: 1,
+            ease: "power1.out",
+            onComplete: () => setCurrentPage(1),
+          });
+      })
+    );
   };
 
   const toRegPage = (back: boolean) => {
+    const mm = gsap.matchMedia();
     contextSafe(() => {
-      gsap.to(bgRef.current, {
-        x: "-16.5%",
-        duration: 1.5,
-        // ease: "power1.out",
-        onStart: () => setIsAnim(true),
-        onComplete: () => setIsAnim(false),
-      });
-      gsap.to(sunRef.current, {
-        left: "50%",
-        bottom: "33svh",
-        x: "-49.5%",
-        duration: 1.5,
-        // ease: "power1.out",
-      });
-      const tl = gsap.timeline();
-      tl.to(back ? elemRef3.current : elemRef1.current, {
-        opacity: 0,
-        duration: 1,
-        ease: "power1.out",
-      })
-        .set(back ? elemRef3.current : elemRef1.current, {
-          display: "none",
-          ease: "power1.out",
-        })
-        .set(back ? elemRef2.current : elemRef2.current, {
-          display: "flex",
-          ease: "power1.out",
-        })
-        .to(back ? elemRef2.current : elemRef2.current, {
-          opacity: 1,
+      mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+        gsap.to(bgRef.current, {
+          x: "-16.5%",
+          duration: 1.5,
+          // ease: "power1.out",
+          onStart: () => setIsAnim(true),
+          onComplete: () => setIsAnim(false),
+        });
+        gsap.to(sunRef.current, {
+          left: "50%",
+          bottom: "33svh",
+          x: "-49.5%",
+          duration: 1.5,
+          // ease: "power1.out",
+        });
+        const tl = gsap.timeline();
+        tl.to(back ? elemRef3.current : elemRef1.current, {
+          opacity: 0,
           duration: 1,
           ease: "power1.out",
-          onComplete: () => setCurrentPage(2),
+        })
+          .set(back ? elemRef3.current : elemRef1.current, {
+            display: "none",
+            ease: "power1.out",
+          })
+          .set(back ? elemRef2.current : elemRef2.current, {
+            display: "flex",
+            ease: "power1.out",
+          })
+          .to(back ? elemRef2.current : elemRef2.current, {
+            opacity: 1,
+            duration: 1,
+            ease: "power1.out",
+            onComplete: () => setCurrentPage(2),
+          });
+      });
+      mm.add("(max-width: 1200px) and (aspect-ratio < 1.45)", () => {
+        const tl = gsap.timeline({
+          onStart: () => setIsAnim(true),
+          onComplete: () => setIsAnim(false),
         });
+        tl.to(back ? elemRef3.current : elemRef1.current, {
+          opacity: 0,
+          duration: 1,
+          ease: "power1.out",
+        })
+          .set(back ? elemRef3.current : elemRef1.current, {
+            display: "none",
+            ease: "power1.out",
+          })
+          .set(back ? elemRef2.current : elemRef2.current, {
+            display: "flex",
+            ease: "power1.out",
+          })
+          .to(back ? elemRef2.current : elemRef2.current, {
+            opacity: 1,
+            duration: 1,
+            ease: "power1.out",
+            onComplete: () => setCurrentPage(2),
+          });
+      });
     })();
   };
 
   // useEffect triggered only if startAnimation = true
- /* useEffect(() => {
-    if (startAnimation) {
-      toRegPage(false);
-      setTimeout(() => {
-        toEventPage();
-      }, 2500);
-    }
-  }, [startAnimation]);*/
+  useEffect(() => {
+    // if (startAnimation) {
+    // toRegPage(false);
+    // setTimeout(() => {
+    //   toEventPage();
+    // }, 2500);
+    // }
+  }, []);
 
   const toEventPage = () => {
-    contextSafe(() => {
-      gsap.to(bgRef.current, {
-        x: "-1%",
-        duration: 1.5,
-        // ease: "power1.out",
-        onStart: () => setIsAnim(true),
-        onComplete: () => setIsAnim(false),
-      });
-      gsap.to(sunRef.current, {
-        left: "67%",
-        bottom: "17vw",
-        x: "0%",
-        duration: 1.5,
-        // ease: "power1.out",
-      });
-      const tl = gsap.timeline();
-      tl.to(elemRef2.current, {
-        opacity: 0,
-        duration: 1,
-        ease: "power1.out",
-      })
-        .set(elemRef2.current, {
-          display: "none",
-          ease: "power1.out",
-        })
-        .set(elemRef3.current, {
-          display: "flex",
-          ease: "power1.out",
-        })
-        .to(elemRef3.current, {
-          opacity: 1,
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+      contextSafe(() => {
+        gsap.to(bgRef.current, {
+          x: "-1%",
+          duration: 1.5,
+          // ease: "power1.out",
+          onStart: () => setIsAnim(true),
+          onComplete: () => setIsAnim(false),
+        });
+        gsap.to(sunRef.current, {
+          left: "67%",
+          bottom: "17vw",
+          x: "0%",
+          duration: 1.5,
+          // ease: "power1.out",
+        });
+        const tl = gsap.timeline();
+        tl.to(elemRef2.current, {
+          opacity: 0,
           duration: 1,
           ease: "power1.out",
-          onComplete: () => setCurrentPage(3),
-        });
-    })();
+        })
+          .set(elemRef2.current, {
+            display: "none",
+            ease: "power1.out",
+          })
+          .set(elemRef3.current, {
+            display: "flex",
+            ease: "power1.out",
+          })
+          .to(elemRef3.current, {
+            opacity: 1,
+            duration: 1,
+            ease: "power1.out",
+            onComplete: () => setCurrentPage(3),
+          });
+      })();
+    });
   };
 
   const backButtonHandler = () => {
@@ -181,12 +216,9 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   const onGoogleSignIn = useGoogleLogin({
     onSuccess: (response) => {
       axios
-        .post(
-          "https://bits-oasis.org/2025/main/registrations/google-reg/",
-          {
-            access_token: response.access_token,
-          }
-        )
+        .post("https://bits-oasis.org/2025/main/registrations/google-reg/", {
+          access_token: response.access_token,
+        })
         .then((res) => {
           setCookies("Access_token", response.access_token);
           if (res.data.exists) {
@@ -201,7 +233,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
             //   access_token: response.access_token,
             // });
             setUserEmail(res.data.email);
-            if (res.data.email && startAnimation) toRegPage(false); 
+            if (res.data.email && startAnimation) toRegPage(false);
           }
         })
         .catch((err) => {
@@ -232,7 +264,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
           styles.backBtn + " " + (currentPage === 1 ? styles.inActive : "")
         }
       >
-        <img src={Back} alt="" style={{ width:"4vw" ,height:"auto"}}/>
+        <img src={Back} alt="" style={{ width: "4vw", height: "auto" }} />
       </button>
 
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />
