@@ -9,9 +9,7 @@ const imagesToPreload = [
   "/svgs/logo.svg",
   "/images/landing/background1.png",
   "/images/landing/tree1.png",
-
   "/videos/ink-spread-4.gif",
-
   "/svgs/landing/insta.svg",
   "/svgs/landing/twitter.svg",
   "/svgs/landing/linkden.svg",
