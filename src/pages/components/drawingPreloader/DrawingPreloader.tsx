@@ -7,8 +7,8 @@ import useOverlayStore from "../../../utils/store";
 const imagesToPreload = [
   "/svgs/landing/registerBtn.svg",
   "/svgs/logo.svg",
-  "/images/landing/background.png",
-  "/images/landing/tree6.png",
+  "/images/landing/background1.png",
+  "/images/landing/tree1.png",
   "/svgs/landing/insta.svg",
   "/svgs/landing/twitter.svg",
   "/svgs/landing/linkden.svg",

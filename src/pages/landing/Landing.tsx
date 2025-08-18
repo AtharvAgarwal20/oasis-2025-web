@@ -6,8 +6,8 @@ import styles from "./Landing.module.scss";
 import useOverlayStore from "../../utils/store";
 
 import Navbar from "../components/navbar/Navbar";
-import tree from "/images/landing/tree6.png";
-import landingImage from "/images/landing/background.png";
+import tree from "/images/landing/tree1.png";
+import landingImage from "/images/landing/background1.png";
 import registerBtn from "/svgs/landing/registerBtn.svg";
 import logo from "/svgs/logo.svg";
 import insta from "/svgs/landing/insta.svg";
