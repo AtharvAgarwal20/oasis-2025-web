@@ -1,18 +1,19 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, use } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./DrawingPreloader.module.scss";
+import useOverlayStore from "../../../utils/store";
 
 const imagesToPreload = [
   "/svgs/landing/registerBtn.svg",
   "/svgs/logo.svg",
-  "/images/landing/v.png",
-  "/videos/ink-spread-3.gif",
-  "/images/landing/tree.png",
+  "/images/landing/background.png",
+  "/images/landing/tree6.png",
   "/svgs/landing/insta.svg",
   "/svgs/landing/twitter.svg",
   "/svgs/landing/linkden.svg",
   "/svgs/landing/socialLinkBg.svg",
+  "/videos/ink-spread-4.gif",
 ];
 
 export default function DrawingPreloader({
@@ -21,9 +22,11 @@ export default function DrawingPreloader({
   className?: string;
   onEnter?: () => void;
 }) {
+  const overlayIsActive = useOverlayStore((state) => state.isActive);
+  const overlaySetActive = useOverlayStore((state) => state.setActive);
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const svgContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let loadedImages = 0;
 
@@ -138,7 +141,10 @@ export default function DrawingPreloader({
   // }, []);
 
   return (
-    <div className={showOverlay ? styles.sketchOverlay : styles.overlay}>
+    <div
+      className={overlayIsActive ? styles.sketchOverlay : styles.overlay}
+      ref={svgContainerRef}
+    >
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +278,7 @@ export default function DrawingPreloader({
           <button
             className={styles.enterButton}
             onClick={() => {
-              setShowOverlay(true);
+              overlaySetActive();
             }}
           >
             Enter

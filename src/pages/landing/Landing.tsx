@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import styles from "./Landing.module.scss";
+import useOverlayStore from "../../utils/store";
 
 import Navbar from "../components/navbar/Navbar";
 import tree from "/images/landing/tree6.png";
@@ -38,6 +39,7 @@ interface LandingProps {
 }
 
 export default function Landing({ goToRegister }: LandingProps) {
+  const overlayIsActive = useOverlayStore((state) => state.isActive);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -67,7 +69,7 @@ export default function Landing({ goToRegister }: LandingProps) {
       .to(
         landingRef.current,
         {
-          scale: 1.12,
+          scale: 1.13,
           duration: 4,
           ease: "power2.out",
         },
@@ -132,7 +134,14 @@ export default function Landing({ goToRegister }: LandingProps) {
 
   return (
     <>
-      <div className={styles.wrapper} ref={wrapperRef}>
+      <div
+        className={
+          !overlayIsActive
+            ? `${styles.pointerNoneEvent} ${styles.wrapper}`
+            : styles.wrapper
+        }
+        ref={wrapperRef}
+      >
         <div className={styles.landing}>
           <img
             src={landingImage}

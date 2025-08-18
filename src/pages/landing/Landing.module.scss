@@ -7,7 +7,11 @@ html {
 
 body {
   -ms-overflow-style: none;
-  background-color: #0a2461;
+}
+
+.pointerNoneEvent {
+  pointer-events: none;
+  position: fixed;
 }
 
 .wrapper {
@@ -19,6 +23,7 @@ body {
     height: 50%;
     z-index: 0;
     overflow-x: hidden;
+    background-color: #0a2461;
 
     .landingImage {
       width: 100%;
