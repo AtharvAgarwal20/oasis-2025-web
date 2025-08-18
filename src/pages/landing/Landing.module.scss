@@ -95,6 +95,9 @@ body {
         transition: transform 0.1s ease-out;
         transform-origin: "center right";
         will-change: transform;
+        margin-top: clamp(0vh, 100vh - 56.7vw, 100vh);
+        object-fit: contain;
+        object-position: top;
       }
     }
 
