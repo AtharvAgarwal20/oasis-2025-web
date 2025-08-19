@@ -71,9 +71,6 @@ export default function Landing({ goToRegister }: LandingProps) {
   const landingMobileRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
-    // Only run animations after images are loaded
-
-    // Ensure tree is visible initially and wait for element to be ready
     if (treeImageRef.current && landingRef.current) {
       gsap.set(treeImageRef.current, {
         autoAlpha: 1,
@@ -111,7 +108,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         start: "top top",
         end: "+=800vh",
         scrub: 1.2,
-        pin: `.${styles.treeContainer}`,
+        // pin: `.${styles.treeContainer}`,
       },
     });
 
@@ -215,9 +212,6 @@ export default function Landing({ goToRegister }: LandingProps) {
           0
         );
     });
-
-    // Refresh ScrollTrigger to ensure proper calculation
-    ScrollTrigger.refresh();
   }, []);
 
   useEffect(() => {
