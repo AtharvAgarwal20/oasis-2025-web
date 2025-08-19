@@ -138,7 +138,8 @@ export default function DrawingPreloader({
   // }, []);
 
   return (
-    <div className={showOverlay ? styles.sketchOverlay : styles.overlay}>
+    <div className={showOverlay ? styles.sketchOverlay : styles.overlay}
+    >
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState } from "react";
 
 import styles from "./Landing.module.scss";
 
@@ -41,6 +42,29 @@ export default function Landing({ goToRegister }: LandingProps) {
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const registerBtnRef = useRef<HTMLDivElement>(null);
+
+  const [showMask, setShowMask] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+
+      if (scrollY >= vh) {
+        // 100vh scrolled
+        setShowMask(true);
+      } else {
+        setShowMask(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useGSAP(() => {
     const masterTimeline = gsap.timeline({
@@ -207,7 +231,12 @@ export default function Landing({ goToRegister }: LandingProps) {
               ))}
             </div>
           </div>
-          <div className={styles.registerBtnContainer} onClick={goToRegister}>
+          <div
+            className={styles.registerBtnContainer}
+            style={{ maskImage: showMask ? "url('/videos/ink-spread-4.gif')" : "none" }}
+            onClick={goToRegister}
+            ref={registerBtnRef}
+          >
             <img
               src={registerBtn}
               className={styles.registerBtn}
