@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState } from "react";
 
 import styles from "./Landing.module.scss";
 import useOverlayStore from "../../utils/store";
@@ -26,7 +27,7 @@ i;
 
 gsap.registerPlugin(ScrollTrigger);
 
-// const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
+const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
 
 const socialLinks = [
   {
@@ -59,10 +60,13 @@ interface LandingProps {
 }
 
 export default function Landing({ goToRegister }: LandingProps) {
+  //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const dateCountdownRef = useRef<HTMLDivElement>(null);
+
 
   useGSAP(() => {
     const masterTimeline = gsap.timeline({
@@ -77,6 +81,7 @@ export default function Landing({ goToRegister }: LandingProps) {
     });
 
     masterTimeline
+
       .to(
         treeImageRef.current,
         {
@@ -108,49 +113,48 @@ export default function Landing({ goToRegister }: LandingProps) {
       )
 
       .to(
-        landingRef.current,
+        dateCountdownRef.current,
         {
-          y: "-40%",
-          scale: 1.15,
-          duration: 10,
+          y: "-300%",
+          duration: 1,
           ease: "sine.in",
         },
-        3.5
-      );
+        0
+      )
   }, []);
 
-  // const [timeLeft, setTimeLeft] = useState({
-  //   days: 0,
-  //   hours: 0,
-  //   minutes: 0,
-  //   seconds: 0,
-  // });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-  // useEffect(() => {
-  //   const calculateTimeLeft = () => {
-  //     const now = new Date();
-  //     const difference = TARGET_DATE.getTime() - now.getTime();
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = TARGET_DATE.getTime() - now.getTime();
 
-  //     if (difference <= 0) {
-  //       setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  //       return;
-  //     }
+      if (difference <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
 
-  //     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  //     const hours = Math.floor(
-  //       (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //     );
-  //     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-  //     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-  //     setTimeLeft({ days, hours, minutes, seconds });
-  //   };
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
 
-  //   calculateTimeLeft();
-  //   const timerId = setInterval(calculateTimeLeft, 1000);
+    calculateTimeLeft();
+    const timerId = setInterval(calculateTimeLeft, 1000);
 
-  //   return () => clearInterval(timerId);
-  // }, []);
+    return () => clearInterval(timerId);
+  }, []);
 
   return (
     <>
@@ -227,11 +231,12 @@ export default function Landing({ goToRegister }: LandingProps) {
                 style={{ contain: "none" }}
               />
             </div>
+            <div className={styles.treeExtender}></div>
           </div>
           <div className={styles.logoContainer}>
             <img src={logo} className={styles.logo} alt="Logo" />
           </div>
-          {/* <div className={styles.dateCountdown}>
+          <div className={styles.dateCountdown} ref={dateCountdownRef}>
             <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
               <div className={styles.days}>
                 {timeLeft.days > 10 ? (
@@ -264,7 +269,7 @@ export default function Landing({ goToRegister }: LandingProps) {
               </div>
               MINUTES
             </div>
-          </div> */}
+          </div>
 
           <div className={styles.registerBtnContainer} onClick={goToRegister}>
             <img
