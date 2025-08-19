@@ -66,6 +66,7 @@ export default function Landing({ goToRegister }: LandingProps) {
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
+  const [removeGif, setRemoveGif] = useState(false);
 
   useGSAP(() => {
     const masterTimeline = gsap.timeline({
@@ -111,6 +112,17 @@ export default function Landing({ goToRegister }: LandingProps) {
       )
 
       .to(
+        landingRef.current,
+        {
+          y: "-50%",
+          scale: 1.4,
+          duration: 10,
+          ease: "sine.in",
+        },
+        3
+      )
+
+      .to(
         dateCountdownRef.current,
         {
           y: "-300%",
@@ -120,6 +132,20 @@ export default function Landing({ goToRegister }: LandingProps) {
         0
       );
   }, []);
+
+  useEffect(() => {
+    if (overlayIsActive) {
+      setTimeout(() => {
+        setRemoveGif(true);
+      }, 3620);
+    }
+  }, [overlayIsActive]);
+
+  useEffect(() => {
+    if (removeGif && wrapperRef.current) {
+      wrapperRef.current.style.maskImage = "none";
+    }
+  }, [removeGif]);
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -157,11 +183,9 @@ export default function Landing({ goToRegister }: LandingProps) {
   return (
     <>
       <div
-        className={
-          !overlayIsActive
-            ? `${styles.pointerNoneEvent} ${styles.wrapper}`
-            : `${styles.wrapper} ${styles.mask} `
-        }
+        className={`${styles.wrapper} ${
+          !removeGif ? styles.pointerNoneEvent : ""
+        } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
         <div
