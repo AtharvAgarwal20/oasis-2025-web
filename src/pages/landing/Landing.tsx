@@ -62,11 +62,13 @@ interface LandingProps {
 export default function Landing({ goToRegister }: LandingProps) {
   //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
+  const removeGif = useOverlayStore((state) => state.removeGif);
+  const setRemoveGif = useOverlayStore((state) => state.setRemoveGif);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
-  const [removeGif, setRemoveGif] = useState(false);
+  const landingMobileRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
     const masterTimeline = gsap.timeline({
@@ -79,65 +81,113 @@ export default function Landing({ goToRegister }: LandingProps) {
       },
     });
 
-    masterTimeline
+    const mm = gsap.matchMedia();
 
-      .to(
-        treeImageRef.current,
-        {
-          scale: 1.2,
-          duration: 4,
-          ease: "power2.out",
-        },
-        0
-      )
-      .to(
-        landingRef.current,
-        {
-          scale: 1.13,
-          duration: 4,
-          ease: "power2.out",
-        },
-        0
-      )
+    mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
+      masterTimeline
 
-      .to(
-        treeImageRef.current,
-        {
-          y: "-50%",
-          scale: 1.4,
-          duration: 10,
-          ease: "sine.in",
-        },
-        3
-      )
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.2,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+        .to(
+          landingRef.current,
+          {
+            scale: 1.13,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
 
-      .to(
-        landingRef.current,
-        {
-          y: "-50%",
-          scale: 1.4,
-          duration: 10,
-          ease: "sine.in",
-        },
-        3
-      )
+        .to(
+          treeImageRef.current,
+          {
+            y: "-50%",
+            scale: 1.4,
+            duration: 12,
+            ease: "sine.in",
+          },
+          3
+        )
 
-      .to(
-        dateCountdownRef.current,
-        {
-          y: "-300%",
-          duration: 1,
-          ease: "sine.in",
-        },
-        0
-      );
+        .to(
+          landingMobileRef.current,
+          {
+            y: "-50%",
+            scale: 1.4,
+            duration: 10,
+            ease: "sine.in",
+          },
+          3
+        );
+    });
+    mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
+      masterTimeline
+
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.2,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+        .to(
+          landingRef.current,
+          {
+            scale: 1.13,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        .to(
+          treeImageRef.current,
+          {
+            y: "-50%",
+            scale: 1.4,
+            duration: 12,
+            ease: "sine.in",
+          },
+          3
+        )
+
+        .to(
+          landingRef.current,
+          {
+            y: "-50%",
+            scale: 1.4,
+            duration: 10,
+            ease: "sine.in",
+          },
+          3
+        )
+
+        .to(
+          dateCountdownRef.current,
+          {
+            y: "-300%",
+            duration: 1,
+            ease: "sine.in",
+          },
+          0
+        );
+    });
   }, []);
 
   useEffect(() => {
     if (overlayIsActive) {
       setTimeout(() => {
-        setRemoveGif(true);
-      }, 3620);
+        setRemoveGif();
+      }, 4000);
     }
   }, [overlayIsActive]);
 
@@ -203,6 +253,7 @@ export default function Landing({ goToRegister }: LandingProps) {
             src={mobileMountains}
             className={styles.mobileMountains}
             alt=""
+            ref={landingMobileRef}
           />
           <img
             src={mobileBackground}

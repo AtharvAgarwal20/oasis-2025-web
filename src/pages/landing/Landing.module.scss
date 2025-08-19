@@ -2,12 +2,16 @@
 
 html {
   --registerFontSize: 2rem;
+  --counterBigFontSize: 2rem;
+  --counterSmallFontSize: 1.5rem;
   scrollbar-width: none;
 }
 
 @media (max-width: 1350px) {
   html {
     --registerFontSize: 1.5rem;
+    --counterBigFontSize: 1.5rem;
+    --counterSmallFontSize: 1.25rem;
   }
 }
 
@@ -26,6 +30,8 @@ html {
 @media (max-width: 800px) {
   html {
     --registerFontSize: 1rem;
+    --counterBigFontSize: 1.75rem;
+    --counterSmallFontSize: 1.25rem;
   }
 }
 
@@ -106,6 +112,27 @@ body {
       }
       .mobileBackground {
         display: block;
+      }
+    }
+
+    @media (aspect-ratio < 5/8) {
+      .mobileMountains {
+        right: -10svw;
+        width: auto;
+      }
+    }
+
+    @media (aspect-ratio < 4/8) {
+      .mobileMountains {
+        right: -20svw;
+        width: auto;
+      }
+    }
+
+    @media (aspect-ratio < 35/80) {
+      .mobileMountains {
+        right: -40svw;
+        width: auto;
       }
     }
 
@@ -234,7 +261,7 @@ body {
         background-size: cover;
         background-position: center;
         width: 100vw;
-        height: 100vh;
+        height: 50vw;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -298,26 +325,48 @@ body {
     .dateCountdown {
       position: fixed;
       z-index: 200;
-      right: 10svw;
-      top: 3svw;
+      right: 2svw;
+      top: 4svw;
       width: 15svw;
+      min-width: fit-content;
       display: flex;
       align-items: center;
       gap: 0.5svw;
       will-change: auto;
       font-family: $primaryFont;
       color: white;
-      font-size: 2rem;
+      font-size: var(--counterBigFontSize);
       text-align: center;
+      background-color: none;
       .timeLeft {
-        font-size: 1.5rem;
+        font-size: var(--counterSmallFontSize);
         .days,
         .hours,
         .minutes,
         .seconds {
-          font-size: 2rem;
+          font-size: var(--counterBigFontSize);
           font-weight: bold;
         }
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .dateCountdown {
+        display: none;
+      }
+    }
+
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
+      .dateCountdown {
+        display: flex;
+        top: 270px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: fit-content;
+        font-size: 1.5rem;
+        padding: 0.5svw;
+        text-align: center;
+        gap: 1.5svw;
       }
     }
 
