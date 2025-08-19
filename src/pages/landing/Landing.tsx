@@ -1,28 +1,27 @@
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import styles from "./Landing.module.scss";
 import useOverlayStore from "../../utils/store";
+import styles from "./Landing.module.scss";
 
-import Navbar from "../components/navbar/Navbar";
-import tree from "/images/landing/tree1.png";
-import landingImage from "/images/landing/background1.png";
-import registerBtn from "/svgs/landing/registerBtn.svg";
-import mobileRegisterBtn from "/svgs/landing/mobileRegisterBtn.svg";
-import logo from "/svgs/logo.svg";
-import insta from "/svgs/landing/insta.svg";
-import instaLamp from "/svgs/landing/instaLamp.svg";
-import x from "/svgs/landing/x.svg";
-import xLamp from "/svgs/landing/xLamp.svg";
-import linkden from "/svgs/landing/linkden.svg";
-import linkdenLamp from "/svgs/landing/linkdenLamp.svg";
-import wire from "/svgs/landing/wire.svg";
-import mobileMountains from "/images/landing/mobileMountains.png";
-import mobileBackground from "/svgs/landing/mobileBackground.svg";
 import { useGSAP } from "@gsap/react";
 import { i } from "framer-motion/client";
+import Navbar from "../components/navbar/Navbar";
+import landingImage from "/images/landing/background1.png";
+import mobileMountains from "/images/landing/mobileMountains.png";
+import tree from "/images/landing/tree1.png";
+import insta from "/svgs/landing/insta.svg";
+import instaLamp from "/svgs/landing/instaLamp.svg";
+import linkden from "/svgs/landing/linkden.svg";
+import linkdenLamp from "/svgs/landing/linkdenLamp.svg";
+import mobileBackground from "/svgs/landing/mobileBackground.svg";
+import mobileRegisterBtn from "/svgs/landing/mobileRegisterBtn.svg";
+import registerBtn from "/svgs/landing/registerBtn.svg";
+import wire from "/svgs/landing/wire.svg";
+import x from "/svgs/landing/x.svg";
+import xLamp from "/svgs/landing/xLamp.svg";
+import logo from "/svgs/logo.svg";
 i;
 
 gsap.registerPlugin(ScrollTrigger);
@@ -72,6 +71,22 @@ export default function Landing({ goToRegister }: LandingProps) {
   const landingMobileRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
+    if (treeImageRef.current && landingRef.current) {
+      gsap.set(treeImageRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+
+      gsap.set(landingRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+    }
+
     gsap.fromTo(
       registerButtonRef.current,
       { autoAlpha: 1 },
