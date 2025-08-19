@@ -228,22 +228,6 @@ export default function Landing({ goToRegister }: LandingProps) {
     }
   }, [overlayIsActive]);
 
-  // Remove this problematic line that tries to resize the window
-  // useEffect(() => {
-  //   window.resizeTo(1920, 1080);
-  // }, []);
-
-  useEffect(() => {
-    if (treeImageRef.current) {
-      const element = treeImageRef.current;
-      element.style.opacity = "0";
-      element.offsetHeight;
-      element.style.opacity = "1";
-
-      element.style.transform = "translate3d(0, 0, 0)";
-    }
-  }, []);
-
   useEffect(() => {
     if (removeGif && wrapperRef.current) {
       wrapperRef.current.style.maskImage = "none";
