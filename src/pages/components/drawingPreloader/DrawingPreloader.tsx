@@ -40,8 +40,8 @@ export default function DrawingPreloader({
   className?: string;
   onEnter?: () => void;
 }) {
-  const overlayIsActive = useOverlayStore((state) => state.isActive);
-  const overlaySetActive = useOverlayStore((state) => state.setActive);
+  const overlayIsActive = useOverlayStore((state: any) => state.isActive);
+  const overlaySetActive = useOverlayStore((state: any) => state.setActive);
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
   const svgContainerRef = useRef<HTMLDivElement>(null);

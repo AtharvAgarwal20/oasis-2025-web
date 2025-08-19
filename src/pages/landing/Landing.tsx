@@ -40,6 +40,7 @@ interface LandingProps {
 }
 
 export default function Landing({ goToRegister }: LandingProps) {
+  //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
