@@ -1,5 +1,9 @@
 @use "../../assets/global.scss" as *;
 
+body {
+  height: 300vh;
+}
+
 html {
   --registerFontSize: 2rem;
   --counterBigFontSize: 2rem;
@@ -137,7 +141,7 @@ body {
     }
 
     .treeContainer {
-      position: absolute;
+      position: fixed;
       z-index: 100;
       right: 0;
       top: -8svw;
@@ -288,6 +292,7 @@ body {
           margin-top: clamp(0dvh, 100dvh - 85svw, 100dvh);
         }
       }
+
     }
 
     @media (aspect-ratio < 18/10) {

@@ -93,28 +93,35 @@ export default function Landing({ goToRegister }: LandingProps) {
         start: "top top",
         end: "+=800vh",
         scrub: 1.2,
-        pin: `.${styles.treeContainer}`,
       },
     });
 
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
+
+      gsap.fromTo(
+      dateCountdownRef.current,
+      { autoAlpha: 1 },
+      {
+        autoAlpha: 0,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "400vh",
+          end: "+=300vh",
+          scrub: true,
+        },
+      }
+    );
+
+
       masterTimeline
 
         .to(
           treeImageRef.current,
           {
-            scale: 1.2,
-            duration: 4,
-            ease: "power2.out",
-          },
-          0
-        )
-        .to(
-          landingRef.current,
-          {
-            scale: 1.13,
+            scale: 1.4,
             duration: 4,
             ease: "power2.out",
           },
@@ -125,8 +132,8 @@ export default function Landing({ goToRegister }: LandingProps) {
           treeImageRef.current,
           {
             y: "-50%",
+            duration: 10,
             scale: 1.4,
-            duration: 12,
             ease: "sine.in",
           },
           3
@@ -136,11 +143,10 @@ export default function Landing({ goToRegister }: LandingProps) {
           landingMobileRef.current,
           {
             y: "-50%",
-            scale: 1.4,
             duration: 10,
             ease: "sine.in",
           },
-          3
+          4
         );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
@@ -168,7 +174,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-50%",
+            y: "-70%",
             scale: 1.4,
             duration: 12,
             ease: "sine.in",
@@ -184,7 +190,7 @@ export default function Landing({ goToRegister }: LandingProps) {
             duration: 10,
             ease: "sine.in",
           },
-          3
+          3.2
         )
 
         .to(
