@@ -76,7 +76,6 @@ export default function Landing({ goToRegister }: LandingProps) {
         end: "+=800vh",
         scrub: 1.2,
         pin: `.${styles.treeContainer}`,
-        markers: true,
       },
     });
 
