@@ -72,6 +72,25 @@ export default function Landing({ goToRegister }: LandingProps) {
   const landingMobileRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
+    // Only run animations after images are loaded
+
+    // Ensure tree is visible initially and wait for element to be ready
+    if (treeImageRef.current && landingRef.current) {
+      gsap.set(treeImageRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+
+      gsap.set(landingRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+    }
+
     gsap.fromTo(
       registerButtonRef.current,
       { autoAlpha: 1 },
@@ -197,6 +216,9 @@ export default function Landing({ goToRegister }: LandingProps) {
           0
         );
     });
+
+    // Refresh ScrollTrigger to ensure proper calculation
+    ScrollTrigger.refresh();
   }, []);
 
   useEffect(() => {
@@ -207,9 +229,10 @@ export default function Landing({ goToRegister }: LandingProps) {
     }
   }, [overlayIsActive]);
 
-  useEffect(() => {
-    window.resizeTo(1920, 1080);
-  }, []);
+  // Remove this problematic line that tries to resize the window
+  // useEffect(() => {
+  //   window.resizeTo(1920, 1080);
+  // }, []);
 
   useEffect(() => {
     if (removeGif && wrapperRef.current) {
