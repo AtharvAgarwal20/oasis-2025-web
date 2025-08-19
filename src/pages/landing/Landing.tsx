@@ -35,11 +35,10 @@ const socialLinks = [
   },
 ];
 interface LandingProps {
-  goToRegister: () => void;
+  goToPage: (path: string) => void;
 }
 
-export default function Landing({ goToRegister }: LandingProps) {
-  const overlayIsActive = useOverlayStore((state) => state.isActive);
+export default function Landing({ goToPage }: LandingProps) {  const overlayIsActive = useOverlayStore((state:any) => state.isActive);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -148,7 +147,7 @@ export default function Landing({ goToRegister }: LandingProps) {
             className={styles.landingImage}
             ref={landingRef}
           />
-          <Navbar />
+          <Navbar goToPage={goToPage} />
 
           <div className={styles.treeContainer}>
             <img
@@ -216,7 +215,8 @@ export default function Landing({ goToRegister }: LandingProps) {
               ))}
             </div>
           </div>
-          <div className={styles.registerBtnContainer} onClick={goToRegister}>
+          <div className={styles.registerBtnContainer} onClick={() => goToPage("/register")} // ✅ wrapped in arrow function
+>
             <img
               src={registerBtn}
               className={styles.registerBtn}

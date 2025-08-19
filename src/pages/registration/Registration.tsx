@@ -149,14 +149,14 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   };
 
   // useEffect triggered only if startAnimation = true
-  useEffect(() => {
+//  useEffect(() => {
     // if (startAnimation) {
     // toRegPage(false);
     // setTimeout(() => {
     //   toEventPage();
     // }, 2500);
     // }
-  }, []);
+  //}, []);
 
   const toEventPage = () => {
     const mm = gsap.matchMedia();
@@ -215,13 +215,18 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
 
   const onGoogleSignIn = useGoogleLogin({
     onSuccess: (response) => {
+      
+          console.log(response.access_token)
       axios
         .post("https://bits-oasis.org/2025/main/registrations/google-reg/", {
           access_token: response.access_token,
+          
         })
         .then((res) => {
+          
           setCookies("Access_token", response.access_token);
           if (res.data.exists) {
+
             setCookies("user-auth", res.data);
             setCookies("Authorization", res.data.tokens.access);
             window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
