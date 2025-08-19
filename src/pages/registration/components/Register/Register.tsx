@@ -1,38 +1,51 @@
-import * as yup from "yup";
+import { useEffect, useState, forwardRef, useMemo } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
-//import type { SingleValue } from "react-select";
+import axios from "axios";
+import * as yup from "yup";
 
 import styles from "./Register.module.scss";
-
-import type { SingleValue } from "react-select";
-
-import { useEffect, useState, forwardRef } from "react";
-import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
-
 import statesData from "./cities.json";
 
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
-import CloudLeft from "/svgs/registration/left.svg";
-import CloudRight from "/svgs/registration/right.svg";
-import { scale } from "framer-motion";
 
+// -------------------------- Types -------------------------- //
 interface StateItem {
   state: string;
   cities: string[];
 }
 
 const typedStatesData: StateItem[] = statesData;
-const stateOptions = typedStatesData.map((item) => ({
-  value: item.state,
-  label: item.state,
-}));
 
-const registrationSchema = yup.object({
+interface Option {
+  value: string;
+  label: string;
+}
+
+type FormData = {
+  name: string;
+  email_id: string;
+  gender: string;
+  phone: string;
+  college_id: string;
+  year: string;
+  state: string;
+  city: string;
+  referral?: string | null;
+};
+
+type PropsType = {
+  onClickNext: () => void;
+  userEmail: string;
+  setUserData: React.Dispatch<React.SetStateAction<any>>;
+};
+
+// -------------------------- Validation -------------------------- //
+const schema: yup.ObjectSchema<FormData> = yup.object({
   name: yup.string().required("Name is required"),
-  email_id: yup.string().email("Invalid email"),
+  email_id: yup.string().email("Invalid email").required("Email is required"),
   gender: yup.string().required("Gender is required"),
   phone: yup
     .string()
@@ -45,364 +58,161 @@ const registrationSchema = yup.object({
   referral: yup.string().nullable().optional(),
 });
 
-type FormData = yup.InferType<typeof registrationSchema>;
+// -------------------------- Register Component -------------------------- //
+const Register = forwardRef<HTMLDivElement, PropsType>(
+  ({ onClickNext, userEmail, setUserData }, ref) => {
+    const [selectedState, setSelectedState] = useState("");
+    const [collegeOptions, setCollegeOptions] = useState<Option[]>([]);
+    const [inputValue, setInputValue] = useState("");
 
-type PropsType = {
-  onClickNext: () => void;
-  userEmail: string;
-  setUserData: React.Dispatch<React.SetStateAction<any>>;
-};
-
-const Register = forwardRef<HTMLDivElement, PropsType>(function RegisterComponent(
-  props,
-  ref
-) {
-  const { onClickNext, userEmail, setUserData } = props;
-  const [selectedState, setSelectedState] = useState("");
-  const [availableCities, setAvailableCities] = useState<{ value: string; label: string }[]>([]);
-  const [collegeOptions, setCollegeOptions] = useState<{ value: string; label: string }[]>([]);
-  const [inputValue, setInputValue] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("https://merge.bits-oasis.org/2025/main/registrations/get_college/")
-      .then((response) => {
-        setCollegeOptions(
-          response.data.data.map((college: { id: number; name: string }) => ({
-            value: String(college.id),
-            label: college.name,
-          }))
-        );
-      })
-      .catch((error) => console.error("Error fetching colleges:", error));
-  }, []);
-
-  const getAvailableCities = (stateName: string) =>
-    (typedStatesData.find((item) => item.state === stateName)?.cities ?? []).map(
-      (city) => ({ value: city, label: city })
+    // Pre-mapped state options
+    const stateOptions = useMemo(
+      () =>
+        typedStatesData.map((item) => ({
+          value: item.state,
+          label: item.state,
+        })),
+      []
     );
 
-  useEffect(() => {
-    setAvailableCities(getAvailableCities(selectedState));
-  }, [selectedState]);
+    const availableCities = useMemo<Option[]>(() => {
+      return (
+        typedStatesData
+          .find((item) => item.state === selectedState)
+          ?.cities.map((city) => ({ value: city, label: city })) ?? []
+      );
+    }, [selectedState]);
 
-  const { register, handleSubmit, formState: { errors }, setValue, control } = useForm<FormData>({
-    resolver: yupResolver(registrationSchema as any),
-    defaultValues: {
-      name: "",
-      email_id: userEmail,
-      gender: "",
-      phone: "",
-      college_id: "",
-      year: "",
-      state: "",
-      city: "",
-      referral: null,
-    },
-  });
+    // Fetch colleges once
+    useEffect(() => {
+      axios
+        .get(
+          "https://merge.bits-oasis.org/2025/main/registrations/get_college/"
+        )
+        .then((res) => {
+          setCollegeOptions(
+            res.data.data.map((c: { id: number; name: string }) => ({
+              value: String(c.id),
+              label: c.name,
+            }))
+          );
+        })
+        .catch((err) => console.error("Error fetching colleges:", err));
+    }, []);
 
-  const getFilteredOptions = (input: string) => {
-    if (!input) return stateOptions;
-    const inputLower = input.toLowerCase();
-    const startsWith = stateOptions.filter((opt) =>
-      opt.label.toLowerCase().startsWith(inputLower)
-    );
-    const contains = stateOptions.filter(
-      (opt) =>
-        !opt.label.toLowerCase().startsWith(inputLower) &&
-        opt.label.toLowerCase().includes(inputLower)
-    );
-    return [...startsWith, ...contains];
-  };
-const isMobile = window.innerWidth < 720;
-const customStyles = {
-  noOptionsMessage: (provided: any) => ({
-    ...provided,
-    color: "white",
-    backgroundColor: "#00000061",
-    padding: "10px",
-    textAlign: "center",
-  }),
-  control: (provided: any,state:any) => ({
-    ...provided,
-    paddingLeft: 0,
-    paddingRight: 0,
-    scale:0.55,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    boxShadow: state.isFocused ? 'none' : provided.boxShadow,
-    outline: 'none',
-    background: "transparent",
-    border: "none",
-  }),
-  menuList: (provided: any) => ({
-    ...provided,
-    padding: 0,
-    margin: 0,
-    backgroundColor: "#2e0505",
-    color: "white",
-    borderRadius: "10px",
-    scrollbarWidth: "thin",
-  }),
-  singleValue: (provided: any) => ({
-    ...provided,
-    color: "white",
-    textAlign: "center",
-    height: "5vh",
-    paddingLeft: "30%", 
-  }),
-  input: (provided: any) => ({
-    ...provided,
-    textAlign: "center",
-    padding: 0,
-    margin: 0,
-    color: "white",
-  }),
-  placeholder: (provided: any) => ({
-    ...provided,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    textAlign: "center",
-    color: "white",
-    padding: 0,
-    margin: 0,
-    whiteSpace: "nowrap",
-  }),
-  menu: (provided: any) => ({
-    ...provided,
-    marginTop: 0,
-    width: isMobile ? "50vw" : "30vw",
-    borderRadius: "10px",
-    overflow: "hidden",
-    zIndex: 10,
-  }),
-  option: (provided: any, state: any) => ({
-    ...provided,
-    backgroundColor: state.isFocused ? "rgba(0,20,80,0.8)" : "#2e0505",
-    color: "white",
-    cursor: "pointer",
-  }),
-  valueContainer: (provided: any) => ({
-    ...provided,
-    width: "100%",
-    padding: 0,
-    height: "4vh",
-    background: "transparent",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  }),
-  dropdownIndicator: (provided: any) => ({
-    ...provided,
-    color: "white",
-    display: "none",
-    cursor: "pointer",
-  }),
-  indicatorSeparator: () => ({
-    display: "none",
-  }),
-};
-const customStylesGender = {
-  control: (provided: any,state:any) => ({
-    ...provided,
-    paddingLeft: 0,
-    paddingRight: 0,
-    display: "flex",
-    boxShadow: state.isFocused ? 'none' : provided.boxShadow,
-    outline: 'none',
-    justifyContent: "center",
-    alignItems: "center",
-    background: "transparent",
-    border: "none",
-    height:"2.3rem",
-  }),
-  menuList: (provided: any) => ({
-    ...provided,
-    padding: 0,
-    margin: 0,
-    backgroundColor: "#2e0505",
-    color: "white",
-    borderRadius: "10px",
-    scrollbarWidth: "thin",
-  }),
-  singleValue: (provided: any) => ({
-    ...provided,
-    color: "white",
-    textAlign: "center",
-    height: "2.3rem",
-    paddingLeft: 0,
-  }),
-  input: (provided: any) => ({
-    ...provided,
-    textAlign: "center",
-    padding: 0,
-    margin: 0,
-    color: "white",
-  }),
-  placeholder: (provided: any, state: any) => ({
-    ...provided,
-    display: state.isFocused || state.selectProps.inputValue || state.value ? 'none' : 'block',
-    color: "white",
-    textAlign: "justify",
-    paddingLeft:"40%",
-  }),
-
-  menu: (provided: any) => ({
-    ...provided,
-    marginTop: 0,
-    width: isMobile ? "50vw" : "10vw",
-    borderRadius: "10px",
-    overflow: "hidden",
-    zIndex: 10,
-  }),
-  option: (provided: any, state: any) => ({
-    ...provided,
-    backgroundColor: state.isFocused ? "rgba(0,20,80,0.8)" : "#2e0505",
-    color: "white",
-    cursor: "pointer",
-  }),
-  valueContainer: (provided: any) => ({
-    ...provided,
-    width: "100%",
-    padding: 0,
-    height: "2.3rem",
-    background: "transparent",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  }),
-  dropdownIndicator: (provided: any) => ({
-    ...provided,
-    color: "white",
-    display: "none",
-    cursor: "pointer",
-  }),
-  indicatorSeparator: () => ({
-    display: "none",
-  }),
-};
-
-
-
-  const onSubmit = (data: any) => {
-    setUserData({
-      ...data,
-      email_id: userEmail,
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      setValue,
+      control,
+    } = useForm<FormData>({
+      resolver: yupResolver(schema),
+      defaultValues: {
+        name: "",
+        email_id: userEmail,
+        gender: "",
+        phone: "",
+        college_id: "",
+        year: "",
+        state: "",
+        city: "",
+        referral: null,
+      },
     });
-    onClickNext();
-  };
 
-  return (
-    <div className={styles.registerContainer} ref={ref}>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.registrationForm}>
-        <div className={styles.formColumns}>
-          <div className={styles.left}>
+    const onSubmit = (data: FormData) => {
+      setUserData({ ...data, email_id: userEmail });
+      onClickNext();
+    };
 
-            <div className={styles.name}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>NAME</label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-               
+    const filterStates = (input: string) => {
+      if (!input) return stateOptions;
+      const search = input.toLowerCase();
+      return [
+        ...stateOptions.filter((s) => s.label.toLowerCase().startsWith(search)),
+        ...stateOptions.filter(
+          (s) =>
+            !s.label.toLowerCase().startsWith(search) &&
+            s.label.toLowerCase().includes(search)
+        ),
+      ];
+    };
+
+    return (
+      <div className={styles.registerContainer} ref={ref}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={styles.registrationForm}
+        >
+          <div className={styles.formColumns}>
+            {/* ---------------- LEFT ---------------- */}
+            <div className={styles.left}>
+              <FormField
+                label="NAME"
+                iconLeft={Left}
+                iconRight={Right}
+                error={errors.name?.message}
+              >
                 <input {...register("name")} />
-              </div>
-              <p>{errors.name?.message}</p>
-            </div>
+              </FormField>
 
-            <div className={styles.email}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>EMAIL </label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-                <input value={userEmail} disabled placeholder={userEmail} />
+              <FormField
+                label="EMAIL"
+                iconLeft={Left}
+                iconRight={Right}
+                error={errors.email_id?.message}
+              >
+                <input value={userEmail} disabled />
+              </FormField>
 
-              </div>
-              <p>{errors.email_id?.message}</p>
-            </div>
+              <FormField label="GENDER" error={errors.gender?.message}>
+                <Controller
+                  name="gender"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      options={[
+                        { value: "Male", label: "Male" },
+                        { value: "Female", label: "Female" },
+                        { value: "Other", label: "Other" },
+                      ]}
+                      styles={selectStyles("small")}
+                      placeholder="Gender"
+                      onChange={(val) => field.onChange(val?.value || "")}
+                      value={
+                        field.value
+                          ? { value: field.value, label: field.value }
+                          : null
+                      }
+                    />
+                  )}
+                />
+              </FormField>
 
-            <div className={styles.together}>
-              <div className={styles.fields}>
-                <div className={styles.field1}>
-                  <label className={styles.sameline}>GENDER</label>
-                  <div className={styles.clouds}>
-                   
-                    <Controller
-  name="gender"
-  control={control}
-  render={({ field }) => (
-    <Select
-      {...field}
-      options={[
-        { value: "Male", label: "Male" },
-        { value: "Female", label: "Female" },
-        { value: "Other", label: "Other" },
-      ]}
-      styles={customStylesGender}
-      placeholder="Gender"
-      onChange={(val) => field.onChange(val?.value || "")}
-      value={
-        field.value
-          ? { value: field.value, label: field.value }
-          : null
-      }
-      className={`${styles.selection} ${styles.genderSelect}`} 
-      classNamePrefix="Select"
-    />
-  )}
-/>
+              <FormField label="REFERRAL CODE">
+                <input {...register("referral")} />
+              </FormField>
 
-                   
-                  </div>
-                  <p>{errors.gender?.message}</p>
-                </div>
-
-                <div className={styles.referral}>
-                  <div className={styles.sameline}>
-                    <label>REFERRAL CODE </label>
-                  </div>
-                  <div className={styles.clouds} >
-                    <input {...register("referral")} />
-
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.mobile}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>MOBILE NUMBER </label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-             
+              <FormField
+                label="MOBILE NUMBER"
+                iconLeft={Left}
+                iconRight={Right}
+                error={errors.phone?.message}
+              >
                 <input {...register("phone")} />
-              </div>
-              <p>{errors.phone?.message}</p>
+              </FormField>
             </div>
-          </div>
 
-          <div className={styles.right}>
-            <div className={styles.college}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>COLLEGE NAME </label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
+            {/* ---------------- RIGHT ---------------- */}
+            <div className={styles.right}>
+              <FormField
+                label="COLLEGE NAME"
+                iconLeft={Left}
+                iconRight={Right}
+                error={errors.college_id?.message}
+              >
                 <Controller
                   name="college_id"
                   control={control}
@@ -410,92 +220,72 @@ const customStylesGender = {
                     <Select
                       {...field}
                       options={collegeOptions}
-                      styles={customStyles}
                       placeholder="Select College"
+                      styles={selectStyles("normal")}
                       onChange={(val) => field.onChange(val?.value || "")}
                       value={
-                        field.value
-                          ? collegeOptions.find((c) => c.value === field.value) || null
-                          : null
+                        collegeOptions.find((c) => c.value === field.value) ||
+                        null
                       }
-                      className={styles.selection}
-                            classNamePrefix="Select"
                     />
                   )}
                 />
-              </div>
-              <p>{errors.college_id?.message}</p>
-            </div>
+              </FormField>
 
-            <div className={styles.year}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>YEAR OF STUDY </label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
-                <fieldset className={styles.radioGroup} aria-label="Year of Study">
-                  {["1", "2", "3", "4"].map((year) => (
-                    <label key={year} className={styles.radioLabel}>
-                      <input
-                        type="radio"
-                        value={year}
-                        {...register("year")}
-                        className={styles.radioInput}
-                      />
-                      <span className={styles.yearNumber}>{year}</span>
+              <FormField
+                label="YEAR OF STUDY"
+                iconLeft={Left}
+                iconRight={Right}
+                error={errors.year?.message}
+              >
+                <fieldset className={styles.radioGroup}>
+                  {["1", "2", "3", "4"].map((yr) => (
+                    <label key={yr}>
+                      <input type="radio" value={yr} {...register("year")} />
+                      <span>{yr}</span>
                     </label>
                   ))}
                 </fieldset>
-                <p className={styles.error}>{errors.year?.message}</p>
-              </div>
-            </div>
+              </FormField>
 
-            <div className={styles.states}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>STATE</label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
+              <FormField
+                label="STATE"
+                iconLeft={Left}
+                iconRight={Right}
+                error={errors.state?.message}
+              >
                 <Controller
                   name="state"
                   control={control}
                   render={({ field }) => (
                     <Select
                       {...field}
-                      options={getFilteredOptions(inputValue)}
-                      styles={customStyles}
-                      onInputChange={(value) => setInputValue(value)}
+                      options={filterStates(inputValue)}
+                      placeholder="Enter State"
+                      styles={selectStyles("normal")}
+                      onInputChange={setInputValue}
                       filterOption={() => true}
                       value={
-                        field.value
-                          ? stateOptions.find((option) => option.value === field.value) || null
-                          : null
+                        stateOptions.find((o) => o.value === field.value) ||
+                        null
                       }
-                      onChange={(option) => {
-                        const val = option?.value || "";
+                      onChange={(opt) => {
+                        const val = opt?.value || "";
                         field.onChange(val);
                         setSelectedState(val);
                         setValue("city", "", { shouldValidate: true });
                       }}
-                      placeholder="Enter State"
-                      classNamePrefix="react-select"
-                      className={styles.selection}
-                      
                     />
                   )}
                 />
-              </div>
-            </div>
+              </FormField>
 
-            <div className={styles.city}>
-              <div className={styles.sameline}>
-                <img src={Left} alt="" />
-                <label>CITY </label>
-                <img src={Right} alt="" />
-              </div>
-              <div className={styles.clouds}>
+              <FormField
+                label="CITY"
+                iconLeft={Left}
+                iconRight={Right}
+                error={errors.city?.message}
+              >
                 <Controller
                   name="city"
                   control={control}
@@ -503,35 +293,83 @@ const customStylesGender = {
                     <Select
                       {...field}
                       options={availableCities}
-                      styles={customStyles}
                       placeholder="Select City"
+                      styles={selectStyles("normal")}
                       isDisabled={!selectedState}
-                      onChange={(val) => field.onChange(val?.value || "")}
+                      onChange={(opt) => field.onChange(opt?.value || "")}
                       value={
-                        field.value
-                          ? availableCities.find((c) => c.value === field.value) || null
-                          : null
+                        availableCities.find((c) => c.value === field.value) ||
+                        null
                       }
-                      className={styles.selection}
                     />
                   )}
                 />
-              </div>
-              <p>{errors.city?.message}</p>
+              </FormField>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
 
-      <button
-        className={styles.confirmButton}
-        type="submit"
-        onClick={handleSubmit(onSubmit)}
-      >
-        <span> NEXT</span>
-      </button>
+        <button
+          className={styles.confirmButton}
+          type="submit"
+          onClick={handleSubmit(onSubmit)}
+        >
+          <span>NEXT</span>
+        </button>
+      </div>
+    );
+  }
+);
+
+// -------------------------- Helper Components -------------------------- //
+const FormField = ({
+  label,
+  children,
+  error,
+  iconLeft,
+  iconRight,
+}: {
+  label: string;
+  children: React.ReactNode;
+  error?: string;
+  iconLeft?: string;
+  iconRight?: string;
+}) => (
+  <div className={styles.field}>
+    <div className={styles.sameline}>
+      {iconLeft && <img src={iconLeft} alt="" />}
+      <label>{label}</label>
+      {iconRight && <img src={iconRight} alt="" />}
     </div>
-  );
+    <div className={styles.clouds}>{children}</div>
+    {error && <p className={styles.error}>{error}</p>}
+  </div>
+);
+
+// -------------------------- Styles Extract -------------------------- //
+const selectStyles = (variant: "normal" | "small") => ({
+  control: (p: any) => ({
+    ...p,
+    background: "transparent",
+    border: "none",
+    boxShadow: "none",
+    minHeight: variant === "small" ? "2rem" : "2.5rem",
+    alignItems: "center",
+    justifyContent: "center",
+  }),
+  singleValue: (p: any) => ({ ...p, color: "white", textAlign: "center" }),
+  placeholder: (p: any) => ({ ...p, color: "white", textAlign: "center" }),
+  menu: (p: any) => ({
+    ...p,
+    background: "#2e0505",
+    color: "white",
+    borderRadius: "10px",
+  }),
+  option: (p: any, state: any) => ({
+    ...p,
+    backgroundColor: state.isFocused ? "rgba(0,20,80,0.8)" : "#2e0505",
+    color: "white",
+  }),
 });
 
 export default Register;

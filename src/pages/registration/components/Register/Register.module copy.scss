@@ -1,0 +1,520 @@
+$inputwidth: 30vw;
+$inputheight: 10vh;
+@use "/src/assets/global.scss" as *;
+
+.registerContainer {
+  display: none;
+  opacity: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 43vw;
+
+  .registrationForm {
+    z-index: 3;
+    // position: absolute;
+    // bottom: 24svh;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .formColumns {
+      width: 100%;
+      z-index: 4;
+      display: flex;
+      gap: 5vw;
+
+      .leftColumn,
+      .rightColumn {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .inputBox {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1vw;
+          width: 100%;
+
+          .labelBox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            img {
+              width: 7vw;
+            }
+            label {
+              color: #fff9e9;
+              font: 400 1.7vw "Abhaya Libre";
+              text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
+            }
+          }
+
+          .inputSubBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 5.822;
+
+            svg {
+              width: 100%;
+              position: absolute;
+              top: 0;
+              object-fit: contain;
+            }
+            .input {
+              // width: fit-content;
+              color: #e2dccb;
+              z-index: 3;
+              border: none;
+              outline: none;
+              font: 400 1vw "Abhaya Libre Extrabold";
+            }
+            .radioGroup {
+              display: flex;
+              gap: 1vw;
+
+              .label {
+                display: flex;
+                align-items: center;
+
+                .radioInput {
+                  // appearance: none;
+                  outline: none;
+                  width: 2vw;
+                  height: 2vw;
+                  // border: 2px solid white;
+                  border-radius: 50%;
+                  position: relative;
+                  cursor: pointer;
+                  &:checked::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 2vw;
+                    height: 2vw;
+                    border-radius: 50%;
+                    border: 2px solid white;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+//         .Select__control,
+//         .Select__control--is-focused {
+//           border: 1px solid #ededed;
+//           height: 2.5rem;
+//           outline: none !important;
+//           box-shadow: none !important;
+
+//           padding-left: "5vw" !important;
+//           padding-right: "5vw" !important;
+//           width: 10vw !important;
+//           padding: 0 !important;
+//           box-shadow: none !important;
+//         }
+//         .genderSelect__placeholder {
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//           width: 100%;
+//           text-align: center;
+//           color: white;
+//           padding: 0;
+//           margin: 0;
+//           white-space: nowrap;
+//         }
+//         .email,
+//         .together {
+//           margin-left: 1vw;
+//         }
+//         .mobile {
+//           margin-left: 4.5vw;
+//         }
+//         .college,
+//         .city {
+//           margin-left: 0.5vw;
+//         }
+//         .year,
+//         .states {
+//           margin-left: 4.5vw;
+//         }
+//         .referral {
+//           width: 8vw;
+//           .sameline {
+//             width: 8vw;
+//           }
+//           .clouds {
+//             width: 8vw;
+//             input {
+//               margin: 0;
+//               width: 8vw;
+//             }
+//           }
+//         }
+//       }
+//     }
+//     .react-select__input-container {
+//       input {
+//         box-shadow: none !important;
+//       }
+//     }
+
+//     .title {
+//       text-align: center;
+//       font-size: 2.5rem;
+//       margin-bottom: 1.5rem;
+//     }
+//   }
+// }
+
+// .confirmButton {
+//   position: absolute;
+//   bottom: 2vw;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   z-index: 3;
+//   outline: none;
+//   border: none;
+//   text-align: center;
+//   cursor: pointer;
+//   margin: 2vw 0;
+//   background: center / cover no-repeat
+//     url("/images/registration/button-banner.png");
+//   padding: 1vw;
+//   color: #fff;
+//   font: 100 1.5vw "Abhaya Libre Extrabold";
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   width: 22vw;
+//   span {
+//     padding-left: 40%;
+//     text-align: center;
+//   }
+
+//   .confirmIcon {
+//     width: 7vw;
+//     height: 0.5vw;
+//     &:last-child {
+//       rotate: 180deg;
+//     }
+//   }
+// }
+
+// .field1 {
+//   option {
+//     width: 1vw;
+//     font-size: 1rem;
+//     text-align: left;
+//   }
+//   .clouds {
+//     background: center/contain url("/svgs/registration/genderborder.svg");
+
+//     background-repeat: no-repeat;
+//   }
+// }
+// .referral {
+//   .cloudss {
+//     background: center/contain url("/svgs/registration/referralborder.svg");
+//     scale: 1.4;
+//     background-repeat: no-repeat;
+//   }
+//   input {
+//     margin: 0 !important;
+//     width: 8vw;
+//   }
+// }
+// .birds2 {
+//   margin-top: 2vw;
+//   width: 45vw;
+//   height: 4vw;
+//   background: center / contain no-repeat url("/svgs/registration/birds2.svg");
+//   background-blend-mode: overlay;
+
+//   .header {
+//     margin-top: 1vw;
+//     text-align: center;
+//     font-size: 4vw;
+//   }
+// }
+
+// .arrowleft,
+// .arrowright {
+//   position: relative;
+//   width: 103.2px;
+//   height: 23px;
+//   background: #ffffff;
+//   clip-path: polygon(6.7% 50%, 86.5% 66%, 93.5% 50%, 86.5% 34%, 6.7% 50%);
+//   z-index: 3;
+//   isolation: isolate;
+// }
+
+// .arrowleft::before,
+// .arrowright::before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   background: rgba(229, 195, 132, 1);
+//   clip-path: inherit;
+//   // z-index: -1;
+//   filter: blur(12px);
+//   opacity: 0.4;
+// }
+
+// .arrowright {
+//   transform: scaleX(-1);
+// }
+
+// .gendob {
+//   height: 1vw;
+// }
+// .gendob .react-select__placeholder {
+//   width: auto !important; // Allow placeholder to expand based on content
+//   min-width: 8vw !important;
+//   // text-align: center !important;
+//   color: #cfcfcf;
+//   opacity: 1;
+// }
+
+// // .radioLabel {
+// //   display: flex;
+// //   align-items: center;
+// //   gap: 0.3rem;
+// //   font-size: 1.2rem;
+// //   color: white;
+// //   cursor: pointer;
+// // }
+
+// // .radioGroup {
+// //   margin-left: 7vw;
+// //   padding-left: 3.1rem;
+// //   padding-right: 3.1rem;
+// //   width: 50%;
+// //   height: 2.2rem;
+// //   background: transparent;
+// //   color: white;
+// //   border-radius: 0;
+// //   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+
+// //   display: flex;
+// //   justify-content: center;
+// //   align-items: center;
+// //   gap: 0.5vw;
+// //   padding: 0.5rem 1rem;
+// //   position: relative;
+
+// //   .radioLabel {
+// //     display: flex;
+// //     align-items: center;
+// //     gap: 0.3rem;
+// //     font-size: 0.6rem;
+// //     color: white;
+
+// //     cursor: pointer;
+// //     font-weight: 500;
+// //   }
+// // }
+
+// .react-select__control {
+//   box-sizing: border-box;
+//   text-align: center;
+//   width: 30vw;
+//   height: 2.1rem;
+//   background: #00000061;
+//   border: 1px solid #ededed;
+//   color: white;
+//   padding: 0.5rem;
+//   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+//   cursor: pointer;
+//   width: 30vw;
+// }
+
+// .react-select__single-value {
+//   color: white;
+
+//   width: 30vw;
+//   text-align: center;
+// }
+
+// .react-select__control--is-focused {
+//   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+
+//   width: 30vw;
+//   border-color: #ededed;
+// }
+// .react-select__menu {
+//   border-radius: 10px;
+//   box-shadow: 0px 0px 10px #e5c3845e;
+//   margin-top: 0;
+//   width: 30vw;
+//   overflow: hidden;
+//   z-index: 10;
+// }
+// .react-select__value-container {
+//   box-sizing: border-box;
+//   text-align: center;
+//   width: 3vw;
+//   height: 2.1rem;
+//   background: #00000061;
+//   border: 1px solid #ededed;
+//   color: white;
+//   padding: 0;
+//   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+//   cursor: pointer;
+// }
+
+// .Select__input input {
+//   // text-align: center !important;
+//   padding: 0 !important;
+//   margin: 0 !important;
+//   caret-color: white;
+// }
+
+// .Select__input input::placeholder {
+//   // text-align: center !important;
+//   color: #cfcfcf;
+//   opacity: 1;
+// }
+
+// .react-select__input {
+//   margin: 0 !important;
+//   padding-left: -20vw !important;
+
+//   input {
+//     width: 100% !important;
+//     // text-align: center !important;
+//     padding: 0 !important;
+//     margin: 0 !important;
+//     caret-color: white;
+//   }
+// }
+
+// .react-select__placeholder {
+//   width: 100%;
+//   text-align: center !important;
+//   color: #cfcfcf;
+//   opacity: 1;
+//   padding: 0 !important;
+//   margin: 0 !important;
+// }
+
+/*
+@media (max-aspect-ratio:1.4){
+   .left,.right{
+    .sameline{
+      font-size: clamp(
+        0.2rem ,0.2vw + 0.1rem,0.8rem
+      );
+    }
+   }
+}
+*/
+// @media (max-width: 720px) {
+//   .registerContainer {
+//     height: 80vh;
+//     .registrationForm {
+//       width: 100vw;
+//       display: flex;
+//       margin: 0;
+//       padding: 0;
+//       justify-content: center;
+//       align-items: center;
+//       bottom: 0;
+//       top: 7rem;
+//       .formColumns {
+//         margin: 0;
+//         padding: 0;
+
+//         margin-top: 10vw;
+//         flex-direction: column;
+//         gap: 0;
+
+//         justify-content: center;
+//         align-items: center;
+//         .left,
+//         .right {
+//           margin: 0;
+//         }
+//         .left {
+//           .name,
+//           .mobile,
+//           .referral,
+//           .gender,
+//           .email,
+//           .together {
+//             margin: 0;
+//             padding: 0;
+//           }
+//           .mobile {
+//             .clouds {
+//               input {
+//                 width: 50vw;
+//               }
+//             }
+//           }
+//         }
+//         .right {
+//           .year,
+//           .college,
+//           .states,
+//           .city {
+//             margin: 0;
+//             padding: 0;
+//           }
+//         }
+//         .left,
+//         .right {
+//           .sameline {
+//             width: 50vw;
+//           }
+//           .clouds,
+//           .together,
+//           .fields {
+//             width: 50vw;
+//           }
+//           .fields {
+//             flex-direction: column;
+//           }
+
+//           .field1 {
+//             width: 50vw;
+//             .sameline {
+//               width: 50vw;
+//             }
+//             .clouds {
+//               width: 50vw;
+//             }
+//           }
+//           .referral {
+//             width: 50vw;
+//             .sameline {
+//               width: 50vw;
+//             }
+//             .clouds {
+//               width: 50vw;
+//               input {
+//                 width: 50vw;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
