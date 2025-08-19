@@ -62,7 +62,7 @@ body {
 
 .wrapper {
   width: 100%;
-  height: 200vh;
+  height: 200svh;
   mask-image: url("");
   mask-size: cover;
   mask-position: center;
@@ -142,7 +142,7 @@ body {
       right: 0;
       top: -8svw;
       width: 100%;
-      max-width: 100vw;
+      max-width: 100svw;
       overflow: hidden;
       will-change: transform;
 
@@ -154,7 +154,7 @@ body {
         transition: transform 0.1s ease-out;
         transform-origin: "center right";
         will-change: transform;
-        margin-top: clamp(0vh, 100vh - 56.7vw, 100vh);
+        margin-top: clamp(0svh, 100svh - 56.7svw, 100svh);
 
         &::after {
           content: "";
@@ -185,7 +185,7 @@ body {
           .wire {
             position: relative;
             left: 0;
-            width: 50vw;
+            width: 50svw;
           }
           .socialLinkContainer {
             position: absolute;
@@ -199,7 +199,7 @@ body {
               grid-template-rows: 1/2;
               align-items: center;
               justify-items: center;
-              width: 6.5vw;
+              width: 6.5svw;
               .socialIcon {
                 grid-row: 1/2;
                 grid-column: 1/2;
@@ -271,7 +271,7 @@ body {
     @media (aspect-ratio < 8/12), (max-width: 730px) {
       .treeContainer {
         .tree {
-          margin-top: clamp(0vh, 100vh - 80vw, 100vh);
+          margin-top: clamp(0svh, 100svh - 80svw, 100svh);
           img {
             scale: 1.2;
           }
@@ -285,7 +285,7 @@ body {
     @media (max-width: 500px) {
       .treeContainer {
         .tree {
-          margin-top: clamp(0vh, 100vh - 85vw, 100vh);
+          margin-top: clamp(0svh, 100svh - 85svw, 100svh);
         }
       }
     }
@@ -476,7 +476,7 @@ body {
     mask-repeat: no-repeat;
     mask-size: cover;
     mask-position: center;
-    height: 100vh;
+    height: 100svh;
   }
 }
 // .mask {
