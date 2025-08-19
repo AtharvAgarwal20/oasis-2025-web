@@ -15,6 +15,7 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 import CloudLeft from "/svgs/registration/left.svg";
 import CloudRight from "/svgs/registration/right.svg";
+import { scale } from "framer-motion";
 
 interface StateItem {
   state: string;
@@ -124,6 +125,7 @@ const customStyles = {
     ...provided,
     paddingLeft: 0,
     paddingRight: 0,
+    scale:0.55,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -310,9 +312,8 @@ const customStylesGender = {
                 <img src={Right} alt="" />
               </div>
               <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
+               
                 <input {...register("name")} />
-                <img src={CloudRight} alt="" />
               </div>
               <p>{errors.name?.message}</p>
             </div>
@@ -324,9 +325,8 @@ const customStylesGender = {
                 <img src={Right} alt="" />
               </div>
               <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
                 <input value={userEmail} disabled placeholder={userEmail} />
-                <img src={CloudRight} alt="" />
+
               </div>
               <p>{errors.email_id?.message}</p>
             </div>
@@ -336,7 +336,7 @@ const customStylesGender = {
                 <div className={styles.field1}>
                   <label className={styles.sameline}>GENDER</label>
                   <div className={styles.clouds}>
-                    <img src={CloudLeft} alt="" />
+                   
                     <Controller
   name="gender"
   control={control}
@@ -362,7 +362,7 @@ const customStylesGender = {
   )}
 />
 
-                    <img src={CloudRight} alt="" style={{display:"none"}} />
+                   
                   </div>
                   <p>{errors.gender?.message}</p>
                 </div>
@@ -372,9 +372,8 @@ const customStylesGender = {
                     <label>REFERRAL CODE </label>
                   </div>
                   <div className={styles.clouds} >
-                    <img src={CloudLeft} alt="" />
                     <input {...register("referral")} />
-                    <img src={CloudRight} alt="" />
+
                   </div>
                 </div>
               </div>
@@ -387,9 +386,8 @@ const customStylesGender = {
                 <img src={Right} alt="" />
               </div>
               <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
+             
                 <input {...register("phone")} />
-                <img src={CloudRight} alt="" />
               </div>
               <p>{errors.phone?.message}</p>
             </div>
@@ -403,7 +401,6 @@ const customStylesGender = {
                 <img src={Right} alt="" />
               </div>
               <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
                 <Controller
                   name="college_id"
                   control={control}
@@ -424,7 +421,6 @@ const customStylesGender = {
                     />
                   )}
                 />
-                <img src={CloudRight} alt="" />
               </div>
               <p>{errors.college_id?.message}</p>
             </div>
@@ -436,7 +432,6 @@ const customStylesGender = {
                 <img src={Right} alt="" />
               </div>
               <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
                 <fieldset className={styles.radioGroup} aria-label="Year of Study">
                   {["1", "2", "3", "4"].map((year) => (
                     <label key={year} className={styles.radioLabel}>
@@ -450,7 +445,6 @@ const customStylesGender = {
                     </label>
                   ))}
                 </fieldset>
-                <img src={CloudRight} alt="" />
                 <p className={styles.error}>{errors.year?.message}</p>
               </div>
             </div>
@@ -462,7 +456,6 @@ const customStylesGender = {
                 <img src={Right} alt="" />
               </div>
               <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
                 <Controller
                   name="state"
                   control={control}
@@ -491,7 +484,6 @@ const customStylesGender = {
                     />
                   )}
                 />
-                <img src={CloudRight} alt="" />
               </div>
             </div>
 
@@ -502,7 +494,6 @@ const customStylesGender = {
                 <img src={Right} alt="" />
               </div>
               <div className={styles.clouds}>
-                <img src={CloudLeft} alt="" />
                 <Controller
                   name="city"
                   control={control}
@@ -523,7 +514,6 @@ const customStylesGender = {
                     />
                   )}
                 />
-                <img src={CloudRight} alt="" />
               </div>
               <p>{errors.city?.message}</p>
             </div>

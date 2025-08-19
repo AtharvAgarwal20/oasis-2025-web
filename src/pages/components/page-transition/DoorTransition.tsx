@@ -57,8 +57,9 @@ export default function DoorTransition({ phase, onClosed, onOpened,page }: Props
       ]);
       if (page ==="/register")
       {
-      <Preloader onEnter={()=>console.log("Hii")}/>
-      }
+        const run = async () => {
+       await Promise.all([<Preloader onEnter={()=>console.log("Hii")}/>])
+      }}
       if (cancelled) return;
 
       if (!cancelled) onClosed?.();

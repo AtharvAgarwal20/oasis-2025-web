@@ -55,11 +55,10 @@ const socialLinks = [
   },
 ];
 interface LandingProps {
-  goToRegister: () => void;
+  goToPage: (path: string) => void;
 }
 
-export default function Landing({ goToRegister }: LandingProps) {
-  const overlayIsActive = useOverlayStore((state) => state.isActive);
+export default function Landing({ goToPage }: LandingProps) {  const overlayIsActive = useOverlayStore((state:any) => state.isActive);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -168,19 +167,7 @@ export default function Landing({ goToRegister }: LandingProps) {
             className={styles.landingImage}
             ref={landingRef}
           />
-
-          <img
-            src={mobileMountains}
-            className={styles.mobileMountains}
-            alt=""
-          />
-          <img
-            src={mobileBackground}
-            alt=""
-            className={styles.mobileBackground}
-          />
-
-          <Navbar />
+          <Navbar goToPage={goToPage} />
 
           <div className={styles.treeContainer}>
             <div className={styles.tree} ref={treeImageRef}>
@@ -261,8 +248,26 @@ export default function Landing({ goToRegister }: LandingProps) {
               MINUTES
             </div>
           </div> */}
-
-          <div className={styles.registerBtnContainer} onClick={goToRegister}>
+          <div className={styles.socialLinksContainer}>
+            <div className={styles.linkBackground}>
+              <img src={socialLinksBg} alt="" />
+            </div>
+            <div className={styles.socialLinks}>
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  <img src={link.icon} alt="" />
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className={styles.registerBtnContainer} onClick={() => goToPage("/register")} // ✅ wrapped in arrow function
+>
             <img
               src={registerBtn}
               className={styles.registerBtn}
