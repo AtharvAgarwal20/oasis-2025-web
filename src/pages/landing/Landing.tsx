@@ -108,7 +108,8 @@ export default function Landing({ goToRegister }: LandingProps) {
         start: "top top",
         end: "+=800vh",
         scrub: 1.2,
-        // pin: `.${styles.treeContainer}`,
+        pin: `.${styles.treeContainer}`,
+        pinSpacing: false,
       },
     });
 
