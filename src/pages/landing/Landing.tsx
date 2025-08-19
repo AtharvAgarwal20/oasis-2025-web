@@ -114,22 +114,20 @@ export default function Landing({ goToRegister }: LandingProps) {
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
-
       gsap.fromTo(
-      dateCountdownRef.current,
-      { autoAlpha: 1 },
-      {
-        autoAlpha: 0,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "400vh",
-          end: "+=300vh",
-          scrub: true,
-        },
-      }
-    );
-
+        dateCountdownRef.current,
+        { autoAlpha: 1 },
+        {
+          autoAlpha: 0,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "400vh",
+            end: "+=300vh",
+            scrub: true,
+          },
+        }
+      );
 
       masterTimeline
 
@@ -231,6 +229,7 @@ export default function Landing({ goToRegister }: LandingProps) {
   useEffect(() => {
     if (removeGif && wrapperRef.current) {
       wrapperRef.current.style.maskImage = "none";
+      document.body.style.position = "static";
     }
   }, [removeGif]);
 

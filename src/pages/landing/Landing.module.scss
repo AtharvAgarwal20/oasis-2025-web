@@ -42,6 +42,7 @@ html {
 body {
   -ms-overflow-style: none;
   background-color: #1a0b2a;
+  position: fixed;
 }
 
 @media (max-width: 730px), (aspect-ratio < 8/12) {
@@ -298,7 +299,6 @@ body {
           margin-top: clamp(0dvh, 100dvh - 85svw, 100dvh);
         }
       }
-
     }
 
     @media (aspect-ratio < 18/10) {
