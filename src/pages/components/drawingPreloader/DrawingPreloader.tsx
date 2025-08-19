@@ -5,18 +5,32 @@ import styles from "./DrawingPreloader.module.scss";
 import useOverlayStore from "../../../utils/store";
 
 const imagesToPreload = [
-  "/svgs/landing/registerBtn.svg",
   "/svgs/logo.svg",
+  "/images/doors/Door1.png",
+  "/images/doors/Door2.png",
+  "/images/doors/Door3.png",
+  "/images/doors/Door4.png",
+  "/videos/ink-spread-4.gif",
+  "/images/landing/back.png",
+  "/images/landing/v.png",
+  "/svgs/landing/hamClouds/cloud1.min.svg",
+  "/svgs/landing/hamClouds/cloud2.min.svg",
+  "/svgs/landing/hamClouds/cloud3.min.svg",
+  "/svgs/landing/hamClouds/cloud4.min.svg",
+  "/svgs/landing/hamClouds/cloud5.min.svg",
+  "/svgs/landing/hamClouds/cloud6.min.svg",
+  "/svgs/landing/insta.svg",
+  "/svgs/landing/linkden.svg",
+  "/svgs/landing/moon1.svg",
+  "/svgs/landing/moonHam.svg",
+  "/svgs/landing/registerBtn.svg",
   "/images/landing/background1.png",
   "/images/landing/tree1.png",
-
   "/videos/ink-spread-4.gif",
-
   "/svgs/landing/insta.svg",
-  "/svgs/landing/twitter.svg",
+  "/svgs/landing/x.svg",
   "/svgs/landing/linkden.svg",
-  "/svgs/landing/socialLinkBg.svg",
-  "/videos/ink-spread-4.gif",
+  "/svgs/landing/wire.svg",
 ];
 
 export default function DrawingPreloader({
@@ -50,7 +64,7 @@ export default function DrawingPreloader({
           resolve(img);
         };
         img.onerror = (err) => {
-          console.error("Image failed to load", err);
+          console.error("Image failed to load", err, img);
           resolve(img); // Optionally resolve to continue progress even if an image fails
         };
         // img.onload = () => {
