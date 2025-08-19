@@ -5,6 +5,30 @@ html {
   scrollbar-width: none;
 }
 
+@media (max-width: 1350px) {
+  html {
+    --registerFontSize: 1.5rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  html {
+    --registerFontSize: 1.25rem;
+  }
+}
+
+@media (max-width: 900px) {
+  html {
+    --registerFontSize: 1.2rem;
+  }
+}
+
+@media (max-width: 800px) {
+  html {
+    --registerFontSize: 1rem;
+  }
+}
+
 body {
   -ms-overflow-style: none;
   background-color: #1a0b2a;
@@ -13,6 +37,21 @@ body {
 .pointerNoneEvent {
   pointer-events: none;
   position: fixed;
+}
+
+@keyframes lantern-swinging-wind {
+  0% {
+    transform: rotate(0deg);
+  }
+  33% {
+    transform: rotate(5deg);
+  }
+  66% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .wrapper {
@@ -31,49 +70,41 @@ body {
       object-position: center;
       position: fixed;
     }
-
-    .cloudContainer {
-      position: absolute;
-      left: 0;
-      bottom: 22svw;
-      will-change: auto;
-
-      .cloud {
-        width: 40svw;
-      }
-    }
-    .sunContainer {
-      position: absolute;
-      right: 28svw;
-      bottom: 25svw;
-      will-change: auto;
-
-      .sun {
-        width: 21svw;
-      }
-    }
-    .smallMountainsContainer {
-      position: absolute;
-      left: 0;
-      bottom: -10svw;
+    .mobileBackground {
+      display: none;
       width: 100%;
-      will-change: auto;
-
-      .smallMountains {
-        width: 100%;
-      }
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      position: fixed;
+      bottom: 0;
+      z-index: -1;
     }
-    .bigMountainContainer {
-      position: absolute;
-      left: 0;
-      bottom: 18svw;
+
+    .mobileMountains {
+      display: none;
       width: 100%;
-      will-change: auto;
+      object-fit: cover;
+      object-position: right;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      height: 70%;
+      margin-bottom: calc(5svw);
+    }
 
-      .bigMountain {
-        width: 100%;
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
+      .mobileMountains {
+        display: block;
+      }
+      .landingImage {
+        display: none;
+      }
+      .mobileBackground {
+        display: block;
       }
     }
+
     .treeContainer {
       position: absolute;
       z-index: 100;
@@ -85,10 +116,7 @@ body {
       will-change: transform;
 
       .tree {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
+        position: relative;
         will-change: transform;
         backface-visibility: hidden;
         transform: translateZ(0);
@@ -96,8 +124,116 @@ body {
         transform-origin: "center right";
         will-change: transform;
         margin-top: clamp(0vh, 100vh - 56.7vw, 100vh);
-        object-fit: contain;
-        object-position: top;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          object-fit: contain;
+          object-position: top;
+          will-change: transform;
+        }
+        .socialLinksContainer {
+          position: absolute;
+          top: 2%;
+          right: 0;
+          height: fit-content;
+          width: fit-content;
+          .wire {
+            position: relative;
+            left: 0;
+            width: 50vw;
+          }
+          .socialLinkContainer {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            animation: lantern-swinging-wind 6s ease-in-out infinite;
+            transform-origin: top center;
+            a {
+              display: grid;
+              grid-template-columns: 1/2;
+              grid-template-rows: 1/2;
+              align-items: center;
+              justify-items: center;
+              width: 6.5vw;
+              .socialIcon {
+                grid-row: 1/2;
+                grid-column: 1/2;
+                z-index: 100;
+                height: fit-content;
+                filter: drop-shadow(5px 5px 2px rgba(0, 0, 0, 0.3));
+                transition: filter 0.1s ease-out;
+              }
+              .socialLamp {
+                grid-row: 1/2;
+                grid-column: 1/2;
+                z-index: 99;
+                width: 100%;
+              }
+              &:hover {
+                .socialIcon {
+                  filter: none;
+                }
+              }
+            }
+          }
+
+          .xDiv {
+            top: 94%;
+            right: 10%;
+            a {
+              .xIcon {
+                width: 33%;
+              }
+            }
+          }
+          .instaDiv {
+            top: 94%;
+            right: 28%;
+            a {
+              .instaIcon {
+                width: 38%;
+                rotate: -12deg;
+                translate: 3px -4px;
+              }
+            }
+          }
+          .linkdenDiv {
+            top: 88%;
+            right: 43%;
+            a {
+              .linkdenIcon {
+                width: 36%;
+                rotate: 8deg;
+                translate: 3px -4px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
+      .treeContainer {
+        .tree {
+          margin-top: clamp(0vh, 100vh - 80vw, 100vh);
+          img {
+            scale: 1.2;
+          }
+        }
+        .socialLinksContainer {
+          display: none;
+        }
+      }
+    }
+
+    @media (max-width: 500px) {
+      .treeContainer {
+        .tree {
+          margin-top: clamp(0vh, 100vh - 85vw, 100vh);
+        }
       }
     }
 
@@ -122,6 +258,14 @@ body {
 
       .logo {
         width: 100%;
+      }
+    }
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
+      .logoContainer {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100px;
+        width: 300px;
       }
     }
 
@@ -219,6 +363,12 @@ body {
         grid-column: 1/2;
         width: 100%;
       }
+      .mobileRegisterBtn {
+        grid-row: 1/2;
+        grid-column: 1/2;
+        width: 100%;
+        display: none;
+      }
       .registerBtnText {
         font-family: $primaryFont;
         font-size: var(--registerFontSize);
@@ -226,6 +376,23 @@ body {
         text-align: center;
         grid-row: 1/2;
         grid-column: 1/2;
+      }
+    }
+
+    @media (aspect-ratio < 8/12), (max-width: 730px) {
+      .registerBtnContainer {
+        width: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        .registerBtn {
+          display: none;
+        }
+        .mobileRegisterBtn {
+          display: block;
+        }
+        .registerBtnText {
+          font-size: 1.5rem;
+        }
       }
     }
   }

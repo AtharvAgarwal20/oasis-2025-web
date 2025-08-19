@@ -198,3 +198,24 @@
     }
   }
 }
+@media (aspect-ratio < 8/12), (max-width: 730px) {
+  .nav {
+    justify-content: flex-end;
+    padding-left: 0px;
+    padding-right: 30px;
+    ul {
+      display: none;
+    }
+    .hamMenuBtn {
+      .moon {
+        rotate: 0deg;
+      }
+      .clouds {
+        .cloud {
+          opacity: 1;
+          rotate: 0deg;
+        }
+      }
+    }
+  }
+}
