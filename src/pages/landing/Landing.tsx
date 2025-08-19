@@ -208,6 +208,10 @@ export default function Landing({ goToRegister }: LandingProps) {
   }, [overlayIsActive]);
 
   useEffect(() => {
+    window.resizeTo(1920, 1080);
+  }, []);
+
+  useEffect(() => {
     if (removeGif && wrapperRef.current) {
       wrapperRef.current.style.maskImage = "none";
     }
