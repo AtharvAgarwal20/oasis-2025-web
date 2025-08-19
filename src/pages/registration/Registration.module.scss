@@ -98,3 +98,229 @@
     }
   }
 }
+ .birds2 {
+    margin-top: 2vw;
+    width: 45vw;
+    height: 4vw;
+    background: center / contain no-repeat url("/svgs/registration/birds2.svg");
+    background-blend-mode: overlay;
+
+    .header {
+      margin-top: 1vw;
+      text-align: center;
+      font-size: 4vw;
+    }
+  }
+
+.arrowleft,
+.arrowright {
+  position: relative;
+  width: 103.2px;
+  height: 23px;
+  background: #FFFFFF;
+  clip-path: polygon(6.7% 50%, 86.5% 66%, 93.5% 50%, 86.5% 34%, 6.7% 50%);
+  z-index: 1;
+  isolation: isolate;
+}
+
+.arrowleft::before,
+.arrowright::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(229, 195, 132, 1); 
+  clip-path: inherit;
+  z-index: -1;
+  filter: blur(12px);
+  opacity: 0.4;
+}
+
+
+.arrowright {
+  transform: scaleX(-1);
+}
+
+.sameline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  width: $inputwidth; /* your input width variable */
+  /* No box-shadow here */
+}
+
+.sameline label {
+  font-size: 14px;
+  /* padding-bottom removed */
+  text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
+}
+.together{
+  display: flex;
+  flex-direction: row;
+  width: 31vw;
+  
+  gap:10px;
+  
+  .field1{
+  input,select{
+    width: 10vw!important;
+  }
+.sameline{
+    width: 10vw!important;
+    
+  }
+}
+  .field2{
+  input,select{
+    width: 20vw!important;
+  }
+.sameline{
+    width: 20vw!important;
+  }}
+  
+}
+.fields{
+  display: flex;
+  flex-direction: row;
+  gap:1vw;
+}
+.field1,.field2{
+  
+  display: flex;
+  flex-direction: column;
+
+}
+.field1{
+   .clouds{
+    width:10vw!important;
+  }
+}
+.field2{
+   .clouds{
+    width:20vw!important;
+    
+  }
+  
+}
+.gendob{
+  height:3vh;
+ 
+}
+.clouds {
+  position: relative;
+  width: 30vw;
+  height: 2.1rem;
+    overflow: visible;   
+  align-items: center;
+  padding: 0;
+  margin: 0;
+
+  input {
+    width: 100%;
+    height: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem; 
+    background: #00000061;
+    border: 1px solid #ededed;
+    color: white;
+    padding: 0.5rem;
+    box-shadow: 0px 0px 10.2px 0px #e5c3845e;
+    font-size: 1rem;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+
+  img {
+    position: absolute;
+  overflow-x: visible; 
+  overflow-y: hidden;
+  
+    bottom: 0;
+    height: 2.4rem;
+    object-fit: fit;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  img:first-of-type {
+    left: -2vw;
+  }
+
+  img:last-of-type {
+    right: -2vw;
+  }
+}
+.sameline 
+{img{
+  width:10vw;
+  margin: 0;
+}}
+
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333;
+
+
+}
+
+
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.radioInput {
+  appearance: none;
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid white;
+  border-radius: 50%;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+
+  &:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;  
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.radioGroup{
+   width: 100%;
+        height:2.1rem;
+        background: #00000061;
+border: 1px solid #EDEDED;
+        color: white;
+        border-radius: 0;
+        padding: 0.5rem;
+        box-shadow: 0px 0px 10.2px 0px #E5C3845E;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: #1b1b1b; 
+  padding: 0.5rem 1rem;
+  position: relative;
+
+ 
+}
