@@ -67,7 +67,6 @@ export default function Landing({ goToRegister }: LandingProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
 
-
   useGSAP(() => {
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
@@ -76,7 +75,6 @@ export default function Landing({ goToRegister }: LandingProps) {
         end: "+=800vh",
         scrub: 1.2,
         pin: `.${styles.treeContainer}`,
-        markers: true,
       },
     });
 
@@ -120,7 +118,7 @@ export default function Landing({ goToRegister }: LandingProps) {
           ease: "sine.in",
         },
         0
-      )
+      );
   }, []);
 
   const [timeLeft, setTimeLeft] = useState({
