@@ -67,7 +67,6 @@ export default function Landing({ goToRegister }: LandingProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
 
-
   useGSAP(() => {
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
@@ -119,7 +118,7 @@ export default function Landing({ goToRegister }: LandingProps) {
           ease: "sine.in",
         },
         0
-      )
+      );
   }, []);
 
   const [timeLeft, setTimeLeft] = useState({
@@ -161,11 +160,15 @@ export default function Landing({ goToRegister }: LandingProps) {
         className={
           !overlayIsActive
             ? `${styles.pointerNoneEvent} ${styles.wrapper}`
-            : styles.wrapper
+            : `${styles.wrapper} ${styles.mask} `
         }
         ref={wrapperRef}
       >
-        <div className={styles.landing}>
+        <div
+          className={
+            overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
+          }
+        >
           <img
             src={landingImage}
             className={styles.landingImage}

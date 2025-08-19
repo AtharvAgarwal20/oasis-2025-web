@@ -39,7 +39,6 @@ export default function DrawingPreloader({
   className?: string;
   onEnter?: () => void;
 }) {
-  const overlayIsActive = useOverlayStore((state: any) => state.isActive);
   const overlaySetActive = useOverlayStore((state: any) => state.setActive);
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -158,10 +157,7 @@ export default function DrawingPreloader({
   // }, []);
 
   return (
-    <div
-      className={overlayIsActive ? styles.sketchOverlay : styles.overlay}
-      ref={svgContainerRef}
-    >
+    <div className={styles.overlay} ref={svgContainerRef}>
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"
