@@ -66,9 +66,25 @@ export default function Landing({ goToRegister }: LandingProps) {
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
+  const registerButtonRef = useRef<HTMLDivElement>(null);
   const [removeGif, setRemoveGif] = useState(false);
 
   useGSAP(() => {
+    gsap.fromTo(
+      registerButtonRef.current,
+      { autoAlpha: 1 },
+      {
+        autoAlpha: 0,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "400vh",
+          end: "+=300vh",
+          scrub: true,
+        },
+      }
+    );
+
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperRef.current,
@@ -131,6 +147,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         },
         0
       );
+      
   }, []);
 
   useEffect(() => {
@@ -293,7 +310,11 @@ export default function Landing({ goToRegister }: LandingProps) {
             </div>
           </div>
 
-          <div className={styles.registerBtnContainer} onClick={goToRegister}>
+          <div
+            className={styles.registerBtnContainer}
+            onClick={goToRegister}
+            ref={registerButtonRef}
+          >
             <img
               src={registerBtn}
               className={styles.registerBtn}
