@@ -158,10 +158,7 @@ export default function DrawingPreloader({
   // }, []);
 
   return (
-    <div
-      className={overlayIsActive ? styles.sketchOverlay : styles.overlay}
-      ref={svgContainerRef}
-    >
+    <div className={styles.overlay} ref={svgContainerRef}>
       <svg
         version="1.0"
         xmlns="http://www.w3.org/2000/svg"

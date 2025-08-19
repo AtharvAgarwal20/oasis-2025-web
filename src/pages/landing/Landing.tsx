@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -158,11 +158,15 @@ export default function Landing({ goToRegister }: LandingProps) {
         className={
           !overlayIsActive
             ? `${styles.pointerNoneEvent} ${styles.wrapper}`
-            : styles.wrapper
+            : `${styles.wrapper} ${styles.mask} `
         }
         ref={wrapperRef}
       >
-        <div className={styles.landing}>
+        <div
+          className={
+            overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
+          }
+        >
           <img
             src={landingImage}
             className={styles.landingImage}
