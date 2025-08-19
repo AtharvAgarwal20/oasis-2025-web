@@ -40,6 +40,12 @@ body {
   background-color: #1a0b2a;
 }
 
+@media (max-width: 730px), (aspect-ratio < 8/12) {
+  body {
+    background-color: #be5964;
+  }
+}
+
 .pointerNoneEvent {
   pointer-events: none;
   position: fixed;
@@ -358,6 +364,7 @@ body {
 
     @media (aspect-ratio < 8/12), (max-width: 730px) {
       .dateCountdown {
+        z-index: 50;
         display: flex;
         top: 290px;
         left: 50%;
