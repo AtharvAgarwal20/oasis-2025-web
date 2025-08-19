@@ -9,12 +9,20 @@ import Navbar from "../components/navbar/Navbar";
 import tree from "/images/landing/tree1.png";
 import landingImage from "/images/landing/background1.png";
 import registerBtn from "/svgs/landing/registerBtn.svg";
+import mobileRegisterBtn from "/svgs/landing/mobileRegisterBtn.svg";
 import logo from "/svgs/logo.svg";
 import insta from "/svgs/landing/insta.svg";
-import twitter from "/svgs/landing/twitter.svg";
-import linkedin from "/svgs/landing/linkden.svg";
-import socialLinksBg from "/svgs/landing/socialLinkBg.svg";
+import instaLamp from "/svgs/landing/instaLamp.svg";
+import x from "/svgs/landing/x.svg";
+import xLamp from "/svgs/landing/xLamp.svg";
+import linkden from "/svgs/landing/linkden.svg";
+import linkdenLamp from "/svgs/landing/linkdenLamp.svg";
+import wire from "/svgs/landing/wire.svg";
+import mobileMountains from "/images/landing/mobileMountains.png";
+import mobileBackground from "/svgs/landing/mobileBackground.svg";
 import { useGSAP } from "@gsap/react";
+import { i } from "framer-motion/client";
+i;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,15 +30,27 @@ gsap.registerPlugin(ScrollTrigger);
 
 const socialLinks = [
   {
-    icon: twitter,
+    icon: x,
+    lamp: xLamp,
+    classNameDiv: styles.xDiv,
+    classNameLamp: styles.xLamp,
+    classNameIcon: styles.xIcon,
     url: "https://x.com/bitsoasis",
   },
   {
-    icon: linkedin,
+    icon: linkden,
+    lamp: linkdenLamp,
+    classNameDiv: styles.linkdenDiv,
+    classNameLamp: styles.linkdenLamp,
+    classNameIcon: styles.linkdenIcon,
     url: "https://www.linkedin.com/company/oasis24-bits-pilani/",
   },
   {
     icon: insta,
+    lamp: instaLamp,
+    classNameDiv: styles.instaDiv,
+    classNameLamp: styles.instaLamp,
+    classNameIcon: styles.instaIcon,
     url: "https://www.instagram.com/bitsoasis/",
   },
 ];
@@ -148,18 +168,61 @@ export default function Landing({ goToRegister }: LandingProps) {
             className={styles.landingImage}
             ref={landingRef}
           />
+
+          <img
+            src={mobileMountains}
+            className={styles.mobileMountains}
+            alt=""
+          />
+          <img
+            src={mobileBackground}
+            alt=""
+            className={styles.mobileBackground}
+          />
+
           <Navbar />
 
           <div className={styles.treeContainer}>
-            <img
-              src={tree}
-              className={styles.tree}
-              alt=""
-              ref={treeImageRef}
-              loading="eager"
-              fetchPriority="high"
-              style={{ contain: "none" }}
-            />
+            <div className={styles.tree} ref={treeImageRef}>
+              <div className={styles.socialLinksContainer}>
+                <div className={styles.wire}>
+                  <img src={wire} alt="" />
+                </div>
+                {socialLinks.map((link, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                  >
+                    <a
+                      key={index}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.socialLink}
+                    >
+                      <img
+                        src={link.icon}
+                        alt=""
+                        className={`${styles.socialIcon} ${link.classNameIcon}`}
+                      />
+                      <img
+                        src={link.lamp}
+                        alt=""
+                        className={`${styles.socialLamp} ${link.classNameLamp}`}
+                      />
+                    </a>
+                  </div>
+                ))}
+              </div>
+              <img
+                src={tree}
+                // className={styles.tree}
+                alt=""
+                loading="eager"
+                fetchPriority="high"
+                style={{ contain: "none" }}
+              />
+            </div>
           </div>
           <div className={styles.logoContainer}>
             <img src={logo} className={styles.logo} alt="Logo" />
@@ -198,29 +261,17 @@ export default function Landing({ goToRegister }: LandingProps) {
               MINUTES
             </div>
           </div> */}
-          <div className={styles.socialLinksContainer}>
-            <div className={styles.linkBackground}>
-              <img src={socialLinksBg} alt="" />
-            </div>
-            <div className={styles.socialLinks}>
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  <img src={link.icon} alt="" />
-                </a>
-              ))}
-            </div>
-          </div>
+
           <div className={styles.registerBtnContainer} onClick={goToRegister}>
             <img
               src={registerBtn}
               className={styles.registerBtn}
               alt="Register"
+            />
+            <img
+              src={mobileRegisterBtn}
+              className={styles.mobileRegisterBtn}
+              alt=""
             />
             <div className={styles.registerBtnText}>Register</div>
           </div>

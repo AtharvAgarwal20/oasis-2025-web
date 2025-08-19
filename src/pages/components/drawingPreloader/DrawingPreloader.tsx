@@ -11,7 +11,6 @@ const imagesToPreload = [
   "/images/doors/Door3.png",
   "/images/doors/Door4.png",
   "/videos/ink-spread-4.gif",
-  // "/images/landing/tree.png",
   "/images/landing/back.png",
   "/images/landing/v.png",
   "/svgs/landing/hamClouds/cloud1.min.svg",
@@ -29,9 +28,9 @@ const imagesToPreload = [
   "/images/landing/tree1.png",
   "/videos/ink-spread-4.gif",
   "/svgs/landing/insta.svg",
-  "/svgs/landing/twitter.svg",
+  "/svgs/landing/x.svg",
   "/svgs/landing/linkden.svg",
-  "/svgs/landing/socialLinkBg.svg",
+  "/svgs/landing/wire.svg",
 ];
 
 export default function DrawingPreloader({
