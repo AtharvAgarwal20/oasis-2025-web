@@ -10,6 +10,45 @@ $inputheight:10vh;
   z-index: 3;
   outline: none;
   border: none;
+  cursor: pointer;
+  margin: 2vw 0;
+  background: center / cover no-repeat
+    url("/public/images/registration/button-banner.png");
+  padding: 1vw;
+  color: #fff;
+  font: 100 1.5vw "Abhaya Libre Extrabold";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 22vw;
+
+  .confirmIcon {
+    width: 7vw;
+    height: 0.5vw;
+    &:last-child {
+      rotate: 180deg;
+    }
+  }
+}
+
+.registerContainer {
+  display: none;
+  opacity: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 43vw;
+}
+
+.confirmButton {
+  position: absolute;
+  bottom: 2vw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  outline: none;
+  border: none;
   text-align: center;
   cursor: pointer;
   margin: 2vw 0;
@@ -75,6 +114,7 @@ $inputheight:10vh;
   }
 
   .formColumns {
+    z-index: 4;
     z-index: 4;
     display: flex;
     flex-wrap: wrap;
@@ -318,6 +358,33 @@ text-align: left;
   }
 }
 
+.arrowleft,
+.arrowright {
+  position: relative;
+  width: 103.2px;
+  height: 23px;
+  background: #ffffff;
+  clip-path: polygon(6.7% 50%, 86.5% 66%, 93.5% 50%, 86.5% 34%, 6.7% 50%);
+  z-index: 3;
+  isolation: isolate;
+}
+
+.arrowleft::before,
+.arrowright::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(229, 195, 132, 1);
+  clip-path: inherit;
+  // z-index: -1;
+  filter: blur(12px);
+  opacity: 0.4;
+}
+
+.arrowright {
+  transform: scaleX(-1);
+}
+
 .sameline {
   font-size: 0.8rem;
   display: flex;
@@ -392,6 +459,22 @@ text-align: left;
   img {
     width: 7vw;
   }
+}
+
+.radioLabel {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
 }
 
 .radioGroup {
