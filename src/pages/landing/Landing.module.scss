@@ -151,17 +151,15 @@ body {
       max-width: 100svw;
       overflow: hidden;
       will-change: transform;
-      opacity: 1;
-      visibility: visible;
-      contain: layout style paint;
 
       .tree {
         position: relative;
         will-change: transform;
         backface-visibility: hidden;
-        transform: translate3d(0, 0, 0);
+        transform: translateZ(0);
         transition: transform 0.1s ease-out;
-        transform-origin: center right;
+        transform-origin: "center right";
+        will-change: transform;
         margin-top: clamp(0dvh, 100dvh - 56.7svw, 100dvh);
         opacity: 1;
         visibility: visible;
