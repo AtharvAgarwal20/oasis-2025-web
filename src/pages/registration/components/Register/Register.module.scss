@@ -154,7 +154,6 @@ $inputheight:10vh;
 
 
 
-
 }
   .left,
   .right {
@@ -184,7 +183,6 @@ $inputheight:10vh;
   white-space: nowrap;
 }
 
-
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -206,24 +204,27 @@ $inputheight:10vh;
 margin-left: 4.5vw;
   }
   .referral{
+    width: 8vw;
     .sameline{
-      width: 18vw;
+      width: 8vw;
     }
     .clouds{
-      width:18vw;
+      width: 8vw;
       input{
-        width: 18vw;
+        margin: 0;
+        width: 8vw;
       }
     }
   }
     .radioInput {
       appearance: none;
-      width: 18px !important;
-      height: 18px !important;
+      width: 9px !important;
+      height: 9px !important;
       border: 2px solid white;
       border-radius: 50%;
       position: relative;
       outline: none;
+      margin: 0!important;
       cursor: pointer;
       background-color: transparent;
       transition: border-color 0.3s ease;
@@ -253,7 +254,6 @@ margin-left: 4.5vw;
     input,
     select {
       text-align: center;
-      width: 30vw;
       font-size: 0.8rem;
       height: 2.1rem;
       background: transparent;
@@ -276,7 +276,7 @@ select {
   option {
     background-color: #2e0505;
     color: white;
-    width: 30vw;
+    width: 15vw;
     font-size: 1rem;
     text-align: center;
   }
@@ -286,6 +286,22 @@ select {
 width: 1vw;
 font-size: 1rem;
 text-align: left;
+  }
+  .clouds{
+    background:center/contain url("/svgs/registration/genderborder.svg");
+    
+   background-repeat: no-repeat;
+  }
+}
+.referral{
+  .cloudss{
+     background:center/contain url("/svgs/registration/referralborder.svg");
+    scale:1.4;
+   background-repeat: no-repeat;
+  }
+  input{
+    margin: 0!important;
+    width: 8vw;
   }
 }
 .birds2 {
@@ -301,7 +317,6 @@ text-align: left;
     font-size: 4vw;
   }
 }
-
 
 .sameline {
   font-size: 0.8rem;
@@ -329,19 +344,21 @@ text-align: left;
 }
 
 .clouds {
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
+ background: right/contain url("/svgs/registration/bord.svg");
+ scale:1.8;
+ background-repeat: no-repeat;
   height: 2.3rem;
   position: relative;
-  width: 30vw;
+  width: 19.2vw;
   overflow: visible;
   align-items: center;
   padding: 0;
   margin: 0;
 
   input {
-    width: 100%;
+    width: 50%;
+    
+    margin: 0 7.5vw 0 7.5vw !important;
     padding-left: 3.1rem;
     padding-right: 3.1rem;
     color: white;
@@ -377,14 +394,13 @@ text-align: left;
   }
 }
 
-
 .radioGroup {
+  margin-left: 7vw;
   padding-left: 3.1rem;
   padding-right: 3.1rem;
-  width: 100%;
+  width:50%;
   height: 2.2rem;
   background: transparent;
-  border: 1px solid #ededed;
   color: white;
   border-radius: 0;
   box-shadow: 0px 0px 10.2px 0px #e5c3845e;
@@ -400,7 +416,7 @@ text-align: left;
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 1.2rem;
+  font-size: 0.6rem;
   color: white;
   
   cursor: pointer;
@@ -572,7 +588,6 @@ input::placeholder {
   margin: 0 !important;
 }
 
-
 /*
 @media (max-aspect-ratio:1.4){
    .left,.right{
@@ -668,3 +683,5 @@ input{
   }
 }
   }
+
+
