@@ -242,7 +242,7 @@ const Events = forwardRef<
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0_350_4)">
+                    <g clipPath="url(#clip0_350_4)">
                       <rect
                         y="0.551514"
                         width="573"
@@ -289,7 +289,7 @@ const Events = forwardRef<
                       d="M256 74.3823C257.048 78.5084 262.605 87.2106 270.153 84.5099C277.142 98.0134 298.983 98.0134 306.322 84.5099C310.515 84.5099 317.435 81.5842 317.854 74.3823H296.362L287.5 84.51L278.016 74.3823H256Z"
                       fill="#181818"
                       stroke="#E2DCCB"
-                      stroke-width="0.7"
+                      strokeWidth="0.7"
                     />
                     <path
                       d="M287.484 84.01L296.347 74.0099L287.484 64.103L278 73.8823L287.484 84.01Z"
@@ -299,7 +299,7 @@ const Events = forwardRef<
                           : "#E2DCCB"
                       }`}
                       stroke="#E2DCCB"
-                      stroke-width="0.7"
+                      strokeWidth="0.7"
                     />
                     <defs>
                       <clipPath id="clip0_350_4">
