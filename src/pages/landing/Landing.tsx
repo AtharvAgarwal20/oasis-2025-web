@@ -64,13 +64,13 @@ export default function Landing({ goToRegister }: LandingProps) {
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
   const setRemoveGif = useOverlayStore((state) => state.setRemoveGif);
-  const treeImageRef = useRef<HTMLImageElement>(null);
+  const treeImageRef = useRef<HTMLDivElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
   const registerButtonRef = useRef<HTMLDivElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
-  const treeContainerRef = useRef<HTMLDivElement>(null);
+  // const treeContainerRef = useRef<HTMLDivElement>(null);
   const aboutUsRef = useRef<HTMLDivElement>(null);
   const bottomContentRef = useRef<HTMLDivElement>(null);
 
@@ -201,12 +201,12 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-50%",
+            y: "-80%",
             scale: 1.4,
             duration: 12,
             ease: "sine.in",
           },
-          3
+          3.2
         )
 
         .to(
@@ -236,7 +236,7 @@ export default function Landing({ goToRegister }: LandingProps) {
     if (overlayIsActive) {
       setTimeout(() => {
         setRemoveGif();
-      }, 4000);
+      }, 3000);
     }
   }, [overlayIsActive]);
 
@@ -314,8 +314,8 @@ export default function Landing({ goToRegister }: LandingProps) {
 
             <Navbar />
 
-            <div className={styles.treeContainer} ref={treeContainerRef}>
-              <div className={styles.tree} ref={treeImageRef}>
+            <div className={styles.treeContainer} ref={treeImageRef}>
+              <div className={styles.tree} >
                 <div className={styles.socialLinksContainer}>
                   <div className={styles.wire}>
                     <img src={wire} alt="" />
@@ -359,10 +359,10 @@ export default function Landing({ goToRegister }: LandingProps) {
                 <div className={styles.dummyAboutUs} ref={aboutUsRef} /> {/* replace this with actual about us and give it the required ref */}
                 {
                   // Don't render contact doors until the refs are set
-                  treeContainerRef.current && aboutUsRef.current &&
+                  treeImageRef.current && aboutUsRef.current &&
                   <ContactDoors
                     aboutUsRef={aboutUsRef} 
-                    treeContRef={treeContainerRef}
+                    treeContRef={treeImageRef}
                     bottomContentRef={bottomContentRef}
                   />
                 }

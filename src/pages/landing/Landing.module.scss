@@ -276,9 +276,9 @@ body {
         background-size: cover;
         background-position: center;
         width: 100vw;
-        height: 50vw;
-        position: absolute;
-        bottom: 0;
+        height: 70vh;
+        position: relative;
+        transform: translateY(-1vh);
         left: 0;
       }
     }
@@ -503,7 +503,7 @@ body {
     }
   }
   &.mask {
-    mask-image: url("/videos/ink-spread-2.gif");
+    mask-image: url("/videos/ink-spread-5.gif");
     mask-repeat: no-repeat;
     mask-size: cover;
     mask-position: center;
