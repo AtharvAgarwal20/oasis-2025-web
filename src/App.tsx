@@ -31,10 +31,9 @@ export default function App() {
   >("idle");
 
   const [isPreloading, setIsPreloading] = useState(
-    location.pathname !== "/" // preload for non-home routes
+    location.pathname !== "/"
   );
 
-  // keep track of the route we are going to
   const nextRoute = useRef<string | null>(null);
 
   useEffect(() => {
@@ -58,8 +57,7 @@ export default function App() {
     setDoorPhase("waiting");
 
     if (nextRoute.current) {
-      // navigate to the stored route after doors close
-      navigate(nextRoute.current, { state: { startAnimation: true } });
+     navigate(nextRoute.current, { state: { startAnimation: true } });
     }
 
     setTimeout(() => {
@@ -69,10 +67,9 @@ export default function App() {
 
   const handleDoorsOpened = () => {
     setDoorPhase("idle");
-    nextRoute.current = null; // reset
+    nextRoute.current = null; 
   };
 
-  // Call this when user clicks navigation
   const goToPage = (path: string) => {
     if (location.pathname !== path) {
       nextRoute.current = path;

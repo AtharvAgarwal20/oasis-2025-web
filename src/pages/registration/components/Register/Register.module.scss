@@ -89,7 +89,7 @@ $inputheight: 10vh;
       .fields {
         display: flex;
         flex-direction: row;
-        gap: 2vw;
+        gap: 3vw;
       }
 
       .field1,
@@ -99,6 +99,15 @@ $inputheight: 10vh;
       }
 
       .field1 {
+        width: 10vw;
+        .clouds{
+          position: relative;
+          
+          img{
+            width: 130%;
+            padding-top: 2.5vw;
+          }
+        }
         input,
         select,
         .selection {
@@ -264,6 +273,17 @@ $inputheight: 10vh;
       margin: 0.2rem 0 0 0;
     }
   }
+  .right{
+    .clouds{
+      img{
+    padding-top:3.5vw;
+      }
+          fieldset {
+    border: none;
+    box-shadow: none;
+      }
+    }
+  }
 }
 
 select {
@@ -278,6 +298,7 @@ select {
   }
 }
 .field1 {
+
   option {
     width: 1vw;
     font-size: 1rem;
@@ -324,9 +345,6 @@ select {
 }
 
 .clouds {
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
   height: 2.3rem;
   position: relative;
   width: 30vw;
@@ -344,16 +362,21 @@ select {
     font-size: 1rem;
     z-index: 3;
     box-sizing: border-box;
+   &:focus{
+    outline: none;
+    box-shadow: none;
+   } 
   }
+  
 
   img {
     position: absolute;
     overflow-x: visible;
     overflow-y: hidden;
-
-    bottom: 0;
-    height: 2.4rem;
-    object-fit: fit;
+    display: flex;
+    align-self: center;
+    width: 100%;
+    object-fit: contain;
     pointer-events: none;
     z-index: 3;
   }
@@ -373,16 +396,16 @@ select {
 }
 
 .radioGroup {
+
+
   padding-left: 3.1rem;
   padding-right: 3.1rem;
   width: 100%;
   height: 2.2rem;
   background: transparent;
-  border: 1px solid #ededed;
+  box-shadow: none;
   color: white;
   border-radius: 0;
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -415,7 +438,6 @@ input::placeholder {
   border: 1px solid #ededed;
   color: white;
   padding: 0.5rem;
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
   cursor: pointer;
 
   width: 30vw;
@@ -433,14 +455,12 @@ input::placeholder {
   text-align: center;
 }
 .react-select__control--is-focused {
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-
+  
   width: 30vw;
   border-color: #ededed;
 }
 .react-select__menu {
   border-radius: 10px;
-  box-shadow: 0px 0px 10px #e5c3845e;
   margin-top: 0;
   width: 30vw;
   overflow: hidden;
@@ -456,7 +476,6 @@ input::placeholder {
   border: 1px solid #ededed;
   color: white;
   padding: 0;
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
   cursor: pointer;
 }
 

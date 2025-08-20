@@ -12,7 +12,7 @@ export default function Homepage({ goToPage }: HomepageProps) {
         <DrawingPreloader />
       </div>
       <div style={{ zIndex: 50, position: "relative" }}>
-        {/* Pass goToPage instead of goToRegister */}
+    
         <Landing goToPage={goToPage} />
       </div>
     </div>

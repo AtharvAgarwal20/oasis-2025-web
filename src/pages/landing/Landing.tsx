@@ -250,7 +250,6 @@ export default function Landing({ goToPage }: LandingProps) {  const overlayIsAc
           </div> */}
           <div className={styles.socialLinksContainer}>
             <div className={styles.linkBackground}>
-              <img src={socialLinksBg} alt="" />
             </div>
             <div className={styles.socialLinks}>
               {socialLinks.map((link, index) => (
