@@ -70,12 +70,14 @@ export default function App() {
     nextRoute.current = null; 
   };
 
-  const goToPage = (path: string) => {
-    if (location.pathname !== path) {
-      nextRoute.current = path;
-      setDoorPhase("closing");
-    }
-  };
+  const goToRegister = () => {
+  const path = "/register";
+  if (location.pathname !== path) {
+    nextRoute.current = path;
+    setDoorPhase("closing");
+  }
+};
+
 
   const handlePreloaderEnter = () => {
     setIsPreloading(false);
@@ -93,7 +95,7 @@ export default function App() {
       {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
 
       {!isPreloading && currentPage === "home" && (
-        <Homepage goToPage={goToPage} />
+        <Homepage goToRegister={goToRegister} />
       )}
       {!isPreloading && currentPage === "register" && (
         <Registration

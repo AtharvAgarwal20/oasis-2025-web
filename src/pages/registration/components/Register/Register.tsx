@@ -15,6 +15,7 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 import Refer from "/svgs/registration/field4.svg"
 import Gen from "/svgs/registration/field3.svg"
+import { head } from "framer-motion/client";
 interface StateItem {
   state: string;
   cities: string[];
@@ -64,9 +65,10 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
     useEffect(() => {
       axios
         .get(
-          "https://merge.bits-oasis.org/2025/main/registrations/get_college/"
+          "https://bits-oasis.org/2025/main/registrations/get_college/"
         )
         .then((response) => {
+          console.log(response)
           setCollegeOptions(
             response.data.data.map((college: { id: number; name: string }) => ({
               value: String(college.id),
@@ -120,7 +122,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       );
       return [...startsWith, ...contains];
     };
-    const isMobile = window.innerWidth < 720;
+    const isMobile = window.innerWidth < 1200 && (window.innerWidth/window.innerHeight)<0.75
      const customStyles = {
       noOptionsMessage: (provided: any) => ({
         ...provided,
@@ -133,6 +135,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         paddingLeft: 0,
         paddingRight: 0,
+        
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -140,6 +143,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         outline: "none",
         background: "transparent",
         border: "none",
+        paddingBottom: isMobile ? "5vw" : "0vw",
       }),
       menuList: (provided: any) => ({
         ...provided,
@@ -154,8 +158,9 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         color: "white",
         textAlign: "center",
-        height: "5vh",
+        height: "2vw",
         paddingLeft: "30%",
+        paddingTop:"5vw"
       }),
       input: (provided: any) => ({
         ...provided,
@@ -173,15 +178,15 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         width: "100%",
         textAlign: "center",
         color: "white",
-        padding: 0,
         margin: 0,
         zIndex:"5",
+        
         whiteSpace: "nowrap",
       }),
       menu: (provided: any) => ({
         ...provided,
         marginTop: 0,
-        width: isMobile ? "50vw" : "30vw",
+        width: isMobile ? "80vw" : "30vw",
         borderRadius: "10px",
         overflow: "hidden",
         zIndex: 10,
@@ -196,7 +201,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         width: "100%",
         padding: 0,
-        height: "4vh",
+        height: "3vw",
         background: "transparent",
         color: "white",
         display: "flex",
@@ -228,6 +233,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         background: "transparent",
         border: "none",
         height: "2.3rem",
+        
+        width:isMobile ? "33.6vw":"100%",
       }),
       menuList: (provided: any) => ({
         ...provided,
@@ -245,12 +252,16 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         height: "2.3rem",
          zIndex:"5",
         paddingLeft: 0,
+        
+        width:isMobile ? "33.6vw":"100%",
       }),
       input: (provided: any) => ({
         ...provided,
         textAlign: "center",
         padding: 0,
         margin: 0,
+        
+        width:isMobile ? "33.6vw":"100%",
         color: "white",
       }),
       placeholder: (provided: any, state: any) => ({
@@ -261,14 +272,14 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             : "block",
         color: "white",
         zIndex:"5",
-        textAlign: "left",
-        paddingLeft: "10%",
+        width:isMobile ? "33.6vw":"100%",
+        textAlign: "center",
       }),
 
       menu: (provided: any) => ({
         ...provided,
         marginTop: 0,
-        width: isMobile ? "50vw" : "12.6vw",
+        width: isMobile ? "33.6vw" : "12.6vw",
         borderRadius: "10px",
         overflow: "hidden",
         zIndex: 10,
