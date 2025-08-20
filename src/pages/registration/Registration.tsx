@@ -15,6 +15,7 @@ import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Back from "/svgs/registration/back.svg";
+import { useNavigate } from "react-router-dom";
 
 interface RegistrationProps {
   startAnimation: boolean; // only start animation after door opens
@@ -39,6 +40,8 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   const elemRef2 = useRef<HTMLDivElement>(null);
   const elemRef3 = useRef<HTMLDivElement>(null);
   const sunRef = useRef<HTMLImageElement>(null);
+
+  const navigate = useNavigate();
 
   const toFirstPage = () => {
     const mm = gsap.matchMedia();
@@ -266,7 +269,8 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   const backButtonHandler = () => {
     switch (currentPage) {
       case 1:
-        return;
+        navigate("/");
+        break;
       case 2:
         console.log("Navigating back to the first page");
         toFirstPage();
@@ -327,9 +331,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
       <button
         disabled={isAnim}
         onClick={backButtonHandler}
-        className={
-          styles.backBtn + " " + (currentPage === 1 ? styles.inActive : "")
-        }
+        className={styles.backBtn}
       >
         <img src={Back} alt="" style={{ width:isMobile?"10vw": "4vw", height: "auto" }} />
       </button>
