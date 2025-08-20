@@ -89,7 +89,7 @@ $inputheight: 10vh;
       .fields {
         display: flex;
         flex-direction: row;
-        gap: 3vw;
+        gap: 0;
       }
 
       .field1,
@@ -99,23 +99,33 @@ $inputheight: 10vh;
       }
 
       .field1 {
-        width: 10vw;
+        width: 12.6vw;
+        .sameline{
+          width: 100%;
+          label{
+          text-align: center;
+          }
+        }
         .clouds {
           position: relative;
 
           img {
-            width: 130%;
-            padding-top: 2.5vw;
+            width: 12.6vw;
+            height: auto;
+            position: absolute;
+            object-fit: contain;
+            align-self:baseline;
           }
         }
         input,
         select,
         .selection {
-          width: 10vw;
+          width: 12.6vw;
+          padding-top: 1vw;
         }
 
         .selection {
-          width: 10vw;
+          width: 13vw;
 
           // Normal + focused state control
           .Select__control,
@@ -223,6 +233,8 @@ $inputheight: 10vh;
     }
     .radioInput {
       appearance: none;
+      
+  padding: 0 ;
       width: 18px !important;
       height: 18px !important;
       border: 2px solid white;
@@ -260,6 +272,7 @@ $inputheight: 10vh;
       height: 2.1rem;
       background: transparent;
       border: 0;
+      padding-top: 2vw;
       color: white;
     }
 
@@ -270,6 +283,7 @@ $inputheight: 10vh;
       margin: 0.2rem 0 0 0;
     }
   }
+
   .right {
     .clouds {
       img {
@@ -370,11 +384,11 @@ select {
     overflow-x: visible;
     overflow-y: hidden;
     display: flex;
-    align-self: center;
+   //align-self: center;
     width: 100%;
     object-fit: contain;
     pointer-events: none;
-    z-index: 3;
+    z-index: -2;
   }
 
   img:first-of-type {
@@ -383,6 +397,21 @@ select {
 
   img:last-of-type {
     right: 0;
+  }
+}
+.right{
+  .clouds{
+    img{
+        position: absolute;
+    overflow-x: visible;
+    overflow-y: hidden;
+    display: flex;
+   align-self: center;
+    width: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: -2;
+    }
   }
 }
 .sameline {
@@ -395,6 +424,7 @@ select {
   padding-left: 3.1rem;
   padding-right: 3.1rem;
   width: 100%;
+  z-index: 5;
   height: 2.2rem;
   background: transparent;
   box-shadow: none;
@@ -486,7 +516,6 @@ input::placeholder {
 }
 input {
   text-align: center !important;
-  padding: 0 !important;
   margin: 0 !important;
   caret-color: white;
 }

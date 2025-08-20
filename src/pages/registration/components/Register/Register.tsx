@@ -121,7 +121,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
       return [...startsWith, ...contains];
     };
     const isMobile = window.innerWidth < 720;
-    const customStyles = {
+     const customStyles = {
       noOptionsMessage: (provided: any) => ({
         ...provided,
         color: "white",
@@ -163,6 +163,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         padding: 0,
         margin: 0,
         color: "white",
+        zIndex:"5",
       }),
       placeholder: (provided: any) => ({
         ...provided,
@@ -174,6 +175,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         color: "white",
         padding: 0,
         margin: 0,
+        zIndex:"5",
         whiteSpace: "nowrap",
       }),
       menu: (provided: any) => ({
@@ -241,6 +243,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         color: "white",
         textAlign: "center",
         height: "2.3rem",
+         zIndex:"5",
         paddingLeft: 0,
       }),
       input: (provided: any) => ({
@@ -257,14 +260,15 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
             ? "none"
             : "block",
         color: "white",
-        textAlign: "justify",
-        paddingLeft: "40%",
+        zIndex:"5",
+        textAlign: "left",
+        paddingLeft: "10%",
       }),
 
       menu: (provided: any) => ({
         ...provided,
         marginTop: 0,
-        width: isMobile ? "50vw" : "10vw",
+        width: isMobile ? "50vw" : "12.6vw",
         borderRadius: "10px",
         overflow: "hidden",
         zIndex: 10,
