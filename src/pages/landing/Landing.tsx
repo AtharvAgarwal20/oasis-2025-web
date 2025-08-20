@@ -22,6 +22,7 @@ import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
+import mobileCloud from "/images/landing/mobileCloud.png";
 i;
 
 gsap.registerPlugin(ScrollTrigger);
@@ -55,7 +56,11 @@ const socialLinks = [
   },
 ];
 
-export default function Landing({ goToPage }: { goToPage: (path: string) => void }) {
+export default function Landing({
+  goToPage,
+}: {
+  goToPage: (path: string) => void;
+}) {
   //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
@@ -305,9 +310,11 @@ export default function Landing({ goToPage }: { goToPage: (path: string) => void
               className={styles.mobileBackground}
             />
 
+            <img src={mobileCloud} className={styles.mobileCloud} />
+
             <Navbar />
 
-            <div className={styles.treeContainer}  ref={treeImageRef}>
+            <div className={styles.treeContainer} ref={treeImageRef}>
               <div className={styles.tree}>
                 <div className={styles.socialLinksContainer}>
                   <div className={styles.wire}>
@@ -390,7 +397,7 @@ export default function Landing({ goToPage }: { goToPage: (path: string) => void
 
             <div
               className={styles.registerBtnContainer}
-              onClick={()=>goToPage("/register")}
+              onClick={() => goToPage("/register")}
               ref={registerButtonRef}
             >
               <img
