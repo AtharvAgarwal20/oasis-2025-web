@@ -6,6 +6,8 @@ import styles from "./Events.module.scss";
 
 import thumb from "/svgs/registration/scrollThumb.svg";
 import ScrollBar from "/svgs/registration/scroll-bar.svg";
+import Left from "/svgs/registration/leftarr.svg";
+import Right from "/svgs/registration/rightarr.svg";
 
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { useGSAP } from "@gsap/react";
@@ -179,23 +181,23 @@ const Events = forwardRef<
     document.removeEventListener("touchend", handlewheelDragEnd);
   };
 
-  const handleTrackSnap = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!mainContainerRef.current || !scrollBarRef.current) return;
-    const mainWrapperElement = mainContainerRef.current;
-    const scrollBarContainer = scrollBarRef.current;
+  // const handleTrackSnap = (e: React.MouseEvent | React.TouchEvent) => {
+  //   if (!mainContainerRef.current || !scrollBarRef.current) return;
+  //   const mainWrapperElement = mainContainerRef.current;
+  //   const scrollBarContainer = scrollBarRef.current;
 
-    const percentage =
-      (("touches" in e ? e.touches[0].clientY : e.clientY) /
-        scrollBarContainer.clientHeight) *
-      100;
-    const maxScrollTopValue =
-      mainWrapperElement.scrollHeight - mainWrapperElement.clientHeight;
+  //   const percentage =
+  //     (("touches" in e ? e.touches[0].clientY : e.clientY) /
+  //       scrollBarContainer.clientHeight) *
+  //     100;
+  //   const maxScrollTopValue =
+  //     mainWrapperElement.scrollHeight - mainWrapperElement.clientHeight;
 
-    mainWrapperElement.scrollTo({
-      top: (percentage / 100) * maxScrollTopValue,
-      behavior: "smooth",
-    });
-  };
+  //   mainWrapperElement.scrollTo({
+  //     top: (percentage / 100) * maxScrollTopValue,
+  //     behavior: "smooth",
+  //   });
+  // };
 
   const handleSubmit = () => {
     setUserData((prevData: any) => ({
@@ -208,7 +210,11 @@ const Events = forwardRef<
   return (
     <>
       <div className={styles.eventsContainer} ref={ref}>
-        <h1 className={styles.heading}>CHOOSE EVENTS</h1>
+        <div className={styles.headingCont}>
+          <img src={Left} alt="left" />
+          <h1 className={styles.heading}>CHOOSE EVENTS</h1>
+          <img src={Right} alt="right" />
+        </div>
         <div className={styles.eventsSubContainer}>
           <div className={styles.eventsListCont}>
             <div className={styles.search}>
@@ -359,7 +365,7 @@ const Events = forwardRef<
           <div
             className={styles.scrollBarContainer}
             ref={scrollBarRef}
-            onClick={handleTrackSnap}
+            // onClick={handleTrackSnap}
           >
             <img src={ScrollBar} alt="scrollbar" className={styles.scrollBar} />
             <img
