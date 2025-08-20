@@ -14,10 +14,8 @@ const navItems = [
   { label: "Events", katakana: "イベンツ", links:"/events"},
   { label: "Contact", katakana: "コンタクト" , links:"/contactus"},
 ];
-interface NavProps {
-  goToPage: (path: string) => void;
-}
-export default function Navbar({ goToPage }: NavProps) {
+
+export default function Navbar() {
   return (
     <nav className={styles.nav}>
       <div className={styles.hamMenuBtn}>
@@ -59,7 +57,7 @@ export default function Navbar({ goToPage }: NavProps) {
       <ul className={styles.navList}>
         {navItems.map((item) => (
           <li key={item.label} className={styles.navItem} >
-            <a className={styles.navLink} onClick={() => goToPage(item.links)} >
+            <a className={styles.navLink} >
               <div className={styles.actualLabel}>{item.label}</div>
               <div className={styles.katakana}>{item.katakana}</div>
             </a>

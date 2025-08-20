@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+// import  {  useRef } from 'react'
  import styles from "./AboutUs.module.scss"
  import Header from "/svgs/aboutus/header.svg"
 const AboutUs = () => {
-    const VidRef = useRef<HTMLVideoElement | null>(null);
+    // const VidRef = useRef<HTMLVideoElement | null>(null);
 /*
     const VidPlay =()=>{
         if(VidRef.current)

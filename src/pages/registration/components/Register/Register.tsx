@@ -15,7 +15,7 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 import Refer from "/svgs/registration/field4.svg"
 import Gen from "/svgs/registration/field3.svg"
-import { head } from "framer-motion/client";
+// import { head } from "framer-motion/client";
 interface StateItem {
   state: string;
   cities: string[];
