@@ -175,24 +175,24 @@ export default function Landing({ goToRegister }: LandingProps) {
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
       masterTimeline
 
-        .to(
-          treeImageRef.current,
-          {
-            scale: 1.2,
-            duration: 4,
-            ease: "power2.out",
-          },
-          0
-        )
-        .to(
-          landingRef.current,
-          {
-            scale: 1.1,
-            duration: 4,
-            ease: "power2.out",
-          },
-          0
-        )
+        // .to(
+        //   treeImageRef.current,
+        //   {
+        //     scale: 1.2,
+        //     duration: 4,
+        //     ease: "power2.out",
+        //   },
+        //   0
+        // )
+        // .to(
+        //   landingRef.current,
+        //   {
+        //     scale: 1.1,
+        //     duration: 4,
+        //     ease: "power2.out",
+        //   },
+        //   0
+        // )
 
         .to(
           treeImageRef.current,
