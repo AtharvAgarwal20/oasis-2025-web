@@ -156,7 +156,7 @@ export default function Landing({ goToRegister }: LandingProps) {
           {
             y: "-50%",
             duration: 6,
-            scale: 1.4,
+            // scale: 1.4,
             ease: "sine.in",
           },
           3
