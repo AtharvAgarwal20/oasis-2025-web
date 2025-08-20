@@ -147,7 +147,7 @@ export default function Landing({ goToRegister }: LandingProps) {
           treeImageRef.current,
           {
             y: "-50%",
-            duration: 10,
+            duration: 6,
             scale: 1.4,
             ease: "sine.in",
           },
@@ -157,8 +157,8 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           landingMobileRef.current,
           {
-            y: "-50%",
-            duration: 10,
+            y: "-30%",
+            duration: 6,
             ease: "sine.in",
           },
           4
@@ -179,7 +179,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           landingRef.current,
           {
-            scale: 1.13,
+            scale: 1.1,
             duration: 4,
             ease: "power2.out",
           },
@@ -189,9 +189,9 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-70%",
-            scale: 1.4,
-            duration: 12,
+            y: "-60%",
+            scale: 1.2,
+            duration: 8,
             ease: "sine.in",
           },
           3
@@ -200,9 +200,9 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           landingRef.current,
           {
-            y: "-50%",
-            scale: 1.4,
-            duration: 10,
+            y: "-40%",
+            scale: 1.1,
+            duration: 8,
             ease: "sine.in",
           },
           3.2
@@ -269,6 +269,7 @@ export default function Landing({ goToRegister }: LandingProps) {
 
   return (
     <>
+
       <div
         className={`${styles.wrapper} ${
           !removeGif ? styles.pointerNoneEvent : ""
