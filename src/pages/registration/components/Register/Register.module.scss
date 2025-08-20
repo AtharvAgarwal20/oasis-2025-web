@@ -687,3 +687,8 @@ input::placeholder {
     height: 63vw;
   }
 }
+@media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+  .registerContainer {
+    height: 100svh;
+  }
+}
