@@ -19,6 +19,8 @@ import Back from "/svgs/registration/back.svg";
 interface RegistrationProps {
   startAnimation: boolean; // only start animation after door opens
 }
+ const isMobile = window.innerWidth < 1200 && (window.innerWidth/window.innerHeight)<0.75
+     
 
 const Registration = ({ startAnimation }: RegistrationProps) => {
   const { contextSafe } = useGSAP();
@@ -329,7 +331,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
           styles.backBtn + " " + (currentPage === 1 ? styles.inActive : "")
         }
       >
-        <img src={Back} alt="" style={{ width: "4vw", height: "auto" }} />
+        <img src={Back} alt="" style={{ width:isMobile?"10vw": "4vw", height: "auto" }} />
       </button>
 
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />

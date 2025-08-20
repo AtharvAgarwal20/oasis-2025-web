@@ -401,3 +401,30 @@
     }
   }
 }
+@media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+$inpwid:90vw;
+.eventsContainer{
+  //height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  .eventsSubContainer{
+    width: 90vw;
+    .scrollBarContainer{
+      display: none;
+    }
+    .eventsListCont{
+      .eventList{
+        .eventItem{
+      width: $inpwid;
+        }
+      }
+    }
+  }
+}
+
+
+}
