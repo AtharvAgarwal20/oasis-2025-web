@@ -1,32 +1,32 @@
-import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
 
-import styles from "./Landing.module.scss";
 import useOverlayStore from "../../utils/store";
+import styles from "./Landing.module.scss";
 
-import Navbar from "../components/navbar/Navbar";
-import tree from "/images/landing/tree1.png";
-import landingImage from "/images/landing/background1.png";
-import registerBtn from "/svgs/landing/registerBtn.svg";
-import mobileRegisterBtn from "/svgs/landing/mobileRegisterBtn.svg";
-import logo from "/svgs/logo.svg";
-import insta from "/svgs/landing/insta.svg";
-import instaLamp from "/svgs/landing/instaLamp.svg";
-import x from "/svgs/landing/x.svg";
-import xLamp from "/svgs/landing/xLamp.svg";
-import linkden from "/svgs/landing/linkden.svg";
-import linkdenLamp from "/svgs/landing/linkdenLamp.svg";
-import wire from "/svgs/landing/wire.svg";
-import mobileMountains from "/images/landing/mobileMountains.png";
-import mobileBackground from "/svgs/landing/mobileBackground.svg";
 import { useGSAP } from "@gsap/react";
 import { i } from "framer-motion/client";
+import Navbar from "../components/navbar/Navbar";
+import landingImage from "/images/landing/background1.png";
+import mobileMountains from "/images/landing/mobileMountains.png";
+import tree from "/images/landing/tree1.png";
+import insta from "/svgs/landing/insta.svg";
+import instaLamp from "/svgs/landing/instaLamp.svg";
+import linkden from "/svgs/landing/linkden.svg";
+import linkdenLamp from "/svgs/landing/linkdenLamp.svg";
+import mobileBackground from "/svgs/landing/mobileBackground.svg";
+import mobileRegisterBtn from "/svgs/landing/mobileRegisterBtn.svg";
+import registerBtn from "/svgs/landing/registerBtn.svg";
+import wire from "/svgs/landing/wire.svg";
+import x from "/svgs/landing/x.svg";
+import xLamp from "/svgs/landing/xLamp.svg";
+import logo from "/svgs/logo.svg";
 i;
 
 gsap.registerPlugin(ScrollTrigger);
 
-// const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
+const TARGET_DATE = new Date("2025-11-05T00:00:00Z");
 
 const socialLinks = [
   {
@@ -55,119 +55,249 @@ const socialLinks = [
   },
 ];
 interface LandingProps {
-  goToPage: (path: string) => void;
+  goToRegister: () => void;
 }
 
-export default function Landing({ goToPage }: LandingProps) {  const overlayIsActive = useOverlayStore((state:any) => state.isActive);
+export default function Landing({ goToRegister }: LandingProps) {
+  //@ts-ignore
+  const overlayIsActive = useOverlayStore((state) => state.isActive);
+  const removeGif = useOverlayStore((state) => state.removeGif);
+  const setRemoveGif = useOverlayStore((state) => state.setRemoveGif);
   const treeImageRef = useRef<HTMLImageElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const dateCountdownRef = useRef<HTMLDivElement>(null);
+  const registerButtonRef = useRef<HTMLDivElement>(null);
+  const landingMobileRef = useRef<HTMLImageElement>(null);
 
   useGSAP(() => {
+    if (treeImageRef.current && landingRef.current) {
+      gsap.set(treeImageRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+
+      gsap.set(landingRef.current, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        force3D: true,
+      });
+    }
+
+    gsap.fromTo(
+      registerButtonRef.current,
+      { autoAlpha: 1 },
+      {
+        autoAlpha: 0,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "400vh",
+          end: "+=300vh",
+          scrub: true,
+        },
+      }
+    );
+
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: wrapperRef.current,
         start: "top top",
         end: "+=800vh",
         scrub: 1.2,
-        pin: `.${styles.treeContainer}`,
-        markers: true,
       },
     });
 
-    masterTimeline
-      .to(
-        treeImageRef.current,
-        {
-          scale: 1.2,
-          duration: 4,
-          ease: "power2.out",
-        },
-        0
-      )
-      .to(
-        landingRef.current,
-        {
-          scale: 1.13,
-          duration: 4,
-          ease: "power2.out",
-        },
-        0
-      )
+    const mm = gsap.matchMedia();
 
-      .to(
-        treeImageRef.current,
+    mm.add("(max-width: 730px) or (aspect-ratio < 8/12)", () => {
+      gsap.fromTo(
+        dateCountdownRef.current,
+        { autoAlpha: 1 },
         {
-          y: "-50%",
-          scale: 1.4,
-          duration: 10,
-          ease: "sine.in",
-        },
-        3
-      )
-
-      .to(
-        landingRef.current,
-        {
-          y: "-40%",
-          scale: 1.15,
-          duration: 10,
-          ease: "sine.in",
-        },
-        3.5
+          autoAlpha: 0,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "400vh",
+            end: "+=300vh",
+            scrub: true,
+          },
+        }
       );
+
+      masterTimeline
+
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.4,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        .to(
+          treeImageRef.current,
+          {
+            y: "-50%",
+            duration: 6,
+            scale: 1.4,
+            ease: "sine.in",
+          },
+          3
+        )
+
+        .to(
+          landingMobileRef.current,
+          {
+            y: "-30%",
+            duration: 6,
+            ease: "sine.in",
+          },
+          4
+        );
+    });
+    mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
+      masterTimeline
+
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.2,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+        .to(
+          landingRef.current,
+          {
+            scale: 1.1,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        .to(
+          treeImageRef.current,
+          {
+            y: "-60%",
+            scale: 1.2,
+            duration: 8,
+            ease: "sine.in",
+          },
+          3
+        )
+
+        .to(
+          landingRef.current,
+          {
+            y: "-40%",
+            scale: 1.1,
+            duration: 8,
+            ease: "sine.in",
+          },
+          3.2
+        )
+
+        .to(
+          dateCountdownRef.current,
+          {
+            y: "-300%",
+            duration: 1,
+            ease: "sine.in",
+          },
+          0
+        );
+    });
   }, []);
 
-  // const [timeLeft, setTimeLeft] = useState({
-  //   days: 0,
-  //   hours: 0,
-  //   minutes: 0,
-  //   seconds: 0,
-  // });
+  useEffect(() => {
+    if (overlayIsActive) {
+      setTimeout(() => {
+        setRemoveGif();
+      }, 4000);
+    }
+  }, [overlayIsActive]);
 
-  // useEffect(() => {
-  //   const calculateTimeLeft = () => {
-  //     const now = new Date();
-  //     const difference = TARGET_DATE.getTime() - now.getTime();
+  useEffect(() => {
+    if (removeGif && wrapperRef.current) {
+      wrapperRef.current.style.maskImage = "none";
+      document.body.style.position = "static";
+    }
+  }, [removeGif]);
 
-  //     if (difference <= 0) {
-  //       setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  //       return;
-  //     }
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-  //     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  //     const hours = Math.floor(
-  //       (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //     );
-  //     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-  //     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = TARGET_DATE.getTime() - now.getTime();
 
-  //     setTimeLeft({ days, hours, minutes, seconds });
-  //   };
+      if (difference <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
 
-  //   calculateTimeLeft();
-  //   const timerId = setInterval(calculateTimeLeft, 1000);
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-  //   return () => clearInterval(timerId);
-  // }, []);
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    calculateTimeLeft();
+    const timerId = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
 
   return (
     <>
       <div
-        className={
-          !overlayIsActive
-            ? `${styles.pointerNoneEvent} ${styles.wrapper}`
-            : styles.wrapper
-        }
+        className={`${styles.wrapper} ${
+          !removeGif ? styles.pointerNoneEvent : ""
+        } ${overlayIsActive ? styles.mask : ""}`}
         ref={wrapperRef}
       >
-        <div className={styles.landing}>
+        <div
+          className={
+            overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
+          }
+        >
           <img
             src={landingImage}
             className={styles.landingImage}
             ref={landingRef}
           />
-          <Navbar goToPage={goToPage} />
+
+          <img
+            src={mobileMountains}
+            className={styles.mobileMountains}
+            alt=""
+            ref={landingMobileRef}
+          />
+          <img
+            src={mobileBackground}
+            alt=""
+            className={styles.mobileBackground}
+          />
+
+          <Navbar />
 
           <div className={styles.treeContainer}>
             <div className={styles.tree} ref={treeImageRef}>
@@ -210,14 +340,15 @@ export default function Landing({ goToPage }: LandingProps) {  const overlayIsAc
                 style={{ contain: "none" }}
               />
             </div>
+            <div className={styles.treeExtender}></div>
           </div>
           <div className={styles.logoContainer}>
             <img src={logo} className={styles.logo} alt="Logo" />
           </div>
-          {/* <div className={styles.dateCountdown}>
+          <div className={styles.dateCountdown} ref={dateCountdownRef}>
             <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
               <div className={styles.days}>
-                {timeLeft.days > 10 ? (
+                {timeLeft.days >= 10 ? (
                   <span>{timeLeft.days}</span>
                 ) : (
                   <span>0{timeLeft.days}</span>
@@ -228,7 +359,7 @@ export default function Landing({ goToPage }: LandingProps) {  const overlayIsAc
             :
             <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
               <div className={styles.hours}>
-                {timeLeft.hours > 10 ? (
+                {timeLeft.hours >= 10 ? (
                   <span>{timeLeft.hours}</span>
                 ) : (
                   <span>0{timeLeft.hours}</span>
@@ -239,7 +370,7 @@ export default function Landing({ goToPage }: LandingProps) {  const overlayIsAc
             :
             <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
               <div className={styles.minutes}>
-                {timeLeft.minutes > 10 ? (
+                {timeLeft.minutes >= 10 ? (
                   <span>{timeLeft.minutes}</span>
                 ) : (
                   <span>0{timeLeft.minutes}</span>
@@ -247,26 +378,13 @@ export default function Landing({ goToPage }: LandingProps) {  const overlayIsAc
               </div>
               MINUTES
             </div>
-          </div> */}
-          <div className={styles.socialLinksContainer}>
-            <div className={styles.linkBackground}>
-            </div>
-            <div className={styles.socialLinks}>
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  <img src={link.icon} alt="" />
-                </a>
-              ))}
-            </div>
           </div>
-          <div className={styles.registerBtnContainer} onClick={() => goToPage("/register")} // ✅ wrapped in arrow function
->
+
+          <div
+            className={styles.registerBtnContainer}
+            onClick={goToRegister}
+            ref={registerButtonRef}
+          >
             <img
               src={registerBtn}
               className={styles.registerBtn}
