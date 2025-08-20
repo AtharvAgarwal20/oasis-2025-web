@@ -268,7 +268,6 @@ export default function Landing({ goToRegister }: LandingProps) {
 
   return (
     <>
-
       <div
         className={`${styles.wrapper} ${
           !removeGif ? styles.pointerNoneEvent : ""
@@ -349,7 +348,7 @@ export default function Landing({ goToRegister }: LandingProps) {
           <div className={styles.dateCountdown} ref={dateCountdownRef}>
             <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
               <div className={styles.days}>
-                {timeLeft.days > 10 ? (
+                {timeLeft.days >= 10 ? (
                   <span>{timeLeft.days}</span>
                 ) : (
                   <span>0{timeLeft.days}</span>
@@ -360,7 +359,7 @@ export default function Landing({ goToRegister }: LandingProps) {
             :
             <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
               <div className={styles.hours}>
-                {timeLeft.hours > 10 ? (
+                {timeLeft.hours >= 10 ? (
                   <span>{timeLeft.hours}</span>
                 ) : (
                   <span>0{timeLeft.hours}</span>
@@ -371,7 +370,7 @@ export default function Landing({ goToRegister }: LandingProps) {
             :
             <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
               <div className={styles.minutes}>
-                {timeLeft.minutes > 10 ? (
+                {timeLeft.minutes >= 10 ? (
                   <span>{timeLeft.minutes}</span>
                 ) : (
                   <span>0{timeLeft.minutes}</span>
