@@ -63,7 +63,7 @@ export default function Landing({ goToRegister }: LandingProps) {
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
   const setRemoveGif = useOverlayStore((state) => state.setRemoveGif);
-  const treeImageRef = useRef<HTMLImageElement>(null);
+  const treeImageRef = useRef<HTMLDivElement>(null);
   const landingRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dateCountdownRef = useRef<HTMLDivElement>(null);
@@ -154,7 +154,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-40%",
+            y: "-50%",
             duration: 6,
             scale: 1.2,
             ease: "sine.in",
@@ -197,7 +197,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-50%",
+            y: "-80%",
             scale: 1.4,
             duration: 12,
             ease: "sine.in",
@@ -310,8 +310,8 @@ export default function Landing({ goToRegister }: LandingProps) {
 
             <Navbar />
 
-            <div className={styles.treeContainer}>
-              <div className={styles.tree} ref={treeImageRef}>
+            <div className={styles.treeContainer}  ref={treeImageRef}>
+              <div className={styles.tree}>
                 <div className={styles.socialLinksContainer}>
                   <div className={styles.wire}>
                     <img src={wire} alt="" />
