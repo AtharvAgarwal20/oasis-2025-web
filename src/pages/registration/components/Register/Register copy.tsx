@@ -333,13 +333,13 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                       fill="#131313"
                       fill-opacity="0.8"
                       stroke="#FFF9E9"
-                      stroke-width="0.8"
+                      strokeWidth="0.8"
                     />
                     <path
                       d="M234 72.8994C235 76.5661 240.3 84.2994 247.5 81.8994C254.167 93.8994 275 93.8994 282 81.8994C286 81.8994 292.6 79.2994 293 72.8994H272.5L264 81.8994L255 72.8994H234Z"
                       fill="#1B1818"
                       stroke="#FFF9E9"
-                      stroke-width="0.7"
+                      strokeWidth="0.7"
                     />
                     <rect
                       x="254.102"
@@ -367,13 +367,13 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                       fill="#131313"
                       fill-opacity="0.8"
                       stroke="#FFF9E9"
-                      stroke-width="0.8"
+                      strokeWidth="0.8"
                     />
                     <path
                       d="M234 72.8994C235 76.5661 240.3 84.2994 247.5 81.8994C254.167 93.8994 275 93.8994 282 81.8994C286 81.8994 292.6 79.2994 293 72.8994H272.5L264 81.8994L255 72.8994H234Z"
                       fill="#1B1818"
                       stroke="#FFF9E9"
-                      stroke-width="0.7"
+                      strokeWidth="0.7"
                     />
                     <rect
                       x="254.102"
@@ -450,13 +450,13 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                       fill="#131313"
                       fill-opacity="0.8"
                       stroke="#FFF9E9"
-                      stroke-width="0.8"
+                      strokeWidth="0.8"
                     />
                     <path
                       d="M234 72.8994C235 76.5661 240.3 84.2994 247.5 81.8994C254.167 93.8994 275 93.8994 282 81.8994C286 81.8994 292.6 79.2994 293 72.8994H272.5L264 81.8994L255 72.8994H234Z"
                       fill="#1B1818"
                       stroke="#FFF9E9"
-                      stroke-width="0.7"
+                      strokeWidth="0.7"
                     />
                     <rect
                       x="254.102"
@@ -533,13 +533,13 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                       fill="#131313"
                       fill-opacity="0.8"
                       stroke="#FFF9E9"
-                      stroke-width="0.8"
+                      strokeWidth="0.8"
                     />
                     <path
                       d="M234 72.8994C235 76.5661 240.3 84.2994 247.5 81.8994C254.167 93.8994 275 93.8994 282 81.8994C286 81.8994 292.6 79.2994 293 72.8994H272.5L264 81.8994L255 72.8994H234Z"
                       fill="#1B1818"
                       stroke="#FFF9E9"
-                      stroke-width="0.7"
+                      strokeWidth="0.7"
                     />
                     <rect
                       x="254.102"

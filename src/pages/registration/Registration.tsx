@@ -6,7 +6,7 @@ import Events from "../../pages/registration/components/Events/Events";
 
 import banner from "/images/registration/reg-banner.png";
 import bgExtend from "/svgs/registration/bg-extended.svg";
-import sun from "/svgs/registration/sun.svg";
+import sun from "/svgs/registration/sunNew.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -82,21 +82,9 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
     mm.add(
       "(max-width: 1200px) and (aspect-ratio < 1.45)",
       contextSafe(() => {
-        gsap.to(bgRef.current, {
-          x: "-42.5%",
-          duration: 1.5,
-          // ease: "power1.out",
+        const tl = gsap.timeline({
           onStart: () => setIsAnim(true),
-          onComplete: () => setIsAnim(false),
         });
-        gsap.to(sunRef.current, {
-          left: "-5%",
-          bottom: "17vw",
-          x: "0%",
-          duration: 1.5,
-          // ease: "power1.out",
-        });
-        const tl = gsap.timeline();
         tl.to(elemRef2.current, {
           opacity: 0,
           duration: 1,
@@ -114,7 +102,10 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
             opacity: 1,
             duration: 1,
             ease: "power1.out",
-            onComplete: () => setCurrentPage(1),
+            onComplete: () => {
+              setCurrentPage(1);
+              setIsAnim(false);
+            },
           });
       })
     );
@@ -162,7 +153,6 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
       mm.add("(max-width: 1200px) and (aspect-ratio < 1.45)", () => {
         const tl = gsap.timeline({
           onStart: () => setIsAnim(true),
-          onComplete: () => setIsAnim(false),
         });
         tl.to(back ? elemRef3.current : elemRef1.current, {
           opacity: 0,
@@ -181,7 +171,10 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
             opacity: 1,
             duration: 1,
             ease: "power1.out",
-            onComplete: () => setCurrentPage(2),
+            onComplete: () => {
+              setCurrentPage(2);
+              setIsAnim(false);
+            },
           });
       });
     })();
@@ -189,12 +182,12 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
 
   // useEffect triggered only if startAnimation = true
   useEffect(() => {
-    if (startAnimation) {
-      toRegPage(false);
-      setTimeout(() => {
-        toEventPage();
-      }, 2500);
-    }
+    // if (startAnimation) {
+    // toRegPage(false);
+    // setTimeout(() => {
+    //   toEventPage();
+    // }, 2500);
+    // }
   }, []);
 
   const toEventPage = () => {
@@ -239,21 +232,9 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
     });
     mm.add("(max-width: 1200px) and (aspect-ratio < 1.45)", () => {
       contextSafe(() => {
-        gsap.to(bgRef.current, {
-          x: "-1%",
-          duration: 1.5,
-          // ease: "power1.out",
+        const tl = gsap.timeline({
           onStart: () => setIsAnim(true),
-          onComplete: () => setIsAnim(false),
         });
-        gsap.to(sunRef.current, {
-          left: "67%",
-          bottom: "17vw",
-          x: "0%",
-          duration: 1.5,
-          // ease: "power1.out",
-        });
-        const tl = gsap.timeline();
         tl.to(elemRef2.current, {
           opacity: 0,
           duration: 1,
@@ -271,7 +252,10 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
             opacity: 1,
             duration: 1,
             ease: "power1.out",
-            onComplete: () => setCurrentPage(3),
+            onComplete: () => {
+              setCurrentPage(3);
+              setIsAnim(false);
+            },
           });
       })();
     });
@@ -282,6 +266,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
       case 1:
         return;
       case 2:
+        console.log("Navigating back to the first page");
         toFirstPage();
         break;
       case 3:
@@ -325,7 +310,9 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
 
   return (
     <div className={styles.instrback}>
-      <img src={sun} alt="sun" className={styles.sun} ref={sunRef} />
+      {/* <img src={sun} alt="sun" className={styles.sun} ref={sunRef} /> */}
+      <div className={styles.overlay}></div>
+      <span className={styles.sun} ref={sunRef}></span>
       <img
         src={bgExtend}
         alt="background"
