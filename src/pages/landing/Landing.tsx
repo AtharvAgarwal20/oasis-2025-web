@@ -194,16 +194,16 @@ export default function Landing({ goToRegister }: LandingProps) {
         //   0
         // )
 
-        .to(
-          treeImageRef.current,
-          {
-            y: "-60%",
-            scale: 1.2,
-            duration: 8,
-            ease: "sine.in",
-          },
-          3
-        )
+        // .to(
+        //   treeImageRef.current,
+        //   {
+        //     y: "-60%",
+        //     scale: 1.2,
+        //     duration: 8,
+        //     ease: "sine.in",
+        //   },
+        //   3
+        // )
 
         .to(
           landingRef.current,
