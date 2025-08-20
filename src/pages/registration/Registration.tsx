@@ -42,7 +42,7 @@ const Registration = ({ startAnimation, goToPage }: RegistrationProps) => {
   const elemRef3 = useRef<HTMLDivElement>(null);
   const sunRef = useRef<HTMLImageElement>(null);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const toFirstPage = () => {
     const mm = gsap.matchMedia();

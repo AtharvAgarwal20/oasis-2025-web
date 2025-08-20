@@ -35,11 +35,14 @@ const registrationSchema = yup.object({
     .string()
     .matches(/^\+?\d{10,15}$/, "Invalid mobile number")
     .required("Mobile number is required"),
+    date: yup
+    .date()
+    .required("Date of Birth is required"),
   college_id: yup.string().required("College is required"),
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
-  referral: yup.string().nullable().optional(),
+//  referral: yup.string().nullable().optional(),
 });
 
 type FormData = yup.InferType<typeof registrationSchema>;
@@ -105,7 +108,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         year: "",
         state: "",
         city: "",
-        referral: null,
+        date:undefined,
+        //referral: null,
       },
     });
 
@@ -163,8 +167,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         alignItem:"center",
         height: "10vw",
         width:"80vw",
-        paddingLeft: isMobile?"0%":"30%",
-        paddingTop:isMobile?"0vw":"5vw",
+        paddingLeft: isMobile?"0%":"0%",
+        paddingTop:isMobile?"0vw":"1vw",
       }),
       input: (provided: any) => ({
         ...provided,
@@ -185,6 +189,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         margin: 0,
         zIndex:"5",
         
+        paddingTop:isMobile?"0vw":"1vw",
         whiteSpace: "nowrap",
       }),
       menu: (provided: any) => ({
@@ -400,11 +405,12 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
                   <div className={styles.referral}>
                     <div className={styles.sameline}>
-                      <label>REFERRAL CODE </label>
+                      <label>DATE OF BIRTH </label>
                     </div>
                     <div className={styles.clouds}>
                       <img src={Refer} alt="" />
-                      <input {...register("referral")} />
+                      <input type="date"  {...register("date")} />
+                      
                     </div>
                   </div>
                 </div>
@@ -472,7 +478,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     className={styles.radioGroup}
                     aria-label="Year of Study"
                   >
-                    {["1", "2", "3", "4"].map((year) => (
+                    {["1", "2", "3", "4","5"].map((year) => (
                       <label key={year} className={styles.radioLabel}>
                         <input
                           type="radio"
