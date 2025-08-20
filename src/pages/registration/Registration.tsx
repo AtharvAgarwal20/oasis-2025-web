@@ -18,12 +18,13 @@ import Back from "/svgs/registration/back.svg";
 import { useNavigate } from "react-router-dom";
 
 interface RegistrationProps {
-  startAnimation: boolean; // only start animation after door opens
+  startAnimation: boolean;
+  goToPage: (path: string) => void;
 }
  const isMobile = window.innerWidth < 1200 && (window.innerWidth/window.innerHeight)<0.75
      
 
-const Registration = ({ startAnimation }: RegistrationProps) => {
+const Registration = ({ startAnimation, goToPage }: RegistrationProps) => {
   const { contextSafe } = useGSAP();
   const [currentPage, setCurrentPage] = useState(1);
   const [userEmail, setUserEmail] = useState("");
@@ -269,7 +270,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   const backButtonHandler = () => {
     switch (currentPage) {
       case 1:
-        navigate("/");
+       goToPage("/")
         break;
       case 2:
         console.log("Navigating back to the first page");
@@ -333,7 +334,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
         onClick={backButtonHandler}
         className={styles.backBtn}
       >
-        <img src={Back} alt="" style={{ width:isMobile?"10vw": "4vw", height: "auto" }} />
+        <img src={Back} alt="" style={{ width:isMobile?"12vw": "4vw", height: "auto" }} />
       </button>
 
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />

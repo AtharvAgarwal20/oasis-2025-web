@@ -54,11 +54,8 @@ const socialLinks = [
     url: "https://www.instagram.com/bitsoasis/",
   },
 ];
-interface LandingProps {
-  goToRegister: () => void;
-}
 
-export default function Landing({ goToRegister }: LandingProps) {
+export default function Landing({ goToPage }: { goToPage: (path: string) => void }) {
   //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
@@ -393,7 +390,7 @@ export default function Landing({ goToRegister }: LandingProps) {
 
             <div
               className={styles.registerBtnContainer}
-              onClick={goToRegister}
+              onClick={()=>goToPage("/register")}
               ref={registerButtonRef}
             >
               <img

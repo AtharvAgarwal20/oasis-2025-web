@@ -2,11 +2,7 @@ import Landing from "./pages/landing/Landing";
 import DrawingPreloader from "./pages/components/drawingPreloader/DrawingPreloader";
 import useOverlayStore from "./utils/store";
 
-export default function Homepage({
-  goToRegister,
-}: {
-  goToRegister: () => void;
-}) {
+export default function Homepage({ goToPage }: { goToPage: (path: string) => void }) {
   const removeGif = useOverlayStore((state) => state.removeGif);
   return (
     <div>
@@ -18,7 +14,7 @@ export default function Homepage({
         <DrawingPreloader />
       </div>
       <div style={{ zIndex: 100, position: "relative" }}>
-        <Landing goToRegister={goToRegister} />
+        <Landing goToPage={goToPage} />
       </div>
     </div>
   );
