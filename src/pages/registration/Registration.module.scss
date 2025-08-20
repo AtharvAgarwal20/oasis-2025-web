@@ -72,6 +72,18 @@
 
 @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
   .instrback {
+    height: 100svh;
+    overflow-y: hidden;
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.77);
+      z-index: 1;
+    }
     .backgroundImage {
       left: 50%;
       width: auto;
@@ -106,20 +118,12 @@
 }
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .instrback {
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.77);
-      z-index: 1;
-    }
     .backgroundImage {
-      height: 100svh;
+      height: auto;
       width: 900vw;
       translate: 0 13%;
-      filter: blur(1px);
+      // filter: blur(1px);
+      // object-fit: cover;
     }
     .sun {
       position: absolute;
