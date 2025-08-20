@@ -183,10 +183,10 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   // useEffect triggered only if startAnimation = true
   useEffect(() => {
     // if (startAnimation) {
-    // toRegPage(false);
-    // setTimeout(() => {
-    //   toEventPage();
-    // }, 2500);
+    toRegPage(false);
+    setTimeout(() => {
+      toEventPage();
+    }, 2500);
     // }
   }, []);
 
