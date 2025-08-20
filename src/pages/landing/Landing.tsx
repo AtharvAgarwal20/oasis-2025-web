@@ -162,15 +162,15 @@ export default function Landing({ goToRegister }: LandingProps) {
           3
         )
 
-      .to(
-        landingMobileRef.current,
-        {
-          y: "-30%",
-          duration: 6,
-          ease: "sine.in",
-        },
-        3
-      );
+        .to(
+          landingMobileRef.current,
+          {
+            y: "-30%",
+            duration: 6,
+            ease: "sine.in",
+          },
+          3
+        );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
       masterTimeline

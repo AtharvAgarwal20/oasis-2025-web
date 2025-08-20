@@ -9,7 +9,11 @@ html {
   --counterBigFontSize: 2rem;
   --counterSmallFontSize: 1.5rem;
   scrollbar-width: none;
-} 
+  img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}
 
 @media (max-width: 1350px) {
   html {
@@ -71,7 +75,7 @@ body {
   }
 }
 
-.wrapperSquared{
+.wrapperSquared {
   height: 220vh;
 }
 
@@ -351,6 +355,7 @@ body {
     }
 
     .dateCountdown {
+      user-select: none;
       position: fixed;
       z-index: 200;
       right: 2svw;
@@ -458,6 +463,7 @@ body {
       align-items: center;
       justify-items: center;
       cursor: pointer;
+      user-select: none;
 
       .registerBtn {
         grid-row: 1/2;
