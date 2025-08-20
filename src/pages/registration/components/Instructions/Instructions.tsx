@@ -1,6 +1,9 @@
 import { forwardRef } from "react";
 import styles from "./Instructions.module.scss";
 
+import Left from "/svgs/registration/leftarr.svg";
+import Right from "/svgs/registration/rightarr.svg";
+
 type PropsType = {
   onGoogleSignIn: () => void;
 };
@@ -9,7 +12,11 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
   ({ onGoogleSignIn }, ref) => {
     return (
       <div className={styles.content} ref={ref}>
-        <h1 className={styles.heading}>INSTRUCTIONS</h1>
+        <div className={styles.headingCont}>
+          <img src={Left} alt="left" />
+          <h1 className={styles.heading}>INSTRUCTIONS</h1>
+          <img src={Right} alt="right" />
+        </div>
         <ul className={styles.instr}>
           <li>
             Complete the registration form with all required details. You'll be
@@ -29,7 +36,7 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
         </ul>
 
         <button className={styles.googleButton} onClick={onGoogleSignIn}>
-          SIGN IN WITH GOOGLE
+          Sign in with Google
         </button>
       </div>
     );

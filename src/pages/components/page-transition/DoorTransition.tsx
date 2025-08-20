@@ -5,7 +5,7 @@ import Door1Image from "/images/doors/Door1.png";
 import Door2Image from "/images/doors/Door2.png";
 import Door3Image from "/images/doors/Door3.png";
 import Door4Image from "/images/doors/Door4.png";
-import Preloader from "../../registration/components/Preloader/Preloader";
+// import Preloader from "../../registration/components/Preloader/Preloader";
 
 type Phase = "idle" | "closing" | "waiting" | "opening";
 
@@ -16,7 +16,7 @@ interface Props {
   page:any;
 }
 
-export default function DoorTransition({ phase, onClosed, onOpened,page }: Props) {
+export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
   const c1 = useAnimation();
   const c2 = useAnimation();
   const c3 = useAnimation();
@@ -55,10 +55,11 @@ export default function DoorTransition({ phase, onClosed, onOpened,page }: Props
         c2.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
         c3.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
       ]);
-      if (page ==="/register")
-      {
-      <Preloader onEnter={()=>console.log("Hii")}/>
-      }
+      // if (page ==="/register")
+      // {
+      //   const run = async () => {
+      //  await Promise.all([<Preloader onEnter={()=>console.log("Hii")}/>])
+      // }}
       if (cancelled) return;
 
       if (!cancelled) onClosed?.();
