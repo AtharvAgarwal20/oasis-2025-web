@@ -1,15 +1,15 @@
 @use "../../assets/global.scss" as *;
 
-body {
-  height: 220vh;
-}
+// body {
+//   height: 220vh;
+// }
 
 html {
   --registerFontSize: 2rem;
   --counterBigFontSize: 2rem;
   --counterSmallFontSize: 1.5rem;
   scrollbar-width: none;
-}
+} 
 
 @media (max-width: 1350px) {
   html {
@@ -69,6 +69,10 @@ body {
   100% {
     transform: rotate(0deg);
   }
+}
+
+.wrapperSquared{
+  height: 220vh;
 }
 
 .wrapper {
@@ -286,8 +290,22 @@ body {
           img {
             scale: 1.2;
           }
+
+          &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 80%;
+          background: none;
+          pointer-events: none;
+        }
         }
         .socialLinksContainer {
+          display: none;
+        }
+        .treeExtender {
           display: none;
         }
       }

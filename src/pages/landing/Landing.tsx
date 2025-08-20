@@ -154,7 +154,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-50%",
+            y: "-30%",
             duration: 6,
             scale: 1.4,
             ease: "sine.in",
@@ -197,9 +197,9 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-60%",
-            scale: 1.2,
-            duration: 8,
+            y: "-50%",
+            scale: 1.4,
+            duration: 12,
             ease: "sine.in",
           },
           3
@@ -278,134 +278,136 @@ export default function Landing({ goToRegister }: LandingProps) {
 
   return (
     <>
-      <div
-        className={`${styles.wrapper} ${
-          !removeGif ? styles.pointerNoneEvent : ""
-        } ${overlayIsActive ? styles.mask : ""}`}
-        ref={wrapperRef}
-      >
+      <div className={styles.wrapperSquared}>
         <div
-          className={
-            overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
-          }
+          className={`${styles.wrapper} ${
+            !removeGif ? styles.pointerNoneEvent : ""
+          } ${overlayIsActive ? styles.mask : ""}`}
+          ref={wrapperRef}
         >
-          <img
-            src={landingImage}
-            className={styles.landingImage}
-            ref={landingRef}
-          />
-
-          <img
-            src={mobileMountains}
-            className={styles.mobileMountains}
-            alt=""
-            ref={landingMobileRef}
-          />
-          <img
-            src={mobileBackground}
-            alt=""
-            className={styles.mobileBackground}
-          />
-
-          <Navbar />
-
-          <div className={styles.treeContainer}>
-            <div className={styles.tree} ref={treeImageRef}>
-              <div className={styles.socialLinksContainer}>
-                <div className={styles.wire}>
-                  <img src={wire} alt="" />
-                </div>
-                {socialLinks.map((link, index) => (
-                  <div
-                    key={index}
-                    className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
-                  >
-                    <a
-                      key={index}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.socialLink}
-                    >
-                      <img
-                        src={link.icon}
-                        alt=""
-                        className={`${styles.socialIcon} ${link.classNameIcon}`}
-                      />
-                      <img
-                        src={link.lamp}
-                        alt=""
-                        className={`${styles.socialLamp} ${link.classNameLamp}`}
-                      />
-                    </a>
-                  </div>
-                ))}
-              </div>
-              <img
-                src={tree}
-                // className={styles.tree}
-                alt=""
-                loading="eager"
-                fetchPriority="high"
-                style={{ contain: "none" }}
-              />
-            </div>
-            <div className={styles.treeExtender}></div>
-          </div>
-          <div className={styles.logoContainer}>
-            <img src={logo} className={styles.logo} alt="Logo" />
-          </div>
-          <div className={styles.dateCountdown} ref={dateCountdownRef}>
-            <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
-              <div className={styles.days}>
-                {timeLeft.days >= 10 ? (
-                  <span>{timeLeft.days}</span>
-                ) : (
-                  <span>0{timeLeft.days}</span>
-                )}
-              </div>
-              DAYS
-            </div>
-            :
-            <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
-              <div className={styles.hours}>
-                {timeLeft.hours >= 10 ? (
-                  <span>{timeLeft.hours}</span>
-                ) : (
-                  <span>0{timeLeft.hours}</span>
-                )}
-              </div>
-              HOURS
-            </div>
-            :
-            <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
-              <div className={styles.minutes}>
-                {timeLeft.minutes >= 10 ? (
-                  <span>{timeLeft.minutes}</span>
-                ) : (
-                  <span>0{timeLeft.minutes}</span>
-                )}
-              </div>
-              MINUTES
-            </div>
-          </div>
-
           <div
-            className={styles.registerBtnContainer}
-            onClick={goToRegister}
-            ref={registerButtonRef}
+            className={
+              overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
+            }
           >
             <img
-              src={registerBtn}
-              className={styles.registerBtn}
-              alt="Register"
+              src={landingImage}
+              className={styles.landingImage}
+              ref={landingRef}
+            />
+
+            <img
+              src={mobileMountains}
+              className={styles.mobileMountains}
+              alt=""
+              ref={landingMobileRef}
             />
             <img
-              src={mobileRegisterBtn}
-              className={styles.mobileRegisterBtn}
+              src={mobileBackground}
               alt=""
+              className={styles.mobileBackground}
             />
-            <div className={styles.registerBtnText}>Register</div>
+
+            <Navbar />
+
+            <div className={styles.treeContainer}>
+              <div className={styles.tree} ref={treeImageRef}>
+                <div className={styles.socialLinksContainer}>
+                  <div className={styles.wire}>
+                    <img src={wire} alt="" />
+                  </div>
+                  {socialLinks.map((link, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.socialLinkContainer} ${link.classNameDiv}`}
+                    >
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                      >
+                        <img
+                          src={link.icon}
+                          alt=""
+                          className={`${styles.socialIcon} ${link.classNameIcon}`}
+                        />
+                        <img
+                          src={link.lamp}
+                          alt=""
+                          className={`${styles.socialLamp} ${link.classNameLamp}`}
+                        />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <img
+                  src={tree}
+                  // className={styles.tree}
+                  alt=""
+                  loading="eager"
+                  fetchPriority="high"
+                  style={{ contain: "none" }}
+                />
+              </div>
+              <div className={styles.treeExtender}></div>
+            </div>
+            <div className={styles.logoContainer}>
+              <img src={logo} className={styles.logo} alt="Logo" />
+            </div>
+            <div className={styles.dateCountdown} ref={dateCountdownRef}>
+              <div className={`${styles.daysLeft} ${styles.timeLeft}`}>
+                <div className={styles.days}>
+                  {timeLeft.days > 10 ? (
+                    <span>{timeLeft.days}</span>
+                  ) : (
+                    <span>0{timeLeft.days}</span>
+                  )}
+                </div>
+                DAYS
+              </div>
+              :
+              <div className={`${styles.hoursLeft} ${styles.timeLeft}`}>
+                <div className={styles.hours}>
+                  {timeLeft.hours > 10 ? (
+                    <span>{timeLeft.hours}</span>
+                  ) : (
+                    <span>0{timeLeft.hours}</span>
+                  )}
+                </div>
+                HOURS
+              </div>
+              :
+              <div className={`${styles.minutesLeft} ${styles.timeLeft}`}>
+                <div className={styles.minutes}>
+                  {timeLeft.minutes > 10 ? (
+                    <span>{timeLeft.minutes}</span>
+                  ) : (
+                    <span>0{timeLeft.minutes}</span>
+                  )}
+                </div>
+                MINUTES
+              </div>
+            </div>
+
+            <div
+              className={styles.registerBtnContainer}
+              onClick={goToRegister}
+              ref={registerButtonRef}
+            >
+              <img
+                src={registerBtn}
+                className={styles.registerBtn}
+                alt="Register"
+              />
+              <img
+                src={mobileRegisterBtn}
+                className={styles.mobileRegisterBtn}
+                alt=""
+              />
+              <div className={styles.registerBtnText}>Register</div>
+            </div>
           </div>
         </div>
       </div>
