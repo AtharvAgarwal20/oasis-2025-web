@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import door1 from '/images/contact/Door1.png';
 import door2 from '/images/contact/Door2.png';
 import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 interface ContactDoorsProps {
     aboutUsRef: React.RefObject<HTMLDivElement | null>,
@@ -13,7 +14,7 @@ interface ContactDoorsProps {
 export default function ContectDoors({ aboutUsRef, treeContRef, bottomContentRef }: ContactDoorsProps) {
     const door1Ref = useRef<HTMLDivElement>(null);
     const door2Ref = useRef<HTMLDivElement>(null);
-    const scrollerRef = useRef<HTMLDivElement>(null);
+    // const scrollerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         console.log(treeContRef?.current, aboutUsRef?.current)
@@ -27,7 +28,8 @@ export default function ContectDoors({ aboutUsRef, treeContRef, bottomContentRef
                 end: `+=${window.innerHeight}`,
                 scrub: 0.5,
                 pin: bottomContentRef?.current,
-                pinType: "fixed",
+                pinType: "transform",
+                markers: true,
                 pinnedContainer: treeContRef?.current,
             }
         })
@@ -39,7 +41,8 @@ export default function ContectDoors({ aboutUsRef, treeContRef, bottomContentRef
                 end: `+=${window.innerHeight}`,
                 scrub: 0.5,
                 pin: bottomContentRef?.current,
-                pinType: "fixed",
+                pinType: "transform",
+                markers: true,
                 pinnedContainer: treeContRef?.current,
             }
         })
