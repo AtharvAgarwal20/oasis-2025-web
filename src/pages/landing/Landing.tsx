@@ -142,6 +142,16 @@ export default function Landing({ goToRegister }: LandingProps) {
         )
 
         .to(
+          landingMobileRef.current,
+          {
+            scale: 1.1,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        .to(
           treeImageRef.current,
           {
             y: "-50%",
