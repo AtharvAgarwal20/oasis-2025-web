@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./DrawingPreloader.module.scss";
 import useOverlayStore from "../../../utils/store";
-import { set } from "react-hook-form";
+// import { set } from "react-hook-form";
 
 const imagesToPreload = [
   "/svgs/logo.svg",
