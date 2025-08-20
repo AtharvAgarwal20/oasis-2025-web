@@ -1,6 +1,7 @@
 @use "../../../assets/global.scss" as *;
 
 .nav {
+  user-select: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -112,6 +113,7 @@
       }
     }
     &:hover {
+      cursor: pointer;
       .moon {
         rotate: 0deg;
       }
