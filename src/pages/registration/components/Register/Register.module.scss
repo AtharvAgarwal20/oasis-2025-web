@@ -1,5 +1,5 @@
 $inputwidth: 30vw;
-$inputheight:10vh;
+$inputheight: 10vh;
 @use "/src/assets/global.scss" as *;
 
 .confirmButton {
@@ -22,8 +22,8 @@ $inputheight:10vh;
   align-items: center;
   justify-content: space-between;
   width: 22vw;
-  span{
-    padding-left:40% ;
+  span {
+    padding-left: 40%;
     text-align: center;
   }
 
@@ -35,8 +35,17 @@ $inputheight:10vh;
     }
   }
 }
+ input, textarea, select {
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
 
 .registerContainer {
+
+
   display: none;
   opacity: 0;
   flex-direction: column;
@@ -44,6 +53,7 @@ $inputheight:10vh;
   justify-content: center;
   width: 100vw;
   height: 43vw;
+  margin-bottom: 5vw;
 }
 
 .registrationForm {
@@ -62,7 +72,6 @@ $inputheight:10vh;
   // justify-content: center;
 
   .react-select__input-container {
-    
     input {
       box-shadow: none !important;
     }
@@ -80,144 +89,162 @@ $inputheight:10vh;
     flex-wrap: wrap;
     gap: 21vw;
   }
-.left{
+  .left {
+    .together {
+      display: flex;
+      flex-direction: row;
+      width: 31vw;
+      gap: 10px;
 
-.together {
-  display: flex;
-  flex-direction: row;
-  width: 31vw;
-  gap: 10px;
-
-  .fields {
-    display: flex;
-    flex-direction: row;
-    gap: 2vw;
-  }
-
-  .field1,
-  .field2 {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .field1 {
-    input,
-    select,
-    .selection {
-      width: 10vw ;
-    }
-
-    .selection {
-      width: 10vw;
-
-      // Normal + focused state control
-      .Select__control,
-      .Select__control--is-focused {
-        border: 1px solid #ededed;
-        height: 2.5rem;
-        width: 10vw !important;
-        padding: 0 !important;
-        box-shadow: none !important;
+      .fields {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
       }
 
-      .Select__placeholder {
-        color: #fff;
-        padding: 0 !important;
-        width: 10vw;
+      .field1,
+      .field2 {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .field1 {
+        width: 12.6vw;
+        .sameline{
+          width: 100%;
+          label{
+          text-align: center;
+          }
+        }
+        .clouds {
+          position: relative;
+
+          img {
+            width: 12.6vw;
+            height: auto;
+            position: absolute;
+            object-fit: contain;
+            align-self:baseline;
+          }
+        }
+        input,
+        select,
+        .selection {
+          width: 12.6vw;
+          padding-top: 1vw;
+        }
+
+        .selection {
+          width: 13vw;
+
+          // Normal + focused state control
+          .Select__control,
+          .Select__control--is-focused {
+            border: 1px solid #ededed;
+            height: 2.5rem;
+            width: 10vw !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+          }
+
+          .Select__placeholder {
+            color: #fff;
+            padding: 0 !important;
+            width: 10vw;
+          }
+        }
+
+        .sameline {
+          width: 10vw;
+        }
+
+        .clouds {
+          width: 10vw;
+        }
+      }
+
+      .field2 {
+        input,
+        select {
+          width: 20vw !important;
+        }
+
+        .sameline {
+          width: 20vw !important;
+        }
+
+        .clouds {
+          width: 20vw !important;
+        }
       }
     }
-
-    .sameline {
-      width:10vw;
-    }
-
-    .clouds {
-      width: 10vw;
-    }
   }
-
-  .field2 {
-    input,
-    select {
-      width: 20vw !important;
-    }
-
-    .sameline {
-      width: 20vw !important;
-    }
-
-    .clouds {
-      width: 20vw !important;
-    }
-  }
-}
-
-
-
-
-}
   .left,
   .right {
+    .Select__control,
+    .Select__control--is-focused {
+      border: 1px solid #ededed;
+      height: 2.5rem;
+      outline: none !important;
+      box-shadow: none !important;
 
-        .Select__control,
-      .Select__control--is-focused {
-        border: 1px solid #ededed;
-        height: 2.5rem;
-          outline: none !important;
-  box-shadow: none !important;
-        
-      padding-left: "5vw"!important;
+      padding-left: "5vw" !important;
       padding-right: "5vw" !important;
-        width: 10vw !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-      }
-      .genderSelect__placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  text-align: center;
-  color: white;
-  padding: 0;
-  margin: 0;
-  white-space: nowrap;
-}
-
+      width: 10vw !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+    .genderSelect__placeholder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+      color: white;
+      padding: 0;
+      margin: 0;
+      white-space: nowrap;
+    }
 
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 2vw;
-    
-  .name {
-    margin-left: 3vw;
-  }
-  .email,.together {
-    margin-left: 1vw;
-  }
-  .mobile,.name{
-    margin-left: 4.5vw ;
-  }
-  .college,.city{
-    margin-left: 0.5vw;
-  }
-  .year,.states{
-margin-left: 4.5vw;
-  }
-  .referral{
-    .sameline{
-      width: 18vw;
+
+    .name {
+      margin-left: 3vw;
     }
-    .clouds{
-      width:18vw;
-      input{
+    .email,
+    .together {
+      margin-left: 1vw;
+    }
+    .mobile,
+    .name {
+      margin-left: 4.5vw;
+    }
+    .college,
+    .city {
+      margin-left: 0.5vw;
+    }
+    .year,
+    .states {
+      margin-left: 4.5vw;
+    }
+    .referral {
+      .sameline {
         width: 18vw;
       }
+      .clouds {
+        width: 18vw;
+        input {
+          width: 18vw;
+        }
+      }
     }
-  }
     .radioInput {
       appearance: none;
+      
+  padding: 0 ;
       width: 18px !important;
       height: 18px !important;
       border: 2px solid white;
@@ -246,9 +273,6 @@ margin-left: 4.5vw;
         transform: translate(-50%, -50%);
       }
     }
-    label {
-      letter-spacing: 1px;
-    }
 
     input,
     select {
@@ -258,6 +282,7 @@ margin-left: 4.5vw;
       height: 2.1rem;
       background: transparent;
       border: 0;
+      padding-top: 2vw;
       color: white;
     }
 
@@ -266,6 +291,18 @@ margin-left: 4.5vw;
       font-size: 0.75rem;
       color: #ffb3b3;
       margin: 0.2rem 0 0 0;
+    }
+  }
+
+  .right {
+    .clouds {
+      img {
+        padding-top: 3.5vw;
+      }
+      fieldset {
+        border: none;
+        box-shadow: none;
+      }
     }
   }
 }
@@ -281,11 +318,11 @@ select {
     text-align: center;
   }
 }
-.field1{
-  option{
-width: 1vw;
-font-size: 1rem;
-text-align: left;
+.field1 {
+  option {
+    width: 1vw;
+    font-size: 1rem;
+    text-align: left;
   }
 }
 .birds2 {
@@ -302,36 +339,33 @@ text-align: left;
   }
 }
 
-
 .sameline {
   font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 4px;
-  width: $inputwidth; 
-  
- label {
-  font-size: 0.8rem;
-  text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
-}
+  width: $inputwidth;
+
+  label {
+    color: #fff9e9;
+    font: 400 1.2vw "Abhaya Libre";
+    text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
+  }
 }
 
 .gendob {
   height: 1vw;
 }
 .gendob .react-select__placeholder {
-  width: auto !important;    // Allow placeholder to expand based on content
-  min-width: 8vw !important; 
+  width: auto !important; // Allow placeholder to expand based on content
+  min-width: 8vw !important;
   text-align: center !important;
   color: #cfcfcf;
   opacity: 1;
 }
 
 .clouds {
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
   height: 2.3rem;
   position: relative;
   width: 30vw;
@@ -349,18 +383,22 @@ text-align: left;
     font-size: 1rem;
     z-index: 3;
     box-sizing: border-box;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
   }
 
   img {
     position: absolute;
     overflow-x: visible;
     overflow-y: hidden;
-
-    bottom: 0;
-    height: 2.4rem;
-    object-fit: fit;
+    display: flex;
+   //align-self: center;
+    width: 100%;
+    object-fit: contain;
     pointer-events: none;
-    z-index: 3;
+    z-index: -2;
   }
 
   img:first-of-type {
@@ -371,42 +409,55 @@ text-align: left;
     right: 0;
   }
 }
+.right{
+  .clouds{
+    img{
+        position: absolute;
+    overflow-x: visible;
+    overflow-y: hidden;
+    display: flex;
+   align-self: center;
+    width: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: -2;
+    }
+  }
+}
 .sameline {
   img {
     width: 7vw;
   }
 }
 
-
 .radioGroup {
   padding-left: 3.1rem;
   padding-right: 3.1rem;
   width: 100%;
+  z-index: 5;
   height: 2.2rem;
   background: transparent;
-  border: 1px solid #ededed;
+  box-shadow: none;
   color: white;
   border-radius: 0;
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5vw;
   padding: 0.5rem 1rem;
   position: relative;
-  
-.radioLabel {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 1.2rem;
-  color: white;
-  
-  cursor: pointer;
-  font-weight: 500;
-}
+  padding-top: 1.1rem;
 
+  .radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 1.2rem;
+    color: white;
+
+    cursor: pointer;
+    font-weight: 500;
+  }
 }
 input::placeholder {
   color: #cfcfcf;
@@ -422,7 +473,6 @@ input::placeholder {
   border: 1px solid #ededed;
   color: white;
   padding: 0.5rem;
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
   cursor: pointer;
 
   width: 30vw;
@@ -440,14 +490,11 @@ input::placeholder {
   text-align: center;
 }
 .react-select__control--is-focused {
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
-
   width: 30vw;
   border-color: #ededed;
 }
 .react-select__menu {
   border-radius: 10px;
-  box-shadow: 0px 0px 10px #e5c3845e;
   margin-top: 0;
   width: 30vw;
   overflow: hidden;
@@ -463,7 +510,6 @@ input::placeholder {
   border: 1px solid #ededed;
   color: white;
   padding: 0;
-  box-shadow: 0px 0px 10.2px 0px #e5c3845e;
   cursor: pointer;
 }
 
@@ -471,7 +517,7 @@ input::placeholder {
   text-align: center !important;
   padding: 0 !important;
   margin: 0 !important;
-  caret-color: white;  
+  caret-color: white;
 }
 
 .Select__input input::placeholder {
@@ -481,7 +527,6 @@ input::placeholder {
 }
 input {
   text-align: center !important;
-  padding: 0 !important;
   margin: 0 !important;
   caret-color: white;
 }
@@ -532,10 +577,10 @@ input::placeholder {
 }
 .react-select__control {
   display: flex !important;
-  justify-content: center !important;  
-  align-items: center !important;      
+  justify-content: center !important;
+  align-items: center !important;
   padding: 0 !important;
-  width: 30vw !important;             
+  width: 30vw !important;
   background: #00000061;
   border: 1px solid #ededed;
   box-shadow: 0 0 10px #e5c3845e;
@@ -543,7 +588,7 @@ input::placeholder {
 
 .react-select__value-container {
   display: flex !important;
-  justify-content: center !important;  
+  justify-content: center !important;
   align-items: center !important;
   padding: 0 !important;
   width: 100% !important;
@@ -555,23 +600,22 @@ input::placeholder {
   padding-left: -20vw !important;
 
   input {
-    width: 100% !important;            
-    text-align: center !important;  
+    width: 100% !important;
+    text-align: center !important;
     padding: 0 !important;
     margin: 0 !important;
-    caret-color: white;                
+    caret-color: white;
   }
 }
 
 .react-select__placeholder {
   width: 100%;
-  text-align: center !important;       
+  text-align: center !important;
   color: #cfcfcf;
-  opacity: 1;                          // make sure it is visible
+  opacity: 1; // make sure it is visible
   padding: 0 !important;
   margin: 0 !important;
 }
-
 
 /*
 @media (max-aspect-ratio:1.4){
@@ -584,87 +628,240 @@ input::placeholder {
    }
 }
 */
-@media (max-width:720px)
-{.registerContainer{
-  height:80vh;
-  .registrationForm{
-    width: 100vw;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-    bottom: 0;
-    top:7rem;
-  .formColumns{
-    margin: 0;
-    padding: 0;
-    
-  margin-top: 10vw;
-    flex-direction: column;
-    gap:0;
+// @media (max-width: 720px) {
+//   .registerContainer {
+//     height: 80vh;
+//     .registrationForm {
+//       width: 100vw;
+//       display: flex;
+//       margin: 0;
+//       padding: 0;
+//       justify-content: center;
+//       align-items: center;
+//       bottom: 0;
+//       top: 7rem;
+//       .formColumns {
+//         margin: 0;
+//         padding: 0;
 
-    justify-content: center;
-    align-items: center;
-    .left,.right{
-      margin: 0;
-      
-    }
-    .left{
-      .name,.mobile,.referral,.gender,.email,.together{
-        margin: 0;
-        padding: 0;
-      }
-        .mobile{
-          .clouds{
-input{
-  
-    width:50vw;
-}
-          }
-  }
-    }
-    .right{
-      .year,.college,.states,.city{
-        margin: 0;
-        padding: 0;
-      }
-    }
-   .left,.right{
-    .sameline{
-      width: 50vw;
-    }
-    .clouds,.together,.fields{
-      width: 50vw;
-    }
-    .fields{
+//         margin-top: 10vw;
+//         flex-direction: column;
+//         gap: 0;
+
+//         justify-content: center;
+//         align-items: center;
+//         .left,
+//         .right {
+//           margin: 0;
+//         }
+//         .left {
+//           .name,
+//           .mobile,
+//           .referral,
+//           .gender,
+//           .email,
+//           .together {
+//             margin: 0;
+//             padding: 0;
+//           }
+//           .mobile {
+//             .clouds {
+//               input {
+//                 width: 50vw;
+//               }
+//             }
+//           }
+//         }
+//         .right {
+//           .year,
+//           .college,
+//           .states,
+//           .city {
+//             margin: 0;
+//             padding: 0;
+//           }
+//         }
+//         .left,
+//         .right {
+//           .sameline {
+//             width: 50vw;
+//           }
+//           .clouds,
+//           .together,
+//           .fields {
+//             width: 50vw;
+//           }
+//           .fields {
+//             flex-direction: column;
+//           }
+
+//           .field1 {
+//             width: 50vw;
+//             .sameline {
+//               width: 50vw;
+//             }
+//             .clouds {
+//               width: 50vw;
+//             }
+//           }
+//           .referral {
+//             width: 50vw;
+//             .sameline {
+//               width: 50vw;
+//             }
+//             .clouds {
+//               width: 50vw;
+//               input {
+//                 width: 50vw;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+@media (max-width: 1200px) or (max-aspect-ratio: 1.45) {
+  .registerContainer {
+    height: 63vw;
+    overflow: hidden;
+      overflow: scroll;
+    .registrationForm{
+      padding: 0;
+    .formColumns{
       flex-direction: column;
-    }
-   
-    .field1{
-      width: 50vw;
-      .sameline{
-        width: 50vw;
+      gap:2vw;
+      .left{
+        .name,.email,.mobile{
+          margin: 0;
+        }
+        .together{
+          margin-left: -0.5vw;
+        }
       }
-      .clouds{
-        width: 50vw;
-      
-    }
-    }
-    .referral{
-      width: 50vw;
-    .sameline{
-      width: 50vw;
-    }
-    .clouds{
-      width:50vw;
-      input{
-        width: 50vw;
+      .right{
+        .year,.states{
+          margin: 0;
+        }
       }
-    }
+    }}
   }
-   }
+}
+$mobilewidth:80vw;
+$part1:$mobilewidth*0.42;
+$part2:$mobilewidth*0.58;
+@media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+  .registerContainer {
+    padding: 0;
+    overflow: visible;
+    .registrationForm{
+      position: absolute;
+      top:20vw;
+      height: 65vh;
+      padding: 0;
+      overflow: scroll;
+    .formColumns{
+      flex-direction: column;
+        gap:10vw;
+      .left,.right{
+        .sameline{
+            width: $mobilewidth;
+            label{
+              font-size: 1rem;
+            }
+            img {
+    width: 15vw;
+    $h:height
+  }
+          }
+        .clouds{
+          height:8vh;
+          width:$mobilewidth;
+          input{
+            width:$mobilewidth;
+             height:7vh;
+          }
+          
+        }
+        display: flex;
+        gap:10vw;
+      }
+      .left{
+        .name,.email,.mobile{
+          margin: 0;
+        }
+        .together{
+          margin-left: -0.5vw;
+        }
+        .sameline{
+            width: $mobilewidth;
+            label{
+              font-size: 1rem;
+            }
+            img {
+    width: 15vw;
+  }
+          }
+        .clouds{
+          width:$mobilewidth;
+          
+        }
+        .fields{
+          width: $mobilewidth;
+          .field1{
+            .sameline{
+              width: $part1;
+            }
+            .clouds{width: $part1;
+            img{
+              width: $part1;
+            }}
+            width: $part1;
+          }
+          .referral{
+            
+            .sameline{
+              width: $part2;
+            }
+            width: $part2;
+            .clouds{
+              width: $part2;
+              input{
+              text-align: left!important;
+              padding-left: 10px;
+            }
+            }
+          }
+        }
+      }
+      .right{
+        .year,.states{
+          margin: 0;
+        }
+        .radioGroup{
+          padding: 0;
+          padding-bottom: 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }}
+  }
+  .confirmButton{
+    position: absolute;
+    bottom: 15vh;
+    width: 50vw;
+    height: 10vw;
+    font-size: 2rem;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    span{
+      padding: 0;
+      text-align: center;
+      width: 100%;
     }
   }
 }
-  }

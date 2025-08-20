@@ -9,10 +9,10 @@ import cloud5 from "/svgs/landing/hamClouds/cloud5.min.svg";
 import cloud6 from "/svgs/landing/hamClouds/cloud6.min.svg";
 
 const navItems = [
-  { label: "Home", katakana: "ホーム", href: "/" },
-  { label: "About Us", katakana: "アバウト・アス", href: "/about" },
-  { label: "Events", katakana: "イベンツ", href: "/events" },
-  { label: "Contact", katakana: "コンタクト", href: "/contact" },
+  { label: "Home", katakana: "ホーム", links:"/" },
+  { label: "About Us", katakana: "アバウト・アス", links:"/aboutus"},
+  { label: "Events", katakana: "イベンツ", links:"/events"},
+  { label: "Contact", katakana: "コンタクト" , links:"/contactus"},
 ];
 
 export default function Navbar() {
@@ -56,8 +56,8 @@ export default function Navbar() {
       </div>
       <ul className={styles.navList}>
         {navItems.map((item) => (
-          <li key={item.label} className={styles.navItem}>
-            <a href={item.href} className={styles.navLink}>
+          <li key={item.label} className={styles.navItem} >
+            <a className={styles.navLink} >
               <div className={styles.actualLabel}>{item.label}</div>
               <div className={styles.katakana}>{item.katakana}</div>
             </a>

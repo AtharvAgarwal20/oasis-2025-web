@@ -30,7 +30,12 @@
     // transform: translateX(-49.5%);
     // transform: translateY(-25%);
     height: 20vw;
+    aspect-ratio: 1;
     z-index: 0;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px white;
+    background-color: white;
+    display: inline-block;
   }
 
   .birds {
@@ -48,30 +53,11 @@
       object-fit: contain;
     }
   }
-  
-@media (max-aspect-ratio:1.45) {
-  
-  .birds {
-    z-index: 1;
-    margin-top: 1.5vw;
-    width: 70vw;
-    background: center / contain no-repeat url("/svgs/registration/birds.svg");
-    background-blend-mode: overlay;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .bannerImage {
-      width: 70%;
-      object-fit: contain;
-    }
-  }
-}
   .backBtn {
     outline: none;
     border: none;
     cursor: pointer;
-    z-index: 3;
+    z-index: 5;
     position: absolute;
     top: 2vw;
     left: 2vw;
@@ -81,5 +67,69 @@
   }
   .inActive {
     display: none;
+  }
+}
+
+@media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
+  .instrback {
+    height: 100svh;
+    overflow-y: hidden;
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.77);
+      z-index: 1;
+    }
+    .backgroundImage {
+      left: 50%;
+      width: auto;
+      height: 100vw;
+      transform: translateX(-45%);
+    }
+    .sun {
+      position: absolute;
+      bottom: 45vw;
+      left: 50%;
+      transform: translateX(-50%);
+      // transform: translateY(-25%);
+      height: 37vw;
+      z-index: 0;
+    }
+    .birds {
+      z-index: 1;
+      margin-top: 1.5vw;
+      width: 70vw;
+      background: center / contain no-repeat url("/svgs/registration/birds.svg");
+      background-blend-mode: overlay;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .bannerImage {
+        width: 70%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+@media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+  .instrback {
+    .backgroundImage {
+      height: auto;
+      width: 900vw;
+      translate: 0 13%;
+      // filter: blur(1px);
+      // object-fit: cover;
+    }
+    .sun {
+      position: absolute;
+      bottom: 63vw;
+      height: 67vw;
+      filter: blur(1px);
+    }
   }
 }

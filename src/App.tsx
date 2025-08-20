@@ -4,6 +4,7 @@ import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Homepage from "./Homepage";
 import Registration from "./pages/registration/Registration";
 import DoorTransition from "./pages/components/page-transition/DoorTransition";
+import AboutUs from "./pages/aboutus/AboutUs";
 
 export default function App() {
   const navigate = useNavigate();
@@ -13,8 +14,16 @@ export default function App() {
     startAnimation?: boolean;
   }
 
-  const [currentPage, setCurrentPage] = useState<"home" | "register" | "events" | "aboutus">(
-    location.pathname === "/register" ? "register" : "home"
+  const [currentPage, setCurrentPage] = useState<
+    "home" | "register" | "events" | "aboutus"
+  >(
+    location.pathname === "/register"
+      ? "register"
+      : location.pathname === "/events"
+      ? "events"
+      : location.pathname === "/aboutus"
+      ? "aboutus"
+      : "home"
   );
 
   const [doorPhase, setDoorPhase] = useState<
@@ -22,53 +31,53 @@ export default function App() {
   >("idle");
 
   const [isPreloading, setIsPreloading] = useState(
-    location.pathname === "/register"
+    location.pathname !== "/"
   );
 
-  const navigatedFromHome = useRef(false);
-useEffect(() => {
-  const path = location.pathname;
+  const nextRoute = useRef<string | null>(null);
 
-  if (path === "/") {
-    setCurrentPage("home");
-  } else if (path === "/register") {
-    setCurrentPage("register");
-    setIsPreloading(true);
-  }
-  else if (path === "/events") {
-    setCurrentPage("events");
-    setIsPreloading(true);
-  }
-  else if (path === "/aboutus") {
-    setCurrentPage("aboutus");
-    setIsPreloading(true);
-  }
-}, [location.pathname]);
+  useEffect(() => {
+    const path = location.pathname;
+
+    if (path === "/") {
+      setCurrentPage("home");
+    } else if (path === "/register") {
+      setCurrentPage("register");
+      setIsPreloading(true);
+    } else if (path === "/events") {
+      setCurrentPage("events");
+      setIsPreloading(true);
+    } else if (path === "/aboutus") {
+      setCurrentPage("aboutus");
+      setIsPreloading(true);
+    }
+  }, [location.pathname]);
 
   const handleDoorsClosed = () => {
     setDoorPhase("waiting");
 
-    if (navigatedFromHome.current) {
-      setCurrentPage("register");
+    if (nextRoute.current) {
+     navigate(nextRoute.current, { state: { startAnimation: true } });
     }
 
     setTimeout(() => {
       setDoorPhase("opening");
-      if (navigatedFromHome.current) {
-        navigate("/register", { state: { startAnimation: true } });
-      }
     }, 500);
   };
 
   const handleDoorsOpened = () => {
     setDoorPhase("idle");
-    navigatedFromHome.current = false;
+    nextRoute.current = null; 
   };
 
   const goToRegister = () => {
-    navigatedFromHome.current = true;
+  const path = "/register";
+  if (location.pathname !== path) {
+    nextRoute.current = path;
     setDoorPhase("closing");
-  };
+  }
+};
+
 
   const handlePreloaderEnter = () => {
     setIsPreloading(false);
@@ -84,7 +93,6 @@ useEffect(() => {
       />
 
       {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
-      
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToRegister={goToRegister} />
@@ -94,9 +102,16 @@ useEffect(() => {
           startAnimation={(location.state as LocationState)?.startAnimation || false}
         />
       )}
+      {!isPreloading && currentPage === "events" && <div>Events Page</div>}
+      {!isPreloading && currentPage === "aboutus" && (
+        <AboutUs/>
+      )}
+
       <Routes>
         <Route path="/" element={null} />
         <Route path="/register" element={null} />
+        <Route path="/events" element={null} />
+        <Route path="/aboutus" element={null} />
       </Routes>
     </>
   );
