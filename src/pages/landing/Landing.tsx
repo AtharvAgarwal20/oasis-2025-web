@@ -232,7 +232,7 @@ export default function Landing({ goToRegister }: LandingProps) {
     if (overlayIsActive) {
       setTimeout(() => {
         setRemoveGif();
-      }, 4000);
+      }, 3000);
     }
   }, [overlayIsActive]);
 
