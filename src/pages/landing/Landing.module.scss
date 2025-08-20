@@ -9,7 +9,11 @@ html {
   --counterBigFontSize: 2rem;
   --counterSmallFontSize: 1.5rem;
   scrollbar-width: none;
-} 
+  img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}
 
 @media (max-width: 1350px) {
   html {
@@ -71,7 +75,7 @@ body {
   }
 }
 
-.wrapperSquared{
+.wrapperSquared {
   height: 220vh;
 }
 
@@ -306,6 +310,17 @@ body {
             scale: 1.2;
           }
 
+          &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 60%;
+          background: linear-gradient(to bottom, transparent 0.1%, black);
+          pointer-events: none;
+        }
+
         }
         .socialLinksContainer {
           display: none;
@@ -354,6 +369,7 @@ body {
     }
 
     .dateCountdown {
+      user-select: none;
       position: fixed;
       z-index: 200;
       right: 2svw;
@@ -461,6 +477,7 @@ body {
       align-items: center;
       justify-items: center;
       cursor: pointer;
+      user-select: none;
 
       .registerBtn {
         grid-row: 1/2;
