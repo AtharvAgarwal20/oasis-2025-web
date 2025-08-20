@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 interface RegistrationProps {
   startAnimation: boolean; // only start animation after door opens
 }
+ const isMobile = window.innerWidth < 1200 && (window.innerWidth/window.innerHeight)<0.75
+     
 
 const Registration = ({ startAnimation }: RegistrationProps) => {
   const { contextSafe } = useGSAP();
@@ -331,7 +333,7 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
         onClick={backButtonHandler}
         className={styles.backBtn}
       >
-        <img src={Back} alt="" style={{ width: "4vw", height: "auto" }} />
+        <img src={Back} alt="" style={{ width:isMobile?"10vw": "4vw", height: "auto" }} />
       </button>
 
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />

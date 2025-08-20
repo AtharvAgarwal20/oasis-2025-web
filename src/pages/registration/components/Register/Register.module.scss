@@ -35,8 +35,17 @@ $inputheight: 10vh;
     }
   }
 }
+ input, textarea, select {
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
 
 .registerContainer {
+
+
   display: none;
   opacity: 0;
   flex-direction: column;
@@ -744,9 +753,8 @@ $part1:$mobilewidth*0.42;
 $part2:$mobilewidth*0.58;
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .registerContainer {
-    height: 100svh;
     padding: 0;
-    overflow: scroll;
+    overflow: visible;
     .registrationForm{
       position: absolute;
       top:20vw;
@@ -764,10 +772,16 @@ $part2:$mobilewidth*0.58;
             }
             img {
     width: 15vw;
+    $h:height
   }
           }
         .clouds{
+          height:8vh;
           width:$mobilewidth;
+          input{
+            width:$mobilewidth;
+             height:7vh;
+          }
           
         }
         display: flex;
@@ -806,12 +820,17 @@ $part2:$mobilewidth*0.58;
             width: $part1;
           }
           .referral{
+            
             .sameline{
               width: $part2;
             }
             width: $part2;
             .clouds{
               width: $part2;
+              input{
+              text-align: left!important;
+              padding-left: 10px;
+            }
             }
           }
         }
