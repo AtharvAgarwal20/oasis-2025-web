@@ -95,8 +95,8 @@ export default function Landing({ goToRegister }: LandingProps) {
         ease: "power2.inOut",
         scrollTrigger: {
           trigger: wrapperRef.current,
-          start: "400vh",
-          end: "+=300vh",
+          start: "200vh",
+          end: "+=200vh",
           scrub: true,
         },
       }
@@ -122,8 +122,8 @@ export default function Landing({ goToRegister }: LandingProps) {
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: wrapperRef.current,
-            start: "400vh",
-            end: "+=300vh",
+            start: "200vh",
+            end: "+=200vh",
             scrub: true,
           },
         }

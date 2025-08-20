@@ -292,6 +292,17 @@ body {
             scale: 1.2;
           }
 
+          &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 60%;
+          background: linear-gradient(to bottom, transparent 0.1%, black);
+          pointer-events: none;
+        }
+
         }
         .socialLinksContainer {
           display: none;
