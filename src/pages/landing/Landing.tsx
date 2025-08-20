@@ -131,25 +131,25 @@ export default function Landing({ goToRegister }: LandingProps) {
 
       masterTimeline
 
-        .to(
-          treeImageRef.current,
-          {
-            scale: 1.4,
-            duration: 4,
-            ease: "power2.out",
-          },
-          0
-        )
+        // .to(
+        //   treeImageRef.current,
+        //   {
+        //     scale: 1.4,
+        //     duration: 4,
+        //     ease: "power2.out",
+        //   },
+        //   0
+        // )
 
-        .to(
-          landingMobileRef.current,
-          {
-            scale: 1.1,
-            duration: 4,
-            ease: "power2.out",
-          },
-          0
-        )
+        // .to(
+        //   landingMobileRef.current,
+        //   {
+        //     scale: 1.1,
+        //     duration: 4,
+        //     ease: "power2.out",
+        //   },
+        //   0
+        // )
 
         .to(
           treeImageRef.current,
@@ -175,35 +175,35 @@ export default function Landing({ goToRegister }: LandingProps) {
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
       masterTimeline
 
-        // .to(
-        //   treeImageRef.current,
-        //   {
-        //     scale: 1.2,
-        //     duration: 4,
-        //     ease: "power2.out",
-        //   },
-        //   0
-        // )
-        // .to(
-        //   landingRef.current,
-        //   {
-        //     scale: 1.1,
-        //     duration: 4,
-        //     ease: "power2.out",
-        //   },
-        //   0
-        // )
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.2,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
+        .to(
+          landingRef.current,
+          {
+            scale: 1.1,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
 
-        // .to(
-        //   treeImageRef.current,
-        //   {
-        //     y: "-60%",
-        //     scale: 1.2,
-        //     duration: 8,
-        //     ease: "sine.in",
-        //   },
-        //   3
-        // )
+        .to(
+          treeImageRef.current,
+          {
+            y: "-60%",
+            scale: 1.2,
+            duration: 8,
+            ease: "sine.in",
+          },
+          3
+        )
 
         .to(
           landingRef.current,
