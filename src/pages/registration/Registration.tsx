@@ -6,11 +6,11 @@ import Events from "../../pages/registration/components/Events/Events";
 
 import banner from "/images/registration/reg-banner.png";
 import bgExtend from "/svgs/registration/bg-extended.svg";
-import sun from "/svgs/registration/sunNew.svg";
+// import sun from "/svgs/registration/sunNew.svg";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
@@ -181,14 +181,14 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   };
 
   // useEffect triggered only if startAnimation = true
-  useEffect(() => {
-    // if (startAnimation) {
-    toRegPage(false);
-    setTimeout(() => {
-      toEventPage();
-    }, 2500);
-    // }
-  }, []);
+  // useEffect(() => {
+  //   // if (startAnimation) {
+  //   toRegPage(false);
+  //   setTimeout(() => {
+  //     toEventPage();
+  //   }, 2500);
+  //   // }
+  // }, []);
 
   const toEventPage = () => {
     const mm = gsap.matchMedia();
