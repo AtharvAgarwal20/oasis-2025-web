@@ -1,0 +1,43 @@
+
+.contactContent {
+    .contactHeading {
+        position: relative;
+        width: clamp(12rem, 30vw, 30rem);
+        margin: auto;
+        margin-bottom: 3rem;
+        .contactBanner {
+            width: 100%;
+        }
+    }
+    .contactGalleryContainer {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9rem;
+        height: 75vh;
+
+        .contactGallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100%;
+            gap: 4.5rem 1.8rem;
+
+            .contactGalleryItem {
+                background-color: red;
+                width: 100%;
+                height: 100%;
+            }
+
+            @media (max-width: 1000px) {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+    
+}

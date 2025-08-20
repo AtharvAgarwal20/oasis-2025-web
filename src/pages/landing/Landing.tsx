@@ -22,6 +22,7 @@ import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/svgs/logo.svg";
+import ContactDoors from "../contact/ContactDoors";
 i;
 
 gsap.registerPlugin(ScrollTrigger);
@@ -69,6 +70,9 @@ export default function Landing({ goToRegister }: LandingProps) {
   const dateCountdownRef = useRef<HTMLDivElement>(null);
   const registerButtonRef = useRef<HTMLDivElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
+  const treeContainerRef = useRef<HTMLDivElement>(null);
+  const aboutUsRef = useRef<HTMLDivElement>(null);
+  const bottomContentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
@@ -310,7 +314,7 @@ export default function Landing({ goToRegister }: LandingProps) {
 
             <Navbar />
 
-            <div className={styles.treeContainer}>
+            <div className={styles.treeContainer} ref={treeContainerRef}>
               <div className={styles.tree} ref={treeImageRef}>
                 <div className={styles.socialLinksContainer}>
                   <div className={styles.wire}>
@@ -350,6 +354,18 @@ export default function Landing({ goToRegister }: LandingProps) {
                   fetchPriority="high"
                   style={{ contain: "none" }}
                 />
+              </div>
+              <div className={styles.bottomContent} ref={bottomContentRef}>
+                <div className={styles.dummyAboutUs} ref={aboutUsRef} /> {/* replace this with actual about us and give it the required ref */}
+                {
+                  // Don't render contact doors until the refs are set
+                  treeContainerRef.current && aboutUsRef.current &&
+                  <ContactDoors
+                    aboutUsRef={aboutUsRef} 
+                    treeContRef={treeContainerRef}
+                    bottomContentRef={bottomContentRef}
+                  />
+                }
               </div>
               <div className={styles.treeExtender}></div>
             </div>
