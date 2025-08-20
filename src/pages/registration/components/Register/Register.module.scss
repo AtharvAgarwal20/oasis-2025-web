@@ -35,17 +35,13 @@ $inputheight: 10vh;
     }
   }
 }
-input:-webkit-autofill,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
-  box-shadow: 0 0 0 1000px transparent inset !important;
-  -webkit-text-fill-color: white !important;
-  color: white !important;
-  background-color: transparent !important;
-  transition: background-color 5000s ease-in-out 0s;
+ input, textarea, select {
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }
-
 
 .registerContainer {
 
@@ -117,7 +113,6 @@ select:-webkit-autofill {
         .sameline{
           width: 100%;
           label{
-            z-index: 100;
           text-align: center;
           }
         }
@@ -236,8 +231,6 @@ select:-webkit-autofill {
       margin-left: 4.5vw;
     }
     .referral {
-    
-
       .sameline {
         width: 18vw;
       }
@@ -252,8 +245,8 @@ select:-webkit-autofill {
       appearance: none;
       
   padding: 0 ;
-      width: 1vw !important;
-      height: 1vw !important;
+      width: 18px !important;
+      height: 18px !important;
       border: 2px solid white;
       border-radius: 50%;
       position: relative;
@@ -298,14 +291,6 @@ select:-webkit-autofill {
       font-size: 0.75rem;
       color: #ffb3b3;
       margin: 0.2rem 0 0 0;
-    }
-  }
-  .left{
-    .clouds{
-      input{
-        text-align: center;
-        height: 4vw;
-      }
     }
   }
 
@@ -450,7 +435,7 @@ select {
   padding-right: 3.1rem;
   width: 100%;
   z-index: 5;
-  height: 3vw;
+  height: 2.2rem;
   background: transparent;
   box-shadow: none;
   color: white;
@@ -541,15 +526,15 @@ input::placeholder {
   opacity: 1;
 }
 input {
-  text-align: center !important;
-  margin: 0 !important;
-  caret-color: white;
+  // text-align: center !important;
+  // margin: 0 !important;
+  // caret-color: white;
 }
 
 input::placeholder {
-  text-align: center !important;
-  color: #cfcfcf;
-  opacity: 1;
+  // text-align: center !important;
+  // color: #cfcfcf;
+  // opacity: 1;
 }
 
 .react-select__control {
@@ -737,7 +722,7 @@ input::placeholder {
 //   }
 // }
 
-@media (max-width: 1200px) or (max-aspect-ratio: 1.45) {
+@media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
   .registerContainer {
     height: 63vw;
     overflow: hidden;
@@ -775,12 +760,10 @@ $part2:$mobilewidth*0.58;
       top:20vw;
       height: 65vh;
       padding: 0;
-      overflow-y: scroll;
-      overflow-x:hidden;
+      overflow: scroll;
     .formColumns{
       flex-direction: column;
         gap:10vw;
-        
       .left,.right{
         .sameline{
             width: $mobilewidth;
@@ -845,11 +828,9 @@ $part2:$mobilewidth*0.58;
             .clouds{
               width: $part2;
               input{
-              text-align: center;
-              width: $part2;
+              text-align: left!important;
+              padding-left: 10px;
             }
-           
-
             }
           }
         }
@@ -861,7 +842,6 @@ $part2:$mobilewidth*0.58;
         .radioGroup{
           padding: 0;
           padding-bottom: 1.5rem;
-          padding-top: 0.5rem;
           display: flex;
           align-items: center;
           justify-content: center;

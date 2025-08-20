@@ -33,6 +33,7 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
             For further details contact, Parimal: 8638304074, Ishita: 7804051996
           </li>
           <li>For detailed Instructions click here</li>
+          <li className={styles.eventItemOverlay}></li>
         </ul>
 
         <button className={styles.googleButton} onClick={onGoogleSignIn}>

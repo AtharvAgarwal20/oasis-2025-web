@@ -15,16 +15,16 @@ import { useCookies } from "react-cookie";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import Back from "/svgs/registration/back.svg";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface RegistrationProps {
   startAnimation: boolean;
   goToPage: (path: string) => void;
 }
- const isMobile = window.innerWidth < 1200 && (window.innerWidth/window.innerHeight)<0.75
-     
+const isMobile =
+  window.innerWidth < 1200 && window.innerWidth / window.innerHeight < 0.75;
 
-const Registration = ({ startAnimation, goToPage }: RegistrationProps) => {
+const Registration = ({ goToPage }: RegistrationProps) => {
   const { contextSafe } = useGSAP();
   const [currentPage, setCurrentPage] = useState(1);
   const [userEmail, setUserEmail] = useState("");
@@ -270,7 +270,7 @@ const Registration = ({ startAnimation, goToPage }: RegistrationProps) => {
   const backButtonHandler = () => {
     switch (currentPage) {
       case 1:
-       goToPage("/")
+        goToPage("/");
         break;
       case 2:
         console.log("Navigating back to the first page");
@@ -303,7 +303,7 @@ const Registration = ({ startAnimation, goToPage }: RegistrationProps) => {
             //   access_token: response.access_token,
             // });
             setUserEmail(res.data.email);
-            if (res.data.email && startAnimation) toRegPage(false);
+            if (res.data.email) toRegPage(false);
           }
         })
         .catch((err) => {
@@ -334,7 +334,11 @@ const Registration = ({ startAnimation, goToPage }: RegistrationProps) => {
         onClick={backButtonHandler}
         className={styles.backBtn}
       >
-        <img src={Back} alt="" style={{ width:isMobile?"12vw": "4vw", height: "auto" }} />
+        <img
+          src={Back}
+          alt=""
+          style={{ width: isMobile ? "12vw" : "4vw", height: "auto" }}
+        />
       </button>
 
       <Instructions onGoogleSignIn={onGoogleSignIn} ref={elemRef1} />
