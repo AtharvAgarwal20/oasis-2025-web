@@ -131,46 +131,46 @@ export default function Landing({ goToRegister }: LandingProps) {
 
       masterTimeline
 
-        // .to(
-        //   treeImageRef.current,
-        //   {
-        //     scale: 1.4,
-        //     duration: 4,
-        //     ease: "power2.out",
-        //   },
-        //   0
-        // )
+        .to(
+          treeImageRef.current,
+          {
+            scale: 1.2,
+            duration: 4,
+            ease: "sine.inOut",
+          },
+          0
+        )
 
-        // .to(
-        //   landingMobileRef.current,
-        //   {
-        //     scale: 1.1,
-        //     duration: 4,
-        //     ease: "power2.out",
-        //   },
-        //   0
-        // )
+        .to(
+          landingMobileRef.current,
+          {
+            scale: 1.05,
+            duration: 4,
+            ease: "power2.out",
+          },
+          0
+        )
 
         .to(
           treeImageRef.current,
           {
-            y: "-30%",
+            y: "-40%",
             duration: 6,
-            scale: 1.4,
+            scale: 1.2,
             ease: "sine.in",
           },
-          0
-        );
+          3
+        )
 
-      // .to(
-      //   landingMobileRef.current,
-      //   {
-      //     y: "-30%",
-      //     duration: 6,
-      //     ease: "sine.in",
-      //   },
-      //   4
-      // );
+      .to(
+        landingMobileRef.current,
+        {
+          y: "-30%",
+          duration: 6,
+          ease: "sine.in",
+        },
+        3
+      );
     });
     mm.add("(min-width: 730px) and (aspect-ratio > 8/12)", () => {
       masterTimeline

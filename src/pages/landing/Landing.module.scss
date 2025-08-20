@@ -285,27 +285,15 @@ body {
 
     @media (aspect-ratio < 8/12), (max-width: 730px) {
       .treeContainer {
+        position: fixed;
         .tree {
           margin-top: clamp(0svh, 100svh - 80svw, 100svh);
           img {
             scale: 1.2;
           }
 
-          &::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 80%;
-          background: none;
-          pointer-events: none;
-        }
         }
         .socialLinksContainer {
-          display: none;
-        }
-        .treeExtender {
           display: none;
         }
       }
