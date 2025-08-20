@@ -79,6 +79,45 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
           });
       })
     );
+    mm.add(
+      "(max-width: 1200px) and (aspect-ratio < 1.45)",
+      contextSafe(() => {
+        gsap.to(bgRef.current, {
+          x: "-42.5%",
+          duration: 1.5,
+          // ease: "power1.out",
+          onStart: () => setIsAnim(true),
+          onComplete: () => setIsAnim(false),
+        });
+        gsap.to(sunRef.current, {
+          left: "-5%",
+          bottom: "17vw",
+          x: "0%",
+          duration: 1.5,
+          // ease: "power1.out",
+        });
+        const tl = gsap.timeline();
+        tl.to(elemRef2.current, {
+          opacity: 0,
+          duration: 1,
+          ease: "power1.out",
+        })
+          .set(elemRef2.current, {
+            display: "none",
+            ease: "power1.out",
+          })
+          .set(elemRef1.current, {
+            display: "flex",
+            ease: "power1.out",
+          })
+          .to(elemRef1.current, {
+            opacity: 1,
+            duration: 1,
+            ease: "power1.out",
+            onComplete: () => setCurrentPage(1),
+          });
+      })
+    );
   };
 
   const toRegPage = (back: boolean) => {
@@ -149,18 +188,56 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
   };
 
   // useEffect triggered only if startAnimation = true
- useEffect(() => {
+  useEffect(() => {
     if (startAnimation) {
-    toRegPage(false);
-    setTimeout(() => {
-      toEventPage();
-    }, 2500);
+      toRegPage(false);
+      setTimeout(() => {
+        toEventPage();
+      }, 2500);
     }
   }, []);
 
   const toEventPage = () => {
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+      contextSafe(() => {
+        gsap.to(bgRef.current, {
+          x: "-1%",
+          duration: 1.5,
+          // ease: "power1.out",
+          onStart: () => setIsAnim(true),
+          onComplete: () => setIsAnim(false),
+        });
+        gsap.to(sunRef.current, {
+          left: "67%",
+          bottom: "17vw",
+          x: "0%",
+          duration: 1.5,
+          // ease: "power1.out",
+        });
+        const tl = gsap.timeline();
+        tl.to(elemRef2.current, {
+          opacity: 0,
+          duration: 1,
+          ease: "power1.out",
+        })
+          .set(elemRef2.current, {
+            display: "none",
+            ease: "power1.out",
+          })
+          .set(elemRef3.current, {
+            display: "flex",
+            ease: "power1.out",
+          })
+          .to(elemRef3.current, {
+            opacity: 1,
+            duration: 1,
+            ease: "power1.out",
+            onComplete: () => setCurrentPage(3),
+          });
+      })();
+    });
+    mm.add("(max-width: 1200px) and (aspect-ratio < 1.45)", () => {
       contextSafe(() => {
         gsap.to(bgRef.current, {
           x: "-1%",
@@ -215,18 +292,14 @@ const Registration = ({ startAnimation }: RegistrationProps) => {
 
   const onGoogleSignIn = useGoogleLogin({
     onSuccess: (response) => {
-      
-          console.log(response.access_token)
+      console.log(response.access_token);
       axios
         .post("https://bits-oasis.org/2025/main/registrations/google-reg/", {
           access_token: response.access_token,
-          
         })
         .then((res) => {
-          
           setCookies("Access_token", response.access_token);
           if (res.data.exists) {
-
             setCookies("user-auth", res.data);
             setCookies("Authorization", res.data.tokens.access);
             window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;

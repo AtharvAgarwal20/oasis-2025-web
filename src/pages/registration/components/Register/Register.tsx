@@ -13,8 +13,6 @@ import statesData from "./cities.json";
 
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
-import CloudLeft from "/svgs/registration/left.svg";
-import CloudRight from "/svgs/registration/right.svg";
 import Refer from "/svgs/registration/field4.svg"
 import Gen from "/svgs/registration/field3.svg"
 interface StateItem {

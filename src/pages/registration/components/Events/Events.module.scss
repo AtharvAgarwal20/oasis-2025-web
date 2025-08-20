@@ -195,36 +195,8 @@
   }
 }
 
-@media (max-aspect-ratio: 1.45) {
-  .eventsContainer {
-    .scrollBarContainer {
-      display: none;
-    }
-    .eventsListCont {
-      height: 70vh;
-      .eventsList {
-        padding-top: 20px;
-        height: 50vh;
-        flex-wrap: nowrap;
-        gap: clamp(0.5rem, 2.5vh + 0.1rem, 1.9rem) !important;
-
-        .eventItem {
-          button {
-            cursor: pointer !important;
-            font-size: clamp(0.5rem, 1.5vw + 0.1rem, 1.3rem) !important;
-          }
-        }
-      }
-      .confirmButton {
-        margin-top: clamp(2.5rem, 2.5vh + 2.1rem, 3.9rem);
-      }
-    }
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    .heading {
-      font-size: 1.4 * 3vw !important;
-      margin: 1.4 * 3vw 0 1.4 * 3vw 0 !important;
-    }
+@media (max-width: 1200px) or (max-aspect-ratio: 1.45) {
+  .eventsContainer{
+    height: 63vw;
   }
 }

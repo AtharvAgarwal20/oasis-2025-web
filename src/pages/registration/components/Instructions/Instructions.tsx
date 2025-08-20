@@ -29,7 +29,7 @@ const Instructions = forwardRef<HTMLDivElement, PropsType>(
         </ul>
 
         <button className={styles.googleButton} onClick={onGoogleSignIn}>
-          SIGN IN WITH GOOGLE
+          Sign in with Google
         </button>
       </div>
     );

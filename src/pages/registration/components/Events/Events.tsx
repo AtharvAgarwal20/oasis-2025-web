@@ -70,15 +70,8 @@ const Events = forwardRef<
   const { contextSafe } = useGSAP();
 
   const sortBySearch = (data: typeof eventsOptions, search: string) => {
-    const lowerSearch = search.toLowerCase();
-    return [...data].sort((a, b) => {
-      const aMatch = a.name.toLowerCase().includes(lowerSearch);
-      const bMatch = b.name.toLowerCase().includes(lowerSearch);
-
-      if (aMatch && !bMatch) return -1;
-      if (!aMatch && bMatch) return 1;
-      return 0;
-    });
+    const lowerSearch = search.trim().toLowerCase();
+    return data.filter((item) => item.name.toLowerCase().includes(lowerSearch));
   };
 
   const sortedArray = sortBySearch(eventsOptions, search);
@@ -383,7 +376,11 @@ const Events = forwardRef<
             <div className={styles.eventDescription} ref={eventDescRef}>
               <h2>{activeEvent.name}</h2>
               <p>{activeEvent.about}</p>
-              <button>ADD</button>
+              <button onClick={() => handleEvent(activeEvent)}>
+                {selectedEvents.some((e) => e.id === activeEvent.id)
+                  ? "REMOVE"
+                  : "ADD"}
+              </button>
             </div>
           )}
         </div>
