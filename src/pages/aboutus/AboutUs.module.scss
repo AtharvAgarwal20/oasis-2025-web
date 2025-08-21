@@ -64,7 +64,7 @@
       }
 
       .fan2 {
-         object-fit: contain;
+        object-fit: contain;
         position: absolute;
         top: -7vh;
         right: -5vw;
@@ -118,64 +118,58 @@
       }
     }
   }
-  
-
-
-}.controls {
+}
+.controls {
   padding-top: 1vw;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
   perspective: 200px;
-  
-   perspective-origin: center;
-    .buttonContainer {
-   top: 20vh;
-   left: 10vw;
-     transform: rotateY(10deg);
-     transform-style: preserve-3d;
-  position: relative;
-  width: 100%;
-  max-width: 273px; 
-  aspect-ratio: 273 / 137; 
-}
 
-.buttonGroup {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  perspective-origin: center;
+  .buttonContainer {
+    top: 20vh;
+    left: 10vw;
+    transform: rotateY(10deg);
+    transform-style: preserve-3d;
+    position: relative;
+    width: 100%;
+    max-width: 273px;
+    aspect-ratio: 273 / 137;
+  }
 
+  .buttonGroup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 0 20px;
-  rotate: -5deg;
-  .a1{
-  width: 5px;
-  background-color: #f2dd7c;
-  margin-top: 3px;
-  height: 45%;
-  rotate: 5deg;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 20px;
+    rotate: -5deg;
+    .a1 {
+      width: 5px;
+      background-color: #f2dd7c;
+      margin-top: 3px;
+      height: 45%;
+      rotate: 5deg;
+    }
+    button {
+      background: #111111;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    img {
+      width: 34px;
+      height: 34px;
+    }
+  }
 }
-button {
-background: #111111;
-border: none;
-  cursor: pointer;
-  padding: 0;
-}
- img {
-  width: 34px;
-  height: 34px;
-}
-}
-
-}
-
-
 
 .background {
   width: 100%;
@@ -184,30 +178,30 @@ border: none;
 }
 
 @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
-.AboutContainer{
-  overflow-y: scroll;
-  .wrapper{
-  perspective: none;
-  width: 80vw;
-  .vid{
-    transform: none;
-  }
-}
-  .abt{
-    perspective: none;
-    width: 80vw;
-    left: 10vw;
-    top:50vh;
-  .aboutback{
-    transform: none;
-  }
-  }
-  .controls{
-    
+  .AboutContainer {
+    overflow-y: scroll;
+    .wrapper {
+      perspective: none;
+      width: 80vw;
+      .vid {
+        transform: none;
+      }
+    }
+    .abt {
+      perspective: none;
+      width: 80vw;
+      left: 10vw;
+      top: 50vh;
+      .aboutback {
+        transform: none;
+      }
+    }
+    .controls {
       padding-top: 50px;
-    perspective: none;
-    .buttonContainer{
-      transform: none;
+      perspective: none;
+      .buttonContainer {
+        transform: none;
+      }
+    }
   }
 }
- }}

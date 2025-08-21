@@ -23,6 +23,7 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
+import AboutUs from "../aboutus/AboutUs";
 // import ContactDoors from "../contact/ContactDoors";
 i;
 
@@ -294,6 +295,7 @@ export default function Landing({
           } ${overlayIsActive ? styles.mask : ""}`}
           ref={wrapperRef}
         >
+          <Navbar />
           <div
             className={
               overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
@@ -318,8 +320,6 @@ export default function Landing({
             />
 
             <img src={mobileCloud} className={styles.mobileCloud} />
-
-            <Navbar />
 
             <div className={styles.treeContainer} ref={treeImageRef}>
               <div className={styles.tree}>
@@ -436,6 +436,15 @@ export default function Landing({
               />
             }
           </div> */}
+      </div>
+      <div
+        className={
+          overlayIsActive
+            ? styles.aboutUsContainer
+            : `${styles.noneDisplay} ${styles.aboutUsContainer}`
+        }
+      >
+        <AboutUs />
       </div>
     </>
   );
