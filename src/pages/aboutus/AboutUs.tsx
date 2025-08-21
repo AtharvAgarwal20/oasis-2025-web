@@ -271,15 +271,16 @@ const AboutUs = () => {
 <div>
        <div className={styles.controls}>
   <div className={styles.buttonContainer}>
-    <div className={styles.a1}></div>
+   
   
         <img src="/svgs/aboutus/bord.svg" className={styles.background} alt="" />
       
     <div className={styles.buttonGroup}>
      
       <button onClick={prevVideo}><img src={prev} alt=""  className={styles.btns1}/></button>
-      
+       <div className={styles.a1}></div>
       <button onClick={togglePlayPause}><img src={pause} alt="" className={styles.btns2} /></button>
+       <div className={styles.a1}></div>
       <button onClick={nextVideo}><img src={next} alt=""  className={styles.btns3}/></button>
     </div>
   </div>

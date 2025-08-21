@@ -116,17 +116,27 @@
     }
   }
 }.controls {
+  padding-top: 1vw;
+  
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.buttonContainer {
+  perspective: 200px;
+  
+   perspective-origin: center;
+    .buttonContainer {
+   top: 20vh;
+   left: 10vw;
+     transform: rotateY(10deg);
+     transform-style: preserve-3d;
   position: relative;
   width: 100%;
   max-width: 273px; 
   aspect-ratio: 273 / 137; 
 }
+}
+
+
 
 .background {
   width: 100%;
@@ -160,4 +170,11 @@ border: none;
 .buttonGroup img {
   width: 24px;
   height: 24px;
+}
+.a1{
+  width: 5px;
+  background-color: #f2dd7c;
+  margin-top: 3px;
+  height: 45%;
+  rotate: 5deg;
 }
