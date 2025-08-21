@@ -546,3 +546,18 @@ body {
 //   mask-position: center;
 //   mask-repeat: no-repeat;
 // }
+
+
+    .bottomContent {
+      position: absolute;
+      min-height: 100vh;
+      width: 100%;
+      bottom: 0px;
+
+      .dummyAboutUs {
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+        background-color: turquoise;
+      }
+    }
