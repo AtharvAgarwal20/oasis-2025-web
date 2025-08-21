@@ -1,0 +1,63 @@
+import { FaEnvelope, FaPhone } from 'react-icons/fa6';
+import styles from './ContactGallery.module.scss';
+import contacts from './contacts';
+import contactBanner from '/images/contact/contact-banner.png'
+
+
+export default function ContactGallery() {
+
+    const launchPhone = (phone: string) => window.location.href = `tel:${phone}`;
+    const launchEmail = (email: string) => window.location.href = `mailto:${email}`;
+
+    return (
+        <div className={styles.contactContent}>
+            <div className={styles.contactHeading}>
+                <img className={styles.contactBanner} src={contactBanner}></img>
+            </div>
+            <div className={styles.contactGalleryContainer}>
+                <div className={styles.contactGallery}>
+                    {
+                        contacts.slice(0, 4).map((contact, index) => (
+                            <div className={styles.contactItem} key={index}>
+                                <div className={styles.contactCard}>
+                                    <div className={styles.contactImgContainer}>
+                                        <img src={contact.imageURL} alt={contact.name} />
+                                    </div>
+                                    <div className={styles.contactDetails}>
+                                        <div className={styles.contactName}>{contact.name}</div>
+                                        <div className={styles.contactPosition}>{contact.role}</div>
+                                        <div className={styles.contactLinks}>
+                                            <div className={styles.contactPhone}><FaPhone className={styles.contactIcon} /></div>
+                                            <div className={styles.contactEmail}><FaEnvelope className={styles.contactIcon} /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div className={styles.contactGallery}>
+                    {
+                        contacts.slice(4, 8).map((contact, index) => (
+                            <div className={styles.contactItem} key={index}>
+                                <div className={styles.contactCard}>
+                                    <div className={styles.contactImgContainer}>
+                                        <img src={contact.imageURL} alt={contact.name} />
+                                    </div>
+                                    <div className={styles.contactDetails}>
+                                        <div className={styles.contactName}>{contact.name}</div>
+                                        <div className={styles.contactPosition}>{contact.role}</div>
+                                        <div className={styles.contactLinks}>
+                                            <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
+                                            <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    )
+}

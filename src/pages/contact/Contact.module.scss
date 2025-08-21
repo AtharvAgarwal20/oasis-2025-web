@@ -1,0 +1,72 @@
+// body {position: static;}
+
+.contactPageWrapper {
+    height: 100vh;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {display: none;}
+    .contactSection, .contactPage {
+        position: relative;
+        width: 100svw;
+
+        .contactContent {
+            padding: 1.2rem 1.8rem;
+            position: relative;
+        }
+
+        .contactBg {
+            position: absolute;
+            top: 0px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100%;
+            overflow: hidden;
+
+            .contactBgImg {
+                width: 100%;
+                height: 100%;
+
+                // height: 100%;
+                // max-height: 100%;
+                // object-fit: cover;
+
+                &:nth-of-type(1) {object-position: right;}
+                &:nth-of-type(2) {object-position: left;}
+            }
+        }
+    }
+
+    .contactPage {
+        background-size: auto;
+        background-repeat: repeat;
+        background-position: center;
+        min-height: 100vh;
+    }
+
+    .contactDoors {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        overflow: hidden;
+        grid-template-columns: 1fr 1fr;
+
+        .contactDoor {
+            width: 100%;
+            height: 100vh;
+
+            .contactDoorImg {
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                object-fit: cover;
+            }
+
+            &:nth-of-type(1) .contactBgImg {object-position: right;}
+            &:nth-of-type(2) .contactBgImg {object-position: left;}
+        }
+
+        &::-webkit-scrollbar {display: none;}
+}
+}

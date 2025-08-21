@@ -319,7 +319,7 @@ export default function DrawingPreloader({
               : `${styles.drawingPreloader} ${styles.mobilePreloader}`
           }
         >
-          <g clip-path="url(#prefix__clip0_3633_193)" stroke="#000">
+          <g clipPath="url(#prefix__clip0_3633_193)" stroke="#000">
             <path
               stroke="black"
               fill="none"
