@@ -46,10 +46,7 @@ select:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-
 .registerContainer {
-
-
   display: none;
   opacity: 0;
   flex-direction: column;
@@ -57,7 +54,7 @@ select:-webkit-autofill {
   justify-content: center;
   width: 100vw;
   height: 43vw;
-  //margin-bottom: 5vw;
+  margin-bottom: 5vw;
 }
 
 .registrationForm {
@@ -114,11 +111,11 @@ select:-webkit-autofill {
 
       .field1 {
         width: 12.6vw;
-        .sameline{
+        .sameline {
           width: 100%;
-          label{
+          label {
             z-index: 100;
-          text-align: center;
+            text-align: center;
           }
         }
         .clouds {
@@ -129,7 +126,7 @@ select:-webkit-autofill {
             height: auto;
             position: absolute;
             object-fit: contain;
-            align-self:baseline;
+            align-self: baseline;
           }
         }
         input,
@@ -236,8 +233,6 @@ select:-webkit-autofill {
       margin-left: 4.5vw;
     }
     .referral {
-    
-
       .sameline {
         width: 18vw;
       }
@@ -247,49 +242,45 @@ select:-webkit-autofill {
         input {
           width: 18vw;
         }
-        
-input[type="date"]::-webkit-calendar-picker-indicator {
-  background: transparent;
-  color: transparent;
-  opacity: 0; /* hides icon */
-  position: absolute;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  z-index: 3;
-}
 
+        input[type="date"]::-webkit-calendar-picker-indicator {
+          background: transparent;
+          color: transparent;
+          opacity: 0; /* hides icon */
+          position: absolute;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          z-index: 3;
+        }
 
+        .dateWrapper input[type="date"] {
+          position: relative;
+          z-index: 2;
+          background: transparent;
+          color: white;
+          padding-right: 2.5rem; // leave space for icon
+        }
+        .dateWrapper {
+          position: relative;
+        }
+        .dat {
+          position: absolute !important;
 
-.dateWrapper input[type="date"] {
-  position: relative;
-  z-index: 2;
-  background: transparent;
-  color: white;
-  padding-right: 2.5rem; // leave space for icon
-}
-.dateWrapper{
-  position: relative;
-
-}
-.dat {
-  position: absolute!important;
-  
-  top:1.25vw;
-  left:0.5vw;
-  width: 3vw;
-  height: 3vw;
-  pointer-events: none;
-  z-index: 1;
-}
-
+          top: 1.25vw;
+          left: 0.5vw;
+          width: 3vw;
+          height: 3vw;
+          pointer-events: none;
+          z-index: 1;
+        }
       }
     }
     .radioInput {
       appearance: none;
-      
-  padding: 0 ;
+
+      padding: 0;
       width: 1vw !important;
       height: 1vw !important;
       border: 2px solid white;
@@ -338,9 +329,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       text-align: center;
     }
   }
-  .left{
-    .clouds{
-      input{
+  .left {
+    .clouds {
+      input {
         text-align: center;
         height: 4vw;
       }
@@ -447,7 +438,7 @@ select {
     overflow-x: visible;
     overflow-y: hidden;
     display: flex;
-   //align-self: center;
+    //align-self: center;
     width: 100%;
     object-fit: contain;
     pointer-events: none;
@@ -462,19 +453,18 @@ select {
     right: 0;
   }
 }
-.right{
-  
-  .clouds{
-    img{
-        position: absolute;
-    overflow-x: visible;
-    overflow-y: hidden;
-    display: flex;
-   align-self: center;
-    width: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: -2;
+.right {
+  .clouds {
+    img {
+      position: absolute;
+      overflow-x: visible;
+      overflow-y: hidden;
+      display: flex;
+      align-self: center;
+      width: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      z-index: -2;
     }
   }
 }
@@ -578,7 +568,7 @@ input::placeholder {
   text-align: center !important;
   color: #cfcfcf;
   opacity: 1;
- }
+}
 // input {
 //   text-align: center !important;
 //   margin: 0 !important;
@@ -780,135 +770,163 @@ input::placeholder {
   .registerContainer {
     height: 63vw;
     overflow: hidden;
-      overflow: scroll;
-    .registrationForm{
+    overflow: scroll;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .registrationForm {
       padding: 0;
-    .formColumns{
-      flex-direction: column;
-      gap:2vw;
-      .left{
-        .name,.email,.mobile{
-          margin: 0;
+      .formColumns {
+        flex-direction: column;
+        gap: 2vw;
+        .left {
+          .name,
+          .email,
+          .mobile {
+            margin: 0;
+          }
+          .together {
+            margin-left: -0.5vw;
+          }
         }
-        .together{
-          margin-left: -0.5vw;
+        .right {
+          .year,
+          .states {
+            margin: 0;
+          }
         }
       }
-      .right{
-        .year,.states{
-          margin: 0;
-        }
-      }
-    }}
+    }
   }
 }
-$mobilewidth:80vw;
-$part1:$mobilewidth*0.42;
-$part2:$mobilewidth*0.58;
+$mobilewidth: 80vw;
+$part1: $mobilewidth * 0.42;
+$part2: $mobilewidth * 0.58;
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .registerContainer {
     padding: 0;
     overflow: visible;
-    .registrationForm{
+    .registrationForm {
       position: absolute;
-      top:20vw;
+      top: 20vw;
       height: 65vh;
       padding: 0;
       overflow-y: scroll;
-      overflow-x:hidden;
-    .formColumns{
-      flex-direction: column;
-        gap:10vw;
-        
-      .left,.right{
-        .sameline{
-            width: $mobilewidth;
-            label{
-              font-size: 1rem;
-            }
-            img {
-    width: 15vw;
-    $h:height
-  }
-          }
-        .clouds{
-          height:8vh;
-          width:$mobilewidth;
-          input{
-            width:$mobilewidth;
-             height:7vh;
-          }
-          
-        }
-        display: flex;
-        gap:10vw;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
       }
-      .left{
-        .name,.email,.mobile{
-          margin: 0;
-        }
-        .together{
-          margin-left: -0.5vw;
-        }
-        .sameline{
-            width: $mobilewidth;
-            label{
-              font-size: 1rem;
-            }
-            img {
-    width: 15vw;
-  }
-          }
-        .clouds{
-          width:$mobilewidth;
-          
-        }
-        .fields{
-          width: $mobilewidth;
-          .field1{
-            .sameline{
-              width: $part1;
-            }
-            .clouds{width: $part1;
-            img{
-              width: $part1;
-            }}
-            width: $part1;
-          }
-          .referral{
-            
-            .sameline{
-              width: $part2;
-            }
-            width: $part2;
-            .clouds{
-              width: $part2;
-              input{
-              text-align: center;
-              width: $part2;
-            }
-           
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,
+        #000 93%,
+        transparent 100%
+      );
+      --webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,
+        #000 93%,
+        transparent 100%
+      );
+      .formColumns {
+        flex-direction: column;
+        gap: 10vw;
 
+        .left,
+        .right {
+          .sameline {
+            width: $mobilewidth;
+            label {
+              font-size: 1rem;
+            }
+            img {
+              width: 15vw;
+              $h: height;
+            }
+          }
+          .clouds {
+            height: 8vh;
+            width: $mobilewidth;
+            input {
+              width: $mobilewidth;
+              height: 7vh;
+            }
+          }
+          display: flex;
+          gap: 10vw;
+        }
+        .left {
+          .name,
+          .email,
+          .mobile {
+            margin: 0;
+          }
+          .together {
+            margin-left: -0.5vw;
+          }
+          .sameline {
+            width: $mobilewidth;
+            label {
+              font-size: 1rem;
+            }
+            img {
+              width: 15vw;
+            }
+          }
+          .clouds {
+            width: $mobilewidth;
+          }
+          .fields {
+            width: $mobilewidth;
+            .field1 {
+              .sameline {
+                width: $part1;
+              }
+              .clouds {
+                width: $part1;
+                img {
+                  width: $part1;
+                }
+              }
+              width: $part1;
+            }
+            .referral {
+              .sameline {
+                width: $part2;
+              }
+              width: $part2;
+              .clouds {
+                width: $part2;
+                input {
+                  text-align: center;
+                  width: $part2;
+                }
+              }
             }
           }
         }
-      }
-      .right{
-        .year,.states{
-          margin: 0;
+        .right {
+          .year,
+          .states {
+            margin: 0;
+          }
+          .radioGroup {
+            padding: 0;
+            padding-bottom: 1.5rem;
+            padding-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
-        .radioGroup{
-          padding: 0;
-          padding-bottom: 1.5rem;
-          padding-top: 0.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
       }
-    }}
+    }
   }
-  .confirmButton{
+  .confirmButton {
     position: absolute;
     bottom: 15vh;
     width: 50vw;
@@ -917,7 +935,7 @@ $part2:$mobilewidth*0.58;
     text-align: center;
     padding: 0;
     margin: 0;
-    span{
+    span {
       padding: 0;
       text-align: center;
       width: 100%;

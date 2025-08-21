@@ -4,7 +4,7 @@ import styles from "./AboutUs.module.scss";
 import Header from "/svgs/aboutus/header.svg";
 import fan from "/svgs/aboutus/fan.svg";
 import Dagger from "/svgs/aboutus/dagger.svg"
-import Lantern from "/svgs/aboutus/lantern.svg"
+// import Lantern from "/svgs/aboutus/lantern.svg"
 const icons = [
   "/svgs/aboutus/letter1.svg",
   "/svgs/aboutus/letter2.svg",
