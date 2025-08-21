@@ -186,14 +186,17 @@ const Registration = ({ goToPage }: RegistrationProps) => {
     })();
   };
 
-  useEffect(() => {
-    // if (startAnimation) {
-    toRegPage(false);
-    // setTimeout(() => {
-    //   toEventPage();
-    // }, 2500);
-    // }
-  }, []);
+  useEffect(()=>{
+    document.body.style.position = "static";
+  },[])
+  // useEffect(() => {
+  //   // if (startAnimation) {
+  //   toRegPage(false);
+  //   // setTimeout(() => {
+  //   //   toEventPage();
+  //   // }, 2500);
+  //   // }
+  // }, []);
 
   const toEventPage = () => {
     const mm = gsap.matchMedia();

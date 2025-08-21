@@ -247,6 +247,9 @@ export default function Landing({
       wrapperRef.current.style.maskImage = "none";
       document.body.style.position = "static";
     }
+    if (!removeGif) {
+      document.body.style.position = "fixed";
+    }
   }, [removeGif]);
 
   const [timeLeft, setTimeLeft] = useState({
@@ -418,7 +421,7 @@ export default function Landing({
             </div>
           </div>
         </div>
-          {/* <div className={styles.bottomContent} ref={bottomContentRef}>
+        {/* <div className={styles.bottomContent} ref={bottomContentRef}>
             {
               // replace this with actual about us and give it the required ref 
             }
