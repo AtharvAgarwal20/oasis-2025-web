@@ -10,6 +10,7 @@ import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import EventsModal from "../EventsModal/EventsModal";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -44,6 +45,16 @@ import gsap from "gsap";
 //     name: "Event 6",
 //     about: "Description for Event 6",
 //   },
+//   {
+//     id: 7,
+//     name: "Event 7",
+//     about: "Description for Event 7",
+//   },
+//   {
+//     id: 8,
+//     name: "Event 8",
+//     about: "Description for Event 8",
+//   },
 // ];
 
 const Events = forwardRef<
@@ -68,6 +79,7 @@ const Events = forwardRef<
   const [eventsOptions, setEventsOptions] = useState<
     { id: number; name: string; about: string }[]
   >([]);
+  const [eventsModal, setEventsModal] = useState(false);
 
   const { contextSafe } = useGSAP();
 
@@ -92,21 +104,40 @@ const Events = forwardRef<
     name: string;
     about: string;
   }) => {
+    const mm = gsap.matchMedia();
     contextSafe(() => {
-      const tl = gsap.timeline({
-        onStart: () => {
-          setActiveEvent(event);
-        },
+      if (activeEvent && activeEvent.id !== event.id) {
+        mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+          const tl = gsap.timeline({
+            onStart: () => {
+              setActiveEvent((prev) => {
+                if (prev && prev.id === event.id) return null;
+                return event;
+              });
+            },
+          });
+          tl.set(eventDescRef.current, { display: "flex" }).fromTo(
+            eventDescRef.current,
+            { opacity: 0, duration: 0.5 },
+            { opacity: 1, duration: 0.5 }
+          );
+        });
+      }
+      mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
+        setActiveEvent(() => {
+          // if (prev && prev.id === event.id) return null;
+          return event;
+        });
+        setEventsModal(true);
       });
-      tl.set(eventDescRef.current, { display: "flex" }).fromTo(
-        eventDescRef.current,
-        { opacity: 0, duration: 0.5 },
-        { opacity: 1, duration: 0.5 }
-      );
     })();
   };
 
-  const handleEvent = (event: { id: number; name: string; about: string }) => {
+  const handleEvent = (
+    event: { id: number; name: string; about: string } | null
+  ) => {
+    if (!event) return;
+
     if (selectedEvents.some((e) => e.id === event.id)) {
       sessionStorage.setItem(
         "selectedEvents",
@@ -239,8 +270,12 @@ const Events = forwardRef<
               {sortedArray.map((event, index) => (
                 <li
                   key={index}
-                  onMouseEnter={() => showEventDescription(event)}
-                  onClick={() => handleEvent(event)}
+                  onMouseEnter={() => {
+                    if (!activeEvent || activeEvent.id !== event.id) {
+                      showEventDescription(event);
+                    }
+                  }}
+                  onClick={() => showEventDescription(event)}
                   className={styles.eventItem}
                 >
                   <svg
@@ -329,6 +364,7 @@ const Events = forwardRef<
                   </button>
                 </li>
               ))}
+              <li className={styles.eventItemOverlay}></li>
             </ul>
             <button
               className={styles.confirmButton}
@@ -382,6 +418,7 @@ const Events = forwardRef<
             <div className={styles.eventDescription} ref={eventDescRef}>
               <h2>{activeEvent.name}</h2>
               <p>{activeEvent.about}</p>
+              <p>{activeEvent.about}</p>
               <button onClick={() => handleEvent(activeEvent)}>
                 {selectedEvents.some((e) => e.id === activeEvent.id)
                   ? "REMOVE"
@@ -396,6 +433,14 @@ const Events = forwardRef<
           onCancel={() => setConfirmModal(false)}
           selectedEvents={selectedEvents}
           userData={userData}
+        />
+      )}
+      {eventsModal && (
+        <EventsModal
+          handleEvent={() => handleEvent(activeEvent)}
+          eventData={activeEvent}
+          closeModal={() => setEventsModal(false)}
+          selectedEvents={selectedEvents}
         />
       )}
     </>

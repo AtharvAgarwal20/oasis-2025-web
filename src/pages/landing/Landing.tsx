@@ -21,8 +21,8 @@ import registerBtn from "/svgs/landing/registerBtn.svg";
 import wire from "/svgs/landing/wire.svg";
 import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
-import logo from "/svgs/logo.svg";
-// import ContactDoors from "../contact/ContactDoors";
+import logo from "/images/landing/oasisLogo.png";
+import mobileCloud from "/images/landing/mobileCloud.png";
 i;
 
 gsap.registerPlugin(ScrollTrigger);
@@ -55,11 +55,12 @@ const socialLinks = [
     url: "https://www.instagram.com/bitsoasis/",
   },
 ];
-interface LandingProps {
-  goToRegister: () => void;
-}
 
-export default function Landing({ goToRegister }: LandingProps) {
+export default function Landing({
+  goToPage,
+}: {
+  goToPage: (path: string) => void;
+}) {
   //@ts-ignore
   const overlayIsActive = useOverlayStore((state) => state.isActive);
   const removeGif = useOverlayStore((state) => state.removeGif);
@@ -158,7 +159,7 @@ export default function Landing({ goToRegister }: LandingProps) {
         .to(
           treeImageRef.current,
           {
-            y: "-40%",
+            y: "-50%",
             duration: 6,
             scale: 1.2,
             ease: "sine.in",
@@ -206,7 +207,7 @@ export default function Landing({ goToRegister }: LandingProps) {
             duration: 12,
             ease: "sine.in",
           },
-          3.2
+          3
         )
 
         .to(
@@ -312,10 +313,12 @@ export default function Landing({ goToRegister }: LandingProps) {
               className={styles.mobileBackground}
             />
 
+            <img src={mobileCloud} className={styles.mobileCloud} />
+
             <Navbar />
 
             <div className={styles.treeContainer} ref={treeImageRef}>
-              <div className={styles.tree} >
+              <div className={styles.tree}>
                 <div className={styles.socialLinksContainer}>
                   <div className={styles.wire}>
                     <img src={wire} alt="" />
@@ -412,7 +415,7 @@ export default function Landing({ goToRegister }: LandingProps) {
 
             <div
               className={styles.registerBtnContainer}
-              onClick={goToRegister}
+              onClick={() => goToPage("/register")}
               ref={registerButtonRef}
             >
               <img

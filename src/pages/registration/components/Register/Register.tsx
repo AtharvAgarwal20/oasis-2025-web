@@ -68,7 +68,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
           "https://bits-oasis.org/2025/main/registrations/get_college/"
         )
         .then((response) => {
-          console.log(response)
           setCollegeOptions(
             response.data.data.map((college: { id: number; name: string }) => ({
               value: String(college.id),
@@ -375,9 +374,9 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                           <Select
                             {...field}
                             options={[
-                              { value: "Male", label: "Male" },
-                              { value: "Female", label: "Female" },
-                              { value: "Other", label: "Other" },
+                              { value: "M", label: "Male" },
+                              { value: "F", label: "Female" },
+                              { value: "O", label: "Other" },
                             ]}
                             styles={customStylesGender}
                             placeholder="Gender"

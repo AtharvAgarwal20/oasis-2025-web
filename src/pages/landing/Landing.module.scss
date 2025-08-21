@@ -92,6 +92,7 @@ body {
     height: 50%;
     z-index: 0;
     overflow-x: hidden;
+    position: relative;
     .landingImage {
       width: 100%;
       height: 100%;
@@ -121,6 +122,14 @@ body {
       height: 70svh;
       margin-bottom: calc(5svw);
     }
+    .mobileCloud {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 55%;
+      width: 150px;
+      mix-blend-mode: luminosity;
+    }
 
     @media (aspect-ratio < 8/12), (max-width: 730px) {
       .mobileMountains {
@@ -130,6 +139,9 @@ body {
         display: none;
       }
       .mobileBackground {
+        display: block;
+      }
+      .mobileCloud {
         display: block;
       }
     }
@@ -257,7 +269,7 @@ body {
               .instaIcon {
                 width: 38%;
                 rotate: -12deg;
-                translate: 3px -4px;
+                translate: 1.5px -4px;
               }
             }
           }
@@ -311,16 +323,15 @@ body {
           }
 
           &::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          height: 60%;
-          background: linear-gradient(to bottom, transparent 0.1%, black);
-          pointer-events: none;
-        }
-
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 60%;
+            background: linear-gradient(to bottom, transparent 0.1%, black);
+            pointer-events: none;
+          }
         }
         .socialLinksContainer {
           display: none;
@@ -352,7 +363,7 @@ body {
       position: fixed;
       left: 3svw;
       bottom: 2.5svw;
-      width: 25svw;
+      width: 30svw;
       will-change: auto;
 
       .logo {
@@ -363,8 +374,16 @@ body {
       .logoContainer {
         left: 50%;
         transform: translateX(-50%);
-        top: 100px;
+        top: 150px;
         width: 300px;
+      }
+    }
+
+    @media (aspect-ratio > 1/1) and (max-width: 730px) {
+      .logoContainer {
+        top: 30px;
+        left: 20px;
+        transform: none;
       }
     }
 
@@ -407,7 +426,7 @@ body {
       .dateCountdown {
         z-index: 50;
         display: flex;
-        top: 290px;
+        top: 250px;
         left: 50%;
         transform: translateX(-50%);
         width: fit-content;
@@ -415,6 +434,14 @@ body {
         padding: 0.5svw;
         text-align: center;
         gap: 1.5svw;
+      }
+    }
+
+    @media (aspect-ratio > 1/1) and (max-width: 730px) {
+      .dateCountdown {
+        top: 130px;
+        left: 35px;
+        transform: none;
       }
     }
 

@@ -69,14 +69,14 @@ export default function App() {
     setDoorPhase("idle");
     nextRoute.current = null; 
   };
-
-  const goToRegister = () => {
-  const path = "/register";
+// Replace goToRegister with this:
+const goToPage = (path: string) => {
   if (location.pathname !== path) {
     nextRoute.current = path;
     setDoorPhase("closing");
   }
 };
+
 
 
   const handlePreloaderEnter = () => {
@@ -95,10 +95,11 @@ export default function App() {
       {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
 
       {!isPreloading && currentPage === "home" && (
-        <Homepage goToRegister={goToRegister} />
-      )}
+  <Homepage goToPage={goToPage} />
+)}
+
       {!isPreloading && currentPage === "register" && (
-        <Registration
+        <Registration goToPage={goToPage}
           startAnimation={(location.state as LocationState)?.startAnimation || false}
         />
       )}

@@ -74,7 +74,7 @@
   .instrback {
     height: 100svh;
     overflow-y: hidden;
-    
+
     .overlay {
       position: absolute;
       top: 0;
@@ -100,24 +100,15 @@
       z-index: 0;
     }
     .birds {
-      z-index: 1;
-      margin-top: 1.5vw;
-      width: 70vw;
-      background: center / contain no-repeat url("/svgs/registration/birds.svg");
-      background-blend-mode: overlay;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .bannerImage {
-        width: 70%;
-        object-fit: contain;
-      }
+      width: 85vw;
     }
   }
 }
 @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
   .instrback {
+    .birds {
+      width: 85vw;
+    }
     .backgroundImage {
       height: auto;
       width: 900vw;
