@@ -48,7 +48,7 @@
       position: absolute;
       left: 10vw;
       top: 23vh;
-      transform: rotateY(10deg);
+      transform: rotateY(8.5deg);
       transform-style: preserve-3d;
 
       position: relative;
@@ -103,7 +103,7 @@
       width: 100%;
       height: 100%;
       position: relative;
-      transform: rotateY(-10deg);
+      transform: rotateY(-8.5deg);
       transform-style: preserve-3d;
       display: flex;
       justify-content: center;
@@ -133,7 +133,7 @@
     .buttonContainer {
    top: 20vh;
    left: 10vw;
-     transform: rotateY(10deg);
+     transform: rotateY(8.5deg) rotateZ(3deg);
      transform-style: preserve-3d;
   position: relative;
   width: 100%;
@@ -200,6 +200,9 @@ border: none;
     top:50vh;
   .aboutback{
     transform: none;
+    p{
+      font-size: 4vw;
+    }
   }
   }
   .controls{
@@ -208,6 +211,23 @@ border: none;
     perspective: none;
     .buttonContainer{
       transform: none;
+      transform: rotateZ(4deg);
   }
 }
  }}
+
+ @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+  .abt{
+    perspective: none;
+    width: 80vw;
+    left: 10vw;
+    top:50vh;
+    padding-bottom: 20px;
+  .aboutback{
+    transform: none;
+    p{
+      font-size: 4vw;
+    }
+  }
+  }
+ }

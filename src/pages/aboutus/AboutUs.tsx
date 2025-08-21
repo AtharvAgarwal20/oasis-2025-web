@@ -235,7 +235,7 @@ const AboutUs = () => {
       intervalId = window.setInterval(() => {
         spawnIcon2(`.${styles.fan1}`, true);
         spawnIcon(`.${styles.fan2}`, false);
-      }, 400);
+      }, 500);
     };
 
     const stopSpawning = () => {
