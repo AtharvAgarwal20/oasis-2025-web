@@ -6,10 +6,11 @@
       height:102%;
       z-index: -1;
     }*/
-    background: url("/svgs/aboutus/aboutback.svg"),linear-gradient(180deg, rgba(0, 0, 0, 0.6) 99.99%, rgba(0, 0, 0, 0) 100%);;
+    background: url("/svgs/aboutus/aboutback.svg"),linear-gradient(180deg, rgba(0, 0, 0, 0.6) 99.99%, rgba(0, 0, 0, 0) 100%);
     background-size:cover;
     background-blend-mode: darken;
     height: 100vh;
+    
     width: 100vw;
     overflow: hidden;
     .header {
@@ -83,5 +84,40 @@
   pointer-events: none;
 }
 
+.abt{
+  
+width: 31vw;
+  height: 35vw;
+  border: 25px solid rgba(134, 26, 38, 0.1);
+  padding: 0; /* or some space */
+  box-sizing: border-box; /* include border in total width/height */
+  background: url("/svgs/aboutus/abt.svg"), url("/svgs/aboutus/text-frame.svg");
+  background-blend-mode: color-burn;
+  background-position: bottom;
+  background-size: cover;
+  background-clip: content-box;
+  
+
+  background-position: bottom;
+  position: relative;
+ left:60vw;
+ top:-40vh;
+ object-fit: contain;
+ .lantern{
+  position: absolute;
+  transform-origin: bottom right;
+  right: -5vw;
+  top: -5vw;
+ }
+ .dagger1{
+  position: absolute;
+  left: -5vw;
+  width: 10vw;
+  height: auto;
+  z-index: 5;
+  bottom: 0;
+  mix-blend-mode:overlay;
+ }
+}
 
 }

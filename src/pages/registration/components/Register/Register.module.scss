@@ -247,6 +247,43 @@ select:-webkit-autofill {
         input {
           width: 18vw;
         }
+        
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: transparent;
+  opacity: 0; /* hides icon */
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 3;
+}
+
+
+
+.dateWrapper input[type="date"] {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  color: white;
+  padding-right: 2.5rem; // leave space for icon
+}
+.dateWrapper{
+  position: relative;
+
+}
+.dat {
+  position: absolute!important;
+  
+  top:1.25vw;
+  left:0.5vw;
+  width: 3vw;
+  height: 3vw;
+  pointer-events: none;
+  z-index: 1;
+}
+
       }
     }
     .radioInput {
@@ -426,6 +463,7 @@ select {
   }
 }
 .right{
+  
   .clouds{
     img{
         position: absolute;
@@ -540,18 +578,18 @@ input::placeholder {
   text-align: center !important;
   color: #cfcfcf;
   opacity: 1;
-}
-input {
-  text-align: center !important;
-  margin: 0 !important;
-  caret-color: white;
-}
+ }
+// input {
+//   text-align: center !important;
+//   margin: 0 !important;
+//   caret-color: white;
+// }
 
-input::placeholder {
-  text-align: center !important;
-  color: #cfcfcf;
-  opacity: 1;
-}
+// input::placeholder {
+//   text-align: center !important;
+//   color: #cfcfcf;
+//   opacity: 1;
+// }
 
 .react-select__control {
   display: flex !important;
@@ -738,7 +776,7 @@ input::placeholder {
 //   }
 // }
 
-@media (max-width: 1200px) or (max-aspect-ratio: 1.45) {
+@media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
   .registerContainer {
     height: 63vw;
     overflow: hidden;

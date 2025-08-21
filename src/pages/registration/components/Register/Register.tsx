@@ -4,13 +4,13 @@ import Select from "react-select";
 //import type { SingleValue } from "react-select";
 import Field from "/svgs/registration/field2.svg"
 import styles from "./Register.module.scss";
-
+import Drop from "/svgs/registration/Drop.svg"
 import { useEffect, useState, forwardRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 
 import statesData from "./cities.json";
-
+import DatePick from "/svgs/registration/datepick.svg"
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
 import Refer from "/svgs/registration/field4.svg"
@@ -20,6 +20,25 @@ interface StateItem {
   state: string;
   cities: string[];
 }
+import { components } from "react-select";
+
+const CustomDropdownIndicator = (props: any) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <img
+        src={Drop}
+        alt="Dropdown"
+        style={{
+          width: "1.2rem",
+          display:"none",
+          paddingLeft:"2vw",
+          height: "1.2rem",
+          pointerEvents: "none",
+        }}
+      />
+    </components.DropdownIndicator>
+  );
+};
 
 const typedStatesData: StateItem[] = statesData;
 const stateOptions = typedStatesData.map((item) => ({
@@ -39,7 +58,10 @@ const registrationSchema = yup.object({
   year: yup.string().required("Year of study is required"),
   state: yup.string().required("State is required"),
   city: yup.string().required("City is required"),
-  referral: yup.string().nullable().optional(),
+   date: yup
+    .date()
+    .required("Date of Birth is required"),
+//  referral: yup.string().nullable().optional(),
 });
 
 type FormData = yup.InferType<typeof registrationSchema>;
@@ -104,7 +126,8 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         year: "",
         state: "",
         city: "",
-        referral: null,
+        //referral: null,
+        date:undefined,
       },
     });
 
@@ -142,7 +165,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         outline: "none",
         background: "transparent",
         border: "none",
-        height:"3vw",
+        height:isMobile?"0vh":"3vw",
         paddingBottom: isMobile ? "5vw" : "0vw",
       }),
       menuList: (provided: any) => ({
@@ -308,12 +331,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         alignItems: "center",
         textAlign: "center",
       }),
-      dropdownIndicator: (provided: any) => ({
-        ...provided,
-        color: "white",
-        display: "none",
-        cursor: "pointer",
-      }),
+     
       indicatorSeparator: () => ({
         display: "none",
       }),
@@ -390,6 +408,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                             }
                             className={`${styles.selection} ${styles.genderSelect}`}
                             classNamePrefix="Select"
+                             components={{ DropdownIndicator: CustomDropdownIndicator }}
                           />
                         )}
                       />
@@ -401,12 +420,14 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
 
                   <div className={styles.referral}>
                     <div className={styles.sameline}>
-                      <label>REFERRAL CODE </label>
+                      <label>DATE OF BIRTH </label>
                     </div>
-                    <div className={styles.clouds}>
+                    <div className={`${styles.clouds} ${styles.dateWrapper}`}>
                       <img src={Refer} alt="" />
-                      <input {...register("referral")} />
-                    </div>
+  <img src={DatePick} alt="Calendar Icon" className={styles.dat} />
+  <input type="date" {...register("date")} />
+</div>
+
                   </div>
                 </div>
               </div>
