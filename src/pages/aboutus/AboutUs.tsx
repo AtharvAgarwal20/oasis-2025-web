@@ -18,13 +18,17 @@ const icons = [
   "/svgs/aboutus/letter2.svg",
   "/svgs/aboutus/letter3.svg",
   "/svgs/aboutus/letter4.svg",
+  "/svgs/aboutus/letter5.svg",
+  "/svgs/aboutus/letter6.svg",
+  "/svgs/aboutus/letter7.svg",
+  "/svgs/aboutus/letter8.svg",
 ];
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
 
 const AboutUs = () => {
   const [current, setCurrent] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+//  const [isPlaying, setIsPlaying] = useState(false);
 
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
@@ -46,10 +50,10 @@ const AboutUs = () => {
         events: {
           onStateChange: (event: any) => {
             const YTState = window.YT.PlayerState;
-            if (event.data === YTState.PLAYING) setIsPlaying(true);
-            if (event.data === YTState.PAUSED) setIsPlaying(false);
+            // if (event.data === YTState.PLAYING) setIsPlaying(true);
+            // if (event.data === YTState.PAUSED) setIsPlaying(false);
             if (event.data === YTState.ENDED) {
-              setIsPlaying(false);
+              // setIsPlaying(false);
               nextVideo(); 
             }
           },

@@ -1,5 +1,8 @@
 @use "../../assets/global.scss" as *;
 .AboutContainer {
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
   /*.background{
       position: absolute;
       top:-1.2vh;
