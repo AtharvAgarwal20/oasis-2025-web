@@ -35,13 +35,17 @@ $inputheight: 10vh;
     }
   }
 }
- input, textarea, select {
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-    -webkit-text-fill-color: #000 !important;
-    transition: background-color 5000s ease-in-out 0s;
-  }
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: white !important;
+  color: white !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
+
 
 .registerContainer {
 
@@ -53,7 +57,7 @@ $inputheight: 10vh;
   justify-content: center;
   width: 100vw;
   height: 43vw;
-  margin-bottom: 5vw;
+  //margin-bottom: 5vw;
 }
 
 .registrationForm {
@@ -113,6 +117,7 @@ $inputheight: 10vh;
         .sameline{
           width: 100%;
           label{
+            z-index: 100;
           text-align: center;
           }
         }
@@ -209,7 +214,7 @@ $inputheight: 10vh;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2vw;
+    gap: 4vw;
 
     .name {
       margin-left: 3vw;
@@ -231,10 +236,13 @@ $inputheight: 10vh;
       margin-left: 4.5vw;
     }
     .referral {
+    
+
       .sameline {
         width: 18vw;
       }
       .clouds {
+        height: 3vw;
         width: 18vw;
         input {
           width: 18vw;
@@ -245,8 +253,8 @@ $inputheight: 10vh;
       appearance: none;
       
   padding: 0 ;
-      width: 18px !important;
-      height: 18px !important;
+      width: 1vw !important;
+      height: 1vw !important;
       border: 2px solid white;
       border-radius: 50%;
       position: relative;
@@ -287,10 +295,18 @@ $inputheight: 10vh;
     }
 
     p {
-      height: 0.5vw;
+      transform: translateY(2.5vw);
       font-size: 0.75rem;
       color: #ffb3b3;
-      margin: 0.2rem 0 0 0;
+      text-align: center;
+    }
+  }
+  .left{
+    .clouds{
+      input{
+        text-align: center;
+        height: 4vw;
+      }
     }
   }
 
@@ -435,7 +451,7 @@ select {
   padding-right: 3.1rem;
   width: 100%;
   z-index: 5;
-  height: 2.2rem;
+  height: 3vw;
   background: transparent;
   box-shadow: none;
   color: white;
@@ -525,17 +541,17 @@ input::placeholder {
   color: #cfcfcf;
   opacity: 1;
 }
-// input {
-//   // text-align: center !important;
-//   // margin: 0 !important;
-//   // caret-color: white;
-// }
+input {
+  text-align: center !important;
+  margin: 0 !important;
+  caret-color: white;
+}
 
-// input::placeholder {
-//   // text-align: center !important;
-//   // color: #cfcfcf;
-//   // opacity: 1;
-// }
+input::placeholder {
+  text-align: center !important;
+  color: #cfcfcf;
+  opacity: 1;
+}
 
 .react-select__control {
   display: flex !important;
@@ -722,7 +738,7 @@ input::placeholder {
 //   }
 // }
 
-@media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
+@media (max-width: 1200px) or (max-aspect-ratio: 1.45) {
   .registerContainer {
     height: 63vw;
     overflow: hidden;
@@ -760,10 +776,12 @@ $part2:$mobilewidth*0.58;
       top:20vw;
       height: 65vh;
       padding: 0;
-      overflow: scroll;
+      overflow-y: scroll;
+      overflow-x:hidden;
     .formColumns{
       flex-direction: column;
         gap:10vw;
+        
       .left,.right{
         .sameline{
             width: $mobilewidth;
@@ -828,9 +846,11 @@ $part2:$mobilewidth*0.58;
             .clouds{
               width: $part2;
               input{
-              text-align: left!important;
-              padding-left: 10px;
+              text-align: center;
+              width: $part2;
             }
+           
+
             }
           }
         }
@@ -842,6 +862,7 @@ $part2:$mobilewidth*0.58;
         .radioGroup{
           padding: 0;
           padding-bottom: 1.5rem;
+          padding-top: 0.5rem;
           display: flex;
           align-items: center;
           justify-content: center;

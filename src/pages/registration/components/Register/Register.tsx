@@ -142,6 +142,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         outline: "none",
         background: "transparent",
         border: "none",
+        height:"3vw",
         paddingBottom: isMobile ? "5vw" : "0vw",
       }),
       menuList: (provided: any) => ({
@@ -159,11 +160,11 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         textAlign: "center",
         display:"flex",
         justifyContent:"center",
-        alignItem:"center",
-        height: "10vw",
+        alignItems:"center",
+        height: "3vw",
         width:"80vw",
-        paddingLeft: isMobile?"0%":"30%",
-        paddingTop:isMobile?"0vw":"5vw",
+        paddingLeft: isMobile?"0%":"0%",
+        paddingTop:isMobile?"0vw":"0vw",
       }),
       input: (provided: any) => ({
         ...provided,
@@ -183,6 +184,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         color: "white",
         margin: 0,
         zIndex:"5",
+        height:"3vw",
         
         whiteSpace: "nowrap",
       }),
@@ -204,7 +206,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         ...provided,
         width: "100%",
         padding: 0,
-        height: "5vw",
+        height: "3vw",
         background: "transparent",
         color: "white",
         display: "flex",
@@ -235,7 +237,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         alignItems: "center",
         background: "transparent",
         border: "none",
-        height: "2.3rem",
+        height: "3vw",
         
         width:isMobile ? "33.6vw":"100%",
       }),
@@ -263,7 +265,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
         textAlign: "center",
         padding: 0,
         margin: 0,
-        
+        display:"flex",
         width:isMobile ? "33.6vw":"100%",
         color: "white",
       }),
@@ -471,7 +473,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     className={styles.radioGroup}
                     aria-label="Year of Study"
                   >
-                    {["1", "2", "3", "4"].map((year) => (
+                    {["1", "2", "3", "4","5"].map((year) => (
                       <label key={year} className={styles.radioLabel}>
                         <input
                           type="radio"
