@@ -2,40 +2,6 @@ $inputwidth: 30vw;
 $inputheight: 10vh;
 @use "/src/assets/global.scss" as *;
 
-.confirmButton {
-  position: absolute;
-  bottom: 2vw;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  outline: none;
-  border: none;
-  text-align: center;
-  cursor: pointer;
-  margin: 2vw 0;
-  background: center / cover no-repeat
-    url("/images/registration/button-banner.png");
-  padding: 1vw;
-  color: #fff;
-  font: 100 1.5vw "Abhaya Libre Extrabold";
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 22vw;
-  span {
-    padding-left: 40%;
-    text-align: center;
-  }
-
-  .confirmIcon {
-    width: 7vw;
-    height: 0.5vw;
-    &:last-child {
-      rotate: 180deg;
-    }
-  }
-}
-
 .registerContainer {
   display: none;
   opacity: 0;
@@ -46,13 +12,26 @@ $inputheight: 10vh;
   height: 43vw;
   margin-bottom: 5vw;
 
+  select {
+    background-color: transparent;
+    color: #e2dccb;
+    option {
+      background-color: #2e0505;
+      color: #e2dccb;
+      width: 30vw;
+      font-size: 1rem;
+      text-align: center;
+    }
+  }
+
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
     box-shadow: 0 0 0 1000px transparent inset !important;
-    -webkit-text-fill-color: white !important;
-    color: white !important;
+    -webkit-text-fill-color: #e2dccb !important;
+    color: #e2dccb !important;
+    font: 100 1.4vw "Abhaya Libre Extrabold";
     background-color: transparent !important;
     transition: background-color 5000s ease-in-out 0s;
   }
@@ -80,85 +59,81 @@ $inputheight: 10vh;
       flex-wrap: wrap;
       gap: 21vw;
 
-      .left {
-        .together {
-          display: flex;
-          flex-direction: row;
-          width: 31vw;
-          gap: 10px;
-
-          .fields {
-            display: flex;
-            flex-direction: row;
-            gap: 0;
-
-            .field1 {
-              display: flex;
-              flex-direction: column;
-              width: 12.6vw;
-
-              .sameline {
-                width: 10vw;
-                label {
-                  z-index: 100;
-                  text-align: center;
-                }
-              }
-
-              .clouds {
-                position: relative;
-                width: 10vw;
-                input,
-                select {
-                  width: 12.6vw;
-                  padding-top: 1vw;
-                }
-                img {
-                  width: 12.6vw;
-                  height: auto;
-                  position: absolute;
-                  object-fit: contain;
-                  align-self: baseline;
-                }
-                .selection {
-                  width: 13vw;
-                  padding-top: 1vw;
-
-                  // Normal + focused state control
-                  .Select__control,
-                  .Select__control--is-focused {
-                    border: 1px solid #ededed;
-                    height: 2.5rem;
-                    width: 10vw !important;
-                    padding: 0 !important;
-                    box-shadow: none !important;
-                  }
-
-                  .Select__placeholder {
-                    color: #fff;
-                    padding: 0 !important;
-                    width: 10vw;
-                  }
-                }
-              }
-            }
-          }
-        }
-        .clouds {
-          input {
-            text-align: center;
-            height: 4vw;
-          }
-        }
-      }
       .right {
         .clouds {
           img {
             padding-top: 3.5vw;
+            position: absolute;
+            overflow-x: visible;
+            overflow-y: hidden;
+            display: flex;
+            align-self: center;
+            width: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: -2;
           }
-          fieldset {
+
+          .radioGroup {
             border: none;
             box-shadow: none;
+            padding-left: 3.1rem;
+            padding-right: 3.1rem;
+            width: 100%;
+            z-index: 5;
+            height: 3vw;
+            background: transparent;
+            box-shadow: none;
+            color: white;
+            border-radius: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5vw;
+            padding: 0.5rem 1rem;
+            position: relative;
+            padding-top: 1.1rem;
+
+            .radioLabel {
+              display: flex;
+              align-items: center;
+              gap: 0.3rem;
+              font-size: 1.2rem;
+              color: white;
+              cursor: pointer;
+              font-weight: 500;
+
+              .radioInput {
+                appearance: none;
+                padding: 0;
+                width: 1vw !important;
+                height: 1vw !important;
+                border: 2px solid white;
+                border-radius: 50%;
+                position: relative;
+                outline: none;
+                cursor: pointer;
+                background-color: transparent;
+                transition: border-color 0.3s ease;
+
+                &:checked::after {
+                  content: "";
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  width: 8px;
+                  height: 8px;
+                  background: linear-gradient(
+                    0deg,
+                    #f57572 0%,
+                    #f8a26c 42.84%,
+                    #fcdf81 102.69%
+                  );
+                  border-radius: 50%;
+                  transform: translate(-50%, -50%);
+                }
+              }
+            }
           }
         }
       }
@@ -167,7 +142,7 @@ $inputheight: 10vh;
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 4vw;
+        gap: 1vw;
 
         .Select__control,
         .Select__control--is-focused {
@@ -193,8 +168,62 @@ $inputheight: 10vh;
           white-space: nowrap;
         }
 
+        .clouds {
+          position: relative;
+          width: 30vw;
+          aspect-ratio: 5.8223;
+          overflow: visible;
+          align-items: center;
+          padding: 0;
+          margin: 0;
+          z-index: 3;
+
+          input {
+            width: 100%;
+            height: 100%;
+            color: #e2dccb;
+            box-sizing: border-box;
+            background: transparent;
+            border: 0;
+            text-align: center;
+            font: 100 1.4vw "Abhaya Libre Extrabold";
+            &:focus {
+              outline: none;
+              box-shadow: none;
+            }
+          }
+
+          img {
+            position: absolute;
+            overflow-x: visible;
+            overflow-y: hidden;
+            display: flex;
+            width: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: -2;
+          }
+        }
+
+        .sameline {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          top: 0.5vw;
+
+          label {
+            color: #fff9e9;
+            font: 400 1.4vw "Abhaya Libre";
+            text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
+          }
+          img {
+            width: 7vw;
+          }
+        }
+
         .email,
-        .together {
+        .gender {
           margin-left: 1vw;
         }
         .mobile,
@@ -209,85 +238,7 @@ $inputheight: 10vh;
         .states {
           margin-left: 4.5vw;
         }
-        .referral {
-          .sameline {
-            width: 18vw;
-          }
-          .clouds {
-            height: 3vw;
-            width: 18vw;
-            input {
-              width: 18vw;
-            }
 
-            input[type="date"]::-webkit-calendar-picker-indicator {
-              background: transparent;
-              color: transparent;
-              opacity: 0; /* hides icon */
-              position: absolute;
-              right: 0;
-              width: 100%;
-              height: 100%;
-              cursor: pointer;
-              z-index: 3;
-            }
-
-            .dateWrapper input[type="date"] {
-              position: relative;
-              z-index: 2;
-              background: transparent;
-              color: white;
-              padding-right: 2.5rem; // leave space for icon
-            }
-            .dateWrapper {
-              position: relative;
-            }
-            .dat {
-              position: absolute !important;
-
-              top: 1.25vw;
-              left: 0.5vw;
-              width: 3vw;
-              height: 3vw;
-              pointer-events: none;
-              z-index: 1;
-            }
-          }
-        }
-        .radioInput {
-          appearance: none;
-
-          padding: 0;
-          width: 1vw !important;
-          height: 1vw !important;
-          border: 2px solid white;
-          border-radius: 50%;
-          position: relative;
-          outline: none;
-          cursor: pointer;
-          background-color: transparent;
-          transition: border-color 0.3s ease;
-          &:checked::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 8px;
-
-            height: 8px;
-            background: linear-gradient(
-              0deg,
-              #f57572 0%,
-              #f8a26c 42.84%,
-              #fcdf81 102.69%
-            );
-
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-          }
-        }
-
-        input,
         select {
           text-align: center;
           width: 30vw;
@@ -296,175 +247,51 @@ $inputheight: 10vh;
           background: transparent;
           border: 0;
           padding-top: 2vw;
-          color: white;
+          color: #e2dccb;
         }
 
-        p {
-          transform: translateY(2.5vw);
+        .error {
+          margin-left: 4vw;
           font-size: 0.75rem;
           color: #ffb3b3;
-          text-align: center;
+          text-align: left;
         }
       }
     }
   }
-}
-
-select {
-  background-color: transparent;
-  color: white;
-  option {
-    background-color: #2e0505;
-    color: white;
-    width: 30vw;
-    font-size: 1rem;
-    text-align: center;
-  }
-}
-.field1 {
-  option {
-    width: 1vw;
-    font-size: 1rem;
-    text-align: left;
-  }
-}
-.birds2 {
-  margin-top: 2vw;
-  width: 45vw;
-  height: 4vw;
-  background: center / contain no-repeat url("/svgs/registration/birds2.svg");
-  background-blend-mode: overlay;
-
-  .header {
-    margin-top: 1vw;
-    text-align: center;
-    font-size: 4vw;
-  }
-}
-
-.sameline {
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4px;
-  width: $inputwidth;
-
-  label {
-    color: #fff9e9;
-    font: 400 1.2vw "Abhaya Libre";
-    text-shadow: 0 0 6px rgba(229, 195, 132, 0.54);
-  }
-}
-
-.gendob {
-  height: 1vw;
-}
-.gendob .react-select__placeholder {
-  width: auto !important; // Allow placeholder to expand based on content
-  min-width: 8vw !important;
-  text-align: center !important;
-  color: #cfcfcf;
-  opacity: 1;
-}
-
-.clouds {
-  height: 2.3rem;
-  position: relative;
-  width: 30vw;
-  overflow: visible;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-
-  input {
-    width: 100%;
-    padding-left: 3.1rem;
-    padding-right: 3.1rem;
-    color: white;
-    padding: 0.5rem;
-    font-size: 1rem;
-    z-index: 3;
-    box-sizing: border-box;
-    &:focus {
-      outline: none;
-      box-shadow: none;
-    }
-  }
-
-  img {
+  .confirmButton {
     position: absolute;
-    overflow-x: visible;
-    overflow-y: hidden;
-    display: flex;
-    //align-self: center;
-    width: 100%;
-    object-fit: contain;
-    pointer-events: none;
-    z-index: -2;
-  }
-
-  img:first-of-type {
-    left: 0;
-  }
-
-  img:last-of-type {
-    right: 0;
-  }
-}
-.right {
-  .clouds {
-    img {
-      position: absolute;
-      overflow-x: visible;
-      overflow-y: hidden;
-      display: flex;
-      align-self: center;
-      width: 100%;
-      object-fit: contain;
-      pointer-events: none;
-      z-index: -2;
-    }
-  }
-}
-.sameline {
-  img {
-    width: 7vw;
-  }
-}
-
-.radioGroup {
-  padding-left: 3.1rem;
-  padding-right: 3.1rem;
-  width: 100%;
-  z-index: 5;
-  height: 3vw;
-  background: transparent;
-  box-shadow: none;
-  color: white;
-  border-radius: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5vw;
-  padding: 0.5rem 1rem;
-  position: relative;
-  padding-top: 1.1rem;
-
-  .radioLabel {
+    bottom: 2vw;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    outline: none;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin: 2vw 0;
+    background: center / cover no-repeat
+      url("/images/registration/button-banner.png");
+    padding: 1vw;
+    color: #fff;
+    font: 100 1.5vw "Abhaya Libre Extrabold";
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    font-size: 1.2rem;
-    color: white;
+    justify-content: space-between;
+    width: 22vw;
+    span {
+      padding-left: 40%;
+      text-align: center;
+    }
 
-    cursor: pointer;
-    font-weight: 500;
+    .confirmIcon {
+      width: 7vw;
+      height: 0.5vw;
+      &:last-child {
+        rotate: 180deg;
+      }
+    }
   }
-}
-input::placeholder {
-  color: #cfcfcf;
-  font-family: $regFont;
 }
 
 .react-select__control {
@@ -726,6 +553,12 @@ $part2: $mobilewidth * 0.58;
           .fields {
             width: $mobilewidth;
             .field1 {
+              width: $part1;
+              option {
+                width: 1vw;
+                font-size: 1rem;
+                text-align: left;
+              }
               .sameline {
                 width: $part1;
               }
@@ -735,7 +568,6 @@ $part2: $mobilewidth * 0.58;
                   width: $part1;
                 }
               }
-              width: $part1;
             }
             .referral {
               .sameline {

@@ -12,7 +12,6 @@ import axios from "axios";
 import statesData from "./cities.json";
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
-import Gen from "/svgs/registration/field3.svg";
 import { components } from "react-select";
 
 const CustomDropdownIndicator = (props: any) => {
@@ -350,7 +349,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <img src={Field} alt="" />
                   <input {...register("name")} />
                 </div>
-                <p>{errors.name?.message}</p>
+                <p className={styles.error}>{errors.name?.message}</p>
               </div>
 
               <div className={styles.email}>
@@ -363,48 +362,46 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <img src={Field} alt="" />
                   <input value={userEmail} disabled placeholder={userEmail} />
                 </div>
-                <p>{errors.email_id?.message}</p>
+                <p className={styles.error}>{errors.email_id?.message}</p>
               </div>
 
-              <div className={styles.together}>
-                <div className={styles.fields}>
-                  <div className={styles.field1}>
-                    <div className={styles.sameline}>
-                      <label>GENDER </label>
-                    </div>
-                    <div className={styles.clouds}>
-                      <img src={Gen} alt="" />
-                      <Controller
-                        name="gender"
-                        control={control}
-                        render={({ field }) => (
-                          <Select
-                            {...field}
-                            options={[
-                              { value: "M", label: "Male" },
-                              { value: "F", label: "Female" },
-                              { value: "O", label: "Other" },
-                            ]}
-                            styles={customStylesGender}
-                            placeholder="Gender"
-                            onChange={(val) => field.onChange(val?.value || "")}
-                            value={
-                              field.value
-                                ? { value: field.value, label: field.value }
-                                : null
-                            }
-                            className={`${styles.selection} ${styles.genderSelect}`}
-                            classNamePrefix="Select"
-                            components={{
-                              DropdownIndicator: CustomDropdownIndicator,
-                            }}
-                          />
-                        )}
-                      />
-                    </div>
-                    <p>{errors.gender?.message}</p>
-                  </div>
+              <div className={styles.gender}>
+                <div className={styles.sameline}>
+                  <img src={Left} alt="" />
+                  <label>GENDER</label>
+                  <img src={Right} alt="" />
                 </div>
+                <div className={styles.clouds}>
+                  <img src={Field} alt="" />
+                  <Controller
+                    name="gender"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={[
+                          { value: "M", label: "Male" },
+                          { value: "F", label: "Female" },
+                          { value: "O", label: "Other" },
+                        ]}
+                        styles={customStylesGender}
+                        placeholder="Gender"
+                        onChange={(val) => field.onChange(val?.value || "")}
+                        value={
+                          field.value
+                            ? { value: field.value, label: field.value }
+                            : null
+                        }
+                        className={`${styles.selection} ${styles.genderSelect}`}
+                        classNamePrefix="Select"
+                        components={{
+                          DropdownIndicator: CustomDropdownIndicator,
+                        }}
+                      />
+                    )}
+                  />
+                </div>
+                <p className={styles.error}>{errors.gender?.message}</p>
               </div>
 
               <div className={styles.mobile}>
@@ -417,7 +414,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                   <img src={Field} alt="" />
                   <input {...register("phone")} />
                 </div>
-                <p>{errors.phone?.message}</p>
+                <p className={styles.error}>{errors.phone?.message}</p>
               </div>
             </div>
 
@@ -453,7 +450,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     )}
                   />
                 </div>
-                <p>{errors.college_id?.message}</p>
+                <p className={styles.error}>{errors.college_id?.message}</p>
               </div>
 
               <div className={styles.year}>
@@ -555,7 +552,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     )}
                   />
                 </div>
-                <p>{errors.city?.message}</p>
+                <p className={styles.error}>{errors.city?.message}</p>
               </div>
             </div>
           </div>
