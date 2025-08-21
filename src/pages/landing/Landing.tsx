@@ -23,7 +23,7 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
-import ContactDoors from "../contact/ContactDoors";
+// import ContactDoors from "../contact/ContactDoors";
 i;
 
 gsap.registerPlugin(ScrollTrigger);
@@ -73,8 +73,8 @@ export default function Landing({
   const registerButtonRef = useRef<HTMLDivElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
   // const treeContainerRef = useRef<HTMLDivElement>(null);
-  const aboutUsRef = useRef<HTMLDivElement>(null);
-  const bottomContentRef = useRef<HTMLDivElement>(null);
+  // const aboutUsRef = useRef<HTMLDivElement>(null);
+  // const bottomContentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
@@ -418,7 +418,7 @@ export default function Landing({
             </div>
           </div>
         </div>
-          <div className={styles.bottomContent} ref={bottomContentRef}>
+          {/* <div className={styles.bottomContent} ref={bottomContentRef}>
             {
               // replace this with actual about us and give it the required ref 
             }
@@ -432,7 +432,7 @@ export default function Landing({
                 bottomContentRef={bottomContentRef}
               />
             }
-          </div>
+          </div> */}
       </div>
     </>
   );
