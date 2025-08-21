@@ -123,8 +123,6 @@ export default function App() {
         />
       )}
 
-      <Navbar goToPage={goToPage} />
-
       {!isPreloading && currentPage === "events" && <ComingSoon />}
       {!isPreloading && currentPage === "aboutus" && <AboutUs />}
       {!isPreloading && currentPage === "contact" && <Contact />}
