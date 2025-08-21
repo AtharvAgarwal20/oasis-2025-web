@@ -10,10 +10,8 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 
 import statesData from "./cities.json";
-import DatePick from "/svgs/registration/datepick.svg";
 import Left from "/svgs/registration/leftarr.svg";
 import Right from "/svgs/registration/rightarr.svg";
-import Refer from "/svgs/registration/field4.svg";
 import Gen from "/svgs/registration/field3.svg";
 import { components } from "react-select";
 
@@ -402,21 +400,6 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                       />
                     </div>
                     <p>{errors.gender?.message}</p>
-                  </div>
-
-                  <div className={styles.referral}>
-                    <div className={styles.sameline}>
-                      <label>DATE OF BIRTH </label>
-                    </div>
-                    <div className={`${styles.clouds} ${styles.dateWrapper}`}>
-                      <img src={Refer} alt="" />
-                      <img
-                        src={DatePick}
-                        alt="Calendar Icon"
-                        className={styles.dat}
-                      />
-                      <input type="date" {...register("date")} />
-                    </div>
                   </div>
                 </div>
               </div>
