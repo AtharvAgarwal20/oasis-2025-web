@@ -517,15 +517,21 @@ export default function DrawingPreloader({
           <div className={styles.percentage}>{Math.round(progress)}%</div>
         </div>
       ) : (
-        <div className={styles.btnContainer}>
-          <button
-            className={styles.enterButton}
-            onClick={() => {
-              overlaySetActive();
-            }}
-          >
-            Enter
-          </button>
+        <div className={styles.infoContainer}>
+          <div className={styles.btnContainer}>
+            <button
+              className={styles.enterButton}
+              onClick={() => {
+                overlaySetActive();
+              }}
+            >
+              <div className={styles.enterButtonText}>Enter</div>
+            </button>
+          </div>
+          <div className={styles.infoText}>
+            A new horizon of art and culture awaits. Enter the unforgettable
+            world of Oasis
+          </div>
         </div>
       )}
     </div>
