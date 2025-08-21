@@ -44,6 +44,7 @@ export default function App() {
 
     if (path === "/") {
       setCurrentPage("home");
+      setIsPreloading(false);
     } else if (path === "/register") {
       setCurrentPage("register");
       setIsPreloading(true);
@@ -56,34 +57,41 @@ export default function App() {
     }
   }, [location.pathname]);
 
-  const handleDoorsClosed = () => {
+ const handleDoorsClosed = () => {
     setDoorPhase("waiting");
 
     if (nextRoute.current) {
-     navigate(nextRoute.current, { state: { startAnimation: true } });
+      navigate(nextRoute.current, { state: { startAnimation: true } });
     }
 
-    setTimeout(() => {
-      setDoorPhase("opening");
-    }, 500);
+    if (nextRoute.current === "/register") {
+    } else {
+      setTimeout(() => {
+        setDoorPhase("opening");
+      }, 500);
+    }
   };
 
   const handleDoorsOpened = () => {
     setDoorPhase("idle");
-    nextRoute.current = null; 
+    nextRoute.current = null;
   };
-// Replace goToRegister with this:
-const goToPage = (path: string) => {
-  if (location.pathname !== path) {
-    nextRoute.current = path;
-    setDoorPhase("closing");
-  }
-};
 
-
+  const goToPage = (path: string) => {
+    if (location.pathname !== path) {
+      nextRoute.current = path;
+      setDoorPhase("closing");
+    }
+  };
 
   const handlePreloaderEnter = () => {
     setIsPreloading(false);
+
+    if (location.pathname === "/register") {
+      setTimeout(() => {
+        setDoorPhase("opening");
+      }, 300);
+    }
   };
 
   return (
@@ -95,21 +103,23 @@ const goToPage = (path: string) => {
         page={location.pathname}
       />
 
-      {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
+      {isPreloading && (
+        <Preloader onEnter={handlePreloaderEnter} />
+      )}
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToPage={goToPage} />
       )}
 
       {!isPreloading && currentPage === "register" && (
-        <Registration goToPage={goToPage}
+        <Registration
+          goToPage={goToPage}
           startAnimation={(location.state as LocationState)?.startAnimation || false}
         />
       )}
+
       {!isPreloading && currentPage === "events" && <div>Events Page</div>}
-      {!isPreloading && currentPage === "aboutus" && (
-        <AboutUs/>
-      )}
+      {!isPreloading && currentPage === "aboutus" && (<AboutUs/>)}
       {!isPreloading && currentPage === "contact" && (<Contact />)}
 
       <Routes>
