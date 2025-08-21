@@ -5,6 +5,7 @@ import Homepage from "./Homepage";
 import Registration from "./pages/registration/Registration";
 import DoorTransition from "./pages/components/page-transition/DoorTransition";
 import AboutUs from "./pages/aboutus/AboutUs";
+import Contact from "./pages/contact/ContactPage";
 
 export default function App() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function App() {
   }
 
   const [currentPage, setCurrentPage] = useState<
-    "home" | "register" | "events" | "aboutus"
+    "home" | "register" | "events" | "aboutus" | "contact"
   >(
     location.pathname === "/register"
       ? "register"
@@ -23,6 +24,8 @@ export default function App() {
       ? "events"
       : location.pathname === "/aboutus"
       ? "aboutus"
+      : location.pathname === "/contact"
+      ? "contact"
       : "home"
   );
 
@@ -95,8 +98,8 @@ const goToPage = (path: string) => {
       {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
 
       {!isPreloading && currentPage === "home" && (
-  <Homepage goToPage={goToPage} />
-)}
+        <Homepage goToPage={goToPage} />
+      )}
 
       {!isPreloading && currentPage === "register" && (
         <Registration goToPage={goToPage}
@@ -107,6 +110,7 @@ const goToPage = (path: string) => {
       {!isPreloading && currentPage === "aboutus" && (
         <AboutUs/>
       )}
+      {!isPreloading && currentPage === "contact" && (<Contact />)}
 
       <Routes>
         <Route path="/" element={null} />

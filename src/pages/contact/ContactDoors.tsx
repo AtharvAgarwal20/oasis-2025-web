@@ -5,45 +5,48 @@ import door2 from '/images/contact/Door2.png';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
-import { deprecations } from 'sass';
 
 interface ContactDoorsProps {
     aboutUsRef: React.RefObject<HTMLDivElement | null>,
-    treeContRef?: React.RefObject<HTMLDivElement | null>,
+    pinnedContRef?: React.RefObject<HTMLDivElement | null>,
     bottomContentRef?: React.RefObject<HTMLDivElement | null>,
 }
 
-export default function ContactDoors({ aboutUsRef, treeContRef, bottomContentRef }: ContactDoorsProps) {
+export default function ContactDoors({ aboutUsRef, pinnedContRef, bottomContentRef }: ContactDoorsProps) {
     const door1Ref = useRef<HTMLDivElement>(null);
     const door2Ref = useRef<HTMLDivElement>(null);
-    const scrollerRef = useRef<HTMLDivElement>(null);
+    // const scrollerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        console.log(treeContRef?.current, aboutUsRef?.current)
+        console.log(pinnedContRef?.current, aboutUsRef?.current)
         gsap.registerPlugin(ScrollTrigger);
 
         gsap.from(door1Ref.current, {
             x: "-100%",
             scrollTrigger: {
-                trigger: door1Ref.current,
+                trigger: aboutUsRef.current,
                 start: "top top",
                 end: `+=${window.innerHeight}`,
                 scrub: 0.5,
                 pin: bottomContentRef?.current,
-                pinType: "fixed",
-                pinnedContainer: treeContRef?.current,
+                // pinType: "transform",
+                pinSpacing: false,
+                markers: true,
+                // pinnedContainer: pinnedContRef?.current,
             }
         })
         gsap.from(door2Ref.current, {
             x: "100%",
             scrollTrigger: {
-                trigger: door2Ref.current,
+                trigger: aboutUsRef.current,
                 start: "top top",
                 end: `+=${window.innerHeight}`,
                 scrub: 0.5,
                 pin: bottomContentRef?.current,
-                pinType: "fixed",
-                pinnedContainer: treeContRef?.current,
+                // pinType: "transform",
+                pinSpacing: false,
+                markers: true,
+                // pinnedContainer: pinnedContRef?.current,
             }
         })
     });
