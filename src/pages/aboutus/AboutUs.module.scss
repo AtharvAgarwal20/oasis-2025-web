@@ -109,12 +109,15 @@
         color: #300505;
         font: $abtFont;
         font-weight: 400;
-        font-size: 1.4vw;
+        font-size: 1.8vw;
         width: 80%;
         text-align: center;
       }
     }
   }
+  
+
+
 }.controls {
   padding-top: 1vw;
   
@@ -134,15 +137,6 @@
   max-width: 273px; 
   aspect-ratio: 273 / 137; 
 }
-}
-
-
-
-.background {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
 .buttonGroup {
   position: absolute;
@@ -156,25 +150,61 @@
   align-items: center;
   justify-content: space-evenly;
   padding: 0 20px;
-  gap:5px;
   rotate: -5deg;
-}
-
-.buttonGroup button {
-background: #111111;
-border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.buttonGroup img {
-  width: 24px;
-  height: 24px;
-}
-.a1{
+  .a1{
   width: 5px;
   background-color: #f2dd7c;
   margin-top: 3px;
   height: 45%;
   rotate: 5deg;
 }
+button {
+background: #111111;
+border: none;
+  cursor: pointer;
+  padding: 0;
+}
+ img {
+  width: 34px;
+  height: 34px;
+}
+}
+
+}
+
+
+
+.background {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
+.AboutContainer{
+  overflow-y: scroll;
+  .wrapper{
+  perspective: none;
+  width: 80vw;
+  .vid{
+    transform: none;
+  }
+}
+  .abt{
+    perspective: none;
+    width: 80vw;
+    left: 10vw;
+    top:50vh;
+  .aboutback{
+    transform: none;
+  }
+  }
+  .controls{
+    
+      padding-top: 50px;
+    perspective: none;
+    .buttonContainer{
+      transform: none;
+  }
+}
+ }}

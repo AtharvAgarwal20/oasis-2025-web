@@ -270,6 +270,8 @@ const AboutUs = () => {
         </div>
 <div>
        <div className={styles.controls}>
+         <div className={styles.a1}></div>
+     
   <div className={styles.buttonContainer}>
    
   
