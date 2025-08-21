@@ -1,8 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import styles from "./AboutUs.module.scss";
 import Header from "/svgs/aboutus/header.svg";
 import fan from "/svgs/aboutus/fan.png";
+import prev from "/svgs/aboutus/prev.svg"
+import pause from "/svgs/aboutus/pause.svg"
+import next from "/svgs/aboutus/next.svg"
+declare global {
+  interface Window {
+    YT?: any;
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
 const icons = [
   "/svgs/aboutus/letter1.svg",
   "/svgs/aboutus/letter2.svg",
@@ -10,19 +20,94 @@ const icons = [
   "/svgs/aboutus/letter4.svg",
 ];
 
+const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
+
 const AboutUs = () => {
+  const [current, setCurrent] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playerContainerRef = useRef<HTMLDivElement | null>(null);
+  const playerRef = useRef<any>(null);
   useEffect(() => {
-    gsap.set(`.${styles.fan2}`, {
-      xPercent: 100,
-      yPercent: -100,
-    });
+    const initPlayer = () => {
+      if (playerRef.current || !playerContainerRef.current || !window.YT) return;
+
+      playerRef.current = new window.YT.Player(playerContainerRef.current, {
+        height: "100%",
+        width: "100%",
+        videoId: videos[0],
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1,
+        },
+        events: {
+          onStateChange: (event: any) => {
+            const YTState = window.YT.PlayerState;
+            if (event.data === YTState.PLAYING) setIsPlaying(true);
+            if (event.data === YTState.PAUSED) setIsPlaying(false);
+            if (event.data === YTState.ENDED) {
+              setIsPlaying(false);
+              nextVideo(); 
+            }
+          },
+        },
+      });
+    };
+
+    if (window.YT && window.YT.Player) {
+      initPlayer();
+    } else {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+      window.onYouTubeIframeAPIReady = () => initPlayer();
+    }
+
+    return () => {
+      try {
+        if (playerRef.current?.destroy) playerRef.current.destroy();
+      } catch {}
+    };
+  }, []);
+
+  const loadByIndex = (index: number) => {
+    if (!playerRef.current) return;
+    setCurrent(index);
+    playerRef.current.loadVideoById(videos[index]);
+  };
+
+  const nextVideo = () => {
+    const newIdx = (current + 1) % videos.length;
+    loadByIndex(newIdx);
+  };
+
+  const prevVideo = () => {
+    const newIdx = (current - 1 + videos.length) % videos.length;
+    loadByIndex(newIdx);
+  };
+
+  const togglePlayPause = () => {
+    if (!playerRef.current || !window.YT) return;
+    const state = playerRef.current.getPlayerState();
+    const YTState = window.YT.PlayerState;
+    if (state === YTState.PLAYING) {
+      playerRef.current.pauseVideo();
+    } else {
+      playerRef.current.playVideo();
+    }
+  };
+
+  useEffect(() => {
+    gsap.set(`.${styles.fan2}`, { xPercent: 100, yPercent: -100 });
   }, []);
 
   useEffect(() => {
     gsap.to(`.${styles.fan1}`, {
-      
-      rotateX:-5,
-      rotateY:-5,
+      rotateX: -5,
+      rotateY: -5,
       duration: 0.5,
       yoyo: true,
       repeat: -1,
@@ -30,18 +115,16 @@ const AboutUs = () => {
     });
 
     gsap.to(`.${styles.fan2}`, {
-      
+      rotateX: -5,
+      rotateY: -5,
       duration: 0.5,
-       
-      rotateX:-5,
-      rotateY:-5,
       yoyo: true,
       repeat: -1,
       ease: "sine.inOut",
     });
 
     const spawnIcon = (fanSelector: string, isFan1: boolean) => {
-      const fanEl = document.querySelector(fanSelector) as HTMLElement;
+      const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
       if (!fanEl || !fanEl.parentElement) return;
 
       const rect = fanEl.getBoundingClientRect();
@@ -59,14 +142,14 @@ const AboutUs = () => {
 
       fanEl.parentElement.appendChild(img);
 
-      let angle;
+      let angle: number;
       if (isFan1) {
         angle = Math.random() * (Math.PI / 2);
       } else {
-        angle = Math.PI + Math.random() *2* (Math.PI / 3); 
+        angle = Math.PI + Math.random() * 2 * (Math.PI / 3);
       }
 
-      const distance =  Math.random() * 100;
+      const distance = Math.random() * 100;
       const dx = Math.cos(angle) * distance;
       const dy = -Math.sin(angle) * distance;
 
@@ -90,8 +173,9 @@ const AboutUs = () => {
         }
       );
     };
+
     const spawnIcon2 = (fanSelector: string, isFan1: boolean) => {
-      const fanEl = document.querySelector(fanSelector) as HTMLElement;
+      const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
       if (!fanEl || !fanEl.parentElement) return;
 
       const rect = fanEl.getBoundingClientRect();
@@ -109,14 +193,14 @@ const AboutUs = () => {
 
       fanEl.parentElement.appendChild(img);
 
-      let angle;
+      let angle: number;
       if (isFan1) {
-        angle = Math.random() *2* (Math.PI / 3);
+        angle = Math.random() * 2 * (Math.PI / 3);
       } else {
-        angle = Math.PI + Math.random() *2* (Math.PI / 3); 
+        angle = Math.PI + Math.random() * 2 * (Math.PI / 3);
       }
 
-      const distance =  Math.random() * 100;
+      const distance = Math.random() * 100;
       const dx = Math.cos(angle) * distance;
       const dy = -Math.sin(angle) * distance;
 
@@ -141,29 +225,25 @@ const AboutUs = () => {
       );
     };
 
-   let interval: number;
-
+    let intervalId: number;
 
     const startSpawning = () => {
-      interval = setInterval(() => {
+      intervalId = window.setInterval(() => {
         spawnIcon2(`.${styles.fan1}`, true);
         spawnIcon(`.${styles.fan2}`, false);
       }, 400);
     };
 
-    const stopSpawning = () => clearInterval(interval);
+    const stopSpawning = () => {
+      if (intervalId) window.clearInterval(intervalId);
+    };
 
     const handleVisibility = () => {
-      if (document.hidden) {
-        stopSpawning();
-      } else {
-        startSpawning();
-      }
+      if (document.hidden) stopSpawning();
+      else startSpawning();
     };
 
     document.addEventListener("visibilitychange", handleVisibility);
-
-    // start initially
     startSpawning();
 
     return () => {
@@ -180,30 +260,46 @@ const AboutUs = () => {
 
       <div className={styles.wrapper}>
         <div className={styles.vid}>
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/Ogio7ZJSb9g?autoplay=0&amp;mute=0&amp;controls=0&amp;origin=https%3A%2F%2Fwww.bits-oasis.org&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1&amp;enablejsapi=1&amp;widgetid=1&amp;forigin=https%3A%2F%2Fwww.bits-oasis.org%2F&amp;aoriginsup=1&amp;gporigin=https%3A%2F%2Fwww.google.com%2F&amp;vf=6"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            style={{ objectFit: "cover" }}
-          ></iframe>
+          <div
+            ref={playerContainerRef}
+            style={{ width: "100%", height: "100%" }}
+          />
 
-          {/* Fans */}
           <img src={fan} alt="" className={styles.fan1} />
           <img src={fan} alt="" className={styles.fan2} />
         </div>
+<div>
+       <div className={styles.controls}>
+  <div className={styles.buttonContainer}>
+    <div className={styles.a1}></div>
+  
+        <img src="/svgs/aboutus/bord.svg" className={styles.background} alt="" />
+      
+    <div className={styles.buttonGroup}>
+     
+      <button onClick={prevVideo}><img src={prev} alt=""  className={styles.btns1}/></button>
+      
+      <button onClick={togglePlayPause}><img src={pause} alt="" className={styles.btns2} /></button>
+      <button onClick={nextVideo}><img src={next} alt=""  className={styles.btns3}/></button>
+    </div>
+  </div>
+</div></div>
+
       </div>
+
       <div className={styles.abt}>
         <div className={styles.aboutback}>
-          <p>Oasis, the annual cultural extravaganza of Birla Institute of Technology and Science, Pilani, has been a vibrant part of India's cultural tapestry since 1971. Managed entirely by students, it's a dazzling showcase of talent in Dance, Drama, Literature, Comedy, Fashion, and Music. It's where dreams come alive, laughter fills the air, and creativity knows no bounds. Step into the world of Oasis, where youth's boundless potential shines.</p>
+          <p>
+            Oasis, the annual cultural extravaganza of Birla Institute of
+            Technology and Science, Pilani, has been a vibrant part of India's
+            cultural tapestry since 1971. Managed entirely by students, it's a
+            dazzling showcase of talent in Dance, Drama, Literature, Comedy,
+            Fashion, and Music. It's where dreams come alive, laughter fills the
+            air, and creativity knows no bounds. Step into the world of Oasis,
+            where youth's boundless potential shines.
+          </p>
         </div>
-        
-        <p></p>
       </div>
-      
     </div>
   );
 };
