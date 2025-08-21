@@ -11,9 +11,7 @@ const imagesToPreload = [
   "/images/doors/Door2.png",
   "/images/doors/Door3.png",
   "/images/doors/Door4.png",
-  "/videos/ink-spread-4.gif",
-  "/images/landing/back.png",
-  "/images/landing/v.png",
+  "/videos/ink-spread-5.gif",
   "/svgs/landing/hamClouds/cloud1.min.svg",
   "/svgs/landing/hamClouds/cloud2.min.svg",
   "/svgs/landing/hamClouds/cloud3.min.svg",
@@ -24,14 +22,20 @@ const imagesToPreload = [
   "/svgs/landing/linkden.svg",
   "/svgs/landing/moon1.svg",
   "/svgs/landing/moonHam.svg",
-  "/svgs/landing/registerBtn.svg",
   "/images/landing/background1.png",
   "/images/landing/tree1.png",
-  "/videos/ink-spread-4.gif",
   "/svgs/landing/insta.svg",
   "/svgs/landing/x.svg",
   "/svgs/landing/linkden.svg",
   "/svgs/landing/wire.svg",
+  "/images/landing/mobileMountains.png",
+  "/svgs/landing/instaLamp.svg",
+  "/svgs/landing/linkdenLamp.svg",
+  "/svgs/landing/mobileBackground.svg",
+  "/svgs/landing/mobileRegisterBtn.svg",
+  "/svgs/landing/registerBtn.svg",
+  "/images/landing/oasisLogo.png",
+  "/images/landing/mobileCloud.png",
 ];
 
 export default function DrawingPreloader({
@@ -73,17 +77,8 @@ export default function DrawingPreloader({
         };
         img.onerror = (err) => {
           console.error("Image failed to load", err, img);
-          resolve(img); // Optionally resolve to continue progress even if an image fails
+          resolve(img);
         };
-        // img.onload = () => {
-        //   loadedImages++;
-        //   setProgress((loadedImages / imagesToPreload.length) * 100);
-        //   resolve(img);
-        //   console.log(
-        //     `Image preloaded: ${src}, Progress: ${loadedImages}/${imagesToPreload.length}`
-        //   );
-        // };
-        // img.onerror = reject;
       });
     };
 
@@ -154,16 +149,6 @@ export default function DrawingPreloader({
       });
     }
   }, [progress]);
-
-  // const [showDelayedOverlay, setShowDelayedOverlay] = useState(false);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowDelayedOverlay(true);
-  //   }, 1000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
 
   useEffect(() => {
     const handleResize = () => {
