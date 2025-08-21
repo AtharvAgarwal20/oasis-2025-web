@@ -134,8 +134,8 @@ const AboutUs = () => {
       const rect = fanEl.getBoundingClientRect();
       const parentRect = fanEl.parentElement.getBoundingClientRect();
 
-      const startX = rect.left - parentRect.left + rect.width / 2;
-      const startY = rect.top - parentRect.top + rect.height / 2;
+      const startX = rect.left - parentRect.left + rect.width / 2 - 150;
+      const startY = rect.top - parentRect.top + rect.height / 2 -30;
 
       const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       const img = document.createElement("img");
@@ -258,11 +258,9 @@ const AboutUs = () => {
 
   return (
     <div className={styles.AboutContainer}>
-      <div className={styles.header}>
-        <img src={Header} alt="About Us" />
-      </div>
-
+     
       <div className={styles.wrapper}>
+        <div className={styles.wrap1}>
         <div className={styles.vid}>
           <div
             ref={playerContainerRef}
@@ -290,12 +288,8 @@ const AboutUs = () => {
       <button onClick={nextVideo}><img src={next} alt=""  className={styles.btns3}/></button>
     </div>
   </div>
-</div></div>
-
-      </div>
-
-      <div className={styles.abt}>
-        <div className={styles.aboutback}>
+</div></div></div> 
+ <div className={styles.aboutback}>
           <p>
             Oasis, the annual cultural extravaganza of Birla Institute of
             Technology and Science, Pilani, has been a vibrant part of India's
@@ -305,8 +299,10 @@ const AboutUs = () => {
             air, and creativity knows no bounds. Step into the world of Oasis,
             where youth's boundless potential shines.
           </p>
-        </div>
       </div>
+      </div>
+
+       
     </div>
   );
 };
