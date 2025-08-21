@@ -7,7 +7,6 @@ import DoorTransition from "./pages/components/page-transition/DoorTransition";
 import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
-import Navbar from "./pages/components/navbar/Navbar";
 
 export default function App() {
   const navigate = useNavigate();
