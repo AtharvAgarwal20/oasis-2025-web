@@ -269,9 +269,7 @@ const isMobile = window.matchMedia(
     ).matches;
   return (
   <div className={styles.AboutContainer}>
-    <BackButton />
-    
-    <Aboutbar goToPage={goToPage}  />
+    <Aboutbar goToPage={goToPage} />
     <div className={styles.header}>
       <img src=
       {isMobile?Reg:Header} alt="About Us" />

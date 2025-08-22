@@ -6,6 +6,6 @@ export default function BackButton() {
     const { goToPage } = useContext(navContext);
 
     return (
-        <div className={styles.backButton} onClick={() => {if(goToPage) goToPage("/")}} />
+        <div className={`${styles.backButton}`} onClick={() => {if(goToPage) goToPage("/")}} />
     )
 }
