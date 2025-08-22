@@ -8,7 +8,7 @@ import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 
-export const navContext = createContext<{ goToPage?: (page: string) => void }>({});
+export const navContext = createContext<{goToPage?: (page: string) => void}>({});
 
 export default function App() {
   const navigate = useNavigate();
@@ -41,46 +41,44 @@ export default function App() {
   const [isPreloading, setIsPreloading] = useState(location.pathname !== "/");
 
   const nextRoute = useRef<string | null>(null);
-  const prevPathname = useRef(location.pathname);
-
-  const determinePageState = (path: string) => {
-    if (path === "/") return "home";
-    if (path === "/register") return "register";
-    if (path === "/events") return "events";
-    if (path === "/aboutus") return "aboutus";
-    if (path === "/contact") return "contact";
-    return "comingSoon";
-  };
-
-  const shouldPreload = (path: string) => {
-    return path === "/register" || path === "/events" || path === "/aboutus" || path === "/contact";
-  };
 
   useEffect(() => {
-    if (location.pathname !== prevPathname.current) {
-      nextRoute.current = location.pathname;
-      setDoorPhase("closing");
+    const path = location.pathname;
+
+    if (path === "/") {
+      setCurrentPage("home");
+      setIsPreloading(false);
+    } else if (path === "/register") {
+      setCurrentPage("register");
+      setIsPreloading(true);
+    } else if (path === "/events") {
+      setCurrentPage("events");
+      setIsPreloading(true);
+    } else if (path === "/aboutus") {
+      setCurrentPage("aboutus");
+      setIsPreloading(true);
+    } else if (path === "/contact") {
+      setCurrentPage("contact");
+      setIsPreloading(true);
+    } else {
+      setCurrentPage("comingSoon");
+      setIsPreloading(false);
     }
   }, [location.pathname]);
 
   const handleDoorsClosed = () => {
     setDoorPhase("waiting");
 
-    const targetRoute = nextRoute.current;
-
-    if (targetRoute) {
-      setIsPreloading(shouldPreload(targetRoute));
+    if (nextRoute.current) {
+      navigate(nextRoute.current, { state: { startAnimation: true } });
     }
 
-    if (targetRoute && location.pathname !== targetRoute) {
-      navigate(targetRoute, { state: { startAnimation: true } });
+    if (nextRoute.current === "/register") {
+    } else {
+      setTimeout(() => {
+        setDoorPhase("opening");
+      }, 500);
     }
-
-    setTimeout(() => {
-      setDoorPhase("opening");
-      setCurrentPage(determinePageState(targetRoute ?? location.pathname));
-      prevPathname.current = targetRoute ?? location.pathname;
-    }, 500);
   };
 
   const handleDoorsOpened = () => {
@@ -130,18 +128,16 @@ export default function App() {
       )}
 
       {!isPreloading && currentPage === "events" && <ComingSoon />}
-      {!isPreloading && currentPage === "aboutus" && (
-        <AboutUs goToPage={goToPage} />
-      )}
+      {!isPreloading && currentPage === "aboutus" && <AboutUs goToPage={goToPage} />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
 
       <Routes>
-        <Route path="/" element={null} />
+        <Route path="/" element={null} errorElement={<ComingSoon />} />
+        <Route path="/events" element={null} errorElement={<ComingSoon />} />
         <Route path="/register" element={null} />
         <Route path="/events" element={null} />
         <Route path="/aboutus" element={null} />
-        <Route path="/contact" element={null} />
         <Route path="/comingSoon" element={null} />
       </Routes>
     </navContext.Provider>
