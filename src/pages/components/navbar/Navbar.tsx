@@ -12,7 +12,7 @@ const navItems = [
   { label: "Home", katakana: "ホーム", links: "/" },
   { label: "About Us", katakana: "アバウト・アス", links: "/aboutus" },
   { label: "Events", katakana: "イベンツ", links: "/events" },
-  { label: "Contact", katakana: "コンタクト", links: "/contactus" },
+  { label: "Contact", katakana: "コンタクト", links: "/contact" },
 ];
 
 export default function Navbar({
