@@ -194,11 +194,16 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
           isMobile ? 4.2 : isTablet ? 3.2 : 1.5
         }vw Abhaya Libre Extrabold`,
       }),
+      menuPortal: (provided: any) => ({
+        ...provided,
+        zIndex: 9999,
+      }),
       menu: (provided: any) => ({
         ...provided,
         zIndex: 4,
         backgroundColor: "#1E1E1E",
         maxHeight: `${isMobile ? 40 : isTablet ? 30 : 15}vw`,
+        height: "10vw",
         overflow: "hidden",
         scrollbarWidth: "none",
         "::-webkit-scrollbar": {
@@ -293,6 +298,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     render={({ field }) => (
                       <Select<GenderOption, false>
                         {...field}
+                        menuPortalTarget={document.body}
                         options={genderOptions}
                         styles={customStyle}
                         onChange={(val) => field.onChange(val?.value || "")}
@@ -341,6 +347,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     render={({ field }) => (
                       <Select
                         {...field}
+                        menuPortalTarget={document.body}
                         options={collegeOptions}
                         styles={customStyle}
                         onChange={(val) => field.onChange(val?.value || "")}
@@ -404,6 +411,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     render={({ field }) => (
                       <Select
                         {...field}
+                        menuPortalTarget={document.body}
                         unstyled
                         options={getFilteredOptions(inputValue)}
                         styles={customStyle}
@@ -446,6 +454,7 @@ const Register = forwardRef<HTMLDivElement, PropsType>(
                     render={({ field }) => (
                       <Select
                         {...field}
+                        menuPortalTarget={document.body}
                         options={availableCities}
                         styles={customStyle}
                         isDisabled={!selectedState}
