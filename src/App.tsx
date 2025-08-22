@@ -126,10 +126,10 @@ export default function App() {
       )}
 
       {!isPreloading && currentPage === "events" && <ComingSoon />}
-      {!isPreloading && currentPage === "aboutus" && <AboutUs />}
+      {!isPreloading && currentPage === "aboutus" && <AboutUs goToPage={goToPage} />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
-
+     
       <Routes>
         <Route path="/" element={null} errorElement={<ComingSoon />} />
         <Route path="/events" element={null} errorElement={<ComingSoon />} />
