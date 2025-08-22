@@ -6,6 +6,10 @@ import fan from "/svgs/aboutus/fan.png";
 import prev from "/svgs/aboutus/prev.svg"
 import pause from "/svgs/aboutus/pause.svg"
 import next from "/svgs/aboutus/next.svg"
+import Reg from "/svgs/aboutus/reghead.svg"
+import play from "/svgs/aboutus/play.svg"
+import nextarr from "/svgs/aboutus/nextarr.svg"
+import Aboutbar from "./components/Aboutbar";
 declare global {
   interface Window {
     YT?: any;
@@ -26,9 +30,13 @@ const icons = [
 
 const videos = ["Ogio7ZJSb9g", "5MtkggVC0w0", "krsrGOqnAN0"];
 
-const AboutUs = () => {
+const AboutUs = ({
+  goToPage,
+}: {
+  goToPage: (path: string) => void;
+})  => {
   const [current, setCurrent] = useState(0);
-//  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
@@ -50,10 +58,10 @@ const AboutUs = () => {
         events: {
           onStateChange: (event: any) => {
             const YTState = window.YT.PlayerState;
-            // if (event.data === YTState.PLAYING) setIsPlaying(true);
-            // if (event.data === YTState.PAUSED) setIsPlaying(false);
+             if (event.data === YTState.PLAYING) setIsPlaying(true);
+             if (event.data === YTState.PAUSED) setIsPlaying(false);
             if (event.data === YTState.ENDED) {
-              // setIsPlaying(false);
+               setIsPlaying(false);
               nextVideo(); 
             }
           },
@@ -255,31 +263,46 @@ const AboutUs = () => {
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
-
+const isMobile = window.matchMedia(
+      "(max-width: 1200px) and (max-aspect-ratio: 0.75) "
+    ).matches;
   return (
   <div className={styles.AboutContainer}>
+    
+    <Aboutbar goToPage={goToPage}  />
     <div className={styles.header}>
-      <img src={Header} alt="About Us" />
+      <img src=
+      {isMobile?Reg:Header} alt="About Us" />
     </div>
 
-    {/* NEW FLEX + PERSPECTIVE WRAPPER */}
     <div className={styles.content3D}>
-      {/* VIDEO SIDE */}
       <div className={styles.wrapper}>
+         <button onClick={prevVideo} className={styles.arr}>
+          
+        <img src={nextarr} className={styles.prevarr} width="100%"  ></img>
+        </button>
         <div className={styles.vid}>
           <div
             ref={playerContainerRef}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%"  ,borderRadius: "16px"}}
           />
 
           <img src={fan} alt="" className={styles.fan1} />
           <img src={fan} alt="" className={styles.fan2} />
+        
         </div>
+        
+              <button onClick={nextVideo}className={styles.arr}>
+        <img src={nextarr} className={styles.nextarr}width="100%"></img>
+        </button>
+        
+        <div></div>
 
         {/* CONTROLS */}
         <div className={styles.controls}>
           <div className={styles.a1}></div>
           <div className={styles.buttonContainer}>
+            
             <img
               src="/svgs/aboutus/bord.svg"
               className={styles.background}
@@ -291,7 +314,7 @@ const AboutUs = () => {
               </button>
               <div className={styles.a1}></div>
               <button onClick={togglePlayPause}>
-                <img src={pause} alt="" className={styles.btns2} />
+                <img src= {isPlaying?play:pause} alt="" className={styles.btns2} />
               </button>
               <div className={styles.a1}></div>
               <button onClick={nextVideo}>
