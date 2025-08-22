@@ -9,8 +9,22 @@
   overflow-x: hidden;
   overflow-y: hidden;
   background: url("/svgs/aboutus/background.svg");
-    background-size: cover;
+  background-size: cover;
   background-blend-mode: darken;
+
+  .aboutBB {
+    background-image: url('/svgs/registration/back.svg');
+    filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.828)) sepia() saturate(4.5) hue-rotate(-10deg);
+    transition: filter 0.3s;
+    margin: 2.1rem;
+    z-index: 1000;
+
+    &:hover {filter: drop-shadow(0px 0px 9px rgba(255, 255, 255, 1)) sepia() saturate(4.5) hue-rotate(-10deg);}
+
+    @media (max-width: 700px) {
+      margin: 4.5rem 1rem;
+    }
+  }
 
   .header {
     position: absolute;
@@ -29,8 +43,8 @@
   .content3D {
     display: flex;
     justify-content: center;
-    
-  gap:clamp(10px,4vw,100px);
+
+    gap: clamp(10px, 4vw, 100px);
 
     width: 90vw;
     margin: 0 auto;
@@ -39,125 +53,130 @@
     perspective: 600px;
     perspective-origin: center;
 
-     .wrapper {
-      .arr{
+    .wrapper {
+      .arr {
         background: transparent;
         border: none;
         display: none;
-        .prevarr,.nextarr{
-        display: none;
+
+        .prevarr,
+        .nextarr {
+          display: none;
+        }
       }
-      }
-      
-  width: 40vw;
-  transform-style: preserve-3d;
 
-  .vid {
-    width: 100%;
-    
-  aspect-ratio: 16 / 9;
-    border: 0.2vw solid #f2dd7c;
-    box-shadow: 0px 0px 24px 0px #f2dd7c;
-    background: #111111;
-    position: relative;
-
-    transform: rotateY(10deg);
-    transform-style: preserve-3d;
-    
-    border-radius: 16px;
-   div{
-    
-    border-radius: 16px;
-   }
-    .fan1 {
-      z-index: 2;
-      position: absolute;
-      bottom: -7.5vh;
-      left: -4.5vw;
-      width: 10vw;
-      height: auto;
-      object-fit: contain;
-      transform-origin: bottom left;
-    }
-
-    .fan2 {
-      z-index: 2;
-      position: absolute;
-      top: -7vh;
-      right: -5vw;
-      width: 10vw;
-      object-fit: contain;
-      transform-origin: bottom left;
-    }
-  }
-
- .controls {
-  //  margin-top: 3vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transform: rotateY(10deg); 
-    transform-style: preserve-3d;
-
-    .buttonContainer {
-      position: relative;
-      width: 100%;
-      max-width: 273px;
-      aspect-ratio: 273 / 137;
-    //display: flex;
-   // flex-direction: row;
-     transform: rotateZ(4deg) translateZ(20px);
+      width: 40vw;
       transform-style: preserve-3d;
-      
-        scale: 0.8;
-    // .yellowline{
-    //   background-color: #f2dd7c;
-    //   height: 5vh;
-    //   top:7vh;
-    //   position: absolute;
-    //   width: 6px;
-    // }
-      .background {
+
+      .vid {
         width: 100%;
-        height: auto;
-        display: block;
+
+        aspect-ratio: 16 / 9;
+        border: 0.2vw solid #f2dd7c;
+        box-shadow: 0px 0px 24px 0px #f2dd7c;
+        background: #111111;
+        position: relative;
+
+        transform: rotateY(10deg);
+        transform-style: preserve-3d;
+
+        border-radius: 16px;
+
+        div {
+
+          border-radius: 16px;
+        }
+
+        .fan1 {
+          z-index: 2;
+          position: absolute;
+          bottom: -7.5vh;
+          left: -4.5vw;
+          width: 10vw;
+          height: auto;
+          object-fit: contain;
+          transform-origin: bottom left;
+        }
+
+        .fan2 {
+          z-index: 2;
+          position: absolute;
+          top: -7vh;
+          right: -5vw;
+          width: 10vw;
+          object-fit: contain;
+          transform-origin: bottom left;
+        }
       }
 
-      .buttonGroup {
-        position: absolute;
-        inset: 0;
+      .controls {
+        //  margin-top: 3vh;
+        width: 100%;
         display: flex;
+        justify-content: center;
         align-items: center;
-        justify-content: space-evenly;
-        padding: 0 20px;
-        rotate: -5deg;
 
-        .a1 {
-          width: 5px;
-          height: 45%;
-          margin-top: 3px;
-          background-color: #f2dd7c;
-          rotate: 5deg;
-        }
+        transform: rotateY(10deg);
+        transform-style: preserve-3d;
 
-        button {
-          display: inline;
-          background: #111111;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-        }
+        .buttonContainer {
+          position: relative;
+          width: 100%;
+          max-width: 273px;
+          aspect-ratio: 273 / 137;
+          //display: flex;
+          // flex-direction: row;
+          transform: rotateZ(4deg) translateZ(20px);
+          transform-style: preserve-3d;
 
-        img {
-          width: 34px;
-          height: 34px;
+          scale: 0.8;
+
+          // .yellowline{
+          //   background-color: #f2dd7c;
+          //   height: 5vh;
+          //   top:7vh;
+          //   position: absolute;
+          //   width: 6px;
+          // }
+          .background {
+            width: 100%;
+            height: auto;
+            display: block;
+          }
+
+          .buttonGroup {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 0 20px;
+            rotate: -5deg;
+
+            .a1 {
+              width: 5px;
+              height: 45%;
+              margin-top: 3px;
+              background-color: #f2dd7c;
+              rotate: 5deg;
+            }
+
+            button {
+              display: inline;
+              background: #111111;
+              border: none;
+              cursor: pointer;
+              padding: 0;
+            }
+
+            img {
+              width: 34px;
+              height: 34px;
+            }
+          }
         }
       }
     }
-  }
-}
 
 
     .abt {
@@ -167,8 +186,8 @@
 
       .aboutback {
         width: 100%;
-        
-  aspect-ratio: inherit;
+
+        aspect-ratio: inherit;
         position: relative;
 
         background: url("/images/aboutus/abtbck.png");
@@ -205,16 +224,18 @@
     width: 3vw;
     height: auto;
     pointer-events: none;
-    z-index: 3;  }
+    z-index: 3;
+  }
 
   @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
 
-  overflow-y: auto;
+    overflow-y: auto;
+
     .content3D {
       flex-direction: column;
       align-items: center;
       perspective: none;
-       height: auto;
+      height: auto;
 
       .wrapper {
         width: 80vw;
@@ -222,12 +243,12 @@
         .vid {
           // height: 50vh;
           aspect-ratio: 16/9;
-          transform: none; 
+          transform: none;
         }
 
         .controls {
           .buttonContainer {
-            transform: rotateZ(4deg); 
+            transform: rotateZ(4deg);
           }
         }
       }
@@ -236,6 +257,7 @@
         width: 80vw;
         margin-top: 5vh;
         padding-bottom: 30px;
+
         .aboutback {
           transform: none;
 
@@ -249,7 +271,7 @@
 
   @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
 
-  //overflow-y: auto;
+    //overflow-y: auto;
     .abt {
       width: 80vw;
       margin-top: 5vh;
@@ -264,62 +286,77 @@
       }
     }
   }
-  @media  (max-width: 1200px) and (max-aspect-ratio: 0.75) {
-    .header{
+
+  @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
+    .header {
       padding-top: 4vh;
       display: flex;
       width: 100vw;
       height: 13vh;
     }
-    .content3D{
+
+    .content3D {
       flex-direction: column-reverse;
-      gap:10vh;
-    padding-top: 17vh;
-      .abt{
+      gap: 10vh;
+      padding-top: 17vh;
+
+      .abt {
         margin-top: 4vh;
-        
-        width: 80vw;
-        
-  aspect-ratio: 16 / 9;
-      .aboutback{
-        background: transparent;
-        align-items: flex-start;
-        
-  aspect-ratio: 16 / 9;
-        width: 80vw;
-        p{
-        color: #FFE8E8;
-        font-size: 4vw;
+
         width: 80vw;
 
-        }
-      }
-      
-    }
-    .wrapper{
-      display: flex;
-      flex-direction: row;
-      width: 90vw;
-      gap:20px;
-        .vid{
+        aspect-ratio: 16 / 9;
+
+        .aboutback {
+          background: transparent;
+          align-items: flex-start;
+
+          aspect-ratio: 16 / 9;
           width: 80vw;
-           aspect-ratio: 16 / 9;
+
+          p {
+            color: #FFE8E8;
+            font-size: 4vw;
+            width: 80vw;
+
+          }
+        }
+
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 90vw;
+        gap: 20px;
+
+        .vid {
+          width: 80vw;
+          aspect-ratio: 16 / 9;
           border: 0.7px solid #E2DCCB;
           box-shadow: 0px 0px 20.16px 4.03px #CBAE5780;
-          .fan1,.fan2{
+
+          .fan1,
+          .fan2 {
             display: none;
           }
         }
-        .controls{
+
+        .controls {
           display: none;
         }
-        .arr{
+
+        .arr {
           display: block;
-        .prevarr,.nextarr{
-          display: block;
-          width: 4vw;
-        }}
-        .prevarr{
+
+          .prevarr,
+          .nextarr {
+            display: block;
+            width: 4vw;
+          }
+        }
+
+        .prevarr {
           transform: scaleX(-1);
         }
       }
