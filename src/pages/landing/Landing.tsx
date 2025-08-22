@@ -437,7 +437,7 @@ export default function Landing({
             }
           </div> */}
       </div>
-      <div
+      {/* <div
         className={
           overlayIsActive
             ? styles.aboutUsContainer
@@ -445,7 +445,7 @@ export default function Landing({
         }
       >
         <AboutUs />
-      </div>
+      </div> */}
     </>
   );
 }
