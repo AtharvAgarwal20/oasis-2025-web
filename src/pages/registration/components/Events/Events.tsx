@@ -128,31 +128,49 @@ const Events = forwardRef<
   };
 
   const handleEvent = (
-    event: { id: number; name: string; about: string } | null
+    event: { id: number; name: string; about: string } | null,
+    flag: boolean
   ) => {
     if (!event) return;
-    const mm = gsap.matchMedia();
-    contextSafe(() => {
-      mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
-        if (selectedEvents.some((e) => e.id === event.id)) {
-          sessionStorage.setItem(
-            "selectedEvents",
-            JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
-          );
-          setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
-        } else {
-          sessionStorage.setItem(
-            "selectedEvents",
-            JSON.stringify([...selectedEvents, event])
-          );
-          setSelectedEvents((prev) => [...prev, event]);
-        }
-        showEventDescription(event);
-      });
-      mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
-        showEventDescription(event);
-      });
-    })();
+    if (flag) {
+      if (selectedEvents.some((e) => e.id === event.id)) {
+        sessionStorage.setItem(
+          "selectedEvents",
+          JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
+        );
+        setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
+      } else {
+        sessionStorage.setItem(
+          "selectedEvents",
+          JSON.stringify([...selectedEvents, event])
+        );
+        setSelectedEvents((prev) => [...prev, event]);
+      }
+      showEventDescription(event);
+    } else {
+      const mm = gsap.matchMedia();
+      contextSafe(() => {
+        mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+          if (selectedEvents.some((e) => e.id === event.id)) {
+            sessionStorage.setItem(
+              "selectedEvents",
+              JSON.stringify(selectedEvents.filter((e) => e.id !== event.id))
+            );
+            setSelectedEvents((prev) => prev.filter((e) => e.id !== event.id));
+          } else {
+            sessionStorage.setItem(
+              "selectedEvents",
+              JSON.stringify([...selectedEvents, event])
+            );
+            setSelectedEvents((prev) => [...prev, event]);
+          }
+          showEventDescription(event);
+        });
+        mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
+          showEventDescription(event);
+        });
+      })();
+    }
   };
 
   function handleScroll() {
@@ -272,11 +290,9 @@ const Events = forwardRef<
                 <li
                   key={index}
                   onMouseEnter={() => {
-                    if (!activeEvent || activeEvent.id !== event.id) {
-                      showEventDescription(event);
-                    }
+                    showEventDescription(event);
                   }}
-                  onClick={() => handleEvent(event)}
+                  onClick={() => handleEvent(event, false)}
                   className={styles.eventItem}
                 >
                   <svg
@@ -418,7 +434,7 @@ const Events = forwardRef<
             <div className={styles.eventDescription} ref={eventDescRef}>
               <h2>{activeEvent.name}</h2>
               <p>{activeEvent.about}</p>
-              <button onClick={() => handleEvent(activeEvent)}>
+              <button onClick={() => handleEvent(activeEvent, true)}>
                 {selectedEvents.some((e) => e.id === activeEvent.id)
                   ? "REMOVE"
                   : "ADD"}
@@ -436,7 +452,7 @@ const Events = forwardRef<
       )}
       {eventsModal && (
         <EventsModal
-          handleEvent={() => handleEvent(activeEvent)}
+          handleEvent={() => handleEvent(activeEvent, true)}
           eventData={activeEvent}
           closeModal={() => setEventsModal(false)}
           selectedEvents={selectedEvents}
