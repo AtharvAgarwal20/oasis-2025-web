@@ -82,6 +82,7 @@ body {
 
 .wrapperSquared {
   height: 220vh;
+  position: fixed;
 }
 
 .wrapper {
@@ -599,12 +600,11 @@ body {
   z-index: 100;
   height: 100vh;
 
-}
-
-.pinnerContainer {
-  position: relative;
-  height: 100svh;
-  width: 100svw;
+  .pinnerContainer {
+    position: relative;
+    height: 100svh;
+    width: 100svw;
+  }
 }
 
 .scrollExtender {
@@ -616,3 +616,29 @@ body {
 .noneDisplay {
   display: none;
 }
+
+.bottomContent {
+  position: absolute;
+  min-height: 100vh;
+  width: 100%;
+  bottom: 0px;
+
+  .dummyAboutUs {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    background-color: turquoise;
+  }
+}
+
+// .aboutUsContainer {
+//   display: block;
+//   position: relative;
+//   top: 120svh;
+//   z-index: 100;
+//   height: 100vh;
+// }
+
+// .noneDisplay {
+//   display: none;
+// }

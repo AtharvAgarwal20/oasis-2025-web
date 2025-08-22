@@ -1,5 +1,3 @@
-$inputwidth: 30vw;
-$inputheight: 10vh;
 @use "/src/assets/global.scss" as *;
 
 .registerContainer {
@@ -97,6 +95,7 @@ $inputheight: 10vh;
             width: 100%;
             height: 100%;
             z-index: 100;
+            // overflow: visible;
           }
           .radioGroup {
             border: none;
@@ -111,7 +110,7 @@ $inputheight: 10vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1vw;
+            gap: 1.3vw;
             position: relative;
 
             .radioLabel {

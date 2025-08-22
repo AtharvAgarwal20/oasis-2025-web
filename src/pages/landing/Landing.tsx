@@ -23,7 +23,7 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
-import AboutUs from "../aboutus/AboutUs";
+// import AboutUs from "../aboutus/AboutUs";
 // import ContactDoors from "../contact/ContactDoors";
 i;
 
@@ -435,7 +435,7 @@ export default function Landing({
             }
           </div> */}
       </div>
-      <div
+      {/* <div
         className={
           overlayIsActive
             ? styles.aboutUsContainer
@@ -444,7 +444,7 @@ export default function Landing({
         ref={aboutUsRef}
       >
         <AboutUs />
-      </div>
+      </div> */}
     </>
   );
 }

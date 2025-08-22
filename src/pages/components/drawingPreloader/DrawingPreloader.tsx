@@ -65,7 +65,7 @@ export default function DrawingPreloader({
         img.src = src;
         img.onload = () => {
           loadedImages++;
-          setProgress((loadedImages / imagesToPreload.length) * 100);
+          setProgress((loadedImages / imagesToPreload.length) * 99);
           const canvas = document.createElement("canvas");
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
@@ -115,7 +115,7 @@ export default function DrawingPreloader({
 
   useGSAP(() => {
     if (pathsRef.current.length > 0) {
-      const progressNormalized = progress / 100;
+      const progressNormalized = progress / 99;
       const totalPaths = pathsRef.current.length;
 
       pathsRef.current.forEach((path, index) => {
