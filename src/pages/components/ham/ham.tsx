@@ -5,6 +5,7 @@ import homeIcon from "/svgs/landing/homeIcon.svg";
 import aboutusIcon from "/svgs/landing/aboutusIcon.svg";
 import eventIcon from "/svgs/landing/eventsIcon.svg";
 import oasisLogo from "/images/landing/oasisLogo.png";
+import { useHamStore } from "../../../utils/store";
 
 const navItems = [
   { label: "Home", katakana: "ホーム", links: "/", icon: homeIcon },
@@ -22,9 +23,10 @@ export default function Ham({
 }: {
   goToPage: (path: string) => void;
 }) {
+  const setHamOpen = useHamStore((state) => state.setHamOpen);
   return (
     <div className={styles.ham}>
-      <div className={styles.closeBtn}>
+      <div className={styles.closeBtn} onClick={() => setHamOpen(false)}>
         <img src={hamX} alt="Close" className={styles.closeIcon} />
       </div>
       <div className={styles.logoContainer}>
@@ -36,7 +38,10 @@ export default function Ham({
             <div
               key={item.label}
               className={styles.navItem}
-              onClick={() => goToPage(item.links)}
+              onClick={() => {
+                goToPage(item.links);
+                setHamOpen(false);
+              }}
             >
               <img src={item.icon} alt={item.label} className={styles.icon} />
               <span className={styles.label}>{item.label}</span>
