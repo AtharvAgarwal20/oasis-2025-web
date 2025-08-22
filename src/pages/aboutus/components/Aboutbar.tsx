@@ -22,20 +22,21 @@ export default function Aboutbar({
 }) {
   return (
     <nav className={styles.nav}>
-      
-      <ul className={styles.navList}>
-        {navItems.map((item) => (
-          <li key={item.label} className={styles.navItem}>
-            <div
-              className={styles.navLink}
-              onClick={() => goToPage(item.links)}
-            >
-              <div className={styles.actualLabel}>{item.label}</div>
-              <div className={styles.katakana}>{item.katakana}</div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </nav>
+  <div className={styles.leftSpacer} /> 
+  <ul className={styles.navList}>
+    {navItems.map((item) => (
+      <li key={item.label} className={styles.navItem}>
+        <div
+          className={styles.navLink}
+          onClick={() => goToPage(item.links)}
+        >
+          <div className={styles.actualLabel}>{item.label}</div>
+          <div className={styles.katakana}>{item.katakana}</div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</nav>
+
   );
 }
