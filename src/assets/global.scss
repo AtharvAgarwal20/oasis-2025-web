@@ -24,6 +24,10 @@
   font-family: "Abhaya Libre Bold";
   src: url("/fonts/AbhayaLibre-Bold.ttf");
 }
+@font-face {
+  font-family: "Shippori Mincho";
+  src: url("/fonts/ShipporiMincho-Regular.ttf");
+}
 $primaryFont: "Japan Ramen", sans-serif;
 
 $gradient: linear-gradient(#ff6084 0%, #ff9c7b 100%);
