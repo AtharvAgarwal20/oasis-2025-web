@@ -55,6 +55,9 @@ export default function App() {
     } else if (path === "/aboutus") {
       setCurrentPage("aboutus");
       setIsPreloading(true);
+    } else if (path === "/contact") {
+      setCurrentPage("contact");
+      setIsPreloading(true);
     } else {
       setCurrentPage("comingSoon");
       setIsPreloading(false);
