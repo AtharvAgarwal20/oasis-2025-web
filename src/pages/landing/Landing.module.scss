@@ -9,6 +9,7 @@ html {
   --counterBigFontSize: 2rem;
   --counterSmallFontSize: 1.5rem;
   scrollbar-width: none;
+
   img {
     user-select: none;
     -webkit-user-drag: none;
@@ -49,7 +50,8 @@ body {
   position: fixed;
 }
 
-@media (max-width: 730px), (aspect-ratio < 8/12) {
+@media (max-width: 730px),
+(aspect-ratio < 8/12) {
   body {
     background-image: linear-gradient(to right, #d36f66, #be5964);
   }
@@ -64,12 +66,15 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   33% {
     transform: rotate(5deg);
   }
+
   66% {
     transform: rotate(-5deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -94,6 +99,7 @@ body {
     z-index: 0;
     overflow-x: hidden;
     position: relative;
+
     .landingImage {
       width: 100%;
       height: 100%;
@@ -101,6 +107,7 @@ body {
       object-position: center;
       position: fixed;
     }
+
     .mobileBackground {
       display: none;
       width: 100%;
@@ -123,6 +130,7 @@ body {
       height: 70svh;
       margin-bottom: calc(5svw);
     }
+
     .mobileCloud {
       display: none;
       position: fixed;
@@ -132,16 +140,20 @@ body {
       mix-blend-mode: luminosity;
     }
 
-    @media (aspect-ratio < 8/12), (max-width: 730px) {
+    @media (aspect-ratio < 8/12),
+    (max-width: 730px) {
       .mobileMountains {
         display: block;
       }
+
       .landingImage {
         display: none;
       }
+
       .mobileBackground {
         display: block;
       }
+
       .mobileCloud {
         display: block;
       }
@@ -208,23 +220,27 @@ body {
           object-position: top;
           will-change: transform;
         }
+
         .socialLinksContainer {
           position: absolute;
           top: 2%;
           right: 0;
           height: fit-content;
           width: fit-content;
+
           .wire {
             position: relative;
             left: 0;
             width: 50svw;
           }
+
           .socialLinkContainer {
             position: absolute;
             right: 0;
             top: 100%;
             animation: lantern-swinging-wind 6s ease-in-out infinite;
             transform-origin: top center;
+
             a {
               display: grid;
               grid-template-columns: 1/2;
@@ -232,6 +248,7 @@ body {
               align-items: center;
               justify-items: center;
               width: 6.5svw;
+
               .socialIcon {
                 grid-row: 1/2;
                 grid-column: 1/2;
@@ -240,12 +257,14 @@ body {
                 filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
                 transition: filter 0.1s ease-out;
               }
+
               .socialLamp {
                 grid-row: 1/2;
                 grid-column: 1/2;
                 z-index: 99;
                 width: 80%;
               }
+
               &:hover {
                 .socialIcon {
                   filter: none;
@@ -257,15 +276,18 @@ body {
           .xDiv {
             top: 94%;
             right: 10%;
+
             a {
               .xIcon {
                 width: 33%;
               }
             }
           }
+
           .instaDiv {
             top: 94%;
             right: 28%;
+
             a {
               .instaIcon {
                 width: 38%;
@@ -274,9 +296,11 @@ body {
               }
             }
           }
+
           .linkdenDiv {
             top: 88%;
             right: 43%;
+
             a {
               .linkdenIcon {
                 width: 36%;
@@ -300,11 +324,14 @@ body {
       }
     }
 
-    @media (aspect-ratio < 8/12), (max-width: 730px) {
+    @media (aspect-ratio < 8/12),
+    (max-width: 730px) {
       .treeContainer {
         position: fixed;
+
         .tree {
           margin-top: clamp(0svh, 100svh - 80svw, 100svh);
+
           img {
             scale: 1.2;
           }
@@ -320,6 +347,7 @@ body {
             pointer-events: none;
           }
         }
+
         .socialLinksContainer {
           display: none;
         }
@@ -357,7 +385,9 @@ body {
         width: 100%;
       }
     }
-    @media (aspect-ratio < 8/12), (max-width: 730px) {
+
+    @media (aspect-ratio < 8/12),
+    (max-width: 730px) {
       .logoContainer {
         left: 50%;
         transform: translateX(-50%);
@@ -391,8 +421,10 @@ body {
       font-size: 2rem;
       text-align: center;
       background-color: none;
+
       .timeLeft {
         font-size: var(--counterSmallFontSize);
+
         .days,
         .hours,
         .minutes,
@@ -409,7 +441,8 @@ body {
       }
     }
 
-    @media (aspect-ratio < 8/12), (max-width: 730px) {
+    @media (aspect-ratio < 8/12),
+    (max-width: 730px) {
       .dateCountdown {
         z-index: 50;
         display: flex;
@@ -444,14 +477,17 @@ body {
       align-items: center;
       justify-content: center;
       z-index: 100;
+
       .linkBackground {
         width: 100%;
         grid-column: 1/2;
         grid-row: 1/2;
+
         img {
           width: 100%;
         }
       }
+
       .socialLinks {
         grid-row: 1/2;
         grid-column: 1/2;
@@ -470,6 +506,7 @@ body {
           align-items: center;
           justify-content: center;
           cursor: pointer;
+
           img {
             width: 100%;
           }
@@ -499,12 +536,14 @@ body {
         width: 100%;
         transform: rotate(-2.5deg) translateY(2px);
       }
+
       .mobileRegisterBtn {
         grid-row: 1/2;
         grid-column: 1/2;
         width: 100%;
         display: none;
       }
+
       .registerBtnText {
         font-family: $primaryFont;
         font-size: var(--registerFontSize);
@@ -516,23 +555,28 @@ body {
       }
     }
 
-    @media (aspect-ratio < 8/12), (max-width: 730px) {
+    @media (aspect-ratio < 8/12),
+    (max-width: 730px) {
       .registerBtnContainer {
         width: 300px;
         left: 50%;
         transform: translateX(-50%);
+
         .registerBtn {
           display: none;
         }
+
         .mobileRegisterBtn {
           display: block;
         }
+
         .registerBtnText {
           font-size: 1.5rem;
         }
       }
     }
   }
+
   &.mask {
     mask-image: url("/videos/ink-spread-5.gif");
     mask-repeat: no-repeat;
@@ -541,12 +585,37 @@ body {
     height: 100svh;
   }
 }
+
 // .mask {
 //   mask-image: url("/videos/ink-spread-2.gif");
 //   mask-size: cover;
 //   mask-position: center;
 //   mask-repeat: no-repeat;
 // }
+
+.aboutUsContainer {
+  display: block;
+  position: relative;
+  top: 120svh;
+  z-index: 100;
+  height: 100vh;
+
+  .pinnerContainer {
+    position: relative;
+    height: 100svh;
+    width: 100svw;
+  }
+}
+
+.scrollExtender {
+  position: relative;
+  height: 100vh;
+  top: 120svh;
+}
+
+.noneDisplay {
+  display: none;
+}
 
 .bottomContent {
   position: absolute;

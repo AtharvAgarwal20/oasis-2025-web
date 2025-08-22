@@ -3,52 +3,79 @@ import { useEffect, useRef } from 'react';
 import door1 from '/images/contact/Door1.png';
 import door2 from '/images/contact/Door2.png';
 import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
 
 interface ContactDoorsProps {
     aboutUsRef: React.RefObject<HTMLDivElement | null>,
-    pinnedContRef?: React.RefObject<HTMLDivElement | null>,
-    bottomContentRef?: React.RefObject<HTMLDivElement | null>,
+    // pinnedContRef?: React.RefObject<HTMLDivElement | null>,
+    // bottomContentRef?: React.RefObject<HTMLDivElement | null>,
 }
 
-export default function ContactDoors({ aboutUsRef, pinnedContRef, bottomContentRef }: ContactDoorsProps) {
+export default function ContactDoors({ aboutUsRef }: ContactDoorsProps) {
     const door1Ref = useRef<HTMLDivElement>(null);
     const door2Ref = useRef<HTMLDivElement>(null);
     // const scrollerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        console.log(pinnedContRef?.current, aboutUsRef?.current)
-        gsap.registerPlugin(ScrollTrigger);
+        console.log(aboutUsRef?.current)
+        // gsap.registerPlugin(ScrollTrigger);
 
-        gsap.from(door1Ref.current, {
-            x: "-100%",
+        const doorTimeLine = gsap.timeline({
             scrollTrigger: {
-                trigger: aboutUsRef.current,
-                start: "top top",
+                trigger: aboutUsRef?.current,
+                start: `top top`,
                 end: `+=${window.innerHeight}`,
                 scrub: 0.5,
-                pin: bottomContentRef?.current,
-                // pinType: "transform",
-                pinSpacing: false,
                 markers: true,
-                // pinnedContainer: pinnedContRef?.current,
+                pin: aboutUsRef.current,
+                pinType: "transform"
+                // onEnter: () => {
+                //     //@ts-ignore
+                //     aboutUsRef.current.style.position = "fixed";
+                //     //@ts-ignore
+                //     aboutUsRef.current.style.top = "0px";
+                // },
+                // onEnterBack: () => {
+                //     //@ts-ignore
+                //     aboutUsRef.current.style.position = "relative";
+                //     //@ts-ignore
+                //     aboutUsRef.current.style.top = "120svh";
+                // }
             }
         })
-        gsap.from(door2Ref.current, {
-            x: "100%",
-            scrollTrigger: {
-                trigger: aboutUsRef.current,
-                start: "top top",
-                end: `+=${window.innerHeight}`,
-                scrub: 0.5,
-                pin: bottomContentRef?.current,
-                // pinType: "transform",
-                pinSpacing: false,
-                markers: true,
-                // pinnedContainer: pinnedContRef?.current,
-            }
-        })
+
+        doorTimeLine
+            .from(door1Ref.current, {x: "-100%",}, 0)
+            .from(door2Ref.current, {x: "100%",}, 0)
+
+        // gsap.from(door1Ref.current, {
+        //     x: "-100%",
+        //     scrollTrigger: {
+        //         trigger: aboutUsRef.current,
+        //         start: "top top",
+        //         end: `+=${window.innerHeight}`,
+        //         scrub: 0.5,
+        //         pin: aboutUsRef?.current,
+        //         // pinType: "transform",
+        //         pinSpacing: false,
+        //         markers: true,
+        //         // pinnedContainer: pinnedContRef?.current,
+        //     }
+        // })
+        // gsap.from(door2Ref.current, {
+        //     x: "100%",
+        //     scrollTrigger: {
+        //         trigger: aboutUsRef.current,
+        //         start: "top top",
+        //         end: `+=${window.innerHeight}`,
+        //         scrub: 0.5,
+        //         pin: aboutUsRef?.current,
+        //         // pinType: "transform",
+        //         pinSpacing: false,
+        //         markers: true,
+        //         // pinnedContainer: pinnedContRef?.current,
+        //     }
+        // })
     });
 
     useEffect(() => {
