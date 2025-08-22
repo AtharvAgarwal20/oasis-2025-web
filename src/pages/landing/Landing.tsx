@@ -23,9 +23,12 @@ import x from "/svgs/landing/x.svg";
 import xLamp from "/svgs/landing/xLamp.svg";
 import logo from "/images/landing/oasisLogo.png";
 import mobileCloud from "/images/landing/mobileCloud.png";
+import Ham from "../components/ham/ham";
 // import AboutUs from "../aboutus/AboutUs";
 // import ContactDoors from "../contact/ContactDoors";
 i;
+
+import { useHamStore } from "../../utils/store";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,6 +77,11 @@ export default function Landing({
   const registerButtonRef = useRef<HTMLDivElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
   // const aboutUsRef = useRef<HTMLDivElement>(null);
+  // const bottomContentRef = useRef<HTMLDivElement>(null);
+  const hamContainerRef = useRef<HTMLDivElement>(null);
+  const blurRef = useRef<HTMLDivElement>(null);
+  const isHamOpen = useHamStore((state) => state.isHamOpen);
+  const setIsHamOpen = useHamStore((state) => state.setHamOpen);
 
   useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
@@ -284,6 +292,10 @@ export default function Landing({
     return () => clearInterval(timerId);
   }, []);
 
+  useGSAP(() => {
+    console.log(isHamOpen);
+  }, [isHamOpen]);
+
   return (
     <>
       <div className={styles.wrapperSquared}>
@@ -294,6 +306,34 @@ export default function Landing({
           ref={wrapperRef}
         >
           <Navbar goToPage={goToPage} />
+          {/* {isHamOpen && (
+            <div className={styles.hamContainer}>
+              <div
+                className={styles.blur}
+                onClick={() => setIsHamOpen(false)}
+              ></div>
+              <div className={styles.translateHam} ref={hamContainerRef}>
+                <Ham goToPage={goToPage} />
+              </div>
+            </div>
+          )} */}
+          <div
+            className={
+              isHamOpen
+                ? `${styles.hamContainer} ${styles.hamOpen}`
+                : styles.hamContainer
+            }
+          >
+            <div
+              className={styles.blur}
+              onClick={() => setIsHamOpen(false)}
+              ref={blurRef}
+            ></div>
+
+            <div className={styles.translateHam} ref={hamContainerRef}>
+              <Ham goToPage={goToPage} />
+            </div>
+          </div>
           <div
             className={
               overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
