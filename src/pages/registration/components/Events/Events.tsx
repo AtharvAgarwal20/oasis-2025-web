@@ -106,8 +106,8 @@ const Events = forwardRef<
   }) => {
     const mm = gsap.matchMedia();
     contextSafe(() => {
-      if (!activeEvent || activeEvent.id !== event.id) {
-        mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+      mm.add("(min-width: 1200px) or (aspect-ratio > 1.45)", () => {
+        if (!activeEvent || activeEvent.id !== event.id) {
           const tl = gsap.timeline({
             onStart: () => {
               setActiveEvent(event);
@@ -118,12 +118,12 @@ const Events = forwardRef<
             { opacity: 0, duration: 0.5 },
             { opacity: 1, duration: 0.5 }
           );
-        });
-        mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
-          setActiveEvent(event);
-          setEventsModal(true);
-        });
-      }
+        }
+      });
+      mm.add("(max-width: 1199px) and (aspect-ratio <= 1.45)", () => {
+        setActiveEvent(event);
+        setEventsModal(true);
+      });
     })();
   };
 
@@ -434,7 +434,14 @@ const Events = forwardRef<
             <div className={styles.eventDescription} ref={eventDescRef}>
               <h2>{activeEvent.name}</h2>
               <p>{activeEvent.about}</p>
-              <button onClick={() => handleEvent(activeEvent, true)}>
+              <button
+                onClick={() => handleEvent(activeEvent, true)}
+                className={
+                  selectedEvents.some((e) => e.id === activeEvent.id)
+                    ? styles.button2
+                    : styles.button1
+                }
+              >
                 {selectedEvents.some((e) => e.id === activeEvent.id)
                   ? "REMOVE"
                   : "ADD"}

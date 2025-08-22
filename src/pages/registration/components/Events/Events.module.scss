@@ -198,7 +198,7 @@
           display: none;
         }
       }
-      button {
+      .button1 {
         margin: auto auto 0 auto;
         width: fit-content;
         padding: 0.5vw 4vw;
@@ -208,6 +208,17 @@
         font: 400 1.2vw "Abhaya Libre";
         cursor: pointer;
         border: 2px solid #ededed;
+      }
+      .button2 {
+        margin: auto auto 0 auto;
+        width: fit-content;
+        padding: 0.5vw 4vw;
+        border: none;
+        color: #000;
+        font: 400 1.2vw "Abhaya Libre";
+        cursor: pointer;
+        background-color: #fff6dd;
+        border: 1.5px solid #ededed;
       }
     }
   }
