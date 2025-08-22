@@ -6,7 +6,6 @@ import fan from "/svgs/aboutus/fan.png";
 import prev from "/svgs/aboutus/prev.svg"
 import pause from "/svgs/aboutus/pause.svg"
 import next from "/svgs/aboutus/next.svg"
-import BackButton from "../components/backButton/BackButton";
 import Aboutbar from "./components/Aboutbar";
 import Reg from "/svgs/aboutus/reghead.svg"
 import play from "/svgs/aboutus/play.svg"
