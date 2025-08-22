@@ -105,7 +105,7 @@ const AboutUs = () => {
   };
 
   useEffect(() => {
-    gsap.set(`.${styles.fan2}`, { xPercent: 100, yPercent: -100 });
+    gsap.set(`.${styles.fan2}`, { xPercent: 100, yPercent: -100 , rotate:180});
   }, []);
 
   useEffect(() => {
