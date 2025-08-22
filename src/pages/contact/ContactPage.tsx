@@ -1,6 +1,7 @@
 import ContactGallery from './components/contactGallery/ContactGallery';
 import styles from './Contact.module.scss';
 import doors from '/images/contact/DoorsCombined.png'
+import BackButton from '../components/backButton/BackButton';
 
 export default function Contact() {
     return (
@@ -15,6 +16,7 @@ export default function Contact() {
                 <div className={styles.contactContent}>
                     <ContactGallery />
                 </div>
+                <BackButton />
             </div>
         </div>
     );

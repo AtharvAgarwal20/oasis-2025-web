@@ -6,6 +6,7 @@ import fan from "/svgs/aboutus/fan.png";
 import prev from "/svgs/aboutus/prev.svg"
 import pause from "/svgs/aboutus/pause.svg"
 import next from "/svgs/aboutus/next.svg"
+import BackButton from "../components/backButton/BackButton";
 declare global {
   interface Window {
     YT?: any;
@@ -258,6 +259,7 @@ const AboutUs = () => {
 
   return (
   <div className={styles.AboutContainer}>
+    <BackButton />
     <div className={styles.header}>
       <img src={Header} alt="About Us" />
     </div>
