@@ -105,7 +105,7 @@ const AboutUs = () => {
   };
 
   useEffect(() => {
-    gsap.set(`.${styles.fan2}`, { xPercent: 100, yPercent: -100 });
+    gsap.set(`.${styles.fan2}`, { xPercent: 100, yPercent: -100 , rotate:180});
   }, []);
 
   useEffect(() => {
@@ -131,11 +131,11 @@ const AboutUs = () => {
       const fanEl = document.querySelector(fanSelector) as HTMLElement | null;
       if (!fanEl || !fanEl.parentElement) return;
 
-      const rect = fanEl.getBoundingClientRect();
-      const parentRect = fanEl.parentElement.getBoundingClientRect();
+      //const rect = fanEl.getBoundingClientRect();
+      //const parentRect = fanEl.parentElement.getBoundingClientRect();
 
-      const startX = rect.left - parentRect.left + rect.width / 2;
-      const startY = rect.top - parentRect.top + rect.height / 2;
+  const startX = fanEl.offsetLeft + fanEl.offsetWidth / 2;
+  const startY = fanEl.offsetTop + fanEl.offsetHeight / 2;
 
       const iconSrc = icons[Math.floor(Math.random() * icons.length)];
       const img = document.createElement("img");
@@ -150,10 +150,10 @@ const AboutUs = () => {
       if (isFan1) {
         angle = Math.random() * (Math.PI / 2);
       } else {
-        angle = Math.PI + Math.random() * 2 * (Math.PI / 3);
+        angle =(-40 * Math.PI) / 180 + Math.PI + Math.random() * 2 * (Math.PI / 3);
       }
 
-      const distance = Math.random() * 100;
+      const distance =20+ Math.random() * 100;
       const dx = Math.cos(angle) * distance;
       const dy = -Math.sin(angle) * distance;
 
@@ -257,11 +257,14 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div className={styles.AboutContainer}>
-      <div className={styles.header}>
-        <img src={Header} alt="About Us" />
-      </div>
+  <div className={styles.AboutContainer}>
+    <div className={styles.header}>
+      <img src={Header} alt="About Us" />
+    </div>
 
+    {/* NEW FLEX + PERSPECTIVE WRAPPER */}
+    <div className={styles.content3D}>
+      {/* VIDEO SIDE */}
       <div className={styles.wrapper}>
         <div className={styles.vid}>
           <div
@@ -272,28 +275,34 @@ const AboutUs = () => {
           <img src={fan} alt="" className={styles.fan1} />
           <img src={fan} alt="" className={styles.fan2} />
         </div>
-<div>
-       <div className={styles.controls}>
-         <div className={styles.a1}></div>
-     
-  <div className={styles.buttonContainer}>
-   
-  
-        <img src="/svgs/aboutus/bord.svg" className={styles.background} alt="" />
-      
-    <div className={styles.buttonGroup}>
-     
-      <button onClick={prevVideo}><img src={prev} alt=""  className={styles.btns1}/></button>
-       <div className={styles.a1}></div>
-      <button onClick={togglePlayPause}><img src={pause} alt="" className={styles.btns2} /></button>
-       <div className={styles.a1}></div>
-      <button onClick={nextVideo}><img src={next} alt=""  className={styles.btns3}/></button>
-    </div>
-  </div>
-</div></div>
 
+        {/* CONTROLS */}
+        <div className={styles.controls}>
+          <div className={styles.a1}></div>
+          <div className={styles.buttonContainer}>
+            <img
+              src="/svgs/aboutus/bord.svg"
+              className={styles.background}
+              alt=""
+            />
+            <div className={styles.buttonGroup}>
+              <button onClick={prevVideo}>
+                <img src={prev} alt="" className={styles.btns1} />
+              </button>
+              <div className={styles.a1}></div>
+              <button onClick={togglePlayPause}>
+                <img src={pause} alt="" className={styles.btns2} />
+              </button>
+              <div className={styles.a1}></div>
+              <button onClick={nextVideo}>
+                <img src={next} alt="" className={styles.btns3} />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
+      {/* ABOUT SIDE */}
       <div className={styles.abt}>
         <div className={styles.aboutback}>
           <p>
@@ -308,7 +317,9 @@ const AboutUs = () => {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default AboutUs;
