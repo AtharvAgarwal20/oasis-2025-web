@@ -14,6 +14,10 @@
         .contactBanner {
             width: 100%;
         }
+
+        @media (max-width: 900px) {
+            width: clamp(15rem, 45vw, 30rem);
+        }
     }
     .contactGalleryContainer {
 
@@ -98,17 +102,17 @@
                         }
 
                         @media (max-width: 600px) {
-                            .contactName {font-size: 0.6rem; line-height: 0.6rem;}
-                            .contactPosition {font-size: 0.4rem; line-height: 0.4rem;}
+                            .contactName {font-size: 0.8rem; line-height: 0.8rem;}
+                            .contactPosition {font-size: 0.6rem; line-height: 0.6rem;}
                             .contactLinks {
                                 gap: 0.5rem;
                                 div {
-                                    height: 0.4rem;
+                                    height: 0.6rem;
                                     .contactIcon {
-                                        font-size: 0.4rem; 
-                                        height: 0.4rem;
+                                        font-size: 0.6rem; 
+                                        height: 0.6rem;
                                         position: relative;
-                                        top: -0.3rem;
+                                        top: -0.2rem;
                                     }
                                 }
                             }
@@ -125,7 +129,7 @@
 
         @media (max-width: 900px) {
             // grid-template-columns: 1fr;
-            gap: 3rem;
+            gap: 1rem;
         }
     }
     

@@ -73,9 +73,7 @@ export default function Landing({
   const dateCountdownRef = useRef<HTMLDivElement>(null);
   const registerButtonRef = useRef<HTMLDivElement>(null);
   const landingMobileRef = useRef<HTMLImageElement>(null);
-  // const treeContainerRef = useRef<HTMLDivElement>(null);
-  // const aboutUsRef = useRef<HTMLDivElement>(null);
-  // const bottomContentRef = useRef<HTMLDivElement>(null);
+  const aboutUsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     if (treeImageRef.current && landingRef.current) {
@@ -443,6 +441,7 @@ export default function Landing({
             ? styles.aboutUsContainer
             : `${styles.noneDisplay} ${styles.aboutUsContainer}`
         }
+        ref={aboutUsRef}
       >
         <AboutUs />
       </div>
