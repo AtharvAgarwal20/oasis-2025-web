@@ -1,123 +1,207 @@
-.AboutContainer{
-    /*.background{
+@use "../../assets/global.scss" as *;
+.AboutContainer {
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  /*.background{
       position: absolute;
       top:-1.2vh;
       object-position: center;
       height:102%;
       z-index: -1;
     }*/
-    background: url("/svgs/aboutus/aboutback.svg"),linear-gradient(180deg, rgba(0, 0, 0, 0.6) 99.99%, rgba(0, 0, 0, 0) 100%);
-    background-size:cover;
-    background-blend-mode: darken;
-    height: 100vh;
-    
-    width: 100vw;
-    overflow: hidden;
-    .header {
-        position: absolute;
-        top:3.5vh;
-        width: 100%;
-        height: 12vh;
-        display: flex;
-        justify-content: center;
-        img{
-            
-            width: 30vw;
-            height: auto;
-        }
-    }
-
- .wrapper {
-  perspective: 400px;
+  background: url("/svgs/aboutus/aboutback.svg"),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 99.99%, rgba(0, 0, 0, 0) 100%);
+  background-size: cover;
+  background-blend-mode: darken;
+  height: 100vh;
   position: relative;
-  width: 40vw;
-  height: 60vh;
+  width: 100vw;
+  overflow: hidden;
+  .header {
+    position: absolute;
+    top: 3.5vh;
+    width: 100%;
+    height: 12vh;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 30vw;
+      height: auto;
+    }
+  }
 
-  .vid {
+  .wrapper {
+    perspective: 400px;
+    position: relative;
+    width: 40vw;
+    height: 60vh;
+    perspective-origin: center;
+
+    .vid {
+      width: 100%;
+      height: 100%;
+      border: 0.2vw solid #f2dd7c;
+      box-shadow: 0px 0px 24px 0px #f2dd7c;
+      background: #111111;
+
+      position: absolute;
+      left: 10vw;
+      top: 23vh;
+      transform: rotateY(8.5deg);
+      transform-style: preserve-3d;
+
+      position: relative;
+      .fan1 {
+        z-index: 9999;
+        position: absolute;
+        bottom: -7.5vh;
+        left: -4.5vw;
+        width: 10vw;
+        height: auto;
+        transform-origin: bottom left;
+        object-fit: contain;
+      }
+
+      .fan2 {
+        object-fit: contain;
+        position: absolute;
+        top: -7vh;
+        right: -5vw;
+        width: 10vw;
+
+        transform: scaleX(-1) scaleY(-1);
+        transform-origin: bottom left;
+      }
+    }
+  }
+
+  .fan1Emitter,
+  .fan2Emitter {
+    position: absolute;
+    overflow: visible;
+  }
+
+  .flyingIcon {
+    position: absolute;
+    width: 3vw;
+    height: auto;
+    pointer-events: none;
+  }
+
+  .abt {
+    perspective: 400px;
+    position: relative;
+    perspective-origin: center;
+    width: 40vw;
+    height: 60vh;
+
+    left: 48vw;
+    top: -40vh;
+    .aboutback {
+      background: url("/svgs/aboutus/Mask2.svg");
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform: rotateY(-8.5deg);
+      transform-style: preserve-3d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        color: #300505;
+        font: $abtFont;
+        font-weight: 400;
+        font-size: 1.8vw;
+        width: 80%;
+        text-align: center;
+      }
+    }
+  }
+}
+.controls {
+  padding-top: 1vw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 200px;
+
+  perspective-origin: center;
+  .buttonContainer {
+    top: 20vh;
+    left: 10vw;
+    transform: rotateY(10deg);
+    transform-style: preserve-3d;
+    position: relative;
+    width: 100%;
+    max-width: 273px;
+    aspect-ratio: 273 / 137;
+  }
+
+  .buttonGroup {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: red;
-    border: 0.2vw solid #F2DD7C;
-    box-shadow: 0px 0px 24px 0px #F2DD7C;
-    background: #111111;
 
-    position: absolute;
-    left: 200px;
-    top: 200px;
-    transform: rotateY(4deg);
-    transform-style: preserve-3d;
-
-    position: relative; 
-    .fan1 {
-  position: absolute;
-  bottom: -7vh;
-  left: -5vw;
-  width: 10vw;
-  height: auto;
-  transform-origin: bottom left; 
-}
-
-.fan2 {
-  position: absolute;
-  top: -7vh;
-  right: -5vw;
-  width: 10vw;
-  
-  transform: scaleX(-1)  scaleY(-1) ;       
-  transform-origin: bottom left 
-}
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 20px;
+    rotate: -5deg;
+    .a1 {
+      width: 5px;
+      background-color: #f2dd7c;
+      margin-top: 3px;
+      height: 45%;
+      rotate: 5deg;
+    }
+    button {
+      background: #111111;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    img {
+      width: 34px;
+      height: 34px;
+    }
   }
 }
 
-.fan1Emitter,
-.fan2Emitter {
-  position: absolute;
-  overflow: visible;
-}
-
-
-
-.flyingIcon {
-  position: absolute;
-  width: 3vw;
+.background {
+  width: 100%;
   height: auto;
-  pointer-events: none;
+  display: block;
 }
 
-.abt{
-  
-width: 31vw;
-  height: 35vw;
-  border: 25px solid rgba(134, 26, 38, 0.1);
-  padding: 0; /* or some space */
-  box-sizing: border-box; /* include border in total width/height */
-  background: url("/svgs/aboutus/abt.svg"), url("/svgs/aboutus/text-frame.svg");
-  background-blend-mode: color-burn;
-  background-position: bottom;
-  background-size: cover;
-  background-clip: content-box;
-  
-
-  background-position: bottom;
-  position: relative;
- left:60vw;
- top:-40vh;
- object-fit: contain;
- .lantern{
-  position: absolute;
-  transform-origin: bottom right;
-  right: -5vw;
-  top: -5vw;
- }
- .dagger1{
-  position: absolute;
-  left: -5vw;
-  width: 10vw;
-  height: auto;
-  z-index: 5;
-  bottom: 0;
-  mix-blend-mode:overlay;
- }
-}
-
+@media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
+  .AboutContainer {
+    overflow-y: scroll;
+    .wrapper {
+      perspective: none;
+      width: 80vw;
+      .vid {
+        transform: none;
+      }
+    }
+    .abt {
+      perspective: none;
+      width: 80vw;
+      left: 10vw;
+      top: 50vh;
+      .aboutback {
+        transform: none;
+      }
+    }
+    .controls {
+      padding-top: 50px;
+      perspective: none;
+      .buttonContainer {
+        transform: none;
+      }
+    }
+  }
 }
