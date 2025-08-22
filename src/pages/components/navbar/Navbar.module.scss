@@ -162,7 +162,7 @@
       justify-content: center;
       width: 150px;
       height: 40px;
-      a {
+      .navLink {
         color: inherit;
         text-decoration: none;
         text-align: center;
@@ -186,7 +186,7 @@
         }
       }
       &:hover {
-        a {
+        .navLink {
           line-height: 16px;
 
           .actualLabel {

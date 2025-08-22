@@ -295,7 +295,7 @@ export default function Landing({
           } ${overlayIsActive ? styles.mask : ""}`}
           ref={wrapperRef}
         >
-          <Navbar />
+          <Navbar goToPage={goToPage} />
           <div
             className={
               overlayIsActive ? ` ${styles.landing}` : `${styles.landing} `
