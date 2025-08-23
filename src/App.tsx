@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect, createContext } from "react";
 import Preloader from "./pages/registration/components/Preloader/Preloader";
 import Homepage from "./Homepage";
@@ -131,7 +131,7 @@ export default function App() {
       {!isPreloading && currentPage === "aboutus" && <AboutUs goToPage={goToPage} />}
       {!isPreloading && currentPage === "contact" && <Contact />}
       {!isPreloading && currentPage === "comingSoon" && <ComingSoon />}
-
+{/* 
       <Routes>
         <Route path="/" element={null} errorElement={<ComingSoon />} />
         <Route path="/events" element={null} errorElement={<ComingSoon />} />
@@ -139,7 +139,7 @@ export default function App() {
         <Route path="/events" element={null} />
         <Route path="/aboutus" element={null} />
         <Route path="/comingSoon" element={null} />
-      </Routes>
+      </Routes> */}
     </navContext.Provider>
   );
 }
