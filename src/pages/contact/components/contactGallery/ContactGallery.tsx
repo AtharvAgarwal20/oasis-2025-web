@@ -14,11 +14,12 @@ export default function ContactGallery() {
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 1300)
+        document.body.style.position = "static";
 
         window.addEventListener("resize", handleResize)
 
         return () => window.removeEventListener("resize", handleResize)
-    })
+    }, [])
 
     return (
         <div className={styles.contactContent}>
