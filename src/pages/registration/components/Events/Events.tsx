@@ -91,6 +91,7 @@ const Events = forwardRef<
   const sortedArray = sortBySearch(eventsOptions, search);
 
   useEffect(() => {
+    sessionStorage.removeItem("selectedEvents");
     axios
       .get("https://bits-oasis.org/2025/main/registrations/events_details/")
       .then((response) => {

@@ -30,16 +30,61 @@
     color: #fff;
     font: 400 1.7vw "DM Serif Text";
   }
-  ul {
-    margin: 1vw 0 2vw 2.5vw;
-    height: 16vw;
-    overflow-y: auto;
-    list-style: inside;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    ul {
+      margin: 1vw 0 2vw 2.5vw;
+      height: 16vw;
+      overflow-y: auto;
+      list-style: inside;
+      padding: 1vw 0;
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,
+        #000 93%,
+        transparent 100%
+      );
+      --webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #000 7%,
+        #000 93%,
+        transparent 100%
+      );
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
-    li {
-      margin: 0.2vw 0;
-      color: #fff;
-      font: 400 1.4vw "DM Serif Text";
+      li {
+        margin: 0.2vw 0;
+        color: #fff;
+        font: 400 1.4vw "DM Serif Text";
+      }
+    }
+    .scrollBarContainer {
+      height: 16vw;
+      width: 10vw;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      cursor: -webkit-grab;
+      z-index: 4;
+
+      .scrollBarThumb {
+        position: absolute;
+        top: 13.5%;
+        transform: translateY(-50%);
+        height: 2vw;
+      }
+
+      .scrollBar {
+        object-fit: contain;
+        height: 100%;
+        border-radius: 5px;
+      }
     }
   }
   .buttonsContainer {
@@ -73,7 +118,7 @@
   justify-content: center;
   gap: 4vw;
   p {
-    color: #fff;
+    color: #eb5c5c;
     font: 400 1.7vw "DM Serif Text";
   }
   .buttonsContainer {
@@ -92,16 +137,23 @@
     .heading {
       font: 400 4.3vw "DM Serif Text";
     }
-    ul {
-      margin: 1vw 0 2vw 2.5vw;
-      height: 60svh;
-
-      li {
-        font: 400 3vw "DM Serif Text";
+    .content {
+      ul {
+        margin: 1vw 0 2vw 2.5vw;
+        height: 60svh;
+        padding: 4vw 0;
+        li {
+          font: 400 3vw "DM Serif Text";
+        }
+      }
+      .scrollBarContainer {
+        height: 60svh;
+        .scrollBarThumb {
+          height: 8vw;
+        }
       }
     }
     .buttonsContainer {
-
       .cancelButton {
         font: 400 3vw "DM Serif Text";
         padding: 0.5vw 4vw;
@@ -134,16 +186,17 @@
     .heading {
       font: 400 4.3vw "DM Serif Text";
     }
-    ul {
-      margin: 1vw 0 2vw 2.5vw;
-      height: 60svh;
+    .content {
+      ul {
+        margin: 1vw 0 2vw 2.5vw;
+        height: 60svh;
 
-      li {
-        font: 400 3.5vw "DM Serif Text";
+        li {
+          font: 400 4vw "DM Serif Text";
+        }
       }
     }
     .buttonsContainer {
-
       .cancelButton {
         font: 400 4vw "DM Serif Text";
         padding: 0.5vw 4vw;
