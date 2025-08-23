@@ -403,10 +403,12 @@
           }
         }
         .confirmButton {
+          width: 70vw;
+          gap: 1vw;
           font: 100 5.2vw "Abhaya Libre Extrabold";
 
           .confirmIcon {
-            width: 10vw;
+            width: 25vw;
             height: 1.5vw;
           }
         }
