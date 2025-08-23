@@ -126,7 +126,7 @@
           aspect-ratio: 273 / 137;
           //display: flex;
           // flex-direction: row;
-          transform: rotateZ(4deg) translateZ(20px);
+          transform: rotateZ(5deg) translateZ(20px);
           transform-style: preserve-3d;
 
           scale: 0.8;
@@ -175,6 +175,7 @@
             }
           }
         }
+        
       }
     }
 
@@ -247,6 +248,7 @@
         }
 
         .controls {
+          transform:rotateZ(1deg);
           .buttonContainer {
             transform: rotateZ(4deg);
           }
@@ -294,7 +296,9 @@
       width: 100vw;
       height: 13vh;
     }
-
+    .flyingIcon{
+      width: 6vw;
+    }
     .content3D {
       flex-direction: column-reverse;
       gap: 10vh;
