@@ -11,6 +11,7 @@ import Reg from "/svgs/aboutus/reghead.svg"
 import play from "/svgs/aboutus/play.svg"
 import nextarr from "/svgs/aboutus/nextarr.svg"
 import BackButton from "../components/backButton/BackButton";
+import PlayButton from "/svgs/aboutus/borde.svg";
 declare global {
   interface Window {
     YT?: any;
@@ -113,12 +114,14 @@ const AboutUs = ({
     }
   };
 
+  const fan2Ref=useRef<HTMLImageElement>(null);
+  const fan1Ref=useRef<HTMLImageElement>(null);
   useEffect(() => {
-    gsap.set(`.${styles.fan2}`, { xPercent: 100, yPercent: -100, rotate: 180 });
+    gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
   }, []);
 
   useEffect(() => {
-    gsap.to(`.${styles.fan1}`, {
+    gsap.to(fan1Ref.current, {
       rotateX: -5,
       rotateY: -5,
       duration: 0.5,
@@ -127,9 +130,9 @@ const AboutUs = ({
       ease: "power1.inOut",
     });
 
-    gsap.to(`.${styles.fan2}`, {
-      rotateX: -5,
-      rotateY: -5,
+    gsap.to(fan2Ref.current, {
+      rotateX: -9,
+      rotateY: -9,
       duration: 0.5,
       yoyo: true,
       repeat: -1,
@@ -159,7 +162,7 @@ const AboutUs = ({
       if (isFan1) {
         angle = Math.random() * (Math.PI / 2);
       } else {
-        angle = (-40 * Math.PI) / 180 + Math.PI + Math.random() * 2 * (Math.PI / 3);
+        angle = (-20 * Math.PI) / 180 + Math.PI + Math.random() * (Math.PI / 3);;
       }
 
       const distance = 20 + Math.random() * 100;
@@ -237,14 +240,85 @@ const AboutUs = ({
         }
       );
     };
+    const spawnFromCorner = (corner: "top-left" | "top-right" | "bottom-left" | "bottom-right") => {
+  const container = document.querySelector(`.${styles.vid}`) as HTMLElement | null;
+  if (!container) return;
+
+  const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+  const img = document.createElement("img");
+  img.src = iconSrc;
+  img.className = styles.flyingIcon;
+
+  // Set start position
+  let startX = 0, startY = 0;
+  const padding = 10; // padding to keep icon from being flush with corner
+
+  switch (corner) {
+    case "top-left":
+      startX = padding;
+      startY = padding;
+      break;
+    case "top-right":
+      startX = container.clientWidth - padding - 40;
+      startY = padding;
+      break;
+    case "bottom-left":
+      startX = padding;
+      startY = container.clientHeight - padding - 40;
+      break;
+    case "bottom-right":
+      startX = container.clientWidth - padding -40;
+      startY = container.clientHeight - padding - 40;
+      break;
+  }
+
+  img.style.left = `${startX}px`;
+  img.style.top = `${startY}px`;
+
+  container.appendChild(img);
+
+  // Move towards center
+  const centerX = container.clientWidth / 2;
+  const centerY = container.clientHeight / 2;
+
+  const dx = (centerX - startX)*Math.random() /4;
+  const dy = (centerY - startY)*Math.random()/2;
+
+  gsap.fromTo(
+    img,
+    { opacity: 0, scale: 0, x: 0, y: 0 },
+    {
+      opacity: 1,
+      scale: 1,
+      x: dx,
+      y: dy,
+      duration: 2,
+      ease: "power2.out",
+      onComplete: () => {
+        gsap.to(img, {
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => img.remove(),
+        });
+      },
+    }
+  );
+};
+
 
     let intervalId: number;
 
     const startSpawning = () => {
       intervalId = window.setInterval(() => {
+        if (isMobile) {
+        const corners = ["top-left", "top-right", "bottom-left", "bottom-right"];
+        const randomCorner = corners[Math.floor(Math.random() * corners.length)] as any;
+        spawnFromCorner(randomCorner);
+      } else {
         spawnIcon2(`.${styles.fan1}`, true);
         spawnIcon(`.${styles.fan2}`, false);
-      }, 500);
+      }
+      }, isMobile?200:500);
     };
 
     const stopSpawning = () => {
@@ -287,8 +361,8 @@ const AboutUs = ({
               style={{ width: "100%", height: "100%", borderRadius: "16px" }}
             />
 
-            <img src={fan} alt="" className={styles.fan1} />
-            <img src={fan} alt="" className={styles.fan2} />
+            <img src={fan} alt="fan1" ref={fan1Ref} className={styles.fan1} />
+            <img src={fan} alt="fan2" ref={fan2Ref} className={styles.fan2} />
 
           </div>
 
@@ -302,23 +376,23 @@ const AboutUs = ({
           <div className={styles.controls}>
             <div className={styles.a1}></div>
             <div className={styles.buttonContainer}>
-
+            
               <img
-                src="/svgs/aboutus/bord.svg"
+                src={PlayButton}
                 className={styles.background}
-                alt=""
+                alt="Buttons"
               />
               <div className={styles.buttonGroup}>
                 <button onClick={prevVideo}>
-                  <img src={prev} alt="" className={styles.btns1} />
+                  <img src={prev} alt="Previous Button" className={styles.btns1} />
                 </button>
                 <div className={styles.a1}></div>
                 <button onClick={togglePlayPause}>
-                  <img src={isPlaying ? play : pause} alt="" className={styles.btns2} />
+                  <img src={isPlaying ? play : pause} alt="Pause Button" className={styles.btns2} />
                 </button>
                 <div className={styles.a1}></div>
                 <button onClick={nextVideo}>
-                  <img src={next} alt="" className={styles.btns3} />
+                  <img src={next} alt="Next Button" className={styles.btns3} />
                 </button>
               </div>
             </div>

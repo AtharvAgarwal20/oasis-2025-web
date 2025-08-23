@@ -78,6 +78,7 @@
         height: 28vw;
         overflow-y: auto;
         padding: 0.5vw 0;
+        scrollbar-width: none;
         &::-webkit-scrollbar {
           display: none;
         }
@@ -193,6 +194,21 @@
         line-height: 1.7;
         height: 100%;
         overflow-y: auto;
+        padding: 1vw 0;
+        mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 7%,
+          #000 93%,
+          transparent 100%
+        );
+        --webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          #000 7%,
+          #000 93%,
+          transparent 100%
+        );
         scrollbar-width: none;
         &::-webkit-scrollbar {
           display: none;
@@ -387,10 +403,12 @@
           }
         }
         .confirmButton {
+          width: 70vw;
+          gap: 1vw;
           font: 100 5.2vw "Abhaya Libre Extrabold";
 
           .confirmIcon {
-            width: 10vw;
+            width: 25vw;
             height: 1.5vw;
           }
         }

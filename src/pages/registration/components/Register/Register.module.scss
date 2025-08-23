@@ -11,12 +11,17 @@
   z-index: 3;
   position: relative;
 
-  input:autofill,
-  textarea:autofill,
-  select:autofill,
+  input {
+    caret-color: #fff9e9;
+  }
+
   input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
+    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
     box-shadow: 0 0 0 1000px transparent inset !important;
     -webkit-text-fill-color: #e2dccb !important;
@@ -213,7 +218,7 @@
           position: absolute;
           left: 18%;
           bottom: -0.8vw;
-          color:rgb(255, 0, 0);
+          color: rgb(255, 0, 0);
           font: 400 1vw "Abhaya Libre";
           text-align: left;
         }
@@ -426,11 +431,13 @@
       }
     }
     .confirmButton {
+      width: 70vw;
+      gap: 1vw;
       bottom: 6vw;
       font: 100 5.2vw "Abhaya Libre Extrabold";
 
       .confirmIcon {
-        width: 10vw;
+        width: 25vw;
         height: 1.5vw;
       }
     }
