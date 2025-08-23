@@ -1,4 +1,4 @@
-
+//@ts-ignore
 const assetList = {
     "registration": {
         "images": [
