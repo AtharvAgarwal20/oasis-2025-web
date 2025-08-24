@@ -1,4 +1,7 @@
 // body {position: static;}
+@use "sass:math";
+
+$barThickness: calc(10*100vw/1920);
 
 .contactPageWrapper {
     // height: 100vh;
@@ -16,6 +19,7 @@
         .contactContent {
             padding: 1.2rem 1.8rem;
             position: relative;
+            z-index: 10;
 
             @media (max-width: 600px) {
                 padding: 0.6rem 0.4rem;
@@ -54,6 +58,23 @@
         background-repeat: repeat;
         background-position: center;
         min-height: 100vh;
+
+        .contactBB {z-index: 10;}
+    }
+
+    .contactPageBg {
+        z-index: 10;
+        height: inherit;
+        overflow-y: hidden;
+        .horiBar {
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            height: $barThickness;
+            background-color: #7F5934;
+            z-index: inherit;
+            box-shadow: 0px calc($barThickness - 1px) rgba(0, 0, 0, 0.215);
+        }
     }
 }
 .contactDoors {

@@ -6,6 +6,8 @@
 }
 
 .contactContent {
+    position: relative;
+
     .contactHeading {
         position: relative;
         width: clamp(12rem, 30vw, 30rem);
