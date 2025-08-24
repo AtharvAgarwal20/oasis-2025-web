@@ -12,6 +12,11 @@ import play from "/svgs/aboutus/play.svg"
 import nextarr from "/svgs/aboutus/nextarr.svg"
 import BackButton from "../components/backButton/BackButton";
 import PlayButton from "/svgs/aboutus/borde.svg";
+import instaicon from "/svgs/aboutus/instaicon.svg"
+import xicon from "/svgs/aboutus/xicon.svg"
+import linkedin from "/svgs/aboutus/linkedin.svg"
+import yticon from "/svgs/aboutus/yticon.svg"
+import abtus from "/svgs/aboutus/abtus.svg"
 declare global {
   interface Window {
     YT?: any;
@@ -251,25 +256,25 @@ const AboutUs = ({
 
   // Set start position
   let startX = 0, startY = 0;
-  const padding = 10; // padding to keep icon from being flush with corner
+  const padding = 10; 
 
   switch (corner) {
-    case "top-left":
-      startX = padding;
-      startY = padding;
-      break;
+    // case "top-left":
+    //   startX = padding;
+    //   startY = padding;
+    //   break;
     case "top-right":
-      startX = container.clientWidth - padding - 40;
+      startX = container.clientWidth - padding ;
       startY = padding;
       break;
     case "bottom-left":
       startX = padding;
-      startY = container.clientHeight - padding - 40;
+      startY = container.clientHeight - padding ;
       break;
-    case "bottom-right":
-      startX = container.clientWidth - padding -40;
-      startY = container.clientHeight - padding - 40;
-      break;
+    // case "bottom-right":
+    //   startX = container.clientWidth - padding -40;
+    //   startY = container.clientHeight - padding - 40;
+    //   break;
   }
 
   img.style.left = `${startX}px`;
@@ -281,7 +286,7 @@ const AboutUs = ({
   const centerX = container.clientWidth / 2;
   const centerY = container.clientHeight / 2;
 
-  const dx = (centerX - startX)*Math.random() /4;
+  const dx = (centerX - startX)*Math.random() /4 ;
   const dy = (centerY - startY)*Math.random()/2;
 
   gsap.fromTo(
@@ -290,8 +295,8 @@ const AboutUs = ({
     {
       opacity: 1,
       scale: 1,
-      x: dx,
-      y: dy,
+      x: - dx,
+      y: - dy,
       duration: 2,
       ease: "power2.out",
       onComplete: () => {
@@ -306,19 +311,78 @@ const AboutUs = ({
 };
 
 
+
+const spawnFromCorner2 = (corner:"top-right" | "bottom-left") => {
+  const container = document.querySelector(`.${styles.theme}`) as HTMLElement | null;
+  if (!container) return;
+
+  const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+  const img = document.createElement("img");
+  img.src = iconSrc;
+  img.className = styles.flyingIcon;
+
+  // Set start position
+  let startX = 0, startY = 0;
+  const padding = 0; 
+
+  switch (corner) {
+    case "top-right":
+      startX = container.clientWidth - padding -25 ;
+      startY = padding - 30;
+      break;
+    case "bottom-left":
+      startX = padding -20;
+      startY = container.clientHeight - padding -15 ;
+      break;
+  }
+
+  img.style.left = `${startX}px`;
+  img.style.top = `${startY}px`;
+
+  container.appendChild(img);
+
+  const centerX = container.clientWidth / 2;
+  const centerY = container.clientHeight / 2;
+
+  const dx = (centerX - startX)*Math.random() /4 ;
+  const dy = (centerY - startY)*Math.random()/2;
+
+  gsap.fromTo(
+    img,
+    { opacity: 0, scale: 0, x: 0, y: 0 },
+    {
+      opacity: 1,
+      scale: 0.5,
+      x: - dx,
+      y: - dy,
+      duration: 2,
+      ease: "power2.out",
+      onComplete: () => {
+        gsap.to(img, {
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => img.remove(),
+        });
+      },
+    }
+  );
+};
     let intervalId: number;
 
     const startSpawning = () => {
       intervalId = window.setInterval(() => {
+         const corners2 = ["top-right", "bottom-left"];
+        const randomCorner2 = corners2[Math.floor(Math.random() * corners2.length)] as any;
+        spawnFromCorner2(randomCorner2);
         if (isMobile) {
-        const corners = ["top-left", "top-right", "bottom-left", "bottom-right"];
+        const corners = ["top-right", "bottom-left"];
         const randomCorner = corners[Math.floor(Math.random() * corners.length)] as any;
         spawnFromCorner(randomCorner);
       } else {
         spawnIcon2(`.${styles.fan1}`, true);
         spawnIcon(`.${styles.fan2}`, false);
       }
-      }, isMobile?200:500);
+      }, isMobile?700:500);
     };
 
     const stopSpawning = () => {
@@ -412,7 +476,30 @@ const AboutUs = ({
               where youth's boundless potential shines.
             </p>
           </div>
+          <div className={styles.abtus}>
+          <img src={abtus} alt="ABOUT US" />
+          <h1>
+            ABOUT US
+          </h1>
+          </div>
         </div>
+      </div>
+      <button className={styles.theme} onClick={()=>{}}>
+        <h3>ABOUT THEME</h3>
+      </button>
+      <div className={styles.social}>
+        <a href="https://www.linkedin.com/company/oasis24-bits-pilani/">
+          <img src={linkedin} alt="Linkedin" />
+        </a>
+        <a href="https://www.youtube.com/@oasisbitspilani6375">
+          <img src={yticon} alt="Youtube" />
+        </a>
+        <a href="https://twitter.com/bitsoasis">
+          <img src={xicon} alt="Twitter" />
+        </a>
+        <a href="https://www.instagram.com/bitsoasis">
+          <img src={instaicon} alt="Instagram" />
+        </a>
       </div>
       <BackButton className={styles.aboutBB} />
     </div>
