@@ -7,6 +7,7 @@ import DoorTransition from "./pages/components/page-transition/DoorTransition";
 import AboutUs from "./pages/aboutus/AboutUs";
 import Contact from "./pages/contact/ContactPage";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
+import assetList from './assetList';
 
 export const navContext = createContext<{goToPage?: (page: string) => void}>({});
 
@@ -66,15 +67,18 @@ export default function App() {
     }
   }, [location.pathname]);
 
-  const handleDoorsClosed = () => {
+  const handleDoorsClosed = async () => {
     setDoorPhase("waiting");
+
+    const page = nextRoute.current?.replace("/", "");
+    if (page && Object.keys(assetList).includes(page)) await loadAssets(page as keyof typeof assetList)
+    console.log("Reached")
 
     if (nextRoute.current) {
       navigate(nextRoute.current, { state: { startAnimation: true } });
     }
 
-    if (nextRoute.current === "/register") {
-    } else {
+    if (nextRoute.current && !(Object.keys(assetList)).includes(nextRoute.current)) {
       setTimeout(() => {
         setDoorPhase("opening");
       }, 500);
@@ -103,6 +107,31 @@ export default function App() {
     }
   };
 
+  const loadAssets = async (page: keyof typeof assetList) => {
+    
+    const promises = [
+      ...assetList[page].images.map((path) => (
+        new Promise((resolve, reject) => {
+          const image = new Image();
+          image.src = path;
+          image.onload = () => {resolve(image), console.log("loaded asset")};
+          image.onerror = (error) => reject(error);
+        })
+      )),
+      ...assetList[page].videos.map((path) => (
+        new Promise((resolve, reject) => {
+          const video = document.createElement("video");
+          video.src = path;
+          video.onloadeddata = () => resolve(video);
+          video.onerror = (error) => reject(error);
+        })
+      ))
+    ]
+
+    await Promise.allSettled(promises)//.catch((error) => console.log(error))
+    console.log("loaded")
+  }
+
   return (
     <navContext.Provider value={{ goToPage }}>
       <DoorTransition
@@ -112,7 +141,7 @@ export default function App() {
         page={location.pathname}
       />
 
-      {isPreloading && <Preloader onEnter={handlePreloaderEnter} />}
+      {isPreloading && <Preloader onEnter={handlePreloaderEnter} targetLocation={nextRoute.current} />}
 
       {!isPreloading && currentPage === "home" && (
         <Homepage goToPage={goToPage} />
@@ -137,6 +166,7 @@ export default function App() {
         <Route path="/events" element={null} errorElement={<ComingSoon />} />
         <Route path="/register" element={null} />
         <Route path="/events" element={null} />
+        <Route path="/contact" element={null} />
         <Route path="/aboutus" element={null} />
         <Route path="/comingSoon" element={null} />
       </Routes> */}
