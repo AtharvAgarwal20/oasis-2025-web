@@ -89,11 +89,12 @@ export default function Navbar({
       </div>
       <ul className={styles.navList}>
         {navItems.map((item) => (
-          <li key={item.label} className={styles.navItem}>
-            <div
-              className={styles.navLink}
-              onClick={() => goToPage(item.links)}
-            >
+          <li 
+            key={item.label} 
+            className={styles.navItem}
+            onClick={() => goToPage(item.links)}
+          >
+            <div className={styles.navLink}>
               <div className={styles.actualLabel}>{item.label}</div>
               <div className={styles.katakana}>{item.katakana}</div>
             </div>
