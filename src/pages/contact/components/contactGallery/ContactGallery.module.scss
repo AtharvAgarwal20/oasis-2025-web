@@ -6,6 +6,9 @@
 }
 
 .contactContent {
+    position: relative;
+    height: inherit;
+
     .contactHeading {
         position: relative;
         width: clamp(12rem, 30vw, 30rem);
