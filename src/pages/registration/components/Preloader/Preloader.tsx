@@ -23,7 +23,7 @@ export default function Preloader({ onEnter, targetLocation }: PreloaderProps) {
 
   if (targetLocation) {onEnter(); return}; // if this is not null, means it is coming from animateNavigation, so it will be loaded during door transition
   const page = useLocation().pathname.replace("/", "") as keyof typeof assetList;
-  if (!Object.keys(assetList).includes(page)) return; // nothing to preload
+  if (!Object.keys(assetList).includes(page)) {onEnter(); return}; // nothing to preload
   
   const totalAssets = Object.values(assetList[page]).reduce((sum, currentArr) => sum + currentArr.length, 0)
 

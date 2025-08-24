@@ -1,4 +1,5 @@
 @use "../../assets/global.scss" as *;
+
 .AboutContainer {
   height: 100svh;
   width: 100vw;
@@ -7,7 +8,7 @@
 
   overflow-x: hidden;
   overflow-y: hidden;
-  background: url("/svgs/aboutus/background.svg");
+  // background: url("/svgs/aboutus/background.svg");
   background-size: cover;
   background-blend-mode: darken;
 
@@ -18,7 +19,9 @@
     margin: 2.1rem;
     z-index: 1000;
 
-    &:hover {filter: drop-shadow(0px 0px 9px rgba(255, 255, 255, 1)) sepia() saturate(4.5) hue-rotate(-10deg);}
+    &:hover {
+      filter: drop-shadow(0px 0px 9px rgba(255, 255, 255, 1)) sepia() saturate(4.5) hue-rotate(-10deg);
+    }
 
     @media (max-width: 700px) {
       margin: 1.2rem 0.6rem;
@@ -120,8 +123,8 @@
         transform-style: preserve-3d;
 
         .buttonContainer {
-          
-            top:-30px;
+
+          top: -30px;
           position: relative;
           width: 100%;
           max-width: 273px;
@@ -168,7 +171,7 @@
               background: #111111;
               border: none;
               cursor: pointer;
-              padding:4.5px;
+              padding: 4.5px;
             }
 
             img {
@@ -177,7 +180,7 @@
             }
           }
         }
-        
+
       }
     }
 
@@ -186,36 +189,40 @@
       width: 40vw;
       aspect-ratio: 16 / 9;
       transform-style: preserve-3d;
-      .abtus{
+
+      .abtus {
         position: relative;
-        top: - (9 / 16 ) * 53vw;
+        top: - (9 / 16) * 53vw;
         width: 100%;
         left: 30%;
-        
+
         transform: rotateY(-10deg);
-        img{
-            width:50%;
-            height: auto;
+
+        img {
+          width: 50%;
+          height: auto;
         }
-        h1{
+
+        h1 {
           position: absolute;
 
-          top:3vw;
+          top: 3vw;
           width: 50%;
           padding: 0;
           margin: 0;
           text-align: center;
-          font:1.6vw $abtusHeadFont;
+          font: 1.6vw $abtusHeadFont;
 
         }
       }
+
       .aboutback {
         width: 100%;
 
         aspect-ratio: inherit;
         position: relative;
 
-        background: url("/images/aboutus/abtbck.png");
+        // background: url("/images/aboutus/abtbck.png");
         background-position: center;
         background-size: cover;
         border-radius: 16px;
@@ -233,7 +240,7 @@
           font-size: 1.5vw;
           width: 80%;
           text-align: center;
-          
+
         }
       }
     }
@@ -252,7 +259,8 @@
     pointer-events: none;
     z-index: 3;
   }
-  .theme{
+
+  .theme {
     position: absolute;
     width: 12vw;
     height: 4vw;
@@ -263,28 +271,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
-   background: 
-    linear-gradient(black, black) padding-box, /* inner background */
-    linear-gradient(90deg, #BFAF62, #BFAF62) border-box; /* border gradient */
-  border: 5.25px solid transparent;
-  border-radius: 12px; /* or whatever radius you want */
-  color: #BFAF62;
+    background:
+      linear-gradient(black, black) padding-box,
+      /* inner background */
+      linear-gradient(90deg, #BFAF62, #BFAF62) border-box;
+    /* border gradient */
+    border: 5.25px solid transparent;
+    border-radius: 12px;
+    /* or whatever radius you want */
+    color: #BFAF62;
     border-radius: 8px;
+
     h3 {
-  color: #FFFFFF;
-  font: 1.2vw $abtusHeadFont; /* Replace with real font */
-  text-shadow:
-    -0.7px -0.7px 0 #BFAF62,
-     0.7px -0.7px 0 #BFAF62,
-    -0.7px  0.7px 0 #BFAF62,
-     0.7px  0.7px 0 #BFAF62;
-}
+      color: #FFFFFF;
+      font: 1.2vw $abtusHeadFont;
+      /* Replace with real font */
+      text-shadow:
+        -0.7px -0.7px 0 #BFAF62,
+        0.7px -0.7px 0 #BFAF62,
+        -0.7px 0.7px 0 #BFAF62,
+        0.7px 0.7px 0 #BFAF62;
+    }
 
 
   }
-  .social{
+
+  .social {
     display: none;
   }
+
   @media (max-width: 1200px) and (max-aspect-ratio: 1.45) {
 
     overflow-y: auto;
@@ -305,7 +320,8 @@
         }
 
         .controls {
-          transform:rotateZ(1deg);
+          transform: rotateZ(1deg);
+
           .buttonContainer {
             transform: rotateZ(4deg);
           }
@@ -326,34 +342,40 @@
         }
       }
     }
-    
-  .theme{
-    display: none;
-  }
+
+    .theme {
+      display: none;
+    }
   }
 
   @media (max-width: 1200px) and (max-aspect-ratio: 0.75) {
-    background: url("/svgs/aboutus/backg.svg");
+    // background: url("/svgs/aboutus/backg.svg");
     background-size: cover;
     background-position: top;
+
     .aboutBB {
-    filter: none;
+      filter: none;
 
-    &:hover {filter: none;}
+      &:hover {
+        filter: none;
+      }
 
-  }
-  .theme{
-    display: none;
-  }
+    }
+
+    .theme {
+      display: none;
+    }
+
     //overflow-y: auto;
     .abt {
-      
-      .abtus{
+
+      .abtus {
         display: none;
       }
+
       .aboutback {
         transform: none;
-        
+
 
         p {
           font-size: 4vw;
@@ -369,9 +391,11 @@
       width: 100vw;
       height: 13vh;
     }
-    .flyingIcon{
+
+    .flyingIcon {
       width: 6vw;
     }
+
     .content3D {
       flex-direction: column-reverse;
       gap: 0vh;
@@ -383,9 +407,9 @@
         width: 80vw;
 
         aspect-ratio: 16 / 9;
-        
-      height: 30vh;
-      padding-bottom: 0;
+
+        height: 30vh;
+        padding-bottom: 0;
 
         .aboutback {
           background: transparent;
@@ -393,11 +417,11 @@
 
           aspect-ratio: 16 / 9;
           width: 80vw;
-          
+
 
           p {
             color: #FFE8E8;
-            font-size: clamp(13px , 3.2vw , 40px);
+            font-size: clamp(13px, 3.2vw, 40px);
             width: 80vw;
 
           }
@@ -421,9 +445,10 @@
 
           .fan1,
           .fan2 {
-             display: none;
+            display: none;
             // scale:1.2;
           }
+
           // }
           // .fan1{
           //   bottom: -4vh;
@@ -450,17 +475,19 @@
         }
       }
     }
-    .social{
+
+    .social {
       display: flex;
       position: absolute;
       bottom: 2vh;
-      margin-top:1vh;
+      margin-top: 1vh;
       width: 100vw;
       flex-direction: row;
       justify-content: center;
-      gap:3vw;
+      gap: 3vw;
       align-items: center;
-      img{
+
+      img {
         width: 15vw;
         height: 15vw;
       }

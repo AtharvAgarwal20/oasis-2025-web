@@ -44,27 +44,12 @@ export default function App() {
   const nextRoute = useRef<string | null>(null);
 
   useEffect(() => {
-    const path = location.pathname;
+    const path = location.pathname.replace("/", "");
+    const pages = ["register", "events", "aboutus", "contact"]
 
-    if (path === "/") {
-      setCurrentPage("home");
-      setIsPreloading(false);
-    } else if (path === "/register") {
-      setCurrentPage("register");
-      setIsPreloading(true);
-    } else if (path === "/events") {
-      setCurrentPage("events");
-      setIsPreloading(true);
-    } else if (path === "/aboutus") {
-      setCurrentPage("aboutus");
-      setIsPreloading(true);
-    } else if (path === "/contact") {
-      setCurrentPage("contact");
-      setIsPreloading(true);
-    } else {
-      setCurrentPage("comingSoon");
-      setIsPreloading(false);
-    }
+    setCurrentPage(pages.includes(path) ? path as typeof currentPage : (path === "" ? "home" : "comingSoon"))
+    setIsPreloading(Object.keys(assetList).includes(path))
+    
   }, [location.pathname]);
 
   const handleDoorsClosed = async () => {

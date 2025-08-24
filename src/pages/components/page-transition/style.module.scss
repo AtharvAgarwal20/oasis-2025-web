@@ -1,3 +1,4 @@
+@use '../../../assets/global.scss' as *;
 
 .cont {
   position: fixed;
@@ -17,7 +18,7 @@
   min-height: 100%;
   object-fit: cover;
   will-change: transform;
-  z-index: 1000000;
+  z-index: 1000000; // what? T^T
   transform: translateX(calc(var(--base, 0%) + var(--dx, 0%)));
 }
 
@@ -47,4 +48,30 @@
   left: 50vw;        
   min-width: 20vw;
   object-position: 0 0;
+}
+
+.loadingText {
+  opacity: 0;
+  font-family: $primaryFont;
+  font-size: 1.8rem;
+  color: #000;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  margin: 3rem;
+  padding: 0.6rem 1.2rem;
+  border: 3px solid black;
+  border-radius: 18px;
+  z-index: 1000001;
+  transition: opacity 0.3s;
+
+  &.loadingShow {opacity: 1;}
+
+  @media (max-width: 900px) {
+    font-size: 1.2rem;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+  }
 }

@@ -1,4 +1,4 @@
-import  { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import styles from "./style.module.scss";
 import Door1Image from "/images/doors/Door1.png";
@@ -13,7 +13,7 @@ interface Props {
   phase: Phase;
   onClosed?: () => void;
   onOpened?: () => void;
-  page:any;
+  page: any;
 }
 
 export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
@@ -29,7 +29,7 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
     innerRight: "300%",
     outerRight: "200%",
   };
-    useEffect(() => {
+  useEffect(() => {
     closeSoundRef.current = new Audio("/sounds/door-close.mp3");
     openSoundRef.current = new Audio("/sounds/door-close.mp3");
   }, []);
@@ -39,7 +39,7 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
     let cancelled = false;
 
     const runClosing = async () => {
-            closeSoundRef.current?.play();
+      closeSoundRef.current?.play();
       await Promise.all([
         c1.set({ "--dx": START.outerLeft }),
         c2.set({ "--dx": START.innerLeft }),
@@ -51,7 +51,7 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
       await Promise.all([
         c1.start({ "--dx": "0%", transition: { duration: 0.7, ease: "easeInOut" } }),
         c4.start({ "--dx": "0%", transition: { duration: 0.7, ease: "easeInOut" } }),
-        
+
         c2.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
         c3.start({ "--dx": "0%", transition: { duration: 0.9, ease: "easeInOut" } }),
       ]);
@@ -68,20 +68,22 @@ export default function DoorTransition({ phase, onClosed, onOpened }: Props) {
     };
 
     const runOpening = async () => {
-             
-setTimeout(async ()=>{  openSoundRef.current?.play();
-            // await Promise.all([ setTimeout(()=>{     console.log("Hi")},10000) ])
-await Promise.all([
 
-        c2.start({ "--dx": START.innerLeft, transition: { duration: 0.7, ease: "easeInOut" } }),
-        c3.start({ "--dx": START.innerRight, transition: { duration: 0.7, ease: "easeInOut" } }),
+      setTimeout(async () => {
+        openSoundRef.current?.play();
+        // await Promise.all([ setTimeout(()=>{     console.log("Hi")},10000) ])
+        await Promise.all([
 
-        c1.start({ "--dx": START.outerLeft, transition: { duration: 0.9, ease: "easeInOut" } }),
-        c4.start({ "--dx": START.outerRight, transition: { duration: 0.9, ease: "easeInOut" } }),
-      ]);
+          c2.start({ "--dx": START.innerLeft, transition: { duration: 0.7, ease: "easeInOut" } }),
+          c3.start({ "--dx": START.innerRight, transition: { duration: 0.7, ease: "easeInOut" } }),
 
-      if (!cancelled) onOpened?.();},500)
-          
+          c1.start({ "--dx": START.outerLeft, transition: { duration: 0.9, ease: "easeInOut" } }),
+          c4.start({ "--dx": START.outerRight, transition: { duration: 0.9, ease: "easeInOut" } }),
+        ]);
+
+        if (!cancelled) onOpened?.();
+      }, 500)
+
     };
 
     if (phase === "closing") runClosing();
@@ -98,6 +100,7 @@ await Promise.all([
       <motion.img src={Door2Image} className={`${styles.door} ${styles.door2}`} style={{ "--dx": START.innerLeft } as any} animate={c2} />
       <motion.img src={Door3Image} className={`${styles.door} ${styles.door3}`} style={{ "--dx": START.innerRight } as any} animate={c3} />
       <motion.img src={Door4Image} className={`${styles.door} ${styles.door4}`} style={{ "--dx": START.outerRight } as any} animate={c4} />
+      {<div className={`${styles.loadingText} ${phase === "waiting" && styles.loadingShow}`}>Loading</div>}
     </div>
   );
 }

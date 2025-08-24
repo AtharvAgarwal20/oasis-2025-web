@@ -40,8 +40,8 @@ export default function ContactGallery() {
                                         <div className={styles.contactName} title={contact.name}>{contact.name}</div>
                                         <div className={styles.contactPosition} title={contact.role}>{contact.role}</div>
                                         <div className={styles.contactLinks}>
-                                            <div className={styles.contactPhone}><FaPhone className={styles.contactIcon} /></div>
-                                            <div className={styles.contactEmail}><FaEnvelope className={styles.contactIcon} /></div>
+                                            <div className={styles.contactPhone} onClick={() => launchPhone(contact.phone)}><FaPhone className={styles.contactIcon} /></div>
+                                            <div className={styles.contactEmail} onClick={() => launchEmail(contact.email)}><FaEnvelope className={styles.contactIcon} /></div>
                                         </div>
                                     </div>
                                 </div>

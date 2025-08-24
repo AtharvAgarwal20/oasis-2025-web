@@ -17,6 +17,10 @@ import xicon from "/svgs/aboutus/xicon.svg"
 import linkedin from "/svgs/aboutus/linkedin.svg"
 import yticon from "/svgs/aboutus/yticon.svg"
 import abtus from "/svgs/aboutus/abtus.svg"
+import aboutPageBG from "/svgs/aboutus/background.svg"
+import aboutPageBGMobile from "/svgs/aboutus/backg.svg"
+import aboutTextBG from "/images/aboutus/abtbck.png"
+
 declare global {
   interface Window {
     YT?: any;
@@ -119,8 +123,8 @@ const AboutUs = ({
     }
   };
 
-  const fan2Ref=useRef<HTMLImageElement>(null);
-  const fan1Ref=useRef<HTMLImageElement>(null);
+  const fan2Ref = useRef<HTMLImageElement>(null);
+  const fan1Ref = useRef<HTMLImageElement>(null);
   useEffect(() => {
     gsap.set(fan2Ref.current, { xPercent: 100, yPercent: -100, rotate: 180 });
   }, []);
@@ -246,143 +250,143 @@ const AboutUs = ({
       );
     };
     const spawnFromCorner = (corner: "top-left" | "top-right" | "bottom-left" | "bottom-right") => {
-  const container = document.querySelector(`.${styles.vid}`) as HTMLElement | null;
-  if (!container) return;
+      const container = document.querySelector(`.${styles.vid}`) as HTMLElement | null;
+      if (!container) return;
 
-  const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-  const img = document.createElement("img");
-  img.src = iconSrc;
-  img.className = styles.flyingIcon;
+      const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+      const img = document.createElement("img");
+      img.src = iconSrc;
+      img.className = styles.flyingIcon;
 
-  // Set start position
-  let startX = 0, startY = 0;
-  const padding = 10; 
+      // Set start position
+      let startX = 0, startY = 0;
+      const padding = 10;
 
-  switch (corner) {
-    // case "top-left":
-    //   startX = padding;
-    //   startY = padding;
-    //   break;
-    case "top-right":
-      startX = container.clientWidth - padding ;
-      startY = padding;
-      break;
-    case "bottom-left":
-      startX = padding;
-      startY = container.clientHeight - padding ;
-      break;
-    // case "bottom-right":
-    //   startX = container.clientWidth - padding -40;
-    //   startY = container.clientHeight - padding - 40;
-    //   break;
-  }
+      switch (corner) {
+        // case "top-left":
+        //   startX = padding;
+        //   startY = padding;
+        //   break;
+        case "top-right":
+          startX = container.clientWidth - padding;
+          startY = padding;
+          break;
+        case "bottom-left":
+          startX = padding;
+          startY = container.clientHeight - padding;
+          break;
+        // case "bottom-right":
+        //   startX = container.clientWidth - padding -40;
+        //   startY = container.clientHeight - padding - 40;
+        //   break;
+      }
 
-  img.style.left = `${startX}px`;
-  img.style.top = `${startY}px`;
+      img.style.left = `${startX}px`;
+      img.style.top = `${startY}px`;
 
-  container.appendChild(img);
+      container.appendChild(img);
 
-  // Move towards center
-  const centerX = container.clientWidth / 2;
-  const centerY = container.clientHeight / 2;
+      // Move towards center
+      const centerX = container.clientWidth / 2;
+      const centerY = container.clientHeight / 2;
 
-  const dx = (centerX - startX)*Math.random() /4 ;
-  const dy = (centerY - startY)*Math.random()/2;
+      const dx = (centerX - startX) * Math.random() / 4;
+      const dy = (centerY - startY) * Math.random() / 2;
 
-  gsap.fromTo(
-    img,
-    { opacity: 0, scale: 0, x: 0, y: 0 },
-    {
-      opacity: 1,
-      scale: 1,
-      x: - dx,
-      y: - dy,
-      duration: 2,
-      ease: "power2.out",
-      onComplete: () => {
-        gsap.to(img, {
-          opacity: 0,
-          duration: 0.5,
-          onComplete: () => img.remove(),
-        });
-      },
-    }
-  );
-};
+      gsap.fromTo(
+        img,
+        { opacity: 0, scale: 0, x: 0, y: 0 },
+        {
+          opacity: 1,
+          scale: 1,
+          x: - dx,
+          y: - dy,
+          duration: 2,
+          ease: "power2.out",
+          onComplete: () => {
+            gsap.to(img, {
+              opacity: 0,
+              duration: 0.5,
+              onComplete: () => img.remove(),
+            });
+          },
+        }
+      );
+    };
 
 
 
-const spawnFromCorner2 = (corner:"top-right" | "bottom-left") => {
-  const container = document.querySelector(`.${styles.theme}`) as HTMLElement | null;
-  if (!container) return;
+    const spawnFromCorner2 = (corner: "top-right" | "bottom-left") => {
+      const container = document.querySelector(`.${styles.theme}`) as HTMLElement | null;
+      if (!container) return;
 
-  const iconSrc = icons[Math.floor(Math.random() * icons.length)];
-  const img = document.createElement("img");
-  img.src = iconSrc;
-  img.className = styles.flyingIcon;
+      const iconSrc = icons[Math.floor(Math.random() * icons.length)];
+      const img = document.createElement("img");
+      img.src = iconSrc;
+      img.className = styles.flyingIcon;
 
-  // Set start position
-  let startX = 0, startY = 0;
-  const padding = 0; 
+      // Set start position
+      let startX = 0, startY = 0;
+      const padding = 0;
 
-  switch (corner) {
-    case "top-right":
-      startX = container.clientWidth - padding -25 ;
-      startY = padding - 30;
-      break;
-    case "bottom-left":
-      startX = padding -20;
-      startY = container.clientHeight - padding -15 ;
-      break;
-  }
+      switch (corner) {
+        case "top-right":
+          startX = container.clientWidth - padding - 25;
+          startY = padding - 30;
+          break;
+        case "bottom-left":
+          startX = padding - 20;
+          startY = container.clientHeight - padding - 15;
+          break;
+      }
 
-  img.style.left = `${startX}px`;
-  img.style.top = `${startY}px`;
+      img.style.left = `${startX}px`;
+      img.style.top = `${startY}px`;
 
-  container.appendChild(img);
+      container.appendChild(img);
 
-  const centerX = container.clientWidth / 2;
-  const centerY = container.clientHeight / 2;
+      const centerX = container.clientWidth / 2;
+      const centerY = container.clientHeight / 2;
 
-  const dx = (centerX - startX)*Math.random() /4 ;
-  const dy = (centerY - startY)*Math.random()/2;
+      const dx = (centerX - startX) * Math.random() / 4;
+      const dy = (centerY - startY) * Math.random() / 2;
 
-  gsap.fromTo(
-    img,
-    { opacity: 0, scale: 0, x: 0, y: 0 },
-    {
-      opacity: 1,
-      scale: 0.5,
-      x: - dx,
-      y: - dy,
-      duration: 2,
-      ease: "power2.out",
-      onComplete: () => {
-        gsap.to(img, {
-          opacity: 0,
-          duration: 0.5,
-          onComplete: () => img.remove(),
-        });
-      },
-    }
-  );
-};
+      gsap.fromTo(
+        img,
+        { opacity: 0, scale: 0, x: 0, y: 0 },
+        {
+          opacity: 1,
+          scale: 0.5,
+          x: - dx,
+          y: - dy,
+          duration: 2,
+          ease: "power2.out",
+          onComplete: () => {
+            gsap.to(img, {
+              opacity: 0,
+              duration: 0.5,
+              onComplete: () => img.remove(),
+            });
+          },
+        }
+      );
+    };
     let intervalId: number;
 
     const startSpawning = () => {
       intervalId = window.setInterval(() => {
-         const corners2 = ["top-right", "bottom-left"];
+        const corners2 = ["top-right", "bottom-left"];
         const randomCorner2 = corners2[Math.floor(Math.random() * corners2.length)] as any;
         spawnFromCorner2(randomCorner2);
         if (isMobile) {
-        const corners = ["top-right", "bottom-left"];
-        const randomCorner = corners[Math.floor(Math.random() * corners.length)] as any;
-        spawnFromCorner(randomCorner);
-      } else {
-        spawnIcon2(`.${styles.fan1}`, true);
-        spawnIcon(`.${styles.fan2}`, false);
-      }
-      }, isMobile?700:500);
+          const corners = ["top-right", "bottom-left"];
+          const randomCorner = corners[Math.floor(Math.random() * corners.length)] as any;
+          spawnFromCorner(randomCorner);
+        } else {
+          spawnIcon2(`.${styles.fan1}`, true);
+          spawnIcon(`.${styles.fan2}`, false);
+        }
+      }, isMobile ? 700 : 500);
     };
 
     const stopSpawning = () => {
@@ -402,11 +406,23 @@ const spawnFromCorner2 = (corner:"top-right" | "bottom-left") => {
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
-  const isMobile = window.matchMedia(
+
+  const [isMobile, setIsMobile] = useState(window.matchMedia(
     "(max-width: 1200px) and (max-aspect-ratio: 0.75) "
-  ).matches;
+  ).matches);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.matchMedia(
+      "(max-width: 1200px) and (max-aspect-ratio: 0.75) "
+    ).matches);
+    
+    window.addEventListener("resize", handleResize);
+
+    return () => {window.removeEventListener("resize", handleResize)};
+  }, [])
+
   return (
-    <div className={styles.AboutContainer}>
+    <div className={styles.AboutContainer} style={{backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`}} >
       <Aboutbar goToPage={goToPage} />
       <div className={styles.header}>
         <img src=
@@ -440,7 +456,7 @@ const spawnFromCorner2 = (corner:"top-right" | "bottom-left") => {
           <div className={styles.controls}>
             <div className={styles.a1}></div>
             <div className={styles.buttonContainer}>
-            
+
               <img
                 src={PlayButton}
                 className={styles.background}
@@ -465,7 +481,7 @@ const spawnFromCorner2 = (corner:"top-right" | "bottom-left") => {
 
         {/* ABOUT SIDE */}
         <div className={styles.abt}>
-          <div className={styles.aboutback}>
+          <div className={styles.aboutback} style={{backgroundImage: `url("${aboutTextBG}")`}}>
             <p>
               Oasis, the annual cultural extravaganza of Birla Institute of
               Technology and Science, Pilani, has been a vibrant part of India's
@@ -477,14 +493,14 @@ const spawnFromCorner2 = (corner:"top-right" | "bottom-left") => {
             </p>
           </div>
           <div className={styles.abtus}>
-          <img src={abtus} alt="ABOUT US" />
-          <h1>
-            ABOUT US
-          </h1>
+            <img src={abtus} alt="ABOUT US" />
+            <h1>
+              ABOUT US
+            </h1>
           </div>
         </div>
       </div>
-      <button className={styles.theme} onClick={()=>{}}>
+      <button className={styles.theme} onClick={() => { }}>
         <h3>ABOUT THEME</h3>
       </button>
       <div className={styles.social}>
