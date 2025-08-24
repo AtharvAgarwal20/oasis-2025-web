@@ -17,19 +17,27 @@ export default function Contact() {
     const [horiBarDetails, setHoriBarDetails] = useState<HoriBarDetails>();
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 900)
+        const handleResize = () => setIsMobile(window.innerWidth <= 900);
 
         window.addEventListener("resize", handleResize)
 
         return () => window.removeEventListener("resize", handleResize)
-    })
+    }, [])
 
     return (
         <div className={styles.contactPageWrapper}>
             <div className={styles.contactPageBg} >
                 {
                     Array(horiBarDetails?.numOfBars).fill(null).map((_, i) => 
-                        <div className={styles.horiBar} key={i} style={{top: `${i*(horiBarDetails?.barGap || 0) + (horiBarDetails?.firstBarPos || 0)}px`}} />
+                        <div 
+                            className={styles.horiBar} 
+                            key={i} 
+                            style={{
+                                top: `${i*(horiBarDetails?.barGap || 0) + (horiBarDetails?.firstBarPos || 0)}px`
+                            }} 
+                        >
+                            <div /><div /><div />
+                        </div>
                     )
                 }
             </div>

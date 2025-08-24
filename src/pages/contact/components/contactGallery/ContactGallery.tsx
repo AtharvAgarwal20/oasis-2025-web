@@ -28,17 +28,16 @@ export default function ContactGallery({ setHoriBarDetails }: { setHoriBarDetail
             if (!secondRowItem) return;
             const secondRowRelPos = secondRowItem.getBoundingClientRect().top
 
-            const barGapThreshold = 100;
+            // const barGapThreshold = 100;
             let barGap = Math.round(secondRowRelPos - firstRowRelPos);
-            if (barGap > barGapThreshold) barGap = barGap / 2
+            // if (barGap > barGapThreshold) 
+            barGap = barGap / Math.round(barGap / 150);
 
             const firstRowAbsPos = firstRowRelPos + (document.scrollingElement?.scrollTop || 0);
             
             const firstBarPos = Math.round(firstRowAbsPos % barGap);
-            const numOfBars = Math.round((document.scrollingElement?.scrollHeight || 0)/barGap);
+            const numOfBars = Math.round((document.body.clientHeight || 0)/barGap);
 
-            console.log(numOfBars, firstBarPos, barGap, contactItems)
-            console.log(barGap, firstRowAbsPos, firstBarPos, document.scrollingElement?.scrollHeight)
             if (setHoriBarDetails) setHoriBarDetails({numOfBars, firstBarPos, barGap})
         }
 

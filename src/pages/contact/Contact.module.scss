@@ -1,11 +1,11 @@
 // body {position: static;}
-@use "sass:math";
-
-$barThickness: calc(10*100vw/1920);
 
 .contactPageWrapper {
     // height: 100vh;
     // overflow-y: scroll;
+
+    --bar-thickness: calc(10*100vw/1920);
+    @media (max-width: 900px) {--bar-thickness: calc(6*100vw/393)}
 
     &::-webkit-scrollbar {
         display: none;
@@ -70,10 +70,18 @@ $barThickness: calc(10*100vw/1920);
             position: absolute;
             left: 0px;
             width: 100%;
-            height: $barThickness;
-            background-color: #7F5934;
+            height: var(--bar-thickness);
+            // background-color: #7F5934;
             z-index: inherit;
-            box-shadow: 0px calc($barThickness - 1px) rgba(0, 0, 0, 0.215);
+
+            display: grid;
+            grid-template-columns: 1fr calc(83*100vw/1919) 1fr;
+
+            & :nth-child(odd) {
+                background-color: #7F5934;
+                box-shadow: 0px calc(var(--bar-thickness) - 1px) rgba(0, 0, 0, 0.215);
+            }
+            div {height: 100%;}
         }
     }
 }
