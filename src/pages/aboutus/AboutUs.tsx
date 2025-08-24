@@ -481,7 +481,7 @@ const AboutUs = ({
 
         {/* ABOUT SIDE */}
         <div className={styles.abt}>
-          <div className={styles.aboutback} style={{backgroundImage: `url("${aboutTextBG}")`}}>
+          <div className={styles.aboutback} style={{backgroundImage: isMobile ? "none" : `url("${aboutTextBG}")`}}>
             <p>
               Oasis, the annual cultural extravaganza of Birla Institute of
               Technology and Science, Pilani, has been a vibrant part of India's
