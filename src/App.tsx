@@ -70,13 +70,13 @@ export default function App() {
   const handleDoorsClosed = async () => {
     setDoorPhase("waiting");
 
+    const page = nextRoute.current?.replace("/", "");
+    if (page && Object.keys(assetList).includes(page)) await loadAssets(page as keyof typeof assetList)
+    console.log("Reached")
+
     if (nextRoute.current) {
       navigate(nextRoute.current, { state: { startAnimation: true } });
     }
-
-    const page = nextRoute.current?.replace("/", "");
-    if (page && !Object.keys(assetList).includes(page)) await loadAssets(page as keyof typeof assetList)
-    console.log("Reached")
 
     if (nextRoute.current && !(Object.keys(assetList)).includes(nextRoute.current)) {
       setTimeout(() => {
@@ -128,7 +128,7 @@ export default function App() {
       ))
     ]
 
-    await Promise.allSettled(promises).catch((error) => console.log(error))
+    await Promise.allSettled(promises)//.catch((error) => console.log(error))
     console.log("loaded")
   }
 

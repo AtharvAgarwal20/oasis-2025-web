@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Preloader.module.scss";
 import assetList from "../../../../assetList";
+import { useLocation } from "react-router-dom";
 
 // const imagesToPreload = [
 //   "/images/registration/reg-banner.png",
@@ -20,8 +21,8 @@ interface PreloaderProps {
 export default function Preloader({ onEnter, targetLocation }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
 
-  if (!targetLocation) return;
-  const page = targetLocation.replace("/", "") as keyof typeof assetList;
+  if (targetLocation) {onEnter(); return}; // if this is not null, means it is coming from animateNavigation, so it will be loaded during door transition
+  const page = useLocation().pathname.replace("/", "") as keyof typeof assetList;
   if (!Object.keys(assetList).includes(page)) return; // nothing to preload
   
   const totalAssets = Object.values(assetList[page]).reduce((sum, currentArr) => sum + currentArr.length, 0)
@@ -55,17 +56,17 @@ export default function Preloader({ onEnter, targetLocation }: PreloaderProps) {
       })
     )
 
-    Promise.all([
+    Promise.allSettled([
       ...assetList[page].images.map(preloadImage),
       ...assetList[page].videos.map(preloadVideo)
     ])
       .then(() => {
         onEnter();
       })
-      .catch((err) => {
-        console.error("Error preloading images:", err);
-        onEnter();
-      });
+      // .catch((err) => {
+      //   console.error("Error preloading images:", err);
+      //   onEnter();
+      // });
   }, []);
 
   return (
