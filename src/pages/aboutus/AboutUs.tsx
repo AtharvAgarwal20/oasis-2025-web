@@ -6,7 +6,6 @@ import fan from "/svgs/aboutus/fan.png";
 import prev from "/svgs/aboutus/prev.svg"
 import pause from "/svgs/aboutus/pause.svg"
 import next from "/svgs/aboutus/next.svg"
-import Aboutbar from "./components/Aboutbar";
 import Reg from "/svgs/aboutus/reghead.svg"
 import play from "/svgs/aboutus/play.svg"
 import nextarr from "/svgs/aboutus/nextarr.svg"
@@ -20,6 +19,7 @@ import abtus from "/svgs/aboutus/abtus.svg"
 import aboutPageBG from "/svgs/aboutus/background.svg"
 import aboutPageBGMobile from "/svgs/aboutus/backg.svg"
 import aboutTextBG from "/images/aboutus/abtbck.png"
+import Navbar from "../components/navbar/Navbar";
 
 declare global {
   interface Window {
@@ -423,7 +423,8 @@ const AboutUs = ({
 
   return (
     <div className={styles.AboutContainer} style={{backgroundImage: `url("${isMobile ? aboutPageBGMobile : aboutPageBG}")`}} >
-      <Aboutbar goToPage={goToPage} />
+      <Navbar goToPage={goToPage} hideHam variant="about"/>
+
       <div className={styles.header}>
         <img src=
           {isMobile ? Reg : Header} alt="About Us" />
